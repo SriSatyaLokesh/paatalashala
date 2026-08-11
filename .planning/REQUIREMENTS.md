@@ -14,7 +14,7 @@ Requirements for the initial release. Satisfied requirements from the existing b
 - [x] **PLAY-03**: Playback progresses sequentially through the curated playlist, automatically advancing to the next song when the active song ends.
 - [x] **PLAY-04**: Displays active song metadata (Title, Movie, Year, Singer, Music Director).
 - [x] **PLAY-05**: User can play/pause, skip, restart, volume-adjust, and seek using client controllers.
-- [ ] **PLAY-06**: Mobile layouts prevent clipping, keeping media buttons overlay-safe and bottom-aligned for thumb usability.
+- [x] **PLAY-06**: Mobile layouts prevent clipping, keeping media buttons overlay-safe and bottom-aligned for thumb usability.
 
 ### Ambient Environment (ENV)
 
@@ -23,7 +23,7 @@ Requirements for the initial release. Satisfied requirements from the existing b
 - [x] **ENV-03**: Supports independent theme layouts:
   - **Tractor Anna**: Farmland perspective.
   - **Deluxe Saloon**: Player embedded inside a retro television frame.
-- [ ] **ENV-04**: Tractor Anna farmland visuals support moving road markings, cloud drifts, and headlight flares on sunset/night transition.
+- [x] **ENV-04**: Tractor Anna farmland visuals support moving road markings, cloud drifts, and headlight flares on sunset/night transition.
 - [ ] **ENV-05**: Deluxe Saloon visuals support a rotating ceiling fan animation, flickering tube lights, and dynamic TV screen glare matching active play states.
 
 ### Music Curation & Metadata (DATA)
@@ -47,10 +47,12 @@ Requirements for the initial release. Satisfied requirements from the existing b
 Deferred to future releases.
 
 ### Playlist Synchronization
+
 - **SYNC-01**: Add current curated playlist directly to user's Spotify library via OAuth.
 - **SYNC-02**: Add current curated playlist directly to user's YouTube library via OAuth.
 
 ### Platform Expansion
+
 - **PLAT-01**: Introduce "Auto Raja" city traffic environment.
 - **PLAT-02**: Introduce "Nook Tea Stall" misty morning chai environment.
 - **PLAT-03**: Introduce "RTC Bus" local travel window seat perspective.
@@ -78,11 +80,11 @@ Deferred to future releases.
 | PLAY-03 | Phase 1 | Complete |
 | PLAY-04 | Phase 1 | Complete |
 | PLAY-05 | Phase 1 | Complete |
-| PLAY-06 | Phase 1 | Pending |
+| PLAY-06 | Phase 1 | Complete |
 | ENV-01 | Phase 1 | Complete |
 | ENV-02 | Phase 1 | Complete |
 | ENV-03 | Phase 1 | Complete |
-| ENV-04 | Phase 1 | Pending |
+| ENV-04 | Phase 1 | Complete |
 | ENV-05 | Phase 2 | Pending |
 | DATA-01 | Phase 1 | Complete |
 | DATA-02 | Phase 1 | Complete |
@@ -91,6 +93,7 @@ Deferred to future releases.
 | ACC-02 | Phase 2 | Pending |
 
 **Coverage:**
+
 - v1 requirements: 16 total
 - Mapped to phases: 16
 - Unmapped: 0 ✓
