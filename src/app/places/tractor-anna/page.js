@@ -38,6 +38,7 @@ export default function TractorAnna() {
   const [trackTitle, setTrackTitle]     = useState('');
   const [videoVisible, setVideoVisible] = useState(false);
   const [ambientOn, setAmbientOn]       = useState(true);
+  const [playerError, setPlayerError]   = useState(null);
 
   const playerRef  = useRef(null);
   const ambientRef = useRef(null);
@@ -90,12 +91,25 @@ export default function TractorAnna() {
     return () => { ambientRef.current?.pause(); };
   }, [started, isPlaying, ambientOn]);
 
-  // ── Player callbacks (stable — use refs to avoid stale closures) ──────────
+  // ── Player callbacks ─────────────────────────────────────────────────────
   const handlePlayerReady = (player) => {
     playerRef.current = player;
     player.setVolume(volume);
-    // Player mounts only after experience start, so play immediately
+    // Call playVideo immediately — mount happens inside user click so autoplay policy is met
     player.playVideo();
+    // Belt-and-suspenders retry in case playlist takes time to load
+    setTimeout(() => {
+      try {
+        if (playerRef.current?.getPlayerState?.() !== window.YT?.PlayerState?.PLAYING) {
+          playerRef.current?.playVideo();
+        }
+      } catch (_) {}
+    }, 1500);
+  };
+
+  const handlePlayerError = (code) => {
+    setPlayerError(code);
+    console.error('YouTube error code:', code, '| 101/150=embed blocked, 100=not found');
   };
 
   const handleStateChange = (code) => {
@@ -215,17 +229,20 @@ export default function TractorAnna() {
           <img src="/images/tractor_anna_sprite.png" alt="Tractor Anna" className="tractor-hero-sprite"
             style={{ animationPlayState: isPlaying ? 'running' : 'paused' }} />
 
-          {/* YouTube player — always visible in DOM (off-screen when hidden) */}
+          {/* YouTube player — visibility:hidden keeps proper dimensions for YT init */}
           <div style={{
             position: 'fixed',
-            bottom: videoVisible ? '100px' : '-9999px',
-            right:  videoVisible ? '30px'  : '-9999px',
+            bottom: '100px',
+            right: '30px',
             width: '220px', height: '124px',
             borderRadius: '16px', overflow: 'hidden',
             boxShadow: videoVisible ? '0 12px 24px rgba(0,0,0,0.5)' : 'none',
             border: videoVisible ? '1px solid rgba(255,255,255,0.15)' : 'none',
             opacity: videoVisible ? 1 : 0,
-            transition: 'opacity 0.3s', zIndex: 40, background: '#000',
+            visibility: videoVisible ? 'visible' : 'hidden',
+            transition: 'opacity 0.3s, visibility 0.3s',
+            zIndex: videoVisible ? 40 : -1,
+            background: '#000',
             pointerEvents: videoVisible ? 'auto' : 'none',
           }}>
             <YouTubePlayer
@@ -236,8 +253,14 @@ export default function TractorAnna() {
               onStateChange={handleStateChange}
               onPlayerReady={handlePlayerReady}
               onTimeUpdate={handleTimeUpdate}
+              onError={handlePlayerError}
             />
           </div>
+          {playerError && (
+            <div style={{ position: 'fixed', bottom: '170px', right: '30px', background: 'rgba(220,38,38,0.9)', color: '#fff', padding: '8px 14px', borderRadius: '10px', fontSize: '0.75rem', zIndex: 50 }}>
+              ⚠ YT Error {playerError} — playlist may not be embeddable
+            </div>
+          )}
 
           {/* ── HUD Overlay ─────────────────────────────────────────────── */}
           <div style={{ zIndex: 10, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100vh', width: '100%', position: 'relative', padding: '20px 32px 24px' }}>

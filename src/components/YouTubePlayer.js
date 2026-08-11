@@ -11,6 +11,7 @@ export default function YouTubePlayer({
   onStateChange,
   onPlayerReady,
   onTimeUpdate,
+  onError,
 }) {
   const containerRef = useRef(null);
   const playerRef = useRef(null);
@@ -93,6 +94,11 @@ export default function YouTubePlayer({
             } else {
               stopProgressTracker();
             }
+          },
+          onError: (event) => {
+            console.error('[YouTubePlayer] Error code:', event.data,
+              '| 101/150 = embed not allowed, 100 = not found, 2 = bad param');
+            if (onError) onError(event.data);
           },
         },
       });
