@@ -107,19 +107,14 @@ export default function TractorAnna() {
   const handleStateChange = (code) => {
     if (code === 1) {  // PLAYING
       setIsPlaying(true);
-      // Rotate ambience every new track
       const next = (ambIdxRef.current + 1) % AMBIENCES.length;
       ambIdxRef.current = next;
       setAmbienceIdx(next);
       setQuoteIdx(q => (q + 1) % QUOTES.length);
-      // Read live track title
-      try {
-        const info = playerRef.current?.getVideoData?.();
-        if (info?.title) setTrackTitle(info.title);
-      } catch (_) {}
+      // Note: getVideoData not available via postMessage — title stays as playlist name
     } else if (code === 2) {  // PAUSED
       setIsPlaying(false);
-    } else if (code === 0) {  // ENDED — advance (handled by playlist internally, but ensure state sync)
+    } else if (code === 0) {  // ENDED
       setIsPlaying(false);
     }
   };
@@ -129,20 +124,20 @@ export default function TractorAnna() {
     setDuration(dur);
   };
 
-  // ── Controls ───────────────────────────────────────────────────────────────
+  // ── Controls ─────────────────────────────────────────────────────────────
+  // With postMessage approach, use React state (isPlaying) instead of getPlayerState()
   const togglePlay = () => {
-    try {
-      const state = playerRef.current?.getPlayerState?.();
-      if (state === window.YT?.PlayerState?.PLAYING) {
-        playerRef.current.pauseVideo();
-      } else {
-        playerRef.current?.playVideo();
-      }
-    } catch (_) {}
+    if (isPlaying) {
+      playerRef.current?.pauseVideo?.();
+      setIsPlaying(false);
+    } else {
+      playerRef.current?.playVideo?.();
+      setIsPlaying(true);
+    }
   };
 
-  const next = () => { try { playerRef.current?.nextVideo(); } catch (_) {} };
-  const prev = () => { try { playerRef.current?.previousVideo(); } catch (_) {} };
+  const next = () => { playerRef.current?.nextVideo?.(); };
+  const prev = () => { playerRef.current?.previousVideo?.(); };
 
   const seek = (e) => {
     if (!duration) return;
