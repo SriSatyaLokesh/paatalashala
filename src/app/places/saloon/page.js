@@ -24,19 +24,16 @@ export default function DeluxeSaloon() {
 
   const currentSong = songs[currentSongIndex];
 
-  // Fetch presence count
+  // Simulate dynamic presence count locally
   useEffect(() => {
-    const fetchPresence = async () => {
-      try {
-        const res = await fetch('/api/presence?place=saloon');
-        const data = await res.json();
-        setPresenceCount(data.count);
-      } catch (e) {
-        // Fallback
-      }
+    const simulatePresence = () => {
+      const base = 41;
+      const seconds = Math.floor(Date.now() / 4000);
+      const variance = Math.sin(seconds * 0.5) * 4 + Math.cos(seconds * 0.2) * 1;
+      setPresenceCount(Math.max(1, Math.round(base + variance)));
     };
-    fetchPresence();
-    const interval = setInterval(fetchPresence, 6000);
+    simulatePresence();
+    const interval = setInterval(simulatePresence, 4000);
     return () => clearInterval(interval);
   }, []);
 

@@ -9,30 +9,22 @@ export default function Home() {
   const [activeCounts, setActiveCounts] = useState({});
 
   useEffect(() => {
-    // Fetch mock presence count for active places to display on home page
-    const fetchCounts = async () => {
+    // Simulate dynamic presence count for active places locally
+    const simulateCounts = () => {
       const counts = {};
       for (const place of PLACES) {
         if (place.active) {
-          try {
-            const res = await fetch(`/api/presence?place=${place.slug}`);
-            const data = await res.json();
-            const seconds = Math.floor(Date.now() / 4000);
-            const localVariance = Math.round(Math.sin(seconds * 0.5 + place.id.length) * 3 + Math.cos(seconds * 0.2) * 1);
-            counts[place.slug] = Math.max(1, data.count + localVariance);
-          } catch (e) {
-            const base = place.slug === 'tractor-anna' ? 83 : 41;
-            const seconds = Math.floor(Date.now() / 4000);
-            const variance = Math.sin(seconds * 0.5) * 5 + Math.cos(seconds * 0.2) * 2;
-            counts[place.slug] = Math.max(1, Math.round(base + variance));
-          }
+          const base = place.slug === 'tractor-anna' ? 83 : 41;
+          const seconds = Math.floor(Date.now() / 4000);
+          const variance = Math.sin(seconds * 0.5 + place.id.length) * 5 + Math.cos(seconds * 0.2) * 2;
+          counts[place.slug] = Math.max(1, Math.round(base + variance));
         }
       }
       setActiveCounts(counts);
     };
 
-    fetchCounts();
-    const interval = setInterval(fetchCounts, 8000);
+    simulateCounts();
+    const interval = setInterval(simulateCounts, 4000);
     return () => clearInterval(interval);
   }, []);
 

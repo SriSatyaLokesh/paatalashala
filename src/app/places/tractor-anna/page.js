@@ -4,10 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { getSongsForPlace } from '@/data/songs';
 import YouTubePlayer from '@/components/YouTubePlayer';
-import NowPlaying from '@/components/NowPlaying';
-import UpNext from '@/components/UpNext';
 import AmbientWeather from '@/components/AmbientWeather';
-import { ChevronLeft, Compass, Users } from 'lucide-react';
+import { ChevronLeft, Users, Tv, ListMusic, Volume2, VolumeX, ExternalLink, Music } from 'lucide-react';
 
 export default function TractorAnna() {
   const songs = getSongsForPlace('tractor-anna');
@@ -21,28 +19,23 @@ export default function TractorAnna() {
   const [duration, setDuration] = useState(0);
   const [presenceCount, setPresenceCount] = useState(83);
   const [playerObject, setPlayerObject] = useState(null);
+  
+  // New UI states
+  const [isQueueOpen, setIsQueueOpen] = useState(false);
+  const [isVideoVisible, setIsVideoVisible] = useState(false);
 
   const currentSong = songs[currentSongIndex];
 
-  // Fetch real-time listener count
+  // Simulate dynamic presence count locally (no network calls, zero 404s)
   useEffect(() => {
-    const fetchPresence = async () => {
-      try {
-        const res = await fetch('/api/presence?place=tractor-anna');
-        const data = await res.json();
-        const seconds = Math.floor(Date.now() / 4000);
-        const localVariance = Math.round(Math.sin(seconds * 0.5) * 3 + Math.cos(seconds * 0.2) * 1);
-        setPresenceCount(Math.max(1, data.count + localVariance));
-      } catch (e) {
-        // Local simulation fallback
-        const base = 83;
-        const seconds = Math.floor(Date.now() / 4000);
-        const variance = Math.sin(seconds * 0.5) * 5 + Math.cos(seconds * 0.2) * 2;
-        setPresenceCount(Math.max(1, Math.round(base + variance)));
-      }
+    const simulatePresence = () => {
+      const base = 83;
+      const seconds = Math.floor(Date.now() / 4000);
+      const variance = Math.sin(seconds * 0.5) * 5 + Math.cos(seconds * 0.2) * 2;
+      setPresenceCount(Math.max(1, Math.round(base + variance)));
     };
-    fetchPresence();
-    const interval = setInterval(fetchPresence, 5000);
+    simulatePresence();
+    const interval = setInterval(simulatePresence, 4000);
     return () => clearInterval(interval);
   }, []);
 
@@ -116,6 +109,13 @@ export default function TractorAnna() {
     setIsPlaying(true);
   };
 
+  // Play retro horn sound function
+  const playHorn = () => {
+    const audio = new Audio('https://www.soundjay.com/transportation/sounds/truck-horn-1.mp3');
+    audio.volume = 0.4;
+    audio.play().catch(e => console.log('Audio play failed:', e));
+  };
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -152,9 +152,9 @@ export default function TractorAnna() {
           }}>
             <div>
               <span style={{ fontSize: '3.5rem', display: 'block', marginBottom: '16px', animation: 'vehicle-float 3s ease-in-out infinite' }}>🚜</span>
-              <h1 style={{ fontSize: '2rem', fontWeight: '900', letterSpacing: '-0.02em' }}>TRACTOR ANNA</h1>
-              <p style={{ color: 'var(--color-text-secondary)', fontSize: '1rem', marginTop: '6px' }}>
-                Telugu farming songs and agricultural field vistas.
+              <h1 style={{ fontSize: '2rem', fontWeight: '900', letterSpacing: '-0.02em', color: '#fff' }}>ట్రాక్టర్ అన్న</h1>
+              <p style={{ color: '#a1a1aa', fontSize: '1rem', marginTop: '6px' }}>
+                Telugu Village Beats & Agricultural Farmland Drive.
               </p>
             </div>
 
@@ -163,7 +163,7 @@ export default function TractorAnna() {
               alignItems: 'center',
               justifyContent: 'center',
               gap: '8px',
-              color: 'var(--color-accent)',
+              color: '#fbbf24',
               fontSize: '0.9rem',
               fontWeight: '600',
               backgroundColor: 'rgba(245, 158, 11, 0.08)',
@@ -173,7 +173,7 @@ export default function TractorAnna() {
               border: '1px solid rgba(245, 158, 11, 0.2)'
             }}>
               <Users size={16} />
-              <span>{presenceCount} tractors in the fields</span>
+              <span>{presenceCount} on the farm</span>
             </div>
 
             <button
@@ -181,7 +181,7 @@ export default function TractorAnna() {
               style={{
                 padding: '16px 32px',
                 borderRadius: '12px',
-                backgroundColor: 'var(--color-accent)',
+                backgroundColor: '#fbbf24',
                 color: '#000',
                 fontSize: '1.1rem',
                 fontWeight: '800',
@@ -230,58 +230,48 @@ export default function TractorAnna() {
 
           {/* Animated Dirt Road Layout */}
           <div className="farm-road-container" style={{
-            height: '30%',
+            height: '150px',
             width: '100%',
-            backgroundColor: '#6d4c41', // Rustic dirt road color
+            backgroundColor: '#8d6e63', // Rich brown dirt road color
             position: 'relative',
-            borderTop: '6px solid #8d6e63',
+            borderTop: '6px solid #a1887f',
             boxShadow: 'inset 0 10px 20px rgba(0,0,0,0.5)',
             display: 'flex',
             justifyContent: 'center',
           }}>
-            {/* Center Dashed Lane Markings / Scrolling Pebbles */}
+            {/* Center Lane Markings / Scrolling Pebbles */}
             <div 
               style={{
                 width: '100%',
-                height: '12px',
+                height: '8px',
                 position: 'absolute',
-                top: '40%',
-                backgroundImage: 'linear-gradient(to right, #a1887f 40%, transparent 40%)',
-                backgroundSize: '120px 12px',
-                animation: `farm-road-scrolling ${currentSong?.ambience?.roadSpeed || '1s'} linear infinite`,
+                top: '50%',
+                transform: 'translateY(-50%)',
+                backgroundImage: 'linear-gradient(to right, #d7ccc8 30%, transparent 30%)',
+                backgroundSize: '160px 8px',
+                animation: `farm-road-scrolling ${currentSong?.ambience?.roadSpeed || '1.2s'} linear infinite`,
                 animationPlayState: isPlaying ? 'running' : 'paused',
-                opacity: 0.8,
+                opacity: 0.7,
               }} 
             />
 
-            {/* Left/Bottom Boundary Line */}
+            {/* Road boundaries */}
             <div style={{
               position: 'absolute',
-              bottom: '10%',
+              top: 0,
+              left: 0,
               width: '100%',
               height: '4px',
               backgroundColor: '#5d4037',
-              opacity: 0.4,
+              opacity: 0.3,
             }} />
-
-            {/* Dynamic Headlight/Lantern Glow Effect */}
-            {(currentSong?.ambience?.theme === 'night' || currentSong?.ambience?.theme === 'rainy') && isPlaying && (
-              <div style={{
-                position: 'absolute',
-                bottom: 0,
-                width: '100%',
-                height: '100%',
-                background: 'radial-gradient(ellipse at bottom left, rgba(253,224,71,0.2) 0%, transparent 60%)',
-                pointerEvents: 'none',
-              }} />
-            )}
           </div>
 
           {/* Vibrant Tractor Foreground Sprite Asset */}
           <img 
             src="/images/tractor_anna_sprite.png" 
             alt="Tractor Anna" 
-            className="tractor-container"
+            className="tractor-sprite"
             style={{
               animationPlayState: isPlaying ? 'running' : 'paused',
             }}
@@ -292,12 +282,12 @@ export default function TractorAnna() {
             <div 
               style={{
                 position: 'absolute',
-                bottom: '10%',
-                left: '5%',
-                width: '90vw',
-                height: '4px',
-                backgroundColor: 'rgba(15, 23, 42, 0.4)',
-                borderRadius: '2px',
+                bottom: '150px',
+                left: '10%',
+                width: '80vw',
+                height: '6px',
+                backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                borderRadius: '3px',
                 transformOrigin: 'left center',
                 animation: 'wiper-swipe 2.2s ease-in-out infinite',
                 animationPlayState: isPlaying ? 'running' : 'paused',
@@ -308,152 +298,531 @@ export default function TractorAnna() {
         </div>
       )}
 
-      {/* Main View Layout */}
+      {/* Main Immersive HUD Overlay */}
       {isExperienceStarted && (
         <div style={{
           zIndex: 10,
           display: 'flex',
           flexDirection: 'column',
-          flex: 1,
-          padding: '24px',
-          paddingBottom: 'calc(24px + var(--bottom-safe-area))',
+          justifyContent: 'space-between',
+          height: '100vh',
+          width: '100%',
+          position: 'relative',
+          padding: '30px',
         }}>
-          {/* Navigation and Title Header */}
+          {/* Header Area */}
           <header style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginBottom: '30px',
           }}>
+            {/* Back Button */}
             <Link href="/" style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '6px',
-              color: 'var(--color-text-secondary)',
+              gap: '8px',
+              color: '#fff',
               textDecoration: 'none',
               fontSize: '0.9rem',
               fontWeight: '600',
-              padding: '8px 12px',
-              borderRadius: '8px',
-              backgroundColor: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.05)',
-              transition: 'color 0.2s',
+              padding: '10px 18px',
+              borderRadius: '9999px',
+              background: 'rgba(255, 255, 255, 0.06)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(8px)',
+              transition: 'all 0.2s ease',
             }}
-            onMouseEnter={(e) => e.currentTarget.style.color = '#fff'}
-            onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}
+            className="hud-button"
             >
               <ChevronLeft size={16} />
-              <span>Back</span>
+              <span>PLACES</span>
             </Link>
 
-            <div style={{ textAlign: 'center' }}>
-              <h1 style={{ fontSize: '1.25rem', fontWeight: '800', tracking: '-0.02em', display: 'flex', alignItems: 'center', gap: '8px', justifycontent: 'center' }}>
-                <span>🚜 TRACTOR ANNA</span>
-              </h1>
-            </div>
-
+            {/* Presence Counter Badge */}
             <div style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '6px',
-              fontSize: '0.75rem',
-              color: 'var(--color-text-secondary)',
-              backgroundColor: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.05)',
-              padding: '6px 12px',
-              borderRadius: '16px',
+              gap: '8px',
+              fontSize: '0.85rem',
+              fontWeight: '600',
+              color: '#a7f3d0',
+              background: 'rgba(255, 255, 255, 0.06)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(8px)',
+              padding: '8px 18px',
+              borderRadius: '9999px',
             }}>
-              <Users size={12} style={{ color: 'var(--color-accent)' }} />
-              <span>{presenceCount} on road</span>
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10b981', display: 'inline-block', boxShadow: '0 0 8px #10b981' }} />
+              <span>{presenceCount} in the fields</span>
             </div>
+
+            {/* Video Preview Toggle Button */}
+            <button
+              onClick={() => setIsVideoVisible(!isVideoVisible)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                color: isVideoVisible ? '#fbbf24' : '#fff',
+                fontSize: '0.9rem',
+                fontWeight: '600',
+                padding: '10px 18px',
+                borderRadius: '9999px',
+                background: isVideoVisible ? 'rgba(245, 158, 11, 0.15)' : 'rgba(255, 255, 255, 0.06)',
+                border: isVideoVisible ? '1px solid rgba(245, 158, 11, 0.3)' : '1px solid rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(8px)',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              className="hud-button"
+            >
+              <Tv size={16} />
+              <span>{isVideoVisible ? "HIDE VIDEO" : "SHOW VIDEO"}</span>
+            </button>
           </header>
 
-          {/* Grid Panel Area */}
+          {/* Centered Immersive Title Typography */}
           <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(0, 1.2fr) minmax(0, 1fr)',
-            gap: '24px',
-            flex: 1,
-            alignItems: 'start',
-            maxWidth: '1200px',
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '8px',
+            userSelect: 'none',
+          }}>
+            <h2 style={{
+              fontSize: '4.5rem',
+              fontWeight: '900',
+              letterSpacing: '0.05em',
+              color: '#fff',
+              margin: 0,
+              textShadow: '0 4px 16px rgba(0, 0, 0, 0.5)',
+              fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+            }} className="immersive-title">
+              ట్రాక్టర్ అన్న
+            </h2>
+            <p style={{
+              fontSize: '1.1rem',
+              fontWeight: '500',
+              color: '#e4e4e7',
+              margin: 0,
+              textShadow: '0 2px 8px rgba(0, 0, 0, 0.6)',
+              opacity: 0.9,
+              letterSpacing: '0.02em'
+            }}>
+              {currentSong?.title} • {currentSong?.movie} ({currentSong?.year})
+            </p>
+          </div>
+
+          {/* Horn button on the left center */}
+          <div style={{
+            position: 'absolute',
+            left: '30px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '8px',
+          }}>
+            <button
+              onClick={playHorn}
+              style={{
+                width: '72px',
+                height: '72px',
+                borderRadius: '50%',
+                background: 'rgba(255, 255, 255, 0.08)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                backdropFilter: 'blur(12px)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#fff',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+              }}
+              className="horn-button"
+            >
+              <span style={{ fontSize: '1.8rem' }}>📢</span>
+            </button>
+            <span style={{
+              fontSize: '0.75rem',
+              fontWeight: '700',
+              color: '#fff',
+              textShadow: '0 2px 4px rgba(0,0,0,0.8)',
+              letterSpacing: '0.05em',
+            }}>HORN PLEASE</span>
+          </div>
+
+          {/* Sleek Picture-in-Picture YouTube Player in bottom right */}
+          <div 
+            className="mini-youtube-container"
+            style={{
+              display: isVideoVisible ? 'block' : 'none',
+            }}
+          >
+            <YouTubePlayer
+              videoId={currentSong?.youtubeVideoId}
+              isPlaying={isPlaying}
+              volume={volume}
+              onStateChange={handleStateChange}
+              onPlayerReady={handlePlayerReady}
+              onTimeUpdate={handleTimeUpdate}
+            />
+          </div>
+
+          {/* Bottom Sleek Floating HUD Card Capsule */}
+          <div style={{
+            position: 'relative',
             width: '100%',
+            maxWidth: '650px',
             margin: '0 auto',
-          }} className="responsive-grid-layout">
-            
-            {/* Left Panel: Embedded YouTube Player inside Dashboard navigator frame */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <div 
-                className="glass-panel"
-                style={{
-                  padding: '16px',
+            zIndex: 30,
+          }}>
+            {/* Slide-out Playlist Queue Panel */}
+            {isQueueOpen && (
+              <div style={{
+                position: 'absolute',
+                bottom: '90px',
+                left: 0,
+                right: 0,
+                background: 'rgba(15, 17, 23, 0.85)',
+                backdropFilter: 'blur(24px)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                borderRadius: '24px',
+                padding: '20px',
+                maxHeight: '260px',
+                overflowY: 'auto',
+                boxShadow: '0 -12px 40px rgba(0,0,0,0.5)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '8px',
+                animation: 'slide-up 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+              }}>
+                <div style={{
+                  fontSize: '0.8rem',
+                  fontWeight: '700',
+                  color: '#fbbf24',
+                  letterSpacing: '0.05em',
+                  textTransform: 'uppercase',
+                  marginBottom: '6px',
                   display: 'flex',
-                  flexDirection: 'column',
-                  gap: '12px',
-                  border: '2px solid rgba(255, 255, 255, 0.08)',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                  alignItems: 'center',
+                  gap: '6px',
+                }}>
+                  <Music size={12} />
+                  <span>PLAYLIST QUEUE</span>
+                </div>
+                {songs.map((song, index) => {
+                  const isActive = index === currentSongIndex;
+                  return (
+                    <button
+                      key={song.id}
+                      onClick={() => {
+                        handleSongSelect(index);
+                        setIsQueueOpen(false);
+                      }}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '12px 16px',
+                        borderRadius: '12px',
+                        background: isActive ? 'rgba(245, 158, 11, 0.15)' : 'rgba(255, 255, 255, 0.03)',
+                        border: isActive ? '1px solid rgba(245, 158, 11, 0.3)' : '1px solid rgba(255, 255, 255, 0.05)',
+                        color: isActive ? '#fbbf24' : '#fff',
+                        cursor: 'pointer',
+                        textAlign: 'left',
+                        transition: 'all 0.15s ease',
+                      }}
+                      className="queue-item"
+                    >
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                        <span style={{ fontSize: '0.9rem', fontWeight: isActive ? '700' : '500' }}>{song.title}</span>
+                        <span style={{ fontSize: '0.75rem', color: isActive ? 'rgba(251, 191, 36, 0.7)' : '#a1a1aa' }}>{song.movie} • {song.artist}</span>
+                      </div>
+                      {isActive && (
+                        <span style={{ fontSize: '0.75rem', fontWeight: '800', backgroundColor: '#fbbf24', color: '#000', padding: '2px 6px', borderRadius: '4px' }}>NOW PLAYING</span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Capsule Controller Card */}
+            <div style={{
+              background: 'rgba(20, 22, 28, 0.7)',
+              backdropFilter: 'blur(20px) saturate(140%)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderRadius: '24px',
+              padding: '16px 24px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              boxShadow: '0 16px 40px rgba(0, 0, 0, 0.4)',
+              position: 'relative',
+              overflow: 'hidden',
+            }} className="capsule-hud">
+              
+              {/* Premium Progress Bar top edge */}
+              <div 
+                onClick={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const clickX = e.clientX - rect.left;
+                  const newPercent = clickX / rect.width;
+                  handleSeek(newPercent * duration);
+                }}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: '4px',
+                  backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                  cursor: 'pointer',
                 }}
               >
-                {/* Navigator title bar */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.75rem', color: 'var(--color-text-secondary)', fontFamily: 'var(--font-mono)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <Compass size={12} style={{ color: 'var(--color-accent)' }} />
-                    <span>FARMLAND NAVIGATION SCREEN</span>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: isPlaying ? 'var(--color-neon-green)' : 'var(--color-accent)', display: 'inline-block' }} />
-                    <span>{isPlaying ? 'PLAYING' : 'READY'}</span>
-                  </div>
+                <div style={{
+                  height: '100%',
+                  width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`,
+                  backgroundColor: '#fbbf24',
+                  boxShadow: '0 0 6px #fbbf24',
+                  transition: 'width 0.1s linear',
+                }} />
+              </div>
+
+              {/* Left Section: Cover & Title */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1, minWidth: 0 }}>
+                {/* Rotating cover disc */}
+                <div style={{
+                  width: '46px',
+                  height: '46px',
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  border: '2px solid rgba(255,255,255,0.2)',
+                  boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                  animation: 'spin 12s linear infinite',
+                  animationPlayState: isPlaying ? 'running' : 'paused',
+                  flexShrink: 0,
+                  background: '#151515',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                  {currentSong ? (
+                    <img 
+                      src={`https://img.youtube.com/vi/${currentSong.youtubeVideoId}/mqdefault.jpg`}
+                      alt="Disc"
+                      style={{ width: '130%', height: '130%', objectFit: 'cover' }}
+                    />
+                  ) : (
+                    <Music size={20} style={{ color: '#fbbf24' }} />
+                  )}
                 </div>
 
-                {/* Player screen wrapper */}
-                <div style={{ aspectRatio: '16/9', width: '100%' }}>
-                  <YouTubePlayer
-                    videoId={currentSong?.youtubeVideoId}
-                    isPlaying={isPlaying}
-                    volume={volume}
-                    onStateChange={handleStateChange}
-                    onPlayerReady={handlePlayerReady}
-                    onTimeUpdate={handleTimeUpdate}
-                  />
+                {/* Text details */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
+                  <span style={{ fontSize: '0.95rem', fontWeight: '700', color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {currentSong?.title}
+                  </span>
+                  <span style={{ fontSize: '0.75rem', color: '#a1a1aa', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {currentSong?.movie} • {currentSong?.artist.split(',')[0]}
+                  </span>
                 </div>
               </div>
-            </div>
 
-            {/* Right Panel: Controls, Metadata, and Song Queue */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <NowPlaying
-                song={currentSong}
-                isPlaying={isPlaying}
-                volume={volume}
-                currentTime={currentTime}
-                duration={duration}
-                onPlayPauseToggle={handlePlayPauseToggle}
-                onNext={handleNext}
-                onPrev={handlePrev}
-                onVolumeChange={handleVolumeChange}
-                onSeek={handleSeek}
-              />
+              {/* Center Section: Main Audio Controls */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'center', padding: '0 20px' }}>
+                <button
+                  onClick={handlePrev}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: 'rgba(255, 255, 255, 0.7)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '8px',
+                    transition: 'color 0.2s',
+                  }}
+                  className="control-icon"
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#fff'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.7)'}
+                >
+                  <span style={{ fontSize: '1.3rem' }}>⏮</span>
+                </button>
 
-              <UpNext
-                songs={songs}
-                currentSongIndex={currentSongIndex}
-                onSongSelect={handleSongSelect}
-              />
+                <button
+                  onClick={handlePlayPauseToggle}
+                  style={{
+                    width: '46px',
+                    height: '46px',
+                    borderRadius: '50%',
+                    backgroundColor: '#fff',
+                    border: 'none',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 4px 12px rgba(255,255,255,0.3)',
+                    transition: 'transform 0.15s, background-color 0.2s',
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                  onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                >
+                  <span style={{ fontSize: '1.2rem', color: '#000', display: 'flex', alignItems: 'center', justify: 'center' }}>
+                    {isPlaying ? '⏸' : '▶'}
+                  </span>
+                </button>
+
+                <button
+                  onClick={handleNext}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: 'rgba(255, 255, 255, 0.7)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '8px',
+                    transition: 'color 0.2s',
+                  }}
+                  className="control-icon"
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#fff'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.7)'}
+                >
+                  <span style={{ fontSize: '1.3rem' }}>⏭</span>
+                </button>
+              </div>
+
+              {/* Right Section: Volume & Queue Toggles */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', justifyContent: 'flex-end', flex: 1 }}>
+                
+                {/* Volume Slider Block */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="volume-slider-container">
+                  <button
+                    onClick={() => handleVolumeChange(volume === 0 ? 50 : 0)}
+                    style={{ background: 'none', border: 'none', color: '#a1a1aa', cursor: 'pointer', padding: 0 }}
+                  >
+                    {volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                  </button>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={volume}
+                    onChange={(e) => handleVolumeChange(parseInt(e.target.value))}
+                    style={{
+                      width: '60px',
+                      height: '4px',
+                      borderRadius: '2px',
+                      background: 'rgba(255,255,255,0.2)',
+                      accentColor: '#fbbf24',
+                      cursor: 'pointer',
+                    }}
+                    className="volume-slider"
+                  />
+                </div>
+
+                {/* External Spotify button */}
+                {currentSong?.spotifyUrl && (
+                  <a
+                    href={currentSong.spotifyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      color: '#a1a1aa',
+                      display: 'flex',
+                      alignItems: 'center',
+                      padding: '4px',
+                      transition: 'color 0.2s',
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = '#1ed760'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = '#a1a1aa'}
+                  >
+                    <ExternalLink size={18} />
+                  </a>
+                )}
+
+                {/* Queue Toggle */}
+                <button
+                  onClick={() => setIsQueueOpen(!isQueueOpen)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: isQueueOpen ? '#fbbf24' : '#a1a1aa',
+                    cursor: 'pointer',
+                    padding: '4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    transition: 'color 0.2s',
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = isQueueOpen ? '#fbbf24' : '#fff'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = isQueueOpen ? '#fbbf24' : '#a1a1aa'}
+                >
+                  <ListMusic size={20} />
+                </button>
+              </div>
+
             </div>
           </div>
         </div>
       )}
 
-      {/* CSS adjustments for mobile devices */}
+      {/* CSS adjustments for mobile and desktop devices */}
       <style jsx global>{`
-        .tractor-container {
+        .tractor-sprite {
           position: absolute;
-          bottom: 15%;
-          left: 10%;
-          width: 320px;
+          bottom: 140px;
+          left: 15%;
+          width: 250px;
           height: auto;
           animation: tractor-vibration 0.15s linear infinite;
           z-index: 2;
+        }
+
+        .hud-button {
+          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+        .hud-button:hover {
+          background: rgba(255, 255, 255, 0.12) !important;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .horn-button {
+          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+        .horn-button:hover {
+          background: rgba(255, 255, 255, 0.15) !important;
+          transform: scale(1.08) !important;
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
+        }
+        .horn-button:active {
+          transform: scale(0.95) !important;
+        }
+
+        .mini-youtube-container {
+          position: absolute;
+          bottom: 30px;
+          right: 30px;
+          width: 200px;
+          height: 112px;
+          border-radius: 16px;
+          overflow: hidden;
+          box-shadow: 0 12px 24px rgba(0,0,0,0.5);
+          border: 1px solid rgba(255,255,255,0.15);
+          opacity: 0.25;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 40;
+          background: #000;
+        }
+        .mini-youtube-container:hover {
+          opacity: 1;
+          transform: scale(1.05);
+          box-shadow: 0 16px 32px rgba(0,0,0,0.7);
         }
 
         @keyframes tractor-vibration {
@@ -466,45 +835,64 @@ export default function TractorAnna() {
 
         @keyframes farm-road-scrolling {
           from { background-position-x: 0px; }
-          to { background-position-x: -240px; }
+          to { background-position-x: -160px; }
         }
 
+        @keyframes slide-up {
+          from { transform: translateY(15px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        @keyframes wiper-swipe {
+          0% { transform: rotate(0deg); }
+          50% { transform: rotate(65deg); }
+          100% { transform: rotate(0deg); }
+        }
+
+        .queue-item:hover {
+          background: rgba(255, 255, 255, 0.08) !important;
+          border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        /* Responsive overrides for smaller screens */
         @media (max-width: 768px) {
-          .responsive-grid-layout {
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: flex-end !important;
-            position: fixed !important;
-            bottom: 16px !important;
-            left: 16px !important;
-            right: 16px !important;
-            width: calc(100% - 32px) !important;
-            max-height: 55vh !important;
-            overflow-y: auto !important;
-            background: rgba(10, 11, 15, 0.75) !important;
-            backdrop-filter: blur(20px) !important;
-            -webkit-backdrop-filter: blur(20px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            border-radius: 20px !important;
-            padding: 16px !important;
-            z-index: 20 !important;
-            gap: 12px !important;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6) !important;
+          .immersive-title {
+            font-size: 2.8rem !important;
           }
           
-          .responsive-grid-layout > div {
-            width: 100% !important;
+          .capsule-hud {
+            padding: 12px 18px !important;
+            border-radius: 20px !important;
           }
 
-          .tractor-container {
-            width: 180px !important;
-            bottom: 60% !important;
+          .volume-slider-container {
+            display: none !important; /* Hide volume on mobile to save space */
+          }
+
+          .tractor-sprite {
+            width: 170px !important;
+            bottom: 120px !important;
             left: 5% !important;
           }
 
           .farm-road-container {
-            height: 15% !important;
-            bottom: 57% !important;
+            height: 120px !important;
+          }
+
+          .mini-youtube-container {
+            bottom: 170px !important;
+            right: 20px !important;
+            width: 130px !important;
+            height: 73px !important;
+          }
+
+          header {
+            padding: 0 10px !important;
           }
         }
       `}</style>
