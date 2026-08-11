@@ -311,73 +311,190 @@ export default function TractorAnna() {
             </div>
 
             {/* Bottom HUD capsule */}
-            <div style={{ position: 'relative', width: '100%', maxWidth: '650px', margin: '0 auto', zIndex: 30 }}>
-              <div style={{ background: 'rgba(18,20,26,0.92)', backdropFilter: 'blur(24px) saturate(140%)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: '28px', padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 20px 50px rgba(0,0,0,0.75)', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'relative', width: '100%', maxWidth: '680px', margin: '0 auto', zIndex: 30 }}>
+              <div style={{
+                background: 'rgba(18, 20, 26, 0.93)',
+                backdropFilter: 'blur(24px) saturate(140%)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                borderRadius: '24px',
+                padding: '20px 24px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '16px',
+                boxShadow: '0 20px 50px rgba(0,0,0,0.85)',
+                position: 'relative'
+              }} className="capsule-hud">
 
-                {/* Progress bar */}
-                <div onClick={seek} style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: 'rgba(255,255,255,0.1)', cursor: 'pointer' }}>
-                  <div style={{ height: '100%', width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`, background: '#fbbf24', boxShadow: '0 0 8px #fbbf24', transition: 'width 0.1s linear' }} />
-                </div>
-
-                {/* Track info */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, minWidth: 0 }}>
-                  <div style={{ width: '44px', height: '44px', borderRadius: '50%', overflow: 'hidden', border: '2px solid rgba(255,255,255,0.2)', flexShrink: 0, position: 'relative', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center', animationName: 'spin', animationDuration: '12s', animationTimingFunction: 'linear', animationIterationCount: 'infinite', animationPlayState: isPlaying ? 'running' : 'paused' }}>
-                    {currentSong.youtubeVideoId ? (
-                      <img 
-                        src={`https://img.youtube.com/vi/${currentSong.youtubeVideoId}/hqdefault.jpg`} 
-                        alt="Album Art" 
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-                      />
-                    ) : (
-                      <span style={{ fontSize: '1.5rem' }}>🚜</span>
-                    )}
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
-                    <span style={{ fontSize: '0.9rem', fontWeight: '700', color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                      {currentSong?.title || 'Loading song…'}
-                    </span>
-                    <span style={{ fontSize: '0.72rem', color: '#a1a1aa', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                      {currentSong?.movie ? `${currentSong.movie} (${currentSong.year || 'Classic'})` : 'Telugu Classics'}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Controls */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '0 18px' }}>
-                  <button 
-                    onClick={() => setIsShuffle(prev => !prev)} 
-                    title={isShuffle ? "Disable Shuffle" : "Enable Shuffle"}
-                    style={{ 
-                      background: 'none', 
-                      border: 'none', 
-                      color: isShuffle ? '#fbbf24' : 'rgba(255,255,255,0.4)', 
-                      cursor: 'pointer', 
-                      padding: '4px',
+                {/* Top Row: Art + Info (Left) & Playback Controls + Volume (Right) */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '16px' }}>
+                  
+                  {/* Left: Track Info & Album Art */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
+                    <div style={{
+                      width: '50px',
+                      height: '50px',
+                      borderRadius: '50%',
+                      overflow: 'hidden',
+                      border: '2px solid rgba(255,255,255,0.15)',
+                      flexShrink: 0,
+                      position: 'relative',
+                      background: '#000',
                       display: 'flex',
                       alignItems: 'center',
-                      transition: 'color 0.2s'
-                    }} 
-                    className="control-icon"
-                  >
-                    <Shuffle size={15} />
-                  </button>
-                  <button onClick={prev} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '8px', fontSize: '1.3rem' }} className="control-icon">⏮</button>
-                  <button onClick={togglePlay}
-                    style={{ width: '46px', height: '46px', borderRadius: '50%', background: '#fff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 14px rgba(255,255,255,0.4)', transition: 'transform 0.15s' }}
-                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
-                    onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
-                    <span style={{ fontSize: '1.2rem', color: '#000' }}>{isPlaying ? '⏸' : '▶'}</span>
-                  </button>
-                  <button onClick={next} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '8px', fontSize: '1.3rem' }} className="control-icon">⏭</button>
+                      justifyContent: 'center',
+                      animationName: 'spin',
+                      animationDuration: '12s',
+                      animationTimingFunction: 'linear',
+                      animationIterationCount: 'infinite',
+                      animationPlayState: isPlaying ? 'running' : 'paused'
+                    }}>
+                      {currentSong.youtubeVideoId ? (
+                        <img 
+                          src={`https://img.youtube.com/vi/${currentSong.youtubeVideoId}/hqdefault.jpg`} 
+                          alt="Album Art" 
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                        />
+                      ) : (
+                        <span style={{ fontSize: '1.5rem' }}>🚜</span>
+                      )}
+                    </div>
+                    
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
+                      <span style={{ fontSize: '1rem', fontWeight: '800', color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', letterSpacing: '0.01em' }}>
+                        {currentSong?.title || 'Loading song…'}
+                      </span>
+                      <span style={{ fontSize: '0.75rem', color: '#a1a1aa', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {currentSong?.movie ? `${currentSong.movie} (${currentSong.year || 'Classic'})` : 'Telugu Classics'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Right: Controls & Volume */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexShrink: 0 }}>
+                    {/* Controls */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <button 
+                        onClick={() => setIsShuffle(prev => !prev)} 
+                        title={isShuffle ? "Disable Shuffle" : "Enable Shuffle"}
+                        style={{ 
+                          background: 'none', 
+                          border: 'none', 
+                          color: isShuffle ? '#fbbf24' : 'rgba(255,255,255,0.4)', 
+                          cursor: 'pointer', 
+                          padding: '6px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          transition: 'color 0.2s'
+                        }} 
+                        className="control-icon"
+                      >
+                        <Shuffle size={16} />
+                      </button>
+                      
+                      <button onClick={prev} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem' }} className="control-icon">⏮</button>
+                      
+                      <button onClick={togglePlay}
+                        style={{
+                          width: '44px',
+                          height: '44px',
+                          borderRadius: '50%',
+                          background: '#fff',
+                          border: 'none',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          boxShadow: '0 4px 14px rgba(255,255,255,0.3)',
+                          transition: 'transform 0.15s, background-color 0.15s'
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                        onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
+                        <span style={{ fontSize: '1.1rem', color: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          {isPlaying ? '⏸' : '▶'}
+                        </span>
+                      </button>
+                      
+                      <button onClick={next} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem' }} className="control-icon">⏭</button>
+                    </div>
+
+                    {/* Divider */}
+                    <div style={{ width: '1px', height: '24px', backgroundColor: 'rgba(255,255,255,0.1)' }} />
+
+                    {/* Volume */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="volume-slider-container">
+                      <button onClick={() => changeVolume(volume === 0 ? 60 : 0)} style={{ background: 'none', border: 'none', color: '#a1a1aa', cursor: 'pointer', padding: 0 }}>
+                        {volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                      </button>
+                      <input 
+                        type="range" 
+                        min="0" 
+                        max="100" 
+                        value={volume} 
+                        onChange={e => changeVolume(parseInt(e.target.value))}
+                        style={{ 
+                          width: '70px', 
+                          height: '4px', 
+                          borderRadius: '2px', 
+                          background: 'rgba(255,255,255,0.15)', 
+                          accentColor: '#fbbf24', 
+                          cursor: 'pointer' 
+                        }} 
+                      />
+                    </div>
+                  </div>
+
                 </div>
 
-                {/* Volume */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: 1, justifyContent: 'flex-end' }} className="volume-slider-container">
-                  <button onClick={() => changeVolume(volume === 0 ? 60 : 0)} style={{ background: 'none', border: 'none', color: '#a1a1aa', cursor: 'pointer', padding: 0 }}>
-                    {volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
-                  </button>
-                  <input type="range" min="0" max="100" value={volume} onChange={e => changeVolume(parseInt(e.target.value))}
-                    style={{ width: '60px', height: '4px', borderRadius: '2px', background: 'rgba(255,255,255,0.2)', accentColor: '#fbbf24', cursor: 'pointer' }} />
+                {/* Bottom Row: Progress Timeline and Timestamps */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', width: '100%' }}>
+                  {/* Progress Track Line (thicker and cleaner for dragging/seeking) */}
+                  <div 
+                    onClick={seek} 
+                    style={{ 
+                      height: '6px', 
+                      width: '100%', 
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)', 
+                      borderRadius: '3px', 
+                      position: 'relative', 
+                      cursor: 'pointer',
+                      transition: 'background-color 0.2s'
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.15)'}
+                    onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'}
+                  >
+                    <div 
+                      style={{ 
+                        height: '100%', 
+                        width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`, 
+                        background: '#fbbf24', 
+                        borderRadius: '3px',
+                        boxShadow: '0 0 8px rgba(251, 191, 36, 0.5)',
+                        transition: 'width 0.1s linear'
+                      }} 
+                    />
+                    {/* Thumb handle */}
+                    <div 
+                      style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`,
+                        transform: 'translate(-50%, -50%)',
+                        width: '12px',
+                        height: '12px',
+                        borderRadius: '50%',
+                        backgroundColor: '#fff',
+                        boxShadow: '0 2px 6px rgba(0,0,0,0.4)',
+                        opacity: 1,
+                        pointerEvents: 'none'
+                      }}
+                    />
+                  </div>
+                  
+                  {/* Timestamps */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#a1a1aa', fontFamily: 'monospace', letterSpacing: '0.02em' }}>
+                    <span>{fmt(currentTime)}</span>
+                    <span>{duration > 0 ? fmt(duration) : '0:00'}</span>
+                  </div>
                 </div>
 
               </div>
