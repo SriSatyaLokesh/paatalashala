@@ -728,10 +728,28 @@ export default function TractorAnna() {
           max-height: 52vh;
           object-fit: contain;
           height: auto;
-          animation: tractor-hero-vibration 0.2s linear infinite;
+          animation: tractor-smooth-drive 3.6s ease-in-out infinite;
           z-index: 2;
-          filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
+          filter: drop-shadow(0 15px 30px rgba(0,0,0,0.55));
           pointer-events: none;
+        }
+
+        @keyframes tractor-smooth-drive {
+          0% {
+            transform: translateX(-50%) translateY(0px) rotate(0deg);
+          }
+          25% {
+            transform: translateX(calc(-50% + 5px)) translateY(-6px) rotate(0.4deg);
+          }
+          50% {
+            transform: translateX(-50%) translateY(-2px) rotate(0deg);
+          }
+          75% {
+            transform: translateX(calc(-50% - 5px)) translateY(-7px) rotate(-0.4deg);
+          }
+          100% {
+            transform: translateX(-50%) translateY(0px) rotate(0deg);
+          }
         }
 
         .hud-button:hover {
@@ -762,14 +780,6 @@ export default function TractorAnna() {
         .mini-youtube-container:hover {
           opacity: 1;
           transform: scale(1.05);
-        }
-
-        @keyframes tractor-hero-vibration {
-          0% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
-          25% { transform: translateX(-50%) translateY(-2px) rotate(0.15deg); }
-          50% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
-          75% { transform: translateX(-50%) translateY(1.5px) rotate(-0.15deg); }
-          100% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
         }
 
         @keyframes slide-up {
