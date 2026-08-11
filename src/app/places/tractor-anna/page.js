@@ -219,12 +219,12 @@ export default function TractorAnna() {
         />
       )}
 
-      {/* Transparent Tractor Sprite floating natively over background */}
+      {/* Hero Tractor Image: Core Highlight of the page (60% UI Rule) */}
       {isExperienceStarted && (
         <img 
           src={currentSong?.ambience?.vehicleSprite || "/images/tractor_anna_sprite.png"} 
-          alt="Tractor Anna" 
-          className="tractor-sprite"
+          alt="Tractor Anna Hero" 
+          className="tractor-hero-sprite"
           style={{
             animationPlayState: isPlaying ? 'running' : 'paused',
           }}
@@ -243,7 +243,7 @@ export default function TractorAnna() {
           position: 'relative',
           padding: '24px 32px',
         }}>
-          {/* Header Area */}
+          {/* Top Bar Navigation */}
           <header style={{
             display: 'flex',
             justifyContent: 'space-between',
@@ -321,34 +321,35 @@ export default function TractorAnna() {
             </button>
           </header>
 
-          {/* Centered Minimalist Typography & Poetry Quote */}
+          {/* Top-Aligned Clean Title & Quote Block (30% Secondary UI Rule) */}
           <div style={{
             textAlign: 'center',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '12px',
+            gap: '8px',
             userSelect: 'none',
-            margin: 'auto 0',
+            marginTop: '12px',
+            zIndex: 5,
           }}>
             <h2 style={{
-              fontSize: '5rem',
+              fontSize: '4.2rem',
               fontWeight: '900',
               letterSpacing: '0.04em',
               color: '#ffffff',
               margin: 0,
-              textShadow: '0 6px 24px rgba(0, 0, 0, 0.6)',
+              textShadow: '0 6px 28px rgba(0, 0, 0, 0.75)',
               fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
             }} className="immersive-title">
               ట్రాక్టర్ అన్న
             </h2>
             
             <p style={{
-              fontSize: '1.2rem',
+              fontSize: '1.15rem',
               fontWeight: '600',
               color: '#f4f4f5',
               margin: 0,
-              textShadow: '0 3px 12px rgba(0, 0, 0, 0.7)',
+              textShadow: '0 3px 12px rgba(0, 0, 0, 0.85)',
               letterSpacing: '0.02em',
               opacity: 0.95,
             }}>
@@ -360,34 +361,34 @@ export default function TractorAnna() {
               <p style={{
                 fontSize: '1.05rem',
                 fontWeight: '500',
-                color: '#fef08a', // Warm soft yellow
-                margin: '6px 0 0 0',
-                textShadow: '0 2px 10px rgba(0, 0, 0, 0.8)',
+                color: '#fef08a',
+                margin: '2px 0 0 0',
+                textShadow: '0 2px 10px rgba(0, 0, 0, 0.9)',
                 fontStyle: 'italic',
                 letterSpacing: '0.03em',
-                maxWidth: '600px',
+                maxWidth: '650px',
               }}>
                 {currentSong.quote}
               </p>
             )}
           </div>
 
-          {/* Horn button on the left center */}
+          {/* Horn button on the left */}
           <div style={{
             position: 'absolute',
             left: '32px',
-            top: '50%',
-            transform: 'translateY(-50%)',
+            bottom: '120px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '8px',
+            gap: '6px',
+            zIndex: 15,
           }}>
             <button
               onClick={playHorn}
               style={{
-                width: '64px',
-                height: '64px',
+                width: '58px',
+                height: '58px',
                 borderRadius: '50%',
                 background: 'rgba(255, 255, 255, 0.08)',
                 border: '1px solid rgba(255, 255, 255, 0.15)',
@@ -402,10 +403,10 @@ export default function TractorAnna() {
               }}
               className="horn-button"
             >
-              <span style={{ fontSize: '1.6rem' }}>📢</span>
+              <span style={{ fontSize: '1.5rem' }}>📢</span>
             </button>
             <span style={{
-              fontSize: '0.75rem',
+              fontSize: '0.7rem',
               fontWeight: '700',
               color: '#fff',
               textShadow: '0 2px 6px rgba(0,0,0,0.9)',
@@ -430,7 +431,7 @@ export default function TractorAnna() {
             />
           </div>
 
-          {/* Bottom Floating HUD Capsule Controller */}
+          {/* Bottom Floating HUD Capsule Controller (10% Accent UI Rule) */}
           <div style={{
             position: 'relative',
             width: '100%',
@@ -445,14 +446,14 @@ export default function TractorAnna() {
                 bottom: '90px',
                 left: 0,
                 right: 0,
-                background: 'rgba(15, 17, 23, 0.88)',
+                background: 'rgba(15, 17, 23, 0.92)',
                 backdropFilter: 'blur(24px)',
                 border: '1px solid rgba(255, 255, 255, 0.12)',
                 borderRadius: '24px',
                 padding: '20px',
-                maxHeight: '260px',
+                maxHeight: '280px',
                 overflowY: 'auto',
-                boxShadow: '0 -12px 40px rgba(0,0,0,0.6)',
+                boxShadow: '0 -12px 40px rgba(0,0,0,0.7)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '8px',
@@ -470,7 +471,7 @@ export default function TractorAnna() {
                   gap: '6px',
                 }}>
                   <Music size={12} />
-                  <span>PLAYLIST QUEUE</span>
+                  <span>PLAYLIST QUEUE ({songs.length} TRACKS)</span>
                 </div>
                 {songs.map((song, index) => {
                   const isActive = index === currentSongIndex;
@@ -497,7 +498,7 @@ export default function TractorAnna() {
                       className="queue-item"
                     >
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                        <span style={{ fontSize: '0.9rem', fontWeight: isActive ? '700' : '500' }}>{song.title}</span>
+                        <span style={{ fontSize: '0.9rem', fontWeight: isActive ? '700' : '500' }}>{index + 1}. {song.title}</span>
                         <span style={{ fontSize: '0.75rem', color: isActive ? 'rgba(251, 191, 36, 0.7)' : '#a1a1aa' }}>{song.movie} • {song.artist}</span>
                       </div>
                       {isActive && (
@@ -511,7 +512,7 @@ export default function TractorAnna() {
 
             {/* Floating Glass Capsule HUD */}
             <div style={{
-              background: 'rgba(20, 22, 28, 0.75)',
+              background: 'rgba(20, 22, 28, 0.8)',
               backdropFilter: 'blur(20px) saturate(140%)',
               border: '1px solid rgba(255, 255, 255, 0.12)',
               borderRadius: '28px',
@@ -519,7 +520,7 @@ export default function TractorAnna() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              boxShadow: '0 16px 40px rgba(0, 0, 0, 0.5)',
+              boxShadow: '0 16px 40px rgba(0, 0, 0, 0.55)',
               position: 'relative',
               overflow: 'hidden',
             }} className="capsule-hud">
@@ -716,15 +717,20 @@ export default function TractorAnna() {
 
       {/* Global Style Adjustments */}
       <style jsx global>{`
-        .tractor-sprite {
+        /* Core Hero Tractor Sprite (60% UI Dominance Rule) */
+        .tractor-hero-sprite {
           position: absolute;
-          bottom: 30px;
-          left: 40px;
-          width: 230px;
+          bottom: 100px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 520px;
+          max-width: 85vw;
+          max-height: 52vh;
+          object-fit: contain;
           height: auto;
-          animation: tractor-vibration 0.2s linear infinite;
+          animation: tractor-hero-vibration 0.2s linear infinite;
           z-index: 2;
-          filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+          filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
           pointer-events: none;
         }
 
@@ -758,12 +764,12 @@ export default function TractorAnna() {
           transform: scale(1.05);
         }
 
-        @keyframes tractor-vibration {
-          0% { transform: translateY(0px) rotate(0deg); }
-          25% { transform: translateY(-1.5px) rotate(0.1deg); }
-          50% { transform: translateY(0px) rotate(0deg); }
-          75% { transform: translateY(1px) rotate(-0.1deg); }
-          100% { transform: translateY(0px) rotate(0deg); }
+        @keyframes tractor-hero-vibration {
+          0% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
+          25% { transform: translateX(-50%) translateY(-2px) rotate(0.15deg); }
+          50% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
+          75% { transform: translateX(-50%) translateY(1.5px) rotate(-0.15deg); }
+          100% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
         }
 
         @keyframes slide-up {
@@ -782,7 +788,12 @@ export default function TractorAnna() {
 
         @media (max-width: 768px) {
           .immersive-title {
-            font-size: 3rem !important;
+            font-size: 2.8rem !important;
+          }
+
+          .tractor-hero-sprite {
+            width: 320px !important;
+            bottom: 120px !important;
           }
           
           .capsule-hud {
@@ -791,12 +802,6 @@ export default function TractorAnna() {
 
           .volume-slider-container {
             display: none !important;
-          }
-
-          .tractor-sprite {
-            width: 150px !important;
-            bottom: 120px !important;
-            left: 20px !important;
           }
         }
       `}</style>
