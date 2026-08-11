@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { getSongsForPlace } from '@/data/songs';
 import YouTubePlayer from '@/components/YouTubePlayer';
 import AmbientWeather from '@/components/AmbientWeather';
-import { ChevronLeft, Tv, Volume2, VolumeX, Wind, Shuffle } from 'lucide-react';
+import { ChevronLeft, Tv, Volume2, VolumeX, Wind, Shuffle, Play, Pause, Megaphone } from 'lucide-react';
 
 export default function TractorAnna() {
   const songs = getSongsForPlace('tractor-anna');
@@ -289,8 +289,8 @@ export default function TractorAnna() {
           <div style={{ zIndex: 10, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100vh', width: '100%', position: 'relative', padding: '20px 32px 24px' }}>
 
             {/* Top */}
-            <div>
-              <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ width: '100%' }}>
+              <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', width: '100%', minHeight: '44px' }}>
                 {/* Left */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#fff', textDecoration: 'none', fontSize: '0.85rem', fontWeight: '600', padding: '8px 16px', borderRadius: '9999px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)' }} className="hud-button">
@@ -299,8 +299,26 @@ export default function TractorAnna() {
                   {timeString && <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }}>{timeString}</span>}
                 </div>
 
-                {/* Center */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', fontWeight: '600', color: '#a7f3d0', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)', padding: '8px 18px', borderRadius: '9999px' }}>
+                {/* Center - Absolutely Centered */}
+                <div style={{
+                  position: 'absolute',
+                  left: '50%',
+                  top: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  fontSize: '0.85rem',
+                  fontWeight: '600',
+                  color: '#a7f3d0',
+                  background: 'rgba(255,255,255,0.08)',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                  backdropFilter: 'blur(12px)',
+                  padding: '8px 18px',
+                  borderRadius: '9999px',
+                  zIndex: 5,
+                  whiteSpace: 'nowrap'
+                }}>
                   <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', display: 'inline-block', boxShadow: '0 0 8px #10b981' }} />
                   <span>{presenceCount} listeners on field</span>
                 </div>
@@ -319,23 +337,29 @@ export default function TractorAnna() {
               </header>
 
               {/* Title + quote */}
-              <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', userSelect: 'none', marginTop: '1.6rem' }}>
+              <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', userSelect: 'none', marginTop: '1.8rem' }}>
                 <h2 style={{ fontSize: '3.8rem', fontWeight: '900', letterSpacing: '0.04em', color: '#fff', margin: 0, textShadow: '0 6px 28px rgba(0,0,0,0.85)', fontFamily: "'Noto Serif Telugu', serif" }} className="immersive-title">
                   ట్రాక్టర్ అన్న
                 </h2>
-                <p style={{ fontSize: '1.05rem', fontWeight: '500', color: '#fef08a', margin: 0, textShadow: '0 2px 14px rgba(0,0,0,0.98)', fontStyle: 'italic', letterSpacing: '0.03em', maxWidth: '650px' }}>
+                <p style={{
+                  fontSize: '1.05rem',
+                  fontWeight: '600',
+                  color: '#fef08a',
+                  margin: 0,
+                  padding: '8px 24px',
+                  borderRadius: '9999px',
+                  background: 'rgba(15, 15, 23, 0.7)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  backdropFilter: 'blur(12px)',
+                  textShadow: '0 1px 3px rgba(0,0,0,0.6)',
+                  maxWidth: '650px',
+                  lineHeight: '1.4',
+                  fontStyle: 'italic',
+                  letterSpacing: '0.02em'
+                }}>
                   {currentSong?.quote || 'చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾'}
                 </p>
               </div>
-            </div>
-
-            {/* Horn button */}
-            <div style={{ position: 'absolute', left: '32px', bottom: '120px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', zIndex: 15 }}>
-              <button onClick={playHorn} className="horn-button"
-                style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', backdropFilter: 'blur(12px)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 32px rgba(0,0,0,0.4)', transition: 'all 0.2s' }}>
-                <span style={{ fontSize: '1.4rem' }}>📢</span>
-              </button>
-              <span style={{ fontSize: '0.65rem', fontWeight: '700', color: '#fff', textShadow: '0 2px 6px rgba(0,0,0,0.9)', letterSpacing: '0.05em' }}>HORN PLEASE</span>
             </div>
 
             {/* Bottom HUD capsule */}
@@ -359,23 +383,22 @@ export default function TractorAnna() {
                   {/* Left: Track Info & Album Art */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
                     <div style={{
-                      width: '50px',
-                      height: '50px',
-                      borderRadius: '50%',
+                      width: '48px',
+                      height: '48px',
+                      borderRadius: '10px',
                       overflow: 'hidden',
-                      border: '2px solid rgba(255,255,255,0.15)',
+                      border: '1px solid rgba(255,255,255,0.16)',
                       flexShrink: 0,
                       position: 'relative',
-                      background: '#000',
+                      background: 'rgba(255,255,255,0.03)',
+                      boxShadow: '0 8px 16px rgba(0,0,0,0.5)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      animationName: 'spin',
-                      animationDuration: '12s',
-                      animationTimingFunction: 'linear',
-                      animationIterationCount: 'infinite',
-                      animationPlayState: isPlaying ? 'running' : 'paused'
-                    }}>
+                      transition: 'transform 0.3s ease'
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                    onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
                       {currentSong.youtubeVideoId ? (
                         <img 
                           src={`https://img.youtube.com/vi/${currentSong.youtubeVideoId}/hqdefault.jpg`} 
@@ -401,6 +424,28 @@ export default function TractorAnna() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1.3rem', flexShrink: 0 }}>
                     {/* Controls */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      
+                      {/* Horn button */}
+                      <button 
+                        onClick={playHorn} 
+                        title="Horn Please (📢)"
+                        style={{ 
+                          background: 'none', 
+                          border: 'none', 
+                          color: 'rgba(255,255,255,0.4)', 
+                          cursor: 'pointer', 
+                          padding: '6px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          transition: 'color 0.2s, transform 0.2s'
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.15)'}
+                        onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                        className="control-icon"
+                      >
+                        <Megaphone size={16} />
+                      </button>
+
                       <button 
                         onClick={() => setIsShuffle(prev => !prev)} 
                         title={isShuffle ? "Disable Shuffle" : "Shuffle Tracks (🔀)"}
@@ -438,8 +483,12 @@ export default function TractorAnna() {
                         }}
                         onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
                         onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
-                        <span style={{ fontSize: '1.1rem', color: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          {isPlaying ? '⏸' : '▶'}
+                        <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          {isPlaying ? (
+                            <Pause size={18} fill="#000" color="#000" />
+                          ) : (
+                            <Play size={18} fill="#000" color="#000" style={{ transform: 'translateX(1px)' }} />
+                          )}
                         </span>
                       </button>
                       
