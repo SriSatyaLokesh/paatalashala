@@ -12,18 +12,16 @@
     "spotifyUrl": "https://open.spotify.com/track/62Lq2wO9C0C0C0C0C0C0C0",
     "sequence": 1,
     "active": true,
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
       "background": "url('/images/sunset_farm_background.png')",
-      "roadSpeed": "1.2s",
-      "roadType": "dirt",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
       "brightness": 1.0,
-      "visualEffects": ["moving-clouds", "sunset-glow"],
       "description": "Sunset farm drive"
     }
   },
@@ -40,18 +38,16 @@
     "spotifyUrl": "https://open.spotify.com/track/5cW40w2zF5V7V7V7V7V7V7",
     "sequence": 2,
     "active": true,
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
       "background": "url('/images/morning_farm_background.png')",
-      "roadSpeed": "1.0s",
-      "roadType": "dirt",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
       "brightness": 0.9,
-      "visualEffects": ["misty-fog", "golden-sunrise-rays"],
       "description": "Early morning farm drive"
     }
   },
@@ -68,18 +64,16 @@
     "spotifyUrl": "https://open.spotify.com/track/4eY4eY4eY4eY4eY4eY4eY4",
     "sequence": 3,
     "active": true,
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
       "id": "night-farm",
       "theme": "night",
       "background": "url('/images/night_farm_background.png')",
-      "roadSpeed": "0.8s",
-      "roadType": "highway",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
       "brightness": 0.6,
-      "visualEffects": ["headlight-glare", "passing-streetlights"],
       "description": "Starry night farm drive"
     }
   },
@@ -96,18 +90,16 @@
     "spotifyUrl": "https://open.spotify.com/track/3d3d3d3d3d3d3d3d3d3d3d",
     "sequence": 4,
     "active": true,
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
       "background": "url('/images/rainy_farm_background.png')",
-      "roadSpeed": "1.5s",
-      "roadType": "highway",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
       "brightness": 0.7,
-      "visualEffects": ["windshield-wipers", "raindrops-on-glass"],
       "description": "Rainy farm drive"
     }
   },
@@ -124,18 +116,16 @@
     "spotifyUrl": "https://open.spotify.com/track/6g6g6g6g6g6g6g6g6g6g6g",
     "sequence": 5,
     "active": true,
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
       "id": "ghats-highway",
       "theme": "morning",
       "background": "url('/images/ghats_highway_background.png')",
-      "roadSpeed": "0.9s",
-      "roadType": "highway",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
       "brightness": 0.85,
-      "visualEffects": ["misty-fog", "mountain-wind"],
       "description": "Misty Ghats Highway drive"
     }
   },
@@ -152,18 +142,16 @@
     "spotifyUrl": "https://open.spotify.com/track/2f2f2f2f2f2f2f2f2f2f2f",
     "sequence": 6,
     "active": true,
+    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
     "ambience": {
       "id": "lake-dawn",
       "theme": "sunset",
       "background": "url('/images/lake_dawn_background.png')",
-      "roadSpeed": "0s",
-      "roadType": "hidden",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
       "skyState": "sunrise",
       "particles": "dust",
       "brightness": 0.9,
-      "visualEffects": ["lake-reflections", "soft-wind"],
       "description": "Lake side misty dawn rest"
     }
   },
@@ -180,6 +168,7 @@
     "spotifyUrl": "https://open.spotify.com/track/7b7b7b7b7b7b7b7b7b7b7b",
     "sequence": 1,
     "active": true,
+    "quote": "సలూన్ కుర్చీలో మధుర జ్ఞాపకాలు... ✂️",
     "ambience": {
       "id": "retro-saloon-day",
       "theme": "saloon-day",
@@ -188,7 +177,6 @@
       "weather": "clear",
       "particles": "dust-motes",
       "brightness": 1.0,
-      "visualEffects": ["rotating-ceiling-fan", "tv-flicker-soft", "mirror-reflections"],
       "description": "Daytime warm salon lighting"
     }
   },
@@ -205,6 +193,7 @@
     "spotifyUrl": "https://open.spotify.com/track/8c8c8c8c8c8c8c8c8c8c8c",
     "sequence": 2,
     "active": true,
+    "quote": "పాత పాటల సాయంత్రం... 📻",
     "ambience": {
       "id": "retro-saloon-evening",
       "theme": "saloon-evening",
@@ -213,7 +202,6 @@
       "weather": "clear",
       "particles": "dust-motes-dim",
       "brightness": 0.7,
-      "visualEffects": ["rotating-ceiling-fan", "flickering-tube-light", "tv-glow-dynamic"],
       "description": "Cozy twilight salon mood"
     }
   }

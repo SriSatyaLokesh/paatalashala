@@ -19,12 +19,24 @@ export default function TractorAnna() {
   const [duration, setDuration] = useState(0);
   const [presenceCount, setPresenceCount] = useState(83);
   const [playerObject, setPlayerObject] = useState(null);
+  const [timeString, setTimeString] = useState('');
   
-  // New UI states
+  // UI states
   const [isQueueOpen, setIsQueueOpen] = useState(false);
   const [isVideoVisible, setIsVideoVisible] = useState(false);
 
   const currentSong = songs[currentSongIndex];
+
+  // Clock updating
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setTimeString(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }).toLowerCase());
+    };
+    updateTime();
+    const timer = setInterval(updateTime, 10000);
+    return () => clearInterval(timer);
+  }, []);
 
   // Simulate dynamic presence count locally (no network calls, zero 404s)
   useEffect(() => {
@@ -39,11 +51,11 @@ export default function TractorAnna() {
     return () => clearInterval(interval);
   }, []);
 
-  // Sync window styling for ambient transitions (using 1.2s crossfade)
+  // Sync full-screen ambient image background transitions (1.2s crossfade)
   useEffect(() => {
     if (currentSong && isExperienceStarted) {
       document.body.style.transition = 'background 1.2s ease, background-image 1.2s ease';
-      document.body.style.background = `${currentSong.ambience.background} center/cover no-repeat`;
+      document.body.style.background = `${currentSong.ambience.background} center/cover no-repeat fixed`;
     }
     return () => {
       document.body.style.background = '';
@@ -89,8 +101,7 @@ export default function TractorAnna() {
   };
 
   const handleStateChange = (stateCode) => {
-    // When song ends (stateCode == 0), auto play next song
-    if (stateCode === 0) {
+    if (stateCode === 0) { // Song ended
       handleNext();
     } else if (stateCode === 1) { // PLAYING
       setIsPlaying(true);
@@ -109,7 +120,7 @@ export default function TractorAnna() {
     setIsPlaying(true);
   };
 
-  // Play retro horn sound function
+  // Play retro vehicle horn sound function
   const playHorn = () => {
     const audio = new Audio('https://www.soundjay.com/transportation/sounds/truck-horn-1.mp3');
     audio.volume = 0.4;
@@ -152,9 +163,9 @@ export default function TractorAnna() {
           }}>
             <div>
               <span style={{ fontSize: '3.5rem', display: 'block', marginBottom: '16px', animation: 'vehicle-float 3s ease-in-out infinite' }}>🚜</span>
-              <h1 style={{ fontSize: '2rem', fontWeight: '900', letterSpacing: '-0.02em', color: '#fff' }}>ట్రాక్టర్ అన్న</h1>
+              <h1 style={{ fontSize: '2.2rem', fontWeight: '900', letterSpacing: '-0.02em', color: '#fff' }}>ట్రాక్టర్ అన్న</h1>
               <p style={{ color: '#a1a1aa', fontSize: '1rem', marginTop: '6px' }}>
-                Telugu Village Beats & Agricultural Farmland Drive.
+                South Indian Village Beats & Rural Farmland Vibes.
               </p>
             </div>
 
@@ -173,7 +184,7 @@ export default function TractorAnna() {
               border: '1px solid rgba(245, 158, 11, 0.2)'
             }}>
               <Users size={16} />
-              <span>{presenceCount} on the farm</span>
+              <span>{presenceCount} in the fields</span>
             </div>
 
             <button
@@ -193,7 +204,7 @@ export default function TractorAnna() {
               onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
               onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
             >
-              START DRIVING
+              START HARVESTING
             </button>
           </div>
         </div>
@@ -208,111 +219,19 @@ export default function TractorAnna() {
         />
       )}
 
-      {/* Immersive Moving Farmland Visual Scene */}
+      {/* Transparent Tractor Sprite floating natively over background */}
       {isExperienceStarted && (
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          pointerEvents: 'none',
-          zIndex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-end',
-        }}>
-          {/* Horizon separator / skyline gradient glow */}
-          <div style={{
-            height: '45%',
-            background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)',
-          }} />
-
-          {/* Animated Road Layout */}
-          {currentSong?.ambience?.roadType !== 'hidden' && (
-            <div 
-              className="farm-road-container" 
-              style={{
-                height: '150px',
-                width: '100%',
-                backgroundColor: currentSong?.ambience?.roadType === 'highway' ? '#374151' : '#8d6e63',
-                position: 'relative',
-                borderTop: currentSong?.ambience?.roadType === 'highway' ? '5px solid #4b5563' : '6px solid #a1887f',
-                boxShadow: 'inset 0 10px 20px rgba(0,0,0,0.5)',
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-            >
-              {/* Center Lane Markings */}
-              <div 
-                style={{
-                  width: '100%',
-                  height: currentSong?.ambience?.roadType === 'highway' ? '6px' : '8px',
-                  position: 'absolute',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  backgroundImage: currentSong?.ambience?.roadType === 'highway' 
-                    ? 'linear-gradient(to right, #fbbf24 40%, transparent 40%)' 
-                    : 'linear-gradient(to right, #d7ccc8 30%, transparent 30%)',
-                  backgroundSize: currentSong?.ambience?.roadType === 'highway' ? '180px 6px' : '160px 8px',
-                  animationName: 'farm-road-scrolling',
-                  animationDuration: currentSong?.ambience?.roadSpeed || '1.2s',
-                  animationTimingFunction: 'linear',
-                  animationIterationCount: 'infinite',
-                  animationPlayState: isPlaying ? 'running' : 'paused',
-                  opacity: currentSong?.ambience?.roadType === 'highway' ? 0.8 : 0.7,
-                }} 
-              />
-
-              {/* Road boundary marker */}
-              <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '4px',
-                backgroundColor: currentSong?.ambience?.roadType === 'highway' ? '#1f2937' : '#5d4037',
-                opacity: 0.3,
-              }} />
-            </div>
-          )}
-
-          {/* Vibrant Tractor Foreground Sprite Asset */}
-          <img 
-            src={currentSong?.ambience?.vehicleSprite || "/images/tractor_anna_sprite.png"} 
-            alt="Tractor Anna" 
-            className="tractor-sprite"
-            style={{
-              animationPlayState: isPlaying ? 'running' : 'paused',
-              bottom: currentSong?.ambience?.roadType === 'hidden' ? '60px' : '140px',
-            }}
-          />
-
-          {/* Windshield Wiper Overlay for Rain */}
-          {currentSong?.ambience?.weather === 'rain' && (
-            <div 
-              style={{
-                position: 'absolute',
-                bottom: '150px',
-                left: '10%',
-                width: '80vw',
-                height: '6px',
-                backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                borderRadius: '3px',
-                transformOrigin: 'left center',
-                animationName: 'wiper-swipe',
-                animationDuration: '2.2s',
-                animationTimingFunction: 'ease-in-out',
-                animationIterationCount: 'infinite',
-                animationPlayState: isPlaying ? 'running' : 'paused',
-                zIndex: 3,
-              }}
-            />
-          )}
-        </div>
+        <img 
+          src={currentSong?.ambience?.vehicleSprite || "/images/tractor_anna_sprite.png"} 
+          alt="Tractor Anna" 
+          className="tractor-sprite"
+          style={{
+            animationPlayState: isPlaying ? 'running' : 'paused',
+          }}
+        />
       )}
 
-      {/* Main Immersive HUD Overlay */}
+      {/* Main Immersive Minimalist Overlay */}
       {isExperienceStarted && (
         <div style={{
           zIndex: 10,
@@ -322,37 +241,45 @@ export default function TractorAnna() {
           height: '100vh',
           width: '100%',
           position: 'relative',
-          padding: '30px',
+          padding: '24px 32px',
         }}>
           {/* Header Area */}
           <header style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
+            width: '100%',
           }}>
-            {/* Back Button */}
-            <Link href="/" style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              color: '#fff',
-              textDecoration: 'none',
-              fontSize: '0.9rem',
-              fontWeight: '600',
-              padding: '10px 18px',
-              borderRadius: '9999px',
-              background: 'rgba(255, 255, 255, 0.06)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(8px)',
-              transition: 'all 0.2s ease',
-            }}
-            className="hud-button"
-            >
-              <ChevronLeft size={16} />
-              <span>PLACES</span>
-            </Link>
+            {/* Left: Places Back Link & Clock */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <Link href="/" style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                color: '#fff',
+                textDecoration: 'none',
+                fontSize: '0.85rem',
+                fontWeight: '600',
+                padding: '8px 16px',
+                borderRadius: '9999px',
+                background: 'rgba(255, 255, 255, 0.08)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                backdropFilter: 'blur(12px)',
+              }} className="hud-button">
+                <ChevronLeft size={16} />
+                <span>PLACES</span>
+              </Link>
+              {timeString && (
+                <span style={{
+                  fontSize: '0.85rem',
+                  fontWeight: '600',
+                  color: 'rgba(255, 255, 255, 0.7)',
+                  letterSpacing: '0.05em',
+                }}>{timeString}</span>
+              )}
+            </div>
 
-            {/* Presence Counter Badge */}
+            {/* Center: Presence Counter Badge */}
             <div style={{
               display: 'flex',
               alignItems: 'center',
@@ -360,9 +287,9 @@ export default function TractorAnna() {
               fontSize: '0.85rem',
               fontWeight: '600',
               color: '#a7f3d0',
-              background: 'rgba(255, 255, 255, 0.06)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(8px)',
+              background: 'rgba(255, 255, 255, 0.08)',
+              border: '1px solid rgba(255, 255, 255, 0.12)',
+              backdropFilter: 'blur(12px)',
               padding: '8px 18px',
               borderRadius: '9999px',
             }}>
@@ -370,7 +297,7 @@ export default function TractorAnna() {
               <span>{presenceCount} in the fields</span>
             </div>
 
-            {/* Video Preview Toggle Button */}
+            {/* Right: Video Preview Toggle */}
             <button
               onClick={() => setIsVideoVisible(!isVideoVisible)}
               style={{
@@ -378,60 +305,77 @@ export default function TractorAnna() {
                 alignItems: 'center',
                 gap: '8px',
                 color: isVideoVisible ? '#fbbf24' : '#fff',
-                fontSize: '0.9rem',
+                fontSize: '0.85rem',
                 fontWeight: '600',
-                padding: '10px 18px',
+                padding: '8px 16px',
                 borderRadius: '9999px',
-                background: isVideoVisible ? 'rgba(245, 158, 11, 0.15)' : 'rgba(255, 255, 255, 0.06)',
-                border: isVideoVisible ? '1px solid rgba(245, 158, 11, 0.3)' : '1px solid rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(8px)',
+                background: isVideoVisible ? 'rgba(245, 158, 11, 0.2)' : 'rgba(255, 255, 255, 0.08)',
+                border: isVideoVisible ? '1px solid rgba(245, 158, 11, 0.4)' : '1px solid rgba(255, 255, 255, 0.12)',
+                backdropFilter: 'blur(12px)',
                 cursor: 'pointer',
-                transition: 'all 0.2s ease',
               }}
               className="hud-button"
             >
-              <Tv size={16} />
+              <Tv size={15} />
               <span>{isVideoVisible ? "HIDE VIDEO" : "SHOW VIDEO"}</span>
             </button>
           </header>
 
-          {/* Centered Immersive Title Typography */}
+          {/* Centered Minimalist Typography & Poetry Quote */}
           <div style={{
             textAlign: 'center',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '8px',
+            gap: '12px',
             userSelect: 'none',
+            margin: 'auto 0',
           }}>
             <h2 style={{
-              fontSize: '4.5rem',
+              fontSize: '5rem',
               fontWeight: '900',
-              letterSpacing: '0.05em',
-              color: '#fff',
+              letterSpacing: '0.04em',
+              color: '#ffffff',
               margin: 0,
-              textShadow: '0 4px 16px rgba(0, 0, 0, 0.5)',
+              textShadow: '0 6px 24px rgba(0, 0, 0, 0.6)',
               fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
             }} className="immersive-title">
               ట్రాక్టర్ అన్న
             </h2>
+            
             <p style={{
-              fontSize: '1.1rem',
-              fontWeight: '500',
-              color: '#e4e4e7',
+              fontSize: '1.2rem',
+              fontWeight: '600',
+              color: '#f4f4f5',
               margin: 0,
-              textShadow: '0 2px 8px rgba(0, 0, 0, 0.6)',
-              opacity: 0.9,
-              letterSpacing: '0.02em'
+              textShadow: '0 3px 12px rgba(0, 0, 0, 0.7)',
+              letterSpacing: '0.02em',
+              opacity: 0.95,
             }}>
               {currentSong?.title} • {currentSong?.movie} ({currentSong?.year})
             </p>
+
+            {/* Rustic Telugu Quote Line */}
+            {currentSong?.quote && (
+              <p style={{
+                fontSize: '1.05rem',
+                fontWeight: '500',
+                color: '#fef08a', // Warm soft yellow
+                margin: '6px 0 0 0',
+                textShadow: '0 2px 10px rgba(0, 0, 0, 0.8)',
+                fontStyle: 'italic',
+                letterSpacing: '0.03em',
+                maxWidth: '600px',
+              }}>
+                {currentSong.quote}
+              </p>
+            )}
           </div>
 
           {/* Horn button on the left center */}
           <div style={{
             position: 'absolute',
-            left: '30px',
+            left: '32px',
             top: '50%',
             transform: 'translateY(-50%)',
             display: 'flex',
@@ -442,8 +386,8 @@ export default function TractorAnna() {
             <button
               onClick={playHorn}
               style={{
-                width: '72px',
-                height: '72px',
+                width: '64px',
+                height: '64px',
                 borderRadius: '50%',
                 background: 'rgba(255, 255, 255, 0.08)',
                 border: '1px solid rgba(255, 255, 255, 0.15)',
@@ -453,18 +397,18 @@ export default function TractorAnna() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#fff',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
                 transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
               }}
               className="horn-button"
             >
-              <span style={{ fontSize: '1.8rem' }}>📢</span>
+              <span style={{ fontSize: '1.6rem' }}>📢</span>
             </button>
             <span style={{
               fontSize: '0.75rem',
               fontWeight: '700',
               color: '#fff',
-              textShadow: '0 2px 4px rgba(0,0,0,0.8)',
+              textShadow: '0 2px 6px rgba(0,0,0,0.9)',
               letterSpacing: '0.05em',
             }}>HORN PLEASE</span>
           </div>
@@ -486,7 +430,7 @@ export default function TractorAnna() {
             />
           </div>
 
-          {/* Bottom Sleek Floating HUD Card Capsule */}
+          {/* Bottom Floating HUD Capsule Controller */}
           <div style={{
             position: 'relative',
             width: '100%',
@@ -501,14 +445,14 @@ export default function TractorAnna() {
                 bottom: '90px',
                 left: 0,
                 right: 0,
-                background: 'rgba(15, 17, 23, 0.85)',
+                background: 'rgba(15, 17, 23, 0.88)',
                 backdropFilter: 'blur(24px)',
                 border: '1px solid rgba(255, 255, 255, 0.12)',
                 borderRadius: '24px',
                 padding: '20px',
                 maxHeight: '260px',
                 overflowY: 'auto',
-                boxShadow: '0 -12px 40px rgba(0,0,0,0.5)',
+                boxShadow: '0 -12px 40px rgba(0,0,0,0.6)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '8px',
@@ -565,17 +509,17 @@ export default function TractorAnna() {
               </div>
             )}
 
-            {/* Capsule Controller Card */}
+            {/* Floating Glass Capsule HUD */}
             <div style={{
-              background: 'rgba(20, 22, 28, 0.7)',
+              background: 'rgba(20, 22, 28, 0.75)',
               backdropFilter: 'blur(20px) saturate(140%)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              borderRadius: '24px',
-              padding: '16px 24px',
+              border: '1px solid rgba(255, 255, 255, 0.12)',
+              borderRadius: '28px',
+              padding: '14px 24px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              boxShadow: '0 16px 40px rgba(0, 0, 0, 0.4)',
+              boxShadow: '0 16px 40px rgba(0, 0, 0, 0.5)',
               position: 'relative',
               overflow: 'hidden',
             }} className="capsule-hud">
@@ -594,7 +538,7 @@ export default function TractorAnna() {
                   left: 0,
                   right: 0,
                   height: '4px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
                   cursor: 'pointer',
                 }}
               >
@@ -602,17 +546,16 @@ export default function TractorAnna() {
                   height: '100%',
                   width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`,
                   backgroundColor: '#fbbf24',
-                  boxShadow: '0 0 6px #fbbf24',
+                  boxShadow: '0 0 8px #fbbf24',
                   transition: 'width 0.1s linear',
                 }} />
               </div>
 
               {/* Left Section: Cover & Title */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1, minWidth: 0 }}>
-                {/* Rotating cover disc */}
                 <div style={{
-                  width: '46px',
-                  height: '46px',
+                  width: '44px',
+                  height: '44px',
                   borderRadius: '50%',
                   overflow: 'hidden',
                   border: '2px solid rgba(255,255,255,0.2)',
@@ -639,7 +582,7 @@ export default function TractorAnna() {
                   )}
                 </div>
 
-                {/* Text details */}
+                {/* Track Details */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
                   <span style={{ fontSize: '0.95rem', fontWeight: '700', color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {currentSong?.title}
@@ -650,7 +593,7 @@ export default function TractorAnna() {
                 </div>
               </div>
 
-              {/* Center Section: Main Audio Controls */}
+              {/* Center Section: Controls */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'center', padding: '0 20px' }}>
                 <button
                   onClick={handlePrev}
@@ -662,11 +605,8 @@ export default function TractorAnna() {
                     display: 'flex',
                     alignItems: 'center',
                     padding: '8px',
-                    transition: 'color 0.2s',
                   }}
                   className="control-icon"
-                  onMouseEnter={(e) => e.currentTarget.style.color = '#fff'}
-                  onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.7)'}
                 >
                   <span style={{ fontSize: '1.3rem' }}>⏮</span>
                 </button>
@@ -683,13 +623,13 @@ export default function TractorAnna() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    boxShadow: '0 4px 12px rgba(255,255,255,0.3)',
+                    boxShadow: '0 4px 14px rgba(255,255,255,0.4)',
                     transition: 'transform 0.15s, background-color 0.2s',
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                   onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 >
-                  <span style={{ fontSize: '1.2rem', color: '#000', display: 'flex', alignItems: 'center', justify: 'center' }}>
+                  <span style={{ fontSize: '1.2rem', color: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     {isPlaying ? '⏸' : '▶'}
                   </span>
                 </button>
@@ -704,20 +644,15 @@ export default function TractorAnna() {
                     display: 'flex',
                     alignItems: 'center',
                     padding: '8px',
-                    transition: 'color 0.2s',
                   }}
                   className="control-icon"
-                  onMouseEnter={(e) => e.currentTarget.style.color = '#fff'}
-                  onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.7)'}
                 >
                   <span style={{ fontSize: '1.3rem' }}>⏭</span>
                 </button>
               </div>
 
-              {/* Right Section: Volume & Queue Toggles */}
+              {/* Right Section: Volume & Queue */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '14px', justifyContent: 'flex-end', flex: 1 }}>
-                
-                {/* Volume Slider Block */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="volume-slider-container">
                   <button
                     onClick={() => handleVolumeChange(volume === 0 ? 50 : 0)}
@@ -739,11 +674,9 @@ export default function TractorAnna() {
                       accentColor: '#fbbf24',
                       cursor: 'pointer',
                     }}
-                    className="volume-slider"
                   />
                 </div>
 
-                {/* External Spotify button */}
                 {currentSong?.spotifyUrl && (
                   <a
                     href={currentSong.spotifyUrl}
@@ -754,16 +687,12 @@ export default function TractorAnna() {
                       display: 'flex',
                       alignItems: 'center',
                       padding: '4px',
-                      transition: 'color 0.2s',
                     }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = '#1ed760'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = '#a1a1aa'}
                   >
                     <ExternalLink size={18} />
                   </a>
                 )}
 
-                {/* Queue Toggle */}
                 <button
                   onClick={() => setIsQueueOpen(!isQueueOpen)}
                   style={{
@@ -774,10 +703,7 @@ export default function TractorAnna() {
                     padding: '4px',
                     display: 'flex',
                     alignItems: 'center',
-                    transition: 'color 0.2s',
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.color = isQueueOpen ? '#fbbf24' : '#fff'}
-                  onMouseLeave={(e) => e.currentTarget.style.color = isQueueOpen ? '#fbbf24' : '#a1a1aa'}
                 >
                   <ListMusic size={20} />
                 </button>
@@ -788,37 +714,28 @@ export default function TractorAnna() {
         </div>
       )}
 
-      {/* CSS adjustments for mobile and desktop devices */}
+      {/* Global Style Adjustments */}
       <style jsx global>{`
         .tractor-sprite {
           position: absolute;
-          bottom: 140px;
-          left: 15%;
-          width: 250px;
+          bottom: 30px;
+          left: 40px;
+          width: 230px;
           height: auto;
-          animation: tractor-vibration 0.15s linear infinite;
+          animation: tractor-vibration 0.2s linear infinite;
           z-index: 2;
+          filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+          pointer-events: none;
         }
 
-        .hud-button {
-          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        }
         .hud-button:hover {
-          background: rgba(255, 255, 255, 0.12) !important;
+          background: rgba(255, 255, 255, 0.14) !important;
           transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        .horn-button {
-          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        }
         .horn-button:hover {
-          background: rgba(255, 255, 255, 0.15) !important;
+          background: rgba(255, 255, 255, 0.16) !important;
           transform: scale(1.08) !important;
-          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
-        }
-        .horn-button:active {
-          transform: scale(0.95) !important;
         }
 
         .mini-youtube-container {
@@ -839,20 +756,14 @@ export default function TractorAnna() {
         .mini-youtube-container:hover {
           opacity: 1;
           transform: scale(1.05);
-          box-shadow: 0 16px 32px rgba(0,0,0,0.7);
         }
 
         @keyframes tractor-vibration {
           0% { transform: translateY(0px) rotate(0deg); }
-          25% { transform: translateY(-1.5px) rotate(0.2deg); }
+          25% { transform: translateY(-1.5px) rotate(0.1deg); }
           50% { transform: translateY(0px) rotate(0deg); }
-          75% { transform: translateY(1px) rotate(-0.2deg); }
+          75% { transform: translateY(1px) rotate(-0.1deg); }
           100% { transform: translateY(0px) rotate(0deg); }
-        }
-
-        @keyframes farm-road-scrolling {
-          from { background-position-x: 0px; }
-          to { background-position-x: -160px; }
         }
 
         @keyframes slide-up {
@@ -865,51 +776,27 @@ export default function TractorAnna() {
           to { transform: rotate(360deg); }
         }
 
-        @keyframes wiper-swipe {
-          0% { transform: rotate(0deg); }
-          50% { transform: rotate(65deg); }
-          100% { transform: rotate(0deg); }
-        }
-
         .queue-item:hover {
           background: rgba(255, 255, 255, 0.08) !important;
-          border-color: rgba(255, 255, 255, 0.1) !important;
         }
 
-        /* Responsive overrides for smaller screens */
         @media (max-width: 768px) {
           .immersive-title {
-            font-size: 2.8rem !important;
+            font-size: 3rem !important;
           }
           
           .capsule-hud {
-            padding: 12px 18px !important;
-            border-radius: 20px !important;
+            padding: 12px 16px !important;
           }
 
           .volume-slider-container {
-            display: none !important; /* Hide volume on mobile to save space */
+            display: none !important;
           }
 
           .tractor-sprite {
-            width: 170px !important;
+            width: 150px !important;
             bottom: 120px !important;
-            left: 5% !important;
-          }
-
-          .farm-road-container {
-            height: 120px !important;
-          }
-
-          .mini-youtube-container {
-            bottom: 170px !important;
-            right: 20px !important;
-            width: 130px !important;
-            height: 73px !important;
-          }
-
-          header {
-            padding: 0 10px !important;
+            left: 20px !important;
           }
         }
       `}</style>
