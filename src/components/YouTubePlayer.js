@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 
 export default function YouTubePlayer({
   videoId,
+  playlistId,
   isPlaying,
   volume = 50,
   onStateChange,
@@ -16,18 +17,15 @@ export default function YouTubePlayer({
   const isReadyRef = useRef(false);
 
   useEffect(() => {
-    // Helper to check and initialize the player
     const checkAndInit = () => {
       if (window.YT && window.YT.Player) {
         initPlayer();
       }
     };
 
-    // If YT API is already loaded in window, init immediately
     if (window.YT && window.YT.Player) {
       initPlayer();
     } else {
-      // Inject YouTube IFrame API script tag
       if (!document.getElementById('youtube-iframe-api-script')) {
         const tag = document.createElement('script');
         tag.id = 'youtube-iframe-api-script';
@@ -36,14 +34,12 @@ export default function YouTubePlayer({
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
       }
 
-      // Hook up the global callback
       const previousCallback = window.onYouTubeIframeAPIReady;
       window.onYouTubeIframeAPIReady = () => {
         if (previousCallback) previousCallback();
         checkAndInit();
       };
 
-      // Periodic check just in case callback misses
       const interval = setInterval(() => {
         if (window.YT && window.YT.Player) {
           clearInterval(interval);
@@ -57,40 +53,47 @@ export default function YouTubePlayer({
     function initPlayer() {
       if (playerRef.current || !containerRef.current) return;
 
+      // Build playerVars - support both single videoId and playlist
+      const playerVars = {
+        autoplay: 0,
+        controls: 1,
+        disablekb: 0,
+        fs: 1,
+        modestbranding: 1,
+        rel: 0,
+        showinfo: 0,
+        origin: window.location.origin,
+      };
+
+      // If playlist mode: set listType and list
+      if (playlistId) {
+        playerVars.listType = 'playlist';
+        playerVars.list = playlistId;
+      }
+
       playerRef.current = new window.YT.Player(containerRef.current, {
         height: '100%',
         width: '100%',
-        videoId: videoId,
-        playerVars: {
-          autoplay: 0,
-          controls: 1, // Keep player controls visible per PRD
-          disablekb: 0,
-          fs: 1,
-          modestbranding: 1,
-          rel: 0,
-          showinfo: 0,
-          origin: window.location.origin
-        },
+        videoId: playlistId ? undefined : videoId,
+        playerVars,
         events: {
           onReady: (event) => {
             isReadyRef.current = true;
             event.target.setVolume(volume);
-            if (isPlaying && videoId) {
+            if (isPlaying) {
               event.target.playVideo();
             }
             if (onPlayerReady) onPlayerReady(event.target);
           },
           onStateChange: (event) => {
             if (onStateChange) onStateChange(event.data);
-            
-            // Track progress during active playback
             if (event.data === window.YT.PlayerState.PLAYING) {
               startProgressTracker(event.target);
             } else {
               stopProgressTracker();
             }
-          }
-        }
+          },
+        },
       });
     }
 
@@ -99,10 +102,10 @@ export default function YouTubePlayer({
     };
   }, []);
 
-  // Sync videoId
+  // Sync videoId (only in single-video mode)
   useEffect(() => {
+    if (playlistId) return; // playlist mode managed by player internally
     if (isReadyRef.current && playerRef.current && typeof playerRef.current.loadVideoById === 'function' && videoId) {
-      // Get current video data to avoid double load if same video
       try {
         const currentUrl = playerRef.current.getVideoUrl ? playerRef.current.getVideoUrl() : '';
         if (!currentUrl.includes(videoId)) {
@@ -113,7 +116,6 @@ export default function YouTubePlayer({
           }
         }
       } catch (err) {
-        // Fallback
         if (isPlaying) {
           playerRef.current.loadVideoById({ videoId });
         } else {
@@ -123,7 +125,7 @@ export default function YouTubePlayer({
     }
   }, [videoId]);
 
-  // Sync playback state (play/pause)
+  // Sync playback state
   useEffect(() => {
     if (isReadyRef.current && playerRef.current) {
       try {
@@ -134,7 +136,7 @@ export default function YouTubePlayer({
           playerRef.current.pauseVideo();
         }
       } catch (err) {
-        // Suppress errors during load
+        // Suppress
       }
     }
   }, [isPlaying]);
