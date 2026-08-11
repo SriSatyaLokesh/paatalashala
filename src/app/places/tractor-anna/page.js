@@ -178,7 +178,8 @@ export default function TractorAnna() {
   // ── Render ────────────────────────────────────────────────────────────────
   return (
     <div style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden' }}>
-      <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Telugu:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
       {/* Top and Bottom Vignetting Gradient Overlays for High Contrast Visibility */}
       {started && (
@@ -337,16 +338,16 @@ export default function TractorAnna() {
               </header>
 
               {/* Title + quote */}
-              <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', userSelect: 'none', marginTop: '1.8rem' }}>
-                <h2 style={{ fontSize: '3.8rem', fontWeight: '900', letterSpacing: '0.04em', color: '#fff', margin: 0, textShadow: '0 6px 28px rgba(0,0,0,0.85)', fontFamily: "'Noto Serif Telugu', serif" }} className="immersive-title">
+              <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', userSelect: 'none', marginTop: '1.8rem' }}>
+                <h2 style={{ fontSize: '4.6rem', fontWeight: '900', letterSpacing: '0.04em', color: '#fff', margin: 0, textShadow: '0 8px 36px rgba(0,0,0,0.95)', fontFamily: "'Noto Serif Telugu', serif" }} className="immersive-title">
                   ట్రాక్టర్ అన్న
                 </h2>
                 <p style={{
-                  fontSize: '0.9rem',
-                  fontWeight: '500',
-                  color: 'rgba(254, 240, 138, 0.75)',
+                  fontSize: '0.95rem',
+                  fontWeight: '600',
+                  color: 'rgba(254, 240, 138, 0.85)',
                   margin: '4px 0 0 0',
-                  textShadow: '0 2px 10px rgba(0,0,0,0.98)',
+                  textShadow: '0 2px 14px rgba(0,0,0,1), 0 4px 28px rgba(0,0,0,1), 0 0 8px rgba(0,0,0,0.9)',
                   fontStyle: 'italic',
                   letterSpacing: '0.03em',
                   maxWidth: '600px',
@@ -360,41 +361,17 @@ export default function TractorAnna() {
 
             {/* Bottom HUD capsule */}
             <div style={{ position: 'relative', width: '100%', maxWidth: '680px', margin: '0 auto', zIndex: 30 }}>
-              
-              {/* Floating Horn button (Left of Player HUD) */}
-              <div className="floating-horn-container" style={{ position: 'absolute', left: '-76px', bottom: '0px', zIndex: 15 }}>
-                <button onClick={playHorn} title="Horn Please (📢)" className="horn-button"
-                  style={{
-                    width: '54px',
-                    height: '54px',
-                    borderRadius: '50%',
-                    background: 'rgba(18, 20, 26, 0.93)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    backdropFilter: 'blur(24px)',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    boxShadow: '0 10px 30px rgba(0,0,0,0.6)',
-                    color: '#fbbf24',
-                    transition: 'transform 0.2s, background-color 0.2s'
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
-                  onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
-                  <Megaphone size={20} />
-                </button>
-              </div>
 
               <div style={{
-                background: 'rgba(18, 20, 26, 0.93)',
-                backdropFilter: 'blur(24px) saturate(140%)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
+                background: 'rgba(10, 11, 15, 0.88)',
+                backdropFilter: 'blur(30px) saturate(160%)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
                 borderRadius: '24px',
                 padding: '20px 24px',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '16px',
-                boxShadow: '0 20px 50px rgba(0,0,0,0.85)',
+                boxShadow: '0 25px 60px -15px rgba(0,0,0,0.9), inset 0 1px 1px rgba(255,255,255,0.08)',
                 position: 'relative'
               }} className="capsule-hud">
 
@@ -462,6 +439,27 @@ export default function TractorAnna() {
                     {/* Controls */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                       
+                      {/* Horn button - Leftmost */}
+                      <button 
+                        onClick={playHorn} 
+                        title="Horn Please (📢)"
+                        style={{ 
+                          background: 'none', 
+                          border: 'none', 
+                          color: 'rgba(255,255,255,0.4)', 
+                          cursor: 'pointer', 
+                          padding: '6px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          transition: 'color 0.2s, transform 0.2s'
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.15)'}
+                        onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                        className="control-icon"
+                      >
+                        <Megaphone size={16} />
+                      </button>
+
                       <button 
                         onClick={() => setIsShuffle(prev => !prev)} 
                         title={isShuffle ? "Disable Shuffle" : "Shuffle Tracks (🔀)"}
@@ -618,8 +616,8 @@ export default function TractorAnna() {
       {/* ── Global CSS ───────────────────────────────────────────────────────── */}
       <style jsx global>{`
         .tractor-hero-sprite {
-          position: absolute; bottom: 25px; left: 50%;
-          width: 760px; max-width: 95vw; max-height: 72vh;
+          position: absolute; bottom: 45px; left: 50%;
+          width: 980px; max-width: 98vw; max-height: 80vh;
           object-fit: contain; height: auto;
           animation: tractor-engine-idle 0.12s linear infinite;
           z-index: 2;
