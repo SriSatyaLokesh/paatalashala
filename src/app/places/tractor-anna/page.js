@@ -95,8 +95,11 @@ export default function TractorAnna() {
   const handlePlayerReady = useCallback((player) => {
     playerRef.current = player;
     player.setVolume(volume);
-    if (isPlaying) player.playVideo();
-  }, [volume, isPlaying]);
+    // Auto-start as soon as player is ready if experience has already started
+    if (isExperienceStarted) {
+      player.playVideo();
+    }
+  }, [volume, isExperienceStarted]);
 
   const handleStateChange = useCallback((stateCode) => {
     if (stateCode === 1) { // PLAYING
@@ -194,6 +197,32 @@ export default function TractorAnna() {
         </div>
       )}
 
+      {/* ── YouTube Player – always pre-mounted off-screen for instant initialization ── */}
+      <div style={{
+        position: 'fixed',
+        bottom: (isExperienceStarted && isVideoVisible) ? '100px' : '-9999px',
+        right:  (isExperienceStarted && isVideoVisible) ? '30px'  : '-9999px',
+        width: '220px', height: '124px',
+        borderRadius: '16px',
+        overflow: 'hidden',
+        boxShadow: (isExperienceStarted && isVideoVisible) ? '0 12px 24px rgba(0,0,0,0.5)' : 'none',
+        border: (isExperienceStarted && isVideoVisible) ? '1px solid rgba(255,255,255,0.15)' : 'none',
+        opacity: (isExperienceStarted && isVideoVisible) ? 1 : 0,
+        transition: 'opacity 0.3s',
+        zIndex: 40,
+        background: '#000',
+        pointerEvents: (isExperienceStarted && isVideoVisible) ? 'auto' : 'none',
+      }}>
+        <YouTubePlayer
+          playlistId={PLAYLIST_ID}
+          isPlaying={isPlaying}
+          volume={volume}
+          onStateChange={handleStateChange}
+          onPlayerReady={handlePlayerReady}
+          onTimeUpdate={handleTimeUpdate}
+        />
+      </div>
+
       {/* ── Ambient weather ── */}
       {isExperienceStarted && (
         <AmbientWeather weather={ambience.weather} particles={ambience.particles} active={isPlaying} />
@@ -274,23 +303,6 @@ export default function TractorAnna() {
             </button>
             <span style={{ fontSize: '0.65rem', fontWeight: '700', color: '#fff', textShadow: '0 2px 6px rgba(0,0,0,0.9)', letterSpacing: '0.05em' }}>HORN PLEASE</span>
           </div>
-
-          {/* Single YouTube player – always mounted, visually toggled */}
-          <div className="mini-youtube-container" style={{ display: isVideoVisible ? 'block' : 'none', pointerEvents: isVideoVisible ? 'auto' : 'none' }}>
-            <YouTubePlayer
-              playlistId={PLAYLIST_ID}
-              isPlaying={isPlaying}
-              volume={volume}
-              onStateChange={handleStateChange}
-              onPlayerReady={handlePlayerReady}
-              onTimeUpdate={handleTimeUpdate}
-            />
-          </div>
-
-          {/* Audio-only ghost div when video is hidden (keeps player mounted out of view) */}
-          {!isVideoVisible && (
-            <div style={{ position: 'fixed', width: '1px', height: '1px', opacity: 0.01, pointerEvents: 'none', bottom: 0, right: 0 }} />
-          )}
 
           {/* Bottom HUD capsule */}
           <div style={{ position: 'relative', width: '100%', maxWidth: '650px', margin: '0 auto', zIndex: 30 }}>
