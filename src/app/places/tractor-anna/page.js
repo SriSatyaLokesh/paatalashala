@@ -2,49 +2,36 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { getSongsForPlace } from '@/data/songs';
 import YouTubePlayer from '@/components/YouTubePlayer';
 import AmbientWeather from '@/components/AmbientWeather';
 import { ChevronLeft, Tv, Volume2, VolumeX, Wind } from 'lucide-react';
 
-// ── Config ────────────────────────────────────────────────────────────────────
-const PLAYLIST_ID = 'PLV-ef83MQOvgzrHX9xLyFpKoneGR17ZMT';
-
-const AMBIENCES = [
-  { background: "url('/images/sunset_farm_background.png')",   weather: 'clear', particles: 'dust'  },
-  { background: "url('/images/morning_farm_background.png')",  weather: 'misty', particles: 'fog'   },
-  { background: "url('/images/night_farm_background.png')",    weather: 'clear', particles: 'stars' },
-  { background: "url('/images/rainy_farm_background.png')",    weather: 'rain',  particles: 'rain'  },
-  { background: "url('/images/ghats_highway_background.png')", weather: 'misty', particles: 'fog'   },
-];
-
-const QUOTES = [
-  'చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾',
-  'మా ఊరి బాటలో మనస్సు మురిసేను... 🚜',
-  'పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨',
-  'వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️',
-  'కొండల నడుమ కోనసీమ అందాలు... ⛰️',
-];
-
 export default function TractorAnna() {
-  const [started, setStarted]           = useState(false);
+  const songs = getSongsForPlace('tractor-anna');
+
+  // State variables
+  const [started, setStarted]             = useState(false);
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying]       = useState(false);
   const [volume, setVolume]             = useState(60);
   const [currentTime, setCurrentTime]   = useState(0);
   const [duration, setDuration]         = useState(0);
   const [presenceCount, setPresenceCount] = useState(83);
   const [timeString, setTimeString]     = useState('');
-  const [ambienceIdx, setAmbienceIdx]   = useState(0);
-  const [quoteIdx, setQuoteIdx]         = useState(0);
-  const [trackTitle, setTrackTitle]     = useState('');
   const [videoVisible, setVideoVisible] = useState(false);
   const [ambientOn, setAmbientOn]       = useState(true);
   const [playerError, setPlayerError]   = useState(null);
 
   const playerRef  = useRef(null);
   const ambientRef = useRef(null);
-  const ambIdxRef  = useRef(0);
 
-  const ambience = AMBIENCES[ambienceIdx];
+  const currentSong = songs[currentSongIndex] || {};
+  const ambience = currentSong.ambience || {
+    background: "url('/images/sunset_farm_background.png')",
+    weather: 'clear',
+    particles: 'dust'
+  };
 
   // ── Clock ──────────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -68,11 +55,11 @@ export default function TractorAnna() {
 
   // ── Background ────────────────────────────────────────────────────────────
   useEffect(() => {
-    if (!started) return;
-    document.body.style.transition = 'background 1.4s ease';
+    if (!started || !ambience.background) return;
+    document.body.style.transition = 'background 1.8s ease';
     document.body.style.background = `${ambience.background} center/cover no-repeat fixed`;
     return () => { document.body.style.background = ''; };
-  }, [ambienceIdx, started]);
+  }, [currentSongIndex, started, ambience.background]);
 
   // ── Ambient tractor audio ─────────────────────────────────────────────────
   useEffect(() => {
@@ -93,28 +80,25 @@ export default function TractorAnna() {
 
   // ── Player callbacks ─────────────────────────────────────────────────────
   const handlePlayerReady = (player) => {
-    // loadPlaylist() is called inside YouTubePlayer's onReady and auto-starts.
-    // We just store the ref and sync volume here.
     playerRef.current = player;
     player.setVolume(volume);
-    // setIsPlaying will update when onStateChange fires with PLAYING (1)
+    if (isPlaying) {
+      player.playVideo();
+    }
   };
 
   const handlePlayerError = (code) => {
     setPlayerError(code);
+    console.error('YouTube player error code:', code);
   };
 
   const handleStateChange = (code) => {
-    if (code === 1) {  // PLAYING
+    if (code === 0) {  // ENDED - auto play next song
+      next();
+    } else if (code === 1) {  // PLAYING
       setIsPlaying(true);
-      const next = (ambIdxRef.current + 1) % AMBIENCES.length;
-      ambIdxRef.current = next;
-      setAmbienceIdx(next);
-      setQuoteIdx(q => (q + 1) % QUOTES.length);
-      // Note: getVideoData not available via postMessage — title stays as playlist name
+      setPlayerError(null);
     } else if (code === 2) {  // PAUSED
-      setIsPlaying(false);
-    } else if (code === 0) {  // ENDED
       setIsPlaying(false);
     }
   };
@@ -125,31 +109,40 @@ export default function TractorAnna() {
   };
 
   // ── Controls ─────────────────────────────────────────────────────────────
-  // With postMessage approach, use React state (isPlaying) instead of getPlayerState()
   const togglePlay = () => {
-    if (isPlaying) {
-      playerRef.current?.pauseVideo?.();
-      setIsPlaying(false);
-    } else {
-      playerRef.current?.playVideo?.();
-      setIsPlaying(true);
-    }
+    setIsPlaying(prev => !prev);
   };
 
-  const next = () => { playerRef.current?.nextVideo?.(); };
-  const prev = () => { playerRef.current?.previousVideo?.(); };
+  const next = () => {
+    if (songs.length === 0) return;
+    setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songs.length);
+    setIsPlaying(true);
+    setCurrentTime(0);
+    setDuration(0);
+  };
+
+  const prev = () => {
+    if (songs.length === 0) return;
+    setCurrentSongIndex((prevIndex) => (prevIndex - 1 + songs.length) % songs.length);
+    setIsPlaying(true);
+    setCurrentTime(0);
+    setDuration(0);
+  };
 
   const seek = (e) => {
     if (!duration) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const t = ((e.clientX - rect.left) / rect.width) * duration;
     setCurrentTime(t);
-    try { playerRef.current?.seekTo(t, true); } catch (_) {}
+    try {
+      if (playerRef.current && typeof playerRef.current.seekTo === 'function') {
+        playerRef.current.seekTo(t, true);
+      }
+    } catch (_) {}
   };
 
   const changeVolume = (v) => {
     setVolume(v);
-    try { playerRef.current?.setVolume(v); } catch (_) {}
   };
 
   const playHorn = () => {
@@ -162,6 +155,11 @@ export default function TractorAnna() {
     const m   = Math.floor(s / 60);
     const sec = Math.floor(s % 60);
     return `${m}:${sec.toString().padStart(2, '0')}`;
+  };
+
+  const startExperience = () => {
+    setStarted(true);
+    setIsPlaying(true);
   };
 
   // ── Render ────────────────────────────────────────────────────────────────
@@ -183,7 +181,7 @@ export default function TractorAnna() {
               <span>{presenceCount} listeners on field</span>
             </div>
             <button
-              onClick={() => setStarted(true)}
+              onClick={startExperience}
               style={{ padding: '16px 32px', borderRadius: '12px', background: '#fbbf24', color: '#000', fontSize: '1.1rem', fontWeight: '800', border: 'none', cursor: 'pointer', boxShadow: '0 4px 20px rgba(245,158,11,0.4)', transition: 'transform 0.2s' }}
               onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.03)'}
               onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
@@ -233,10 +231,9 @@ export default function TractorAnna() {
             pointerEvents: videoVisible ? 'auto' : 'none',
           }}>
             <YouTubePlayer
-              playlistId={PLAYLIST_ID}
+              videoId={currentSong?.youtubeVideoId}
               isPlaying={isPlaying}
               volume={volume}
-              autoplay={1}
               onStateChange={handleStateChange}
               onPlayerReady={handlePlayerReady}
               onTimeUpdate={handleTimeUpdate}
@@ -245,7 +242,7 @@ export default function TractorAnna() {
           </div>
           {playerError && (
             <div style={{ position: 'fixed', bottom: '170px', right: '30px', background: 'rgba(220,38,38,0.9)', color: '#fff', padding: '8px 14px', borderRadius: '10px', fontSize: '0.75rem', zIndex: 50 }}>
-              ⚠ YT Error {playerError} — playlist may not be embeddable
+              ⚠ YT Player Error: {playerError}
             </div>
           )}
 
@@ -288,7 +285,7 @@ export default function TractorAnna() {
                   ట్రాక్టర్ అన్న
                 </h2>
                 <p style={{ fontSize: '1.05rem', fontWeight: '500', color: '#fef08a', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.95)', fontStyle: 'italic', letterSpacing: '0.03em', maxWidth: '650px' }}>
-                  {QUOTES[quoteIdx]}
+                  {currentSong?.quote || 'చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾'}
                 </p>
               </div>
             </div>
@@ -318,10 +315,10 @@ export default function TractorAnna() {
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
                     <span style={{ fontSize: '0.9rem', fontWeight: '700', color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                      {trackTitle || 'Loading playlist…'}
+                      {currentSong?.title || 'Loading song…'}
                     </span>
-                    <span style={{ fontSize: '0.72rem', color: '#a1a1aa' }}>
-                      {duration > 0 ? `${fmt(currentTime)} / ${fmt(duration)}` : 'Telugu Classics'}
+                    <span style={{ fontSize: '0.72rem', color: '#a1a1aa', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {currentSong?.movie ? `${currentSong.movie} (${currentSong.year || 'Classic'})` : 'Telugu Classics'}
                     </span>
                   </div>
                 </div>

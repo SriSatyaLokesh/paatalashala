@@ -1,17 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 
-/**
- * YouTubePlayer — uses a plain <iframe> embed with enablejsapi=1 + postMessage.
- * This is more reliable than the IFrame API constructor for playlist playback.
- *
- * YouTube embed URL for a playlist:
- *   https://www.youtube.com/embed/videoseries?list=PLAYLIST_ID&autoplay=1&enablejsapi=1
- */
 export default function YouTubePlayer({
   videoId,
-  playlistId,
   isPlaying,
   volume = 50,
   onStateChange,
@@ -19,102 +11,170 @@ export default function YouTubePlayer({
   onTimeUpdate,
   onError,
 }) {
-  const iframeRef    = useRef(null);
-  const intervalRef  = useRef(null);
-  const readyRef     = useRef(false);
-  const volumeRef    = useRef(volume);
+  const containerRef = useRef(null);
+  const playerRef = useRef(null);
+  const progressIntervalRef = useRef(null);
+  const isReadyRef = useRef(false);
 
-  // Build the embed URL
-  const src = playlistId
-    ? `https://www.youtube.com/embed/videoseries?list=${playlistId}&autoplay=1&enablejsapi=1&controls=1&modestbranding=1&rel=0&fs=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`
-    : videoId
-      ? `https://www.youtube.com/embed/${videoId}?autoplay=${isPlaying ? 1 : 0}&enablejsapi=1&controls=1&modestbranding=1&rel=0&fs=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`
-      : null;
-
-  // ── postMessage sender helper ─────────────────────────────────────────────
-  const sendCmd = useCallback((func, args = '') => {
-    try {
-      iframeRef.current?.contentWindow?.postMessage(
-        JSON.stringify({ event: 'command', func, args }),
-        'https://www.youtube.com'
-      );
-    } catch (_) {}
-  }, []);
-
-  // ── Listen for YouTube postMessage events ─────────────────────────────────
   useEffect(() => {
-    const onMessage = (e) => {
-      if (!e.origin.includes('youtube.com')) return;
-      try {
-        const data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
-
-        if (data?.event === 'onReady') {
-          readyRef.current = true;
-          // Set volume immediately
-          sendCmd('setVolume', [volumeRef.current]);
-          if (onPlayerReady) {
-            // Expose a minimal player-like object so page.js controls work
-            onPlayerReady({
-              playVideo:     () => sendCmd('playVideo'),
-              pauseVideo:    () => sendCmd('pauseVideo'),
-              nextVideo:     () => sendCmd('nextVideo'),
-              previousVideo: () => sendCmd('previousVideo'),
-              seekTo:        (s) => sendCmd('seekTo', [s, true]),
-              setVolume:     (v) => { volumeRef.current = v; sendCmd('setVolume', [v]); },
-              getPlayerState: () => -1, // not available via postMessage
-              getVideoData:  () => ({}),
-            });
-          }
-        }
-
-        if (data?.event === 'onStateChange') {
-          const stateCode = data?.info;
-          if (onStateChange) onStateChange(stateCode);
-        }
-
-        if (data?.event === 'onError') {
-          console.error('[YT] error:', data?.info,
-            '(101/150=embed blocked, 100=not found, 2=bad param)');
-          if (onError) onError(data?.info);
-        }
-
-        // infoDelivery carries currentTime / duration
-        if (data?.event === 'infoDelivery' && data?.info) {
-          const { currentTime, duration } = data.info;
-          if (onTimeUpdate && currentTime !== undefined && duration !== undefined) {
-            onTimeUpdate(currentTime, duration);
-          }
-        }
-      } catch (_) {}
+    // Helper to check and initialize the player
+    const checkAndInit = () => {
+      if (window.YT && window.YT.Player) {
+        initPlayer();
+      }
     };
 
-    window.addEventListener('message', onMessage);
-    return () => window.removeEventListener('message', onMessage);
-  }, [sendCmd, onPlayerReady, onStateChange, onTimeUpdate, onError]);
+    // If YT API is already loaded in window, init immediately
+    if (window.YT && window.YT.Player) {
+      initPlayer();
+    } else {
+      // Inject YouTube IFrame API script tag if not present
+      if (!document.getElementById('youtube-iframe-api-script')) {
+        const tag = document.createElement('script');
+        tag.id = 'youtube-iframe-api-script';
+        tag.src = 'https://www.youtube.com/iframe_api';
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      }
 
-  // ── Sync volume via postMessage ────────────────────────────────────────────
+      // Hook up the global callback
+      const previousCallback = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        if (previousCallback) previousCallback();
+        checkAndInit();
+      };
+
+      // Periodic check just in case callback misses
+      const interval = setInterval(() => {
+        if (window.YT && window.YT.Player) {
+          clearInterval(interval);
+          checkAndInit();
+        }
+      }, 500);
+
+      return () => clearInterval(interval);
+    }
+
+    function initPlayer() {
+      if (playerRef.current || !containerRef.current) return;
+
+      playerRef.current = new window.YT.Player(containerRef.current, {
+        height: '100%',
+        width: '100%',
+        videoId: videoId,
+        playerVars: {
+          autoplay: 0,
+          controls: 1, // Keep player controls visible per PRD
+          disablekb: 0,
+          fs: 1,
+          modestbranding: 1,
+          rel: 0,
+          showinfo: 0,
+          origin: typeof window !== 'undefined' ? window.location.origin : ''
+        },
+        events: {
+          onReady: (event) => {
+            isReadyRef.current = true;
+            event.target.setVolume(volume);
+            if (isPlaying && videoId) {
+              event.target.playVideo();
+            }
+            if (onPlayerReady) onPlayerReady(event.target);
+          },
+          onStateChange: (event) => {
+            if (onStateChange) onStateChange(event.data);
+            
+            // Track progress during active playback
+            if (event.data === window.YT.PlayerState.PLAYING) {
+              startProgressTracker(event.target);
+            } else {
+              stopProgressTracker();
+            }
+          },
+          onError: (event) => {
+            console.error('[YT Player Error]:', event.data);
+            if (onError) onError(event.data);
+          }
+        }
+      });
+    }
+
+    return () => {
+      stopProgressTracker();
+    };
+  }, []);
+
+  // Sync videoId
   useEffect(() => {
-    volumeRef.current = volume;
-    if (readyRef.current) sendCmd('setVolume', [volume]);
-  }, [volume, sendCmd]);
+    if (isReadyRef.current && playerRef.current && typeof playerRef.current.loadVideoById === 'function' && videoId) {
+      try {
+        const currentUrl = playerRef.current.getVideoUrl ? playerRef.current.getVideoUrl() : '';
+        if (!currentUrl.includes(videoId)) {
+          if (isPlaying) {
+            playerRef.current.loadVideoById({ videoId });
+          } else {
+            playerRef.current.cueVideoById({ videoId });
+          }
+        }
+      } catch (err) {
+        if (isPlaying) {
+          playerRef.current.loadVideoById({ videoId });
+        } else {
+          playerRef.current.cueVideoById({ videoId });
+        }
+      }
+    }
+  }, [videoId]);
 
-  // ── Sync play/pause (only for single videoId mode, playlist autoplays) ────
+  // Sync playback state (play/pause)
   useEffect(() => {
-    if (!readyRef.current || playlistId) return;
-    if (isPlaying) sendCmd('playVideo');
-    else sendCmd('pauseVideo');
-  }, [isPlaying, playlistId, sendCmd]);
+    if (isReadyRef.current && playerRef.current) {
+      try {
+        const state = playerRef.current.getPlayerState();
+        if (isPlaying && state !== window.YT.PlayerState.PLAYING) {
+          playerRef.current.playVideo();
+        } else if (!isPlaying && state === window.YT.PlayerState.PLAYING) {
+          playerRef.current.pauseVideo();
+        }
+      } catch (err) {
+        // Suppress errors during load
+      }
+    }
+  }, [isPlaying]);
 
-  if (!src) return null;
+  // Sync volume
+  useEffect(() => {
+    if (isReadyRef.current && playerRef.current && typeof playerRef.current.setVolume === 'function') {
+      playerRef.current.setVolume(volume);
+    }
+  }, [volume]);
+
+  function startProgressTracker(player) {
+    stopProgressTracker();
+    progressIntervalRef.current = setInterval(() => {
+      try {
+        if (player && typeof player.getCurrentTime === 'function' && typeof player.getDuration === 'function') {
+          const current = player.getCurrentTime();
+          const duration = player.getDuration();
+          if (onTimeUpdate) {
+            onTimeUpdate(current, duration);
+          }
+        }
+      } catch (err) {
+        // player might be destroyed
+      }
+    }, 500);
+  }
+
+  function stopProgressTracker() {
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current);
+    }
+  }
 
   return (
-    <iframe
-      ref={iframeRef}
-      src={src}
-      style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
-      allow="autoplay; encrypted-media; fullscreen"
-      allowFullScreen
-      title="YouTube Player"
-    />
+    <div style={{ position: 'relative', width: '100%', height: '100%', backgroundColor: '#000', borderRadius: '12px', overflow: 'hidden' }}>
+      <div ref={containerRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} />
+    </div>
   );
 }
