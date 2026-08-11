@@ -1,21 +1,20 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import YouTubePlayer from '@/components/YouTubePlayer';
 import AmbientWeather from '@/components/AmbientWeather';
-import { ChevronLeft, Tv, ListMusic, Volume2, VolumeX, Wind } from 'lucide-react';
+import { ChevronLeft, Tv, Volume2, VolumeX, Wind } from 'lucide-react';
 
-// ── Playlist configuration ──────────────────────────────────────────────────
+// ── Config ────────────────────────────────────────────────────────────────────
 const PLAYLIST_ID = 'PLV-ef83MQOvgzrHX9xLyFpKoneGR17ZMT';
 
-// Rotating ambience environments (road/farm only)
 const AMBIENCES = [
-  { background: "url('/images/sunset_farm_background.png')",   weather: 'clear',  particles: 'dust',  label: 'Sunset Farm' },
-  { background: "url('/images/morning_farm_background.png')",  weather: 'misty',  particles: 'fog',   label: 'Morning Farm' },
-  { background: "url('/images/night_farm_background.png')",    weather: 'clear',  particles: 'stars', label: 'Night Farm' },
-  { background: "url('/images/rainy_farm_background.png')",    weather: 'rain',   particles: 'rain',  label: 'Rainy Farm' },
-  { background: "url('/images/ghats_highway_background.png')", weather: 'misty',  particles: 'fog',   label: 'Ghats Highway' },
+  { background: "url('/images/sunset_farm_background.png')",   weather: 'clear', particles: 'dust'  },
+  { background: "url('/images/morning_farm_background.png')",  weather: 'misty', particles: 'fog'   },
+  { background: "url('/images/night_farm_background.png')",    weather: 'clear', particles: 'stars' },
+  { background: "url('/images/rainy_farm_background.png')",    weather: 'rain',  particles: 'rain'  },
+  { background: "url('/images/ghats_highway_background.png')", weather: 'misty', particles: 'fog'   },
 ];
 
 const QUOTES = [
@@ -27,35 +26,35 @@ const QUOTES = [
 ];
 
 export default function TractorAnna() {
-  const [isExperienceStarted, setIsExperienceStarted] = useState(false);
-  const [isPlaying, setIsPlaying]   = useState(false);
-  const [volume, setVolume]         = useState(60);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration]     = useState(0);
+  const [started, setStarted]           = useState(false);
+  const [isPlaying, setIsPlaying]       = useState(false);
+  const [volume, setVolume]             = useState(60);
+  const [currentTime, setCurrentTime]   = useState(0);
+  const [duration, setDuration]         = useState(0);
   const [presenceCount, setPresenceCount] = useState(83);
-  const [timeString, setTimeString] = useState('');
-  const [ambienceIdx, setAmbienceIdx] = useState(0);
-  const [quoteIdx, setQuoteIdx]     = useState(0);
-  const [trackTitle, setTrackTitle] = useState('');
-  const [isQueueOpen, setIsQueueOpen] = useState(false);
-  const [isVideoVisible, setIsVideoVisible] = useState(false);
-  const [ambientEnabled, setAmbientEnabled] = useState(true);
+  const [timeString, setTimeString]     = useState('');
+  const [ambienceIdx, setAmbienceIdx]   = useState(0);
+  const [quoteIdx, setQuoteIdx]         = useState(0);
+  const [trackTitle, setTrackTitle]     = useState('');
+  const [videoVisible, setVideoVisible] = useState(false);
+  const [ambientOn, setAmbientOn]       = useState(true);
 
-  const playerRef    = useRef(null);
-  const ambientRef   = useRef(null);
-  const ambienceIdxRef = useRef(0);
+  const playerRef  = useRef(null);
+  const ambientRef = useRef(null);
+  const ambIdxRef  = useRef(0);
 
   const ambience = AMBIENCES[ambienceIdx];
 
   // ── Clock ──────────────────────────────────────────────────────────────────
   useEffect(() => {
-    const tick = () => setTimeString(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }).toLowerCase());
+    const tick = () =>
+      setTimeString(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }).toLowerCase());
     tick();
     const t = setInterval(tick, 10000);
     return () => clearInterval(t);
   }, []);
 
-  // ── Presence simulation ───────────────────────────────────────────────────
+  // ── Presence ───────────────────────────────────────────────────────────────
   useEffect(() => {
     const sim = () => {
       const s = Math.floor(Date.now() / 4000);
@@ -66,117 +65,111 @@ export default function TractorAnna() {
     return () => clearInterval(t);
   }, []);
 
-  // ── Background sync ───────────────────────────────────────────────────────
+  // ── Background ────────────────────────────────────────────────────────────
   useEffect(() => {
-    if (!isExperienceStarted) return;
+    if (!started) return;
     document.body.style.transition = 'background 1.4s ease';
     document.body.style.background = `${ambience.background} center/cover no-repeat fixed`;
     return () => { document.body.style.background = ''; };
-  }, [ambienceIdx, isExperienceStarted]);
+  }, [ambienceIdx, started]);
 
-  // ── Ambient tractor engine audio ──────────────────────────────────────────
+  // ── Ambient tractor audio ─────────────────────────────────────────────────
   useEffect(() => {
-    if (!isExperienceStarted) return;
+    if (!started) return;
     if (!ambientRef.current) {
       const a = new Audio('/audio/tractor_ambient.mp3');
       a.loop   = true;
-      a.volume = 0.03; // Very quiet – pure ambience
+      a.volume = 0.03;
       ambientRef.current = a;
     }
-    if (isPlaying && ambientEnabled) {
+    if (isPlaying && ambientOn) {
       ambientRef.current.play().catch(() => {});
     } else {
       ambientRef.current.pause();
     }
-    return () => { if (ambientRef.current) ambientRef.current.pause(); };
-  }, [isExperienceStarted, isPlaying, ambientEnabled]);
+    return () => { ambientRef.current?.pause(); };
+  }, [started, isPlaying, ambientOn]);
 
-  // ── Player callbacks ───────────────────────────────────────────────────────
-  const handlePlayerReady = useCallback((player) => {
+  // ── Player callbacks (stable — use refs to avoid stale closures) ──────────
+  const handlePlayerReady = (player) => {
     playerRef.current = player;
     player.setVolume(volume);
-    // Auto-start as soon as player is ready if experience has already started
-    if (isExperienceStarted) {
-      player.playVideo();
-    }
-  }, [volume, isExperienceStarted]);
+    // Player mounts only after experience start, so play immediately
+    player.playVideo();
+  };
 
-  const handleStateChange = useCallback((stateCode) => {
-    if (stateCode === 1) { // PLAYING
+  const handleStateChange = (code) => {
+    if (code === 1) {  // PLAYING
       setIsPlaying(true);
-      // Rotate ambience + quote on each new track
-      const nextAmb = (ambienceIdxRef.current + 1) % AMBIENCES.length;
-      ambienceIdxRef.current = nextAmb;
-      setAmbienceIdx(nextAmb);
+      // Rotate ambience every new track
+      const next = (ambIdxRef.current + 1) % AMBIENCES.length;
+      ambIdxRef.current = next;
+      setAmbienceIdx(next);
       setQuoteIdx(q => (q + 1) % QUOTES.length);
-      // Grab track title from player
+      // Read live track title
       try {
         const info = playerRef.current?.getVideoData?.();
         if (info?.title) setTrackTitle(info.title);
       } catch (_) {}
-    } else if (stateCode === 2) { // PAUSED
+    } else if (code === 2) {  // PAUSED
+      setIsPlaying(false);
+    } else if (code === 0) {  // ENDED — advance (handled by playlist internally, but ensure state sync)
       setIsPlaying(false);
     }
-  }, []);
+  };
 
-  const handleTimeUpdate = useCallback((cur, dur) => {
+  const handleTimeUpdate = (cur, dur) => {
     setCurrentTime(cur);
     setDuration(dur);
-  }, []);
+  };
 
   // ── Controls ───────────────────────────────────────────────────────────────
-  const handlePlayPause = () => {
-    if (!playerRef.current) return;
+  const togglePlay = () => {
     try {
-      const state = playerRef.current.getPlayerState();
+      const state = playerRef.current?.getPlayerState?.();
       if (state === window.YT?.PlayerState?.PLAYING) {
         playerRef.current.pauseVideo();
       } else {
-        playerRef.current.playVideo();
+        playerRef.current?.playVideo();
       }
     } catch (_) {}
   };
 
-  const handleNext = () => { try { playerRef.current?.nextVideo(); } catch (_) {} };
-  const handlePrev = () => { try { playerRef.current?.previousVideo(); } catch (_) {} };
+  const next = () => { try { playerRef.current?.nextVideo(); } catch (_) {} };
+  const prev = () => { try { playerRef.current?.previousVideo(); } catch (_) {} };
 
-  const handleSeek = (e) => {
+  const seek = (e) => {
     if (!duration) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    const pct  = (e.clientX - rect.left) / rect.width;
-    const t    = pct * duration;
+    const t = ((e.clientX - rect.left) / rect.width) * duration;
     setCurrentTime(t);
     try { playerRef.current?.seekTo(t, true); } catch (_) {}
   };
 
-  const handleVolumeChange = (v) => {
+  const changeVolume = (v) => {
     setVolume(v);
     try { playerRef.current?.setVolume(v); } catch (_) {}
   };
 
   const playHorn = () => {
     const a = new Audio('/audio/horn.mp3');
-    a.volume = 0.5;
+    a.volume = 0.55;
     a.play().catch(() => {});
   };
 
-  const startExperience = () => {
-    setIsExperienceStarted(true);
-    setIsPlaying(true);
-  };
-
   const fmt = (s) => {
-    const m = Math.floor(s / 60);
+    const m   = Math.floor(s / 60);
     const sec = Math.floor(s % 60);
     return `${m}:${sec.toString().padStart(2, '0')}`;
   };
 
+  // ── Render ────────────────────────────────────────────────────────────────
   return (
     <div style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden' }}>
       <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Telugu:wght@700;900&display=swap" rel="stylesheet" />
 
-      {/* ── Start Overlay ── */}
-      {!isExperienceStarted && (
+      {/* ── Start Overlay ─────────────────────────────────────────────────── */}
+      {!started && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(5,6,11,0.96)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100, padding: '20px' }}>
           <div style={{ padding: '40px', maxWidth: '440px', width: '100%', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '24px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '24px', backdropFilter: 'blur(16px)' }}>
             <div>
@@ -188,172 +181,169 @@ export default function TractorAnna() {
               <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
               <span>{presenceCount} listeners on field</span>
             </div>
-            <button onClick={startExperience} style={{ padding: '16px 32px', borderRadius: '12px', background: '#fbbf24', color: '#000', fontSize: '1.1rem', fontWeight: '800', border: 'none', cursor: 'pointer', boxShadow: '0 4px 20px rgba(245,158,11,0.4)', transition: 'transform 0.2s' }}
+            <button
+              onClick={() => setStarted(true)}
+              style={{ padding: '16px 32px', borderRadius: '12px', background: '#fbbf24', color: '#000', fontSize: '1.1rem', fontWeight: '800', border: 'none', cursor: 'pointer', boxShadow: '0 4px 20px rgba(245,158,11,0.4)', transition: 'transform 0.2s' }}
               onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.03)'}
-              onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
+              onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+            >
               START HARVESTING
             </button>
           </div>
         </div>
       )}
 
-      {/* ── YouTube Player – always pre-mounted off-screen for instant initialization ── */}
-      <div style={{
-        position: 'fixed',
-        bottom: (isExperienceStarted && isVideoVisible) ? '100px' : '-9999px',
-        right:  (isExperienceStarted && isVideoVisible) ? '30px'  : '-9999px',
-        width: '220px', height: '124px',
-        borderRadius: '16px',
-        overflow: 'hidden',
-        boxShadow: (isExperienceStarted && isVideoVisible) ? '0 12px 24px rgba(0,0,0,0.5)' : 'none',
-        border: (isExperienceStarted && isVideoVisible) ? '1px solid rgba(255,255,255,0.15)' : 'none',
-        opacity: (isExperienceStarted && isVideoVisible) ? 1 : 0,
-        transition: 'opacity 0.3s',
-        zIndex: 40,
-        background: '#000',
-        pointerEvents: (isExperienceStarted && isVideoVisible) ? 'auto' : 'none',
-      }}>
-        <YouTubePlayer
-          playlistId={PLAYLIST_ID}
-          isPlaying={isPlaying}
-          volume={volume}
-          onStateChange={handleStateChange}
-          onPlayerReady={handlePlayerReady}
-          onTimeUpdate={handleTimeUpdate}
-        />
-      </div>
+      {/* ── EXPERIENCE (mounted only after user clicks START) ─────────────── */}
+      {started && (
+        <>
+          {/* Ambient weather */}
+          <AmbientWeather weather={ambience.weather} particles={ambience.particles} active={isPlaying} />
 
-      {/* ── Ambient weather ── */}
-      {isExperienceStarted && (
-        <AmbientWeather weather={ambience.weather} particles={ambience.particles} active={isPlaying} />
-      )}
+          {/* Speed lines */}
+          {isPlaying && (
+            <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 3, overflow: 'hidden' }}>
+              <div className="speed-lines-container">
+                {[1,2,3,4,5,6,7].map(n => <div key={n} className={`speed-line speed-line-${n}`} />)}
+              </div>
+              <div className="dust-particle-container">
+                {[1,2,3,4,5].map(n => <div key={n} className={`dust-p dust-p-${n}`} />)}
+              </div>
+            </div>
+          )}
 
-      {/* ── Speed lines ── */}
-      {isExperienceStarted && isPlaying && (
-        <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 3, overflow: 'hidden' }}>
-          <div className="speed-lines-container">
-            {[1,2,3,4,5,6,7].map(n => <div key={n} className={`speed-line speed-line-${n}`} />)}
+          {/* Hero tractor */}
+          <img src="/images/tractor_anna_sprite.png" alt="Tractor Anna" className="tractor-hero-sprite"
+            style={{ animationPlayState: isPlaying ? 'running' : 'paused' }} />
+
+          {/* YouTube player — always visible in DOM (off-screen when hidden) */}
+          <div style={{
+            position: 'fixed',
+            bottom: videoVisible ? '100px' : '-9999px',
+            right:  videoVisible ? '30px'  : '-9999px',
+            width: '220px', height: '124px',
+            borderRadius: '16px', overflow: 'hidden',
+            boxShadow: videoVisible ? '0 12px 24px rgba(0,0,0,0.5)' : 'none',
+            border: videoVisible ? '1px solid rgba(255,255,255,0.15)' : 'none',
+            opacity: videoVisible ? 1 : 0,
+            transition: 'opacity 0.3s', zIndex: 40, background: '#000',
+            pointerEvents: videoVisible ? 'auto' : 'none',
+          }}>
+            <YouTubePlayer
+              playlistId={PLAYLIST_ID}
+              isPlaying={isPlaying}
+              volume={volume}
+              autoplay={1}
+              onStateChange={handleStateChange}
+              onPlayerReady={handlePlayerReady}
+              onTimeUpdate={handleTimeUpdate}
+            />
           </div>
-          <div className="dust-particle-container">
-            {[1,2,3,4,5].map(n => <div key={n} className={`dust-p dust-p-${n}`} />)}
-          </div>
-        </div>
-      )}
 
-      {/* ── Hero Tractor ── */}
-      {isExperienceStarted && (
-        <img src="/images/tractor_anna_sprite.png" alt="Tractor Anna" className="tractor-hero-sprite"
-          style={{ animationPlayState: isPlaying ? 'running' : 'paused' }} />
-      )}
+          {/* ── HUD Overlay ─────────────────────────────────────────────── */}
+          <div style={{ zIndex: 10, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100vh', width: '100%', position: 'relative', padding: '20px 32px 24px' }}>
 
-      {/* ── Main HUD Overlay ── */}
-      {isExperienceStarted && (
-        <div style={{ zIndex: 10, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100vh', width: '100%', position: 'relative', padding: '20px 32px 24px' }}>
+            {/* Top */}
+            <div>
+              <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                {/* Left */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#fff', textDecoration: 'none', fontSize: '0.85rem', fontWeight: '600', padding: '8px 16px', borderRadius: '9999px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)' }} className="hud-button">
+                    <ChevronLeft size={16} /><span>PLACES</span>
+                  </Link>
+                  {timeString && <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }}>{timeString}</span>}
+                </div>
 
-          {/* Top section */}
-          <div>
-            <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              {/* Left */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#fff', textDecoration: 'none', fontSize: '0.85rem', fontWeight: '600', padding: '8px 16px', borderRadius: '9999px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)' }} className="hud-button">
-                  <ChevronLeft size={16} /><span>PLACES</span>
-                </Link>
-                {timeString && <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }}>{timeString}</span>}
+                {/* Center */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', fontWeight: '600', color: '#a7f3d0', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)', padding: '8px 18px', borderRadius: '9999px' }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', display: 'inline-block', boxShadow: '0 0 8px #10b981' }} />
+                  <span>{presenceCount} listeners on field</span>
+                </div>
+
+                {/* Right */}
+                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                  <button onClick={() => setAmbientOn(a => !a)}
+                    style={{ display: 'flex', alignItems: 'center', gap: '6px', color: ambientOn ? '#fbbf24' : 'rgba(255,255,255,0.5)', fontSize: '0.8rem', fontWeight: '600', padding: '8px 14px', borderRadius: '9999px', background: ambientOn ? 'rgba(245,158,11,0.15)' : 'rgba(255,255,255,0.06)', border: ambientOn ? '1px solid rgba(245,158,11,0.35)' : '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(12px)', cursor: 'pointer', transition: 'all 0.2s' }} className="hud-button">
+                    <Wind size={14} /><span>{ambientOn ? 'AMBIENCE ON' : 'AMBIENCE OFF'}</span>
+                  </button>
+                  <button onClick={() => setVideoVisible(v => !v)}
+                    style={{ display: 'flex', alignItems: 'center', gap: '6px', color: videoVisible ? '#fbbf24' : '#fff', fontSize: '0.8rem', fontWeight: '600', padding: '8px 14px', borderRadius: '9999px', background: videoVisible ? 'rgba(245,158,11,0.2)' : 'rgba(255,255,255,0.08)', border: videoVisible ? '1px solid rgba(245,158,11,0.4)' : '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)', cursor: 'pointer' }} className="hud-button">
+                    <Tv size={14} /><span>{videoVisible ? 'HIDE VIDEO' : 'SHOW VIDEO'}</span>
+                  </button>
+                </div>
+              </header>
+
+              {/* Title + quote */}
+              <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', userSelect: 'none', marginTop: '6px' }}>
+                <h2 style={{ fontSize: '3.8rem', fontWeight: '900', letterSpacing: '0.04em', color: '#fff', margin: 0, textShadow: '0 6px 28px rgba(0,0,0,0.85)', fontFamily: "'Noto Serif Telugu', serif" }} className="immersive-title">
+                  ట్రాక్టర్ అన్న
+                </h2>
+                <p style={{ fontSize: '1.05rem', fontWeight: '500', color: '#fef08a', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.95)', fontStyle: 'italic', letterSpacing: '0.03em', maxWidth: '650px' }}>
+                  {QUOTES[quoteIdx]}
+                </p>
               </div>
+            </div>
 
-              {/* Center – presence */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', fontWeight: '600', color: '#a7f3d0', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)', padding: '8px 18px', borderRadius: '9999px' }}>
-                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', display: 'inline-block', boxShadow: '0 0 8px #10b981' }} />
-                <span>{presenceCount} listeners on field</span>
+            {/* Horn button */}
+            <div style={{ position: 'absolute', left: '32px', bottom: '120px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', zIndex: 15 }}>
+              <button onClick={playHorn} className="horn-button"
+                style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', backdropFilter: 'blur(12px)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 32px rgba(0,0,0,0.4)', transition: 'all 0.2s' }}>
+                <span style={{ fontSize: '1.4rem' }}>📢</span>
+              </button>
+              <span style={{ fontSize: '0.65rem', fontWeight: '700', color: '#fff', textShadow: '0 2px 6px rgba(0,0,0,0.9)', letterSpacing: '0.05em' }}>HORN PLEASE</span>
+            </div>
+
+            {/* Bottom HUD capsule */}
+            <div style={{ position: 'relative', width: '100%', maxWidth: '650px', margin: '0 auto', zIndex: 30 }}>
+              <div style={{ background: 'rgba(18,20,26,0.92)', backdropFilter: 'blur(24px) saturate(140%)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: '28px', padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 20px 50px rgba(0,0,0,0.75)', position: 'relative', overflow: 'hidden' }}>
+
+                {/* Progress bar */}
+                <div onClick={seek} style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: 'rgba(255,255,255,0.1)', cursor: 'pointer' }}>
+                  <div style={{ height: '100%', width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`, background: '#fbbf24', boxShadow: '0 0 8px #fbbf24', transition: 'width 0.1s linear' }} />
+                </div>
+
+                {/* Track info */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, minWidth: 0 }}>
+                  <div style={{ width: '44px', height: '44px', borderRadius: '50%', overflow: 'hidden', border: '2px solid rgba(255,255,255,0.2)', flexShrink: 0, background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', display: 'flex', alignItems: 'center', justifyContent: 'center', animationName: 'spin', animationDuration: '12s', animationTimingFunction: 'linear', animationIterationCount: 'infinite', animationPlayState: isPlaying ? 'running' : 'paused' }}>
+                    <span style={{ fontSize: '1.5rem' }}>🚜</span>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
+                    <span style={{ fontSize: '0.9rem', fontWeight: '700', color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {trackTitle || 'Loading playlist…'}
+                    </span>
+                    <span style={{ fontSize: '0.72rem', color: '#a1a1aa' }}>
+                      {duration > 0 ? `${fmt(currentTime)} / ${fmt(duration)}` : 'Telugu Classics'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Controls */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '0 18px' }}>
+                  <button onClick={prev} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '8px', fontSize: '1.3rem' }} className="control-icon">⏮</button>
+                  <button onClick={togglePlay}
+                    style={{ width: '46px', height: '46px', borderRadius: '50%', background: '#fff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 14px rgba(255,255,255,0.4)', transition: 'transform 0.15s' }}
+                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                    onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
+                    <span style={{ fontSize: '1.2rem', color: '#000' }}>{isPlaying ? '⏸' : '▶'}</span>
+                  </button>
+                  <button onClick={next} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '8px', fontSize: '1.3rem' }} className="control-icon">⏭</button>
+                </div>
+
+                {/* Volume */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: 1, justifyContent: 'flex-end' }} className="volume-slider-container">
+                  <button onClick={() => changeVolume(volume === 0 ? 60 : 0)} style={{ background: 'none', border: 'none', color: '#a1a1aa', cursor: 'pointer', padding: 0 }}>
+                    {volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                  </button>
+                  <input type="range" min="0" max="100" value={volume} onChange={e => changeVolume(parseInt(e.target.value))}
+                    style={{ width: '60px', height: '4px', borderRadius: '2px', background: 'rgba(255,255,255,0.2)', accentColor: '#fbbf24', cursor: 'pointer' }} />
+                </div>
+
               </div>
-
-              {/* Right – ambient toggle + video toggle */}
-              <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                {/* Ambient sound toggle */}
-                <button onClick={() => setAmbientEnabled(a => !a)} title={ambientEnabled ? 'Turn off ambient sound' : 'Turn on ambient sound'}
-                  style={{ display: 'flex', alignItems: 'center', gap: '6px', color: ambientEnabled ? '#fbbf24' : 'rgba(255,255,255,0.5)', fontSize: '0.8rem', fontWeight: '600', padding: '8px 14px', borderRadius: '9999px', background: ambientEnabled ? 'rgba(245,158,11,0.15)' : 'rgba(255,255,255,0.06)', border: ambientEnabled ? '1px solid rgba(245,158,11,0.35)' : '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(12px)', cursor: 'pointer', transition: 'all 0.2s' }} className="hud-button">
-                  <Wind size={14} />
-                  <span>{ambientEnabled ? 'AMBIENCE ON' : 'AMBIENCE OFF'}</span>
-                </button>
-
-                {/* Video preview toggle */}
-                <button onClick={() => setIsVideoVisible(v => !v)}
-                  style={{ display: 'flex', alignItems: 'center', gap: '6px', color: isVideoVisible ? '#fbbf24' : '#fff', fontSize: '0.8rem', fontWeight: '600', padding: '8px 14px', borderRadius: '9999px', background: isVideoVisible ? 'rgba(245,158,11,0.2)' : 'rgba(255,255,255,0.08)', border: isVideoVisible ? '1px solid rgba(245,158,11,0.4)' : '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)', cursor: 'pointer' }} className="hud-button">
-                  <Tv size={14} />
-                  <span>{isVideoVisible ? 'HIDE VIDEO' : 'SHOW VIDEO'}</span>
-                </button>
-              </div>
-            </header>
-
-            {/* Title + quote */}
-            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', userSelect: 'none', marginTop: '6px', zIndex: 5 }}>
-              <h2 style={{ fontSize: '3.8rem', fontWeight: '900', letterSpacing: '0.04em', color: '#fff', margin: 0, textShadow: '0 6px 28px rgba(0,0,0,0.85)', fontFamily: "'Noto Serif Telugu', serif" }} className="immersive-title">
-                ట్రాక్టర్ అన్న
-              </h2>
-              <p style={{ fontSize: '1.05rem', fontWeight: '500', color: '#fef08a', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.95)', fontStyle: 'italic', letterSpacing: '0.03em', maxWidth: '650px' }}>
-                {QUOTES[quoteIdx]}
-              </p>
             </div>
           </div>
-
-          {/* Horn button */}
-          <div style={{ position: 'absolute', left: '32px', bottom: '120px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', zIndex: 15 }}>
-            <button onClick={playHorn} className="horn-button" style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', backdropFilter: 'blur(12px)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 32px rgba(0,0,0,0.4)', transition: 'all 0.2s' }}>
-              <span style={{ fontSize: '1.4rem' }}>📢</span>
-            </button>
-            <span style={{ fontSize: '0.65rem', fontWeight: '700', color: '#fff', textShadow: '0 2px 6px rgba(0,0,0,0.9)', letterSpacing: '0.05em' }}>HORN PLEASE</span>
-          </div>
-
-          {/* Bottom HUD capsule */}
-          <div style={{ position: 'relative', width: '100%', maxWidth: '650px', margin: '0 auto', zIndex: 30 }}>
-
-            <div style={{ background: 'rgba(18,20,26,0.92)', backdropFilter: 'blur(24px) saturate(140%)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: '28px', padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 20px 50px rgba(0,0,0,0.75)', position: 'relative', overflow: 'hidden' }} className="capsule-hud">
-
-              {/* Progress bar */}
-              <div onClick={handleSeek} style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: 'rgba(255,255,255,0.1)', cursor: 'pointer' }}>
-                <div style={{ height: '100%', width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`, background: '#fbbf24', boxShadow: '0 0 8px #fbbf24', transition: 'width 0.1s linear' }} />
-              </div>
-
-              {/* Track info */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, minWidth: 0 }}>
-                <div style={{ width: '44px', height: '44px', borderRadius: '50%', overflow: 'hidden', border: '2px solid rgba(255,255,255,0.2)', flexShrink: 0, background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', display: 'flex', alignItems: 'center', justifyContent: 'center', animationName: 'spin', animationDuration: '12s', animationTimingFunction: 'linear', animationIterationCount: 'infinite', animationPlayState: isPlaying ? 'running' : 'paused' }}>
-                  <span style={{ fontSize: '1.5rem' }}>🚜</span>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
-                  <span style={{ fontSize: '0.9rem', fontWeight: '700', color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    {trackTitle || 'ట్రాక్టర్ అన్న Playlist'}
-                  </span>
-                  <span style={{ fontSize: '0.72rem', color: '#a1a1aa' }}>
-                    {duration > 0 ? `${fmt(currentTime)} / ${fmt(duration)}` : 'Telugu Classics'}
-                  </span>
-                </div>
-              </div>
-
-              {/* Controls */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '0 18px' }}>
-                <button onClick={handlePrev} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '8px', fontSize: '1.3rem' }} className="control-icon">⏮</button>
-                <button onClick={handlePlayPause} style={{ width: '46px', height: '46px', borderRadius: '50%', background: '#fff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 14px rgba(255,255,255,0.4)', transition: 'transform 0.15s' }}
-                  onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
-                  onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
-                  <span style={{ fontSize: '1.2rem', color: '#000' }}>{isPlaying ? '⏸' : '▶'}</span>
-                </button>
-                <button onClick={handleNext} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '8px', fontSize: '1.3rem' }} className="control-icon">⏭</button>
-              </div>
-
-              {/* Volume */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: 1, justifyContent: 'flex-end' }} className="volume-slider-container">
-                <button onClick={() => handleVolumeChange(volume === 0 ? 60 : 0)} style={{ background: 'none', border: 'none', color: '#a1a1aa', cursor: 'pointer', padding: 0 }}>
-                  {volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
-                </button>
-                <input type="range" min="0" max="100" value={volume} onChange={e => handleVolumeChange(parseInt(e.target.value))}
-                  style={{ width: '60px', height: '4px', borderRadius: '2px', background: 'rgba(255,255,255,0.2)', accentColor: '#fbbf24', cursor: 'pointer' }} />
-              </div>
-
-            </div>
-          </div>
-        </div>
+        </>
       )}
 
+      {/* ── Global CSS ───────────────────────────────────────────────────────── */}
       <style jsx global>{`
         .tractor-hero-sprite {
           position: absolute; bottom: 25px; left: 50%;
@@ -369,9 +359,7 @@ export default function TractorAnna() {
           50%  { transform: translateX(-50%) translateY(-1.5px); }
           100% { transform: translateX(-50%) translateY(0px); }
         }
-        .speed-lines-container, .dust-particle-container {
-          position: absolute; inset: 0; pointer-events: none;
-        }
+        .speed-lines-container, .dust-particle-container { position: absolute; inset: 0; pointer-events: none; }
         .speed-line {
           position: absolute; height: 2px;
           background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
@@ -409,14 +397,6 @@ export default function TractorAnna() {
         .hud-button:hover { background: rgba(255,255,255,0.14) !important; transform: translateY(-1px); }
         .horn-button:hover { background: rgba(255,255,255,0.16) !important; transform: scale(1.08) !important; }
         .control-icon:hover { color: #fff !important; transform: scale(1.1); }
-        .mini-youtube-container {
-          position: absolute; bottom: 100px; right: 30px;
-          width: 220px; height: 124px; border-radius: 16px;
-          overflow: hidden; box-shadow: 0 12px 24px rgba(0,0,0,0.5);
-          border: 1px solid rgba(255,255,255,0.15); opacity: 0.3;
-          transition: all 0.3s cubic-bezier(0.4,0,0.2,1); z-index: 40; background: #000;
-        }
-        .mini-youtube-container:hover { opacity: 1; transform: scale(1.05); }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @media (max-width: 768px) {
           .immersive-title { font-size: 2.8rem !important; }

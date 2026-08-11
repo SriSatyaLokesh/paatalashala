@@ -7,6 +7,7 @@ export default function YouTubePlayer({
   playlistId,
   isPlaying,
   volume = 50,
+  autoplay = 0,
   onStateChange,
   onPlayerReady,
   onTimeUpdate,
@@ -55,7 +56,7 @@ export default function YouTubePlayer({
 
       // Build playerVars - support both single videoId and playlist
       const playerVars = {
-        autoplay: 0,
+        autoplay: autoplay,
         controls: 1,
         disablekb: 0,
         fs: 1,
