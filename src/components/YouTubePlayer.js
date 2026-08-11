@@ -47,10 +47,13 @@ export default function YouTubePlayer({
             player.setVolume(volume);
 
             if (playlistId) {
-              // loadPlaylist(playlist, index, startSeconds) — argument syntax is reliable
-              // When called in onReady, YT immediately queues and plays the whole playlist
-              player.loadPlaylist(playlistId, 0, 0);
-              // autoplay: loadPlaylist starts playing automatically
+              // IMPORTANT: must use object form — bare string is treated as videoId, not playlistId
+              player.loadPlaylist({
+                listType: 'playlist',
+                list: playlistId,
+                index: 0,
+                startSeconds: 0,
+              });
             } else if (videoId) {
               if (isPlaying) player.playVideo();
             }
