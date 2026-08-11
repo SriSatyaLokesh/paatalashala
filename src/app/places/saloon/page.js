@@ -239,7 +239,10 @@ export default function DeluxeSaloon() {
                 width: '100%',
                 height: '100%',
                 backgroundImage: 'linear-gradient(to right, transparent 45%, #fff 45%, #fff 55%, transparent 55%), linear-gradient(to bottom, transparent 45%, #fff 45%, #fff 55%, transparent 55%)',
-                animation: 'fan-spin 3s linear infinite',
+                animationName: 'fan-spin',
+                animationDuration: '3s',
+                animationTimingFunction: 'linear',
+                animationIterationCount: 'infinite',
                 animationPlayState: isPlaying ? 'running' : 'paused',
               }} 
             />
