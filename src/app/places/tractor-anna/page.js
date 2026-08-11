@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { getSongsForPlace } from '@/data/songs';
 import YouTubePlayer from '@/components/YouTubePlayer';
@@ -25,6 +25,8 @@ export default function TractorAnna() {
   const [isQueueOpen, setIsQueueOpen] = useState(false);
   const [isVideoVisible, setIsVideoVisible] = useState(false);
 
+  const ambientAudioRef = useRef(null);
+
   const currentSong = songs[currentSongIndex];
 
   // Clock updating
@@ -38,7 +40,7 @@ export default function TractorAnna() {
     return () => clearInterval(timer);
   }, []);
 
-  // Simulate dynamic presence count locally (no network calls, zero 404s)
+  // Dynamic presence count simulation
   useEffect(() => {
     const simulatePresence = () => {
       const base = 83;
@@ -50,6 +52,30 @@ export default function TractorAnna() {
     const interval = setInterval(simulatePresence, 4000);
     return () => clearInterval(interval);
   }, []);
+
+  // Low-volume ambient tractor engine sound loop (5% volume)
+  useEffect(() => {
+    if (!isExperienceStarted) return;
+
+    if (!ambientAudioRef.current) {
+      const audio = new Audio('/audio/tractor_ambient.mp3');
+      audio.loop = true;
+      audio.volume = 0.05; // Very low ambient background volume
+      ambientAudioRef.current = audio;
+    }
+
+    if (isPlaying) {
+      ambientAudioRef.current.play().catch(e => console.log('Ambient audio play error:', e));
+    } else {
+      ambientAudioRef.current.pause();
+    }
+
+    return () => {
+      if (ambientAudioRef.current) {
+        ambientAudioRef.current.pause();
+      }
+    };
+  }, [isExperienceStarted, isPlaying]);
 
   // Sync full-screen ambient image background transitions (1.2s crossfade)
   useEffect(() => {
@@ -120,11 +146,11 @@ export default function TractorAnna() {
     setIsPlaying(true);
   };
 
-  // Play retro vehicle horn sound function
+  // Play truck horn sound from public/audio/horn.mp3
   const playHorn = () => {
-    const audio = new Audio('https://www.soundjay.com/transportation/sounds/truck-horn-1.mp3');
-    audio.volume = 0.4;
-    audio.play().catch(e => console.log('Audio play failed:', e));
+    const hornAudio = new Audio('/audio/horn.mp3');
+    hornAudio.volume = 0.5;
+    hornAudio.play().catch(e => console.log('Horn play error:', e));
   };
 
   return (
@@ -230,7 +256,7 @@ export default function TractorAnna() {
           zIndex: 3,
           overflow: 'hidden',
         }}>
-          {/* Horizontal Speed Lines Streaming Left to Right */}
+          {/* Horizontal Speed Lines */}
           <div className="speed-lines-container">
             <div className="speed-line speed-line-1" />
             <div className="speed-line speed-line-2" />
@@ -355,7 +381,7 @@ export default function TractorAnna() {
               </button>
             </header>
 
-            {/* Top-Aligned Title & Quote Block (No song name below hero title) */}
+            {/* Top-Aligned Title & Quote Block */}
             <div style={{
               textAlign: 'center',
               display: 'flex',
@@ -454,7 +480,7 @@ export default function TractorAnna() {
             />
           </div>
 
-          {/* Bottom Floating HUD Capsule Controller (Positioned on top of bottom tractor tires for sleek crop overlay) */}
+          {/* Bottom Floating HUD Capsule Controller */}
           <div style={{
             position: 'relative',
             width: '100%',
