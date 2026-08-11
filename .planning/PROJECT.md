@@ -2,7 +2,7 @@
 
 ## What This Is
 
-Paatalashala is a collection of lightweight, immersive web experiences that represent the music and atmosphere associated with familiar Telugu cultural places and situations (such as truck driving on a highway, a local barber shop, a tea stall, or an auto ride). It combines editorially curated Telugu playlists, dynamic environmental atmospheres, and simulated social presence using the official YouTube Player API.
+Paatalashala is a collection of lightweight, immersive web experiences that represent the music and atmosphere associated with familiar Telugu cultural places and situations (such as driving a tractor alongside farm fields, a local barber shop, a tea stall, or an auto ride). It combines editorially curated Telugu playlists, dynamic environmental atmospheres, and simulated social presence using the official YouTube Player API.
 
 ## Core Value
 
@@ -19,12 +19,12 @@ To recreate the exact feeling of "being there" in familiar Telugu environments w
 - ✓ **Ambient Particle Canvas** - HTML5 canvas-rendered particle engine managing weather effects (rain, stars, fog, dust-motes) matching song ambience (`src/components/AmbientWeather.js`).
 - ✓ **Dynamic CSS Ambience Transitions** - Page backgrounds and element styles transition smoothly as tracks change.
 - ✓ **Social Signal (Presence API)** - Endpoint serving mock listener counts with dynamic time-based variance (`src/app/api/presence/route.js`).
-- ✓ **Truck Wala Place** - Fully structured highway container supporting sunset, night, rain, and misty morning ambient states (`src/app/places/truck-wala/page.js`).
+- ✓ **Tractor Anna Place** - Fully structured farmland container supporting sunset, night, rain, and misty morning ambient states (`src/app/places/tractor-anna/page.js`).
 - ✓ **Deluxe Saloon Place** - Themed barber shop container integrating the player inside a retro TV frame (`src/app/places/saloon/page.js`).
 
 ### Active
 
-- [ ] **Polishing Truck Wala Experience** - Fine-tuning highway visuals, road animations, windshield wipers, and dusk/dawn headlight flares to create a premium, immersive drive.
+- [ ] **Polishing Tractor Anna Experience** - Fine-tuning farmland visuals, road animations, windshield wipers, and dusk/dawn headlight flares to create a premium, immersive drive.
 - [ ] **Polishing Deluxe Saloon Experience** - Enhancing TV frame flicker, mirror reflections, rotating ceiling fan animations, and vintage lighting changes.
 - [ ] **Accessibility Controls** - Support for keyboard shortcuts (Space for play/pause, M for mute, arrow keys), visible focus outlines, and responsive pause buttons for particle animations (prefers-reduced-motion).
 - [ ] **Spotify & YouTube Outbound Integrations** - Connect external links to original tracks, and eventually support V2 features like playlist creation.
@@ -38,7 +38,7 @@ To recreate the exact feeling of "being there" in familiar Telugu environments w
 ## Context
 
 - **Current Architecture**: Built on Next.js 16 (App Router) and React 19, utilising vanilla CSS variables and inline JSX styles.
-- **Curation Focus**: Curation is human-first and editorially driven. Songs must evoke a specific cultural place and time (e.g., songs a Telugu truck driver would play on a long drive).
+- **Curation Focus**: Curation is human-first and editorially driven. Songs must evoke a specific cultural place and time (e.g., songs a Telugu farmer would play while plowing fields).
 - **Client Playback**: autoplay constraints require explicit user interaction (a "START" screen) before loading the player API.
 
 ## Constraints

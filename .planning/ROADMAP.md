@@ -2,11 +2,11 @@
 
 ## Overview
 
-The Paatalashala roadmap is structured to deliver themed, culturally immersive Telugu audio environments. We begin with Phase 1 by polishing and launching the **Truck Wala** Telugu highway environment. Phase 2 introduces the **Deluxe Saloon** barber shop experience alongside critical keyboard and motion accessibility controls. Phase 3 expands the platform by adding V2 OAuth playlist synchronization for Spotify and YouTube.
+The Paatalashala roadmap is structured to deliver themed, culturally immersive Telugu audio environments. We begin with Phase 1 by polishing and launching the **Tractor Anna** Telugu farmland environment. Phase 2 introduces the **Deluxe Saloon** barber shop experience alongside critical keyboard and motion accessibility controls. Phase 3 expands the platform by adding V2 OAuth playlist synchronization for Spotify and YouTube.
 
 ## Phases
 
-- [ ] **Phase 1: Truck Wala Polish & Launch** - Fine-tune the highway simulation and mobile-responsiveness for launch.
+- [ ] **Phase 1: Tractor Anna Polish & Launch** - Fine-tune the farmland simulation and mobile-responsiveness for launch.
 - [ ] **Phase 2: Deluxe Saloon & Accessibility** - Integrate the retro barber shop theme and add keyboard and animation pausing controls.
 - [ ] **Phase 3: Playlist Sync (V2 Integration)** - Build Spotify and YouTube OAuth integrations for playlist cloning.
 
@@ -14,20 +14,19 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
 
 ## Phase Details
 
-### Phase 1: Truck Wala Polish & Launch
-**Goal**: Polish the Telugu highway environment (Truck Wala) to ensure smooth visuals, dawn/dusk lighting transitions, and full mobile usability.
+### Phase 1: Tractor Anna Polish & Launch
+**Goal**: Polish the Telugu farmland environment (Tractor Anna) to ensure smooth visuals, farm road transitions, and full mobile usability.
 **Depends on**: Nothing (first phase)
 **Mode**: mvp
-**Requirements**: PLAY-01, PLAY-02, PLAY-03, PLAY-04, PLAY-05, PLAY-06, ENV-01, ENV-02, ENV-03 (Truck Wala), ENV-04, DATA-01, DATA-02, SOCL-01
+**Requirements**: PLAY-01, PLAY-02, PLAY-03, PLAY-04, PLAY-05, PLAY-06, ENV-01, ENV-02, ENV-03 (Tractor Anna), ENV-04, DATA-01, DATA-02, SOCL-01
 **Success Criteria**:
-  1. User can enter `/places/truck-wala`, click START, and start high-energy playback with active progress tracking.
-  2. The highway container elements (road markings, cloud drifts, horizon changes) transition smoothly along with canvas particles.
+  1. User can enter `/places/tractor-anna`, click START, and start high-energy playback with active progress tracking.
+  2. The farmland container elements (road markings, field horizons, cloud drifts) transition smoothly along with canvas particles.
   3. Interactive elements and media overlays scale gracefully on mobile screens without clipping the YouTube player.
-**Plans**: 2 plans
+**Plans**: 1 plan
 
 Plans:
-- [ ] 01-01: Fine-tune highway visual assets, road speed transitions, and dawn/dusk headlight glare.
-- [ ] 01-02: Adapt mobile responsive stylesheets and layout grids for overlay-safe boundaries.
+- [ ] 01-01: Adapt static data, build cartoonish farm and animated road visuals, and configure mobile card layouts.
 
 ### Phase 2: Deluxe Saloon & Accessibility
 **Goal**: Implement the Deluxe Saloon Retro TV frame environment, matching animations, and add accessibility triggers.
@@ -65,6 +64,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Truck Wala Polish & Launch | 0/2 | Not started | - |
+| 1. Tractor Anna Polish & Launch | 0/1 | Not started | - |
 | 2. Deluxe Saloon & Accessibility | 0/2 | Not started | - |
 | 3. Playlist Sync (V2 Integration) | 0/2 | Not started | - |

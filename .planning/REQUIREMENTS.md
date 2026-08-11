@@ -21,19 +21,19 @@ Requirements for the initial release. Satisfied requirements from the existing b
 - [x] **ENV-01**: The screen's background color gradient transitions smoothly when the song changes, matching the song's ambient config (e.g., warm sunset, deep night).
 - [x] **ENV-02**: Particle layers (stars, rain, mist, dust-motes) render on an HTML5 canvas layer above the background, moving dynamically based on active song weather definitions.
 - [x] **ENV-03**: Supports independent theme layouts:
-  - **Truck Wala**: Large highway perspective.
+  - **Tractor Anna**: Farmland perspective.
   - **Deluxe Saloon**: Player embedded inside a retro television frame.
-- [ ] **ENV-04**: Truck Wala highway visuals support moving road markings, cloud drifts, and headlight flares on sunset/night transition.
+- [ ] **ENV-04**: Tractor Anna farmland visuals support moving road markings, cloud drifts, and headlight flares on sunset/night transition.
 - [ ] **ENV-05**: Deluxe Saloon visuals support a rotating ceiling fan animation, flickering tube lights, and dynamic TV screen glare matching active play states.
 
 ### Music Curation & Metadata (DATA)
 
-- [x] **DATA-01**: Playlists and locations are curated editorially to match places (e.g., high-energy mass highway tracks for Truck Wala).
+- [x] **DATA-01**: Playlists and locations are curated editorially to match places (e.g., high-energy mass highway tracks for Tractor Anna).
 - [x] **DATA-02**: Displays outbound destinations (links to official YouTube video and Spotify track).
 
 ### Social Signals & Presence (SOCL)
 
-- [x] **SOCL-01**: Displays mock real-time presence counts (e.g., "83 on the highway", "41 in the saloon") that fluctuate using time-based variance.
+- [x] **SOCL-01**: Displays mock real-time presence counts (e.g., "83 on the road", "41 in the saloon") that fluctuate using time-based variance.
 
 ### Accessibility & Controls (ACC)
 
