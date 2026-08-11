@@ -219,7 +219,7 @@ export default function TractorAnna() {
         />
       )}
 
-      {/* Cinematic Speed Lines & Dust Streaks Overlay */}
+      {/* Cinematic Speed Lines & Wind Streaks Overlay */}
       {isExperienceStarted && isPlaying && (
         <div style={{
           position: 'fixed',
@@ -228,13 +228,15 @@ export default function TractorAnna() {
           zIndex: 3,
           overflow: 'hidden',
         }}>
-          {/* Horizontal Speed Lines */}
+          {/* Horizontal Speed Lines Streaming Past */}
           <div className="speed-lines-container">
             <div className="speed-line speed-line-1" />
             <div className="speed-line speed-line-2" />
             <div className="speed-line speed-line-3" />
             <div className="speed-line speed-line-4" />
             <div className="speed-line speed-line-5" />
+            <div className="speed-line speed-line-6" />
+            <div className="speed-line speed-line-7" />
           </div>
 
           {/* Dust Particles */}
@@ -248,7 +250,7 @@ export default function TractorAnna() {
         </div>
       )}
 
-      {/* Hero Tractor Image: Core Highlight of the page (Massive Centerpiece) */}
+      {/* Hero Tractor Image: Core Highlight (Still Scale with Micro Engine Idle) */}
       {isExperienceStarted && (
         <img 
           src={currentSong?.ambience?.vehicleSprite || "/images/tractor_anna_sprite.png"} 
@@ -748,7 +750,7 @@ export default function TractorAnna() {
 
       {/* Global Style Adjustments */}
       <style jsx global>{`
-        /* Core Hero Tractor Sprite (Huge Hero Image Dominance) */
+        /* Core Hero Tractor Sprite (Solid Still Scale with Micro Idle Vibration) */
         .tractor-hero-sprite {
           position: absolute;
           bottom: 75px;
@@ -759,25 +761,20 @@ export default function TractorAnna() {
           max-height: 68vh;
           object-fit: contain;
           height: auto;
-          animation: tractor-forward-drive 2.4s ease-in-out infinite;
+          animation: tractor-engine-idle 0.12s linear infinite;
           z-index: 2;
           filter: drop-shadow(0 20px 40px rgba(0,0,0,0.65));
           pointer-events: none;
         }
 
-        @keyframes tractor-forward-drive {
-          0% {
-            transform: translateX(-50%) translateY(0px) scale(1);
-          }
-          50% {
-            transform: translateX(-50%) translateY(-4px) scale(1.025);
-          }
-          100% {
-            transform: translateX(-50%) translateY(0px) scale(1);
-          }
+        /* Micro subtle 1.5px engine idle vibration (NO scaling/shrinking!) */
+        @keyframes tractor-engine-idle {
+          0% { transform: translateX(-50%) translateY(0px); }
+          50% { transform: translateX(-50%) translateY(-1.5px); }
+          100% { transform: translateX(-50%) translateY(0px); }
         }
 
-        /* Cinematic Speed & Dust Streak Animations */
+        /* Enhanced Cinematic Speed & Dust Streak Animations */
         .speed-lines-container, .dust-particle-container {
           position: absolute;
           inset: 0;
@@ -787,41 +784,44 @@ export default function TractorAnna() {
         .speed-line {
           position: absolute;
           height: 2px;
-          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+          background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.55) 50%, transparent 100%);
           border-radius: 2px;
-          animation: speed-line-flow 1.4s linear infinite;
+          animation: speed-line-flow 1.0s linear infinite;
         }
-        .speed-line-1 { top: 25%; left: 10%; width: 140px; animation-delay: 0s; }
-        .speed-line-2 { top: 40%; left: 70%; width: 220px; animation-delay: 0.3s; }
-        .speed-line-3 { top: 65%; left: 30%; width: 180px; animation-delay: 0.6s; }
-        .speed-line-4 { top: 80%; left: 80%; width: 160px; animation-delay: 0.9s; }
-        .speed-line-5 { top: 55%; left: 5%; width: 200px; animation-delay: 1.1s; }
+        .speed-line-1 { top: 20%; left: 0%; width: 180px; animation-duration: 0.9s; animation-delay: 0s; }
+        .speed-line-2 { top: 35%; left: 0%; width: 260px; animation-duration: 1.1s; animation-delay: 0.2s; }
+        .speed-line-3 { top: 50%; left: 0%; width: 220px; animation-duration: 0.85s; animation-delay: 0.4s; }
+        .speed-line-4 { top: 68%; left: 0%; width: 300px; animation-duration: 1.05s; animation-delay: 0.6s; }
+        .speed-line-5 { top: 82%; left: 0%; width: 240px; animation-duration: 0.95s; animation-delay: 0.8s; }
+        .speed-line-6 { top: 45%; left: 0%; width: 190px; animation-duration: 1.15s; animation-delay: 0.3s; }
+        .speed-line-7 { top: 60%; left: 0%; width: 280px; animation-duration: 1.0s; animation-delay: 0.7s; }
 
         @keyframes speed-line-flow {
-          0% { transform: scaleX(0.2) translateX(100vw); opacity: 0; }
-          40% { opacity: 0.6; }
-          100% { transform: scaleX(1.5) translateX(-50vw); opacity: 0; }
+          0% { transform: translateX(100vw); opacity: 0; }
+          20% { opacity: 0.75; }
+          80% { opacity: 0.75; }
+          100% { transform: translateX(-30vw); opacity: 0; }
         }
 
         .dust-p {
           position: absolute;
-          width: 4px;
-          height: 4px;
-          background: rgba(254, 240, 138, 0.6);
+          width: 5px;
+          height: 5px;
+          background: rgba(254, 240, 138, 0.7);
           border-radius: 50%;
-          box-shadow: 0 0 6px rgba(254, 240, 138, 0.8);
-          animation: dust-particle-flow 2.2s ease-out infinite;
+          box-shadow: 0 0 8px rgba(254, 240, 138, 0.9);
+          animation: dust-particle-flow 1.6s ease-out infinite;
         }
-        .dust-p-1 { bottom: 120px; left: 45%; animation-delay: 0s; }
-        .dust-p-2 { bottom: 110px; left: 55%; animation-delay: 0.4s; }
-        .dust-p-3 { bottom: 130px; left: 48%; animation-delay: 0.8s; }
-        .dust-p-4 { bottom: 100px; left: 52%; animation-delay: 1.2s; }
-        .dust-p-5 { bottom: 125px; left: 42%; animation-delay: 1.6s; }
+        .dust-p-1 { bottom: 95px; left: 46%; animation-delay: 0s; }
+        .dust-p-2 { bottom: 85px; left: 54%; animation-delay: 0.3s; }
+        .dust-p-3 { bottom: 105px; left: 47%; animation-delay: 0.6s; }
+        .dust-p-4 { bottom: 90px; left: 52%; animation-delay: 0.9s; }
+        .dust-p-5 { bottom: 100px; left: 43%; animation-delay: 1.2s; }
 
         @keyframes dust-particle-flow {
-          0% { transform: translate(0, 0) scale(0.4); opacity: 0; }
-          30% { opacity: 0.8; }
-          100% { transform: translate(-120px, 40px) scale(1.4); opacity: 0; }
+          0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+          30% { opacity: 0.9; }
+          100% { transform: translate(-180px, 35px) scale(1.6); opacity: 0; }
         }
 
         .hud-button:hover {
