@@ -142,17 +142,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Telisindi le",
     "sequence": 6,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "lake-dawn",
+      "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "sunrise",
+      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -168,17 +168,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Manasu Palike",
     "sequence": 7,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -194,17 +194,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Suvvi Suvvi Suvvalamma",
     "sequence": 8,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -220,17 +220,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Idi Swathi Jallu",
     "sequence": 9,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -246,17 +246,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Kokila Title 1989 Shobhana",
     "sequence": 10,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -272,17 +272,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Maa Kanti Paapa Neeve",
     "sequence": 11,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -298,17 +298,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Midisi Midisi",
     "sequence": 12,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
+      "weather": "misty",
       "skyState": "sunrise",
-      "particles": "dust",
+      "particles": "fog",
       "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -324,17 +324,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Nee Thone Dhanka Palasu",
     "sequence": 13,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -350,17 +350,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Nenedaina Kalagannana",
     "sequence": 14,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -376,17 +376,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Iru Vayasula",
     "sequence": 15,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -402,17 +402,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Bhama Nee Meeda Prema",
     "sequence": 16,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -428,17 +428,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Idendi Chiraku",
     "sequence": 17,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "ghats-highway",
+      "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -454,17 +454,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Dandaalayya  Undrallayya",
     "sequence": 18,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -480,17 +480,17 @@
     "spotifyUrl": "https://open.spotify.com/search/O Andalamma Chindenamma",
     "sequence": 19,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -506,17 +506,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Ninnu Kanna",
     "sequence": 20,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "morning-farm",
+      "id": "ghats-highway",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -532,17 +532,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Tene Kanna Teeyanidi",
     "sequence": 21,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -558,17 +558,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Bhalega Vundi Ra",
     "sequence": 22,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -584,17 +584,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Seetakoka Chiluka",
     "sequence": 23,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -610,17 +610,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Jigi Jigi Jigija",
     "sequence": 24,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -636,17 +636,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Oora Pichhuka",
     "sequence": 25,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -662,17 +662,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Godave Godavamma",
     "sequence": 26,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -688,17 +688,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Saarangi Sarangi",
     "sequence": 27,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -714,17 +714,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Naadam Nee Deevane",
     "sequence": 28,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -740,17 +740,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Chandamama Gandhamanduko IRSJ",
     "sequence": 29,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -766,17 +766,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Enniyallo Malliyalo v2",
     "sequence": 30,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
+      "weather": "misty",
       "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -922,17 +922,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Erra Kaluva Puvva",
     "sequence": 36,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "lake-dawn",
+      "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "sunrise",
+      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -948,17 +948,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Puttadi Bomma",
     "sequence": 37,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -974,17 +974,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Hello Guru Premakosame",
     "sequence": 38,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -1000,17 +1000,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Karigi Poyanu",
     "sequence": 39,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -1026,17 +1026,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Inka Inka",
     "sequence": 40,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -1052,17 +1052,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Cheekatante Chinnadani",
     "sequence": 41,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -1078,17 +1078,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Chilipi Vayasu",
     "sequence": 42,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
+      "weather": "misty",
       "skyState": "sunrise",
-      "particles": "dust",
+      "particles": "fog",
       "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -1104,17 +1104,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Ek Do Teen Sakhi Priya",
     "sequence": 43,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -1130,17 +1130,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Jilibili Palukula",
     "sequence": 44,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -1156,17 +1156,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Jettu Speedu Pillaro",
     "sequence": 45,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -1182,17 +1182,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Aaresukoboyi",
     "sequence": 46,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -1208,17 +1208,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Ankulu Digi Ravemayyo",
     "sequence": 47,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "ghats-highway",
+      "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -1234,17 +1234,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Chemma Chekka",
     "sequence": 48,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -1260,17 +1260,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Balapam Patti Bhama",
     "sequence": 49,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -1286,17 +1286,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Anando Brahma",
     "sequence": 50,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "morning-farm",
+      "id": "ghats-highway",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -1312,17 +1312,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Madhura Murali - V2",
     "sequence": 51,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -1338,17 +1338,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Andamivvu Aadivaramu",
     "sequence": 52,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -1364,17 +1364,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Andalalo",
     "sequence": 53,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -1390,17 +1390,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Alli Bili Kalala Raave",
     "sequence": 54,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -1416,17 +1416,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Abba Nee Teeyani Debba",
     "sequence": 55,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -1442,17 +1442,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Addirabanna",
     "sequence": 56,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -1468,17 +1468,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Chukkalu Temmanna",
     "sequence": 57,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -1494,17 +1494,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Jagada Jagada jagadam",
     "sequence": 58,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -1520,17 +1520,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Jallantha Kavvintha",
     "sequence": 59,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -1546,17 +1546,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Sarasakuraa Doraa",
     "sequence": 60,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
+      "weather": "misty",
       "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -1702,17 +1702,17 @@
     "spotifyUrl": "https://open.spotify.com/search/O Priya Priya",
     "sequence": 66,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "lake-dawn",
+      "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "sunrise",
+      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -1728,17 +1728,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Vacchene",
     "sequence": 67,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -1754,17 +1754,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Ninna Choosina Udayam",
     "sequence": 68,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -1780,17 +1780,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Manasu Palike",
     "sequence": 69,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -1806,17 +1806,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Merise Merise",
     "sequence": 70,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -1832,17 +1832,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Naa Paruvam",
     "sequence": 71,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -1858,17 +1858,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Nee Kosam",
     "sequence": 72,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
+      "weather": "misty",
       "skyState": "sunrise",
-      "particles": "dust",
+      "particles": "fog",
       "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -1884,17 +1884,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Sneham Sagali - Sattam Varamal",
     "sequence": 73,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -1910,17 +1910,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Sarigama Padanisa Rasa",
     "sequence": 74,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -1936,17 +1936,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Naa Sontham (Ilavattam)",
     "sequence": 75,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -1962,17 +1962,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Kannula Kaipu",
     "sequence": 76,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -1988,17 +1988,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Goranta Deepam",
     "sequence": 77,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "ghats-highway",
+      "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -2014,17 +2014,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Brindavaname Naa Kosame",
     "sequence": 78,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -2040,17 +2040,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Mirchi Masala",
     "sequence": 79,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -2066,17 +2066,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Maata Lone",
     "sequence": 80,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "morning-farm",
+      "id": "ghats-highway",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -2092,17 +2092,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Addari  Needhi",
     "sequence": 81,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -2118,17 +2118,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Naa Kalalanni",
     "sequence": 82,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -2144,17 +2144,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Naa Prema Oodi Polede",
     "sequence": 83,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -2170,17 +2170,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Eedu Kavithalu Paade Samayam",
     "sequence": 84,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -2196,17 +2196,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Jingala Jinga",
     "sequence": 85,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -2222,17 +2222,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Gokulame Needi Ra",
     "sequence": 86,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -2248,17 +2248,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Anuragam",
     "sequence": 87,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -2274,17 +2274,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Induka Ee Pathaka",
     "sequence": 88,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -2300,17 +2300,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Gorinkanti Sinnoda",
     "sequence": 89,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -2326,17 +2326,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Chakkani Prakruti",
     "sequence": 90,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
+      "weather": "misty",
       "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -2482,17 +2482,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Sayam Kalam Sagara Teeram  V2",
     "sequence": 96,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "lake-dawn",
+      "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "sunrise",
+      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -2508,17 +2508,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Kodi Koose Velalo",
     "sequence": 97,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -2534,17 +2534,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Vinnapalu Vinamani",
     "sequence": 98,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -2560,17 +2560,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Bullipetta Bujji Pitta",
     "sequence": 99,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -2586,17 +2586,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Kotta Kottaga Unnadi",
     "sequence": 100,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -2612,17 +2612,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Ku Ku Ku  Kokila Raave",
     "sequence": 101,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -2638,17 +2638,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Vayyari Godaramma",
     "sequence": 102,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
+      "weather": "misty",
       "skyState": "sunrise",
-      "particles": "dust",
+      "particles": "fog",
       "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -2664,17 +2664,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Subhalekha Rasukunna",
     "sequence": 103,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -2690,17 +2690,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Konalo Sannajaji V2",
     "sequence": 104,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -2716,17 +2716,17 @@
     "spotifyUrl": "https://open.spotify.com/search/L Ante O Ante Stereo",
     "sequence": 105,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -2742,17 +2742,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Ila Anduko Ala Jaaripothave",
     "sequence": 106,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -2768,17 +2768,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Nee Thone Dhanka Palasu",
     "sequence": 107,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "ghats-highway",
+      "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -2794,17 +2794,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Malle Poovula Panupulo",
     "sequence": 108,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -2820,17 +2820,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Aakasamlo Aasala Harivillu",
     "sequence": 109,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -2846,17 +2846,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Ammammo Rathiri Occhindi Roy",
     "sequence": 110,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "morning-farm",
+      "id": "ghats-highway",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -2872,17 +2872,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Priya Priyatama Raagalu",
     "sequence": 111,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -2898,17 +2898,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Nijanga Nenena",
     "sequence": 112,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -2924,17 +2924,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Jhummani Tummeda",
     "sequence": 113,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -2950,17 +2950,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Kotta Pittaro",
     "sequence": 114,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -2976,17 +2976,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Navodayam Nadam",
     "sequence": 115,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -3002,17 +3002,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Tarali Raada Tane Vasantham",
     "sequence": 116,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -3028,17 +3028,17 @@
     "spotifyUrl": "https://open.spotify.com/search/BGM JVAS Title Intro",
     "sequence": 117,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -3054,17 +3054,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Naatu Bandi Naatu Bandi",
     "sequence": 118,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -3080,17 +3080,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Oka Maina Pitta",
     "sequence": 119,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -3106,17 +3106,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Chitti Paapa Muddu Paapa",
     "sequence": 120,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
+      "weather": "misty",
       "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -3262,17 +3262,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Gorinka Venta",
     "sequence": 126,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "lake-dawn",
+      "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "sunrise",
+      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -3288,17 +3288,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Ningi Choodu Paina Undi  V2",
     "sequence": 127,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -3314,17 +3314,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Neeto Mukhamukhi Sukhi Bhava",
     "sequence": 128,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -3340,17 +3340,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Puttinti Bomma",
     "sequence": 129,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -3366,17 +3366,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Kalavo Kathavo",
     "sequence": 130,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -3392,17 +3392,17 @@
     "spotifyUrl": "https://open.spotify.com/search/O Manavathi Telusuko Nee Gathi",
     "sequence": 131,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -3418,17 +3418,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Kurulande Megham",
     "sequence": 132,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
+      "weather": "misty",
       "skyState": "sunrise",
-      "particles": "dust",
+      "particles": "fog",
       "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -3444,17 +3444,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Cheppana Na Kadha / Keladi Kanmani / Chandini Raat Hai",
     "sequence": 133,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -3470,17 +3470,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Vasanthamaade Jeevitham / Varathu Vantha Nayagan",
     "sequence": 134,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -3496,17 +3496,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Kalisey Kannule",
     "sequence": 135,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -3522,17 +3522,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Jabilamma Uguthunnadi",
     "sequence": 136,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -3548,17 +3548,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Vevela Sogasulu",
     "sequence": 137,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "ghats-highway",
+      "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -3574,17 +3574,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Naa Vayasu Needi Ley",
     "sequence": 138,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -3600,17 +3600,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Ee Intilo Deepamai  V2",
     "sequence": 139,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -3626,17 +3626,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Nenedaiyna Kalagannana",
     "sequence": 140,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "morning-farm",
+      "id": "ghats-highway",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -3652,17 +3652,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Adho Megha Toranam V2",
     "sequence": 141,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -3678,17 +3678,17 @@
     "spotifyUrl": "https://open.spotify.com/search/BGM  Sankeerthana",
     "sequence": 142,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -3704,17 +3704,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Aakasam Bhoomi  without fight sounds",
     "sequence": 143,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -3730,17 +3730,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Ayyo Ayyo  Ayyayyo V2",
     "sequence": 144,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -3756,17 +3756,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Malleteege Raa Valachina",
     "sequence": 145,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -3782,17 +3782,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Pai Maasam",
     "sequence": 146,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -3808,17 +3808,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Vayasu Sogasu Kalisina Vela",
     "sequence": 147,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -3834,17 +3834,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Pellantune Vedekkindi Gaali",
     "sequence": 148,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -3860,17 +3860,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Evito Kanne Madi",
     "sequence": 149,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -3886,17 +3886,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Ammayi Andalanni",
     "sequence": 150,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
+      "weather": "misty",
       "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -4042,17 +4042,17 @@
     "spotifyUrl": "https://open.spotify.com/search/BGM Naa Peru Johnny",
     "sequence": 156,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "lake-dawn",
+      "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "sunrise",
+      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -4068,17 +4068,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Ee Velalo Enn Vaanile",
     "sequence": 157,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -4094,17 +4094,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Yamuna Yenduke Nuvvu V2",
     "sequence": 158,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -4120,17 +4120,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Voyyaram Srungaram",
     "sequence": 159,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -4146,17 +4146,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Videshalu Vellina",
     "sequence": 160,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -4172,17 +4172,17 @@
     "spotifyUrl": "https://open.spotify.com/search/BGM Ilaya Nila",
     "sequence": 161,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -4198,17 +4198,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Prema Ida Manasaa",
     "sequence": 162,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
+      "weather": "misty",
       "skyState": "sunrise",
-      "particles": "dust",
+      "particles": "fog",
       "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -4224,17 +4224,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Paitaku Paathalu",
     "sequence": 163,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -4250,17 +4250,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Kattindammo Kanchipattu",
     "sequence": 164,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -4276,17 +4276,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Vaisakha Punnami Rattirela",
     "sequence": 165,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -4302,17 +4302,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Chakkanaina Muddabanti Better SQ",
     "sequence": 166,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -4328,17 +4328,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Muddu Muddu Muddadanga",
     "sequence": 167,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "ghats-highway",
+      "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -4354,17 +4354,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Oohane Tanuvugaa",
     "sequence": 168,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -4380,17 +4380,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Manasu Kastha V2",
     "sequence": 169,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -4406,17 +4406,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Kanne Kaluva",
     "sequence": 170,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "morning-farm",
+      "id": "ghats-highway",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -4432,17 +4432,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Sightey Kotteyara",
     "sequence": 171,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -4458,17 +4458,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Iruvuru Bhamala Kougili  V2",
     "sequence": 172,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -4484,17 +4484,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Idi Chaitrama",
     "sequence": 173,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -4510,17 +4510,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Daachi Pettuko",
     "sequence": 174,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -4536,17 +4536,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Ide Raaja Yogam",
     "sequence": 175,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -4562,17 +4562,17 @@
     "spotifyUrl": "https://open.spotify.com/search/BGM Pelli Picchollu",
     "sequence": 176,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -4588,17 +4588,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Toli Choopu Cheli Raasina Subhalekha V2",
     "sequence": 177,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -4614,17 +4614,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Joru Vana Kurisindi",
     "sequence": 178,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -4640,17 +4640,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Parugulu Theese Vayasunte",
     "sequence": 179,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -4666,17 +4666,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Ardha Rattiri Saddumanigi",
     "sequence": 180,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
+      "weather": "misty",
       "skyState": "sunrise",
-      "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -4822,17 +4822,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Neyyamulallo Nerello",
     "sequence": 186,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "lake-dawn",
+      "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "sunrise",
+      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -4848,17 +4848,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Maa Paapalu  IR KJY",
     "sequence": 187,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.9,
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -4874,17 +4874,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Daivam Maanava Roopam Lo",
     "sequence": 188,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "clear",
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -4900,17 +4900,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Paruvaala Muripaalu V2",
     "sequence": 189,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -4926,17 +4926,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Pogadamaku Atiga",
     "sequence": 190,
     "active": true,
-    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "rainy-farm",
-      "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "rain",
-      "skyState": "stormy",
-      "particles": "rain",
-      "brightness": 0.7,
-      "description": "Rainy farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {
@@ -4952,17 +4952,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Yemi Ee Bhagyamo Nestamaa",
     "sequence": 191,
     "active": true,
-    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
+    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "morning",
-      "background": "url('/images/ghats_highway_background.png')",
+      "id": "sunset-farm",
+      "theme": "sunset",
+      "background": "url('/images/sunset_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.85,
-      "description": "Misty Ghats Highway drive"
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Sunset farm drive"
     }
   },
   {
@@ -4978,17 +4978,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Naalo Nenu Lene Lenu",
     "sequence": 192,
     "active": true,
-    "quote": "తొలిపొద్దు పలకరింపు... ప్రశాంతత మైమరపు... 🌅",
+    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "sunset",
-      "background": "url('/images/lake_dawn_background.png')",
+      "id": "morning-farm",
+      "theme": "morning",
+      "background": "url('/images/morning_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
+      "weather": "misty",
       "skyState": "sunrise",
-      "particles": "dust",
+      "particles": "fog",
       "brightness": 0.9,
-      "description": "Lake side misty dawn rest"
+      "description": "Early morning farm drive"
     }
   },
   {
@@ -5004,17 +5004,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Nee Jeda Kucchulu  V2",
     "sequence": 193,
     "active": true,
-    "quote": "చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾",
+    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
     "ambience": {
-      "id": "sunset-farm",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
+      "id": "night-farm",
+      "theme": "night",
+      "background": "url('/images/night_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
       "weather": "clear",
-      "skyState": "dusk",
-      "particles": "dust",
-      "brightness": 1.0,
-      "description": "Sunset farm drive"
+      "skyState": "night",
+      "particles": "stars",
+      "brightness": 0.6,
+      "description": "Starry night farm drive"
     }
   },
   {
@@ -5030,17 +5030,17 @@
     "spotifyUrl": "https://open.spotify.com/search/BGM Sagara Sangamam  Melting heart  Theme",
     "sequence": 194,
     "active": true,
-    "quote": "మా ఊరి బాటలో మనస్సు మురిసేను... 🚜",
+    "quote": "వాన చినుకుల సంగీతం... పొలం గట్టు పై సంతోషం... 🌧️",
     "ambience": {
-      "id": "morning-farm",
-      "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
+      "id": "rainy-farm",
+      "theme": "rainy",
+      "background": "url('/images/rainy_farm_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.9,
-      "description": "Early morning farm drive"
+      "weather": "rain",
+      "skyState": "stormy",
+      "particles": "rain",
+      "brightness": 0.7,
+      "description": "Rainy farm drive"
     }
   },
   {
@@ -5056,17 +5056,17 @@
     "spotifyUrl": "https://open.spotify.com/search/Palikindi",
     "sequence": 195,
     "active": true,
-    "quote": "పచ్చని పొలాలు... వెన్నెల రాత్రులు... ✨",
+    "quote": "కొండల నడుమ కోనసీమ అందాలు... ⛰️",
     "ambience": {
-      "id": "night-farm",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
+      "id": "ghats-highway",
+      "theme": "morning",
+      "background": "url('/images/ghats_highway_background.png')",
       "vehicleSprite": "/images/tractor_anna_sprite.png",
-      "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.6,
-      "description": "Starry night farm drive"
+      "weather": "misty",
+      "skyState": "sunrise",
+      "particles": "fog",
+      "brightness": 0.85,
+      "description": "Misty Ghats Highway drive"
     }
   },
   {

@@ -219,7 +219,36 @@ export default function TractorAnna() {
         />
       )}
 
-      {/* Hero Tractor Image: Core Highlight of the page (60% UI Rule) */}
+      {/* Cinematic Speed Lines & Dust Streaks Overlay */}
+      {isExperienceStarted && isPlaying && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          pointerEvents: 'none',
+          zIndex: 3,
+          overflow: 'hidden',
+        }}>
+          {/* Horizontal Speed Lines */}
+          <div className="speed-lines-container">
+            <div className="speed-line speed-line-1" />
+            <div className="speed-line speed-line-2" />
+            <div className="speed-line speed-line-3" />
+            <div className="speed-line speed-line-4" />
+            <div className="speed-line speed-line-5" />
+          </div>
+
+          {/* Dust Particles */}
+          <div className="dust-particle-container">
+            <div className="dust-p dust-p-1" />
+            <div className="dust-p dust-p-2" />
+            <div className="dust-p dust-p-3" />
+            <div className="dust-p dust-p-4" />
+            <div className="dust-p dust-p-5" />
+          </div>
+        </div>
+      )}
+
+      {/* Hero Tractor Image: Core Highlight of the page (Massive Centerpiece) */}
       {isExperienceStarted && (
         <img 
           src={currentSong?.ambience?.vehicleSprite || "/images/tractor_anna_sprite.png"} 
@@ -241,136 +270,138 @@ export default function TractorAnna() {
           height: '100vh',
           width: '100%',
           position: 'relative',
-          padding: '24px 32px',
+          padding: '20px 32px 24px 32px',
         }}>
-          {/* Top Bar Navigation */}
-          <header style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '100%',
-          }}>
-            {/* Left: Places Back Link & Clock */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-              <Link href="/" style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                color: '#fff',
-                textDecoration: 'none',
-                fontSize: '0.85rem',
-                fontWeight: '600',
-                padding: '8px 16px',
-                borderRadius: '9999px',
-                background: 'rgba(255, 255, 255, 0.08)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
-                backdropFilter: 'blur(12px)',
-              }} className="hud-button">
-                <ChevronLeft size={16} />
-                <span>PLACES</span>
-              </Link>
-              {timeString && (
-                <span style={{
+          {/* Top Section: Header Bar & Top-Aligned Title Block */}
+          <div>
+            <header style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '100%',
+            }}>
+              {/* Left: Places Back Link & Clock */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                <Link href="/" style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  color: '#fff',
+                  textDecoration: 'none',
                   fontSize: '0.85rem',
                   fontWeight: '600',
-                  color: 'rgba(255, 255, 255, 0.7)',
-                  letterSpacing: '0.05em',
-                }}>{timeString}</span>
-              )}
-            </div>
+                  padding: '8px 16px',
+                  borderRadius: '9999px',
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  backdropFilter: 'blur(12px)',
+                }} className="hud-button">
+                  <ChevronLeft size={16} />
+                  <span>PLACES</span>
+                </Link>
+                {timeString && (
+                  <span style={{
+                    fontSize: '0.85rem',
+                    fontWeight: '600',
+                    color: 'rgba(255, 255, 255, 0.7)',
+                    letterSpacing: '0.05em',
+                  }}>{timeString}</span>
+                )}
+              </div>
 
-            {/* Center: Presence Counter Badge */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              fontSize: '0.85rem',
-              fontWeight: '600',
-              color: '#a7f3d0',
-              background: 'rgba(255, 255, 255, 0.08)',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
-              backdropFilter: 'blur(12px)',
-              padding: '8px 18px',
-              borderRadius: '9999px',
-            }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10b981', display: 'inline-block', boxShadow: '0 0 8px #10b981' }} />
-              <span>{presenceCount} in the fields</span>
-            </div>
-
-            {/* Right: Video Preview Toggle */}
-            <button
-              onClick={() => setIsVideoVisible(!isVideoVisible)}
-              style={{
+              {/* Center: Presence Counter Badge */}
+              <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
-                color: isVideoVisible ? '#fbbf24' : '#fff',
                 fontSize: '0.85rem',
                 fontWeight: '600',
-                padding: '8px 16px',
-                borderRadius: '9999px',
-                background: isVideoVisible ? 'rgba(245, 158, 11, 0.2)' : 'rgba(255, 255, 255, 0.08)',
-                border: isVideoVisible ? '1px solid rgba(245, 158, 11, 0.4)' : '1px solid rgba(255, 255, 255, 0.12)',
+                color: '#a7f3d0',
+                background: 'rgba(255, 255, 255, 0.08)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
                 backdropFilter: 'blur(12px)',
-                cursor: 'pointer',
-              }}
-              className="hud-button"
-            >
-              <Tv size={15} />
-              <span>{isVideoVisible ? "HIDE VIDEO" : "SHOW VIDEO"}</span>
-            </button>
-          </header>
-
-          {/* Top-Aligned Clean Title & Quote Block (30% Secondary UI Rule) */}
-          <div style={{
-            textAlign: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '8px',
-            userSelect: 'none',
-            marginTop: '12px',
-            zIndex: 5,
-          }}>
-            <h2 style={{
-              fontSize: '4.2rem',
-              fontWeight: '900',
-              letterSpacing: '0.04em',
-              color: '#ffffff',
-              margin: 0,
-              textShadow: '0 6px 28px rgba(0, 0, 0, 0.75)',
-              fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-            }} className="immersive-title">
-              ట్రాక్టర్ అన్న
-            </h2>
-            
-            <p style={{
-              fontSize: '1.15rem',
-              fontWeight: '600',
-              color: '#f4f4f5',
-              margin: 0,
-              textShadow: '0 3px 12px rgba(0, 0, 0, 0.85)',
-              letterSpacing: '0.02em',
-              opacity: 0.95,
-            }}>
-              {currentSong?.title} • {currentSong?.movie} ({currentSong?.year})
-            </p>
-
-            {/* Rustic Telugu Quote Line */}
-            {currentSong?.quote && (
-              <p style={{
-                fontSize: '1.05rem',
-                fontWeight: '500',
-                color: '#fef08a',
-                margin: '2px 0 0 0',
-                textShadow: '0 2px 10px rgba(0, 0, 0, 0.9)',
-                fontStyle: 'italic',
-                letterSpacing: '0.03em',
-                maxWidth: '650px',
+                padding: '8px 18px',
+                borderRadius: '9999px',
               }}>
-                {currentSong.quote}
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10b981', display: 'inline-block', boxShadow: '0 0 8px #10b981' }} />
+                <span>{presenceCount} in the fields</span>
+              </div>
+
+              {/* Right: Video Preview Toggle */}
+              <button
+                onClick={() => setIsVideoVisible(!isVideoVisible)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  color: isVideoVisible ? '#fbbf24' : '#fff',
+                  fontSize: '0.85rem',
+                  fontWeight: '600',
+                  padding: '8px 16px',
+                  borderRadius: '9999px',
+                  background: isVideoVisible ? 'rgba(245, 158, 11, 0.2)' : 'rgba(255, 255, 255, 0.08)',
+                  border: isVideoVisible ? '1px solid rgba(245, 158, 11, 0.4)' : '1px solid rgba(255, 255, 255, 0.12)',
+                  backdropFilter: 'blur(12px)',
+                  cursor: 'pointer',
+                }}
+                className="hud-button"
+              >
+                <Tv size={15} />
+                <span>{isVideoVisible ? "HIDE VIDEO" : "SHOW VIDEO"}</span>
+              </button>
+            </header>
+
+            {/* Top-Aligned Title & Quote Block */}
+            <div style={{
+              textAlign: 'center',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '4px',
+              userSelect: 'none',
+              marginTop: '4px',
+              zIndex: 5,
+            }}>
+              <h2 style={{
+                fontSize: '3.4rem',
+                fontWeight: '900',
+                letterSpacing: '0.04em',
+                color: '#ffffff',
+                margin: 0,
+                textShadow: '0 4px 20px rgba(0, 0, 0, 0.8)',
+                fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+              }} className="immersive-title">
+                ట్రాక్టర్ అన్న
+              </h2>
+              
+              <p style={{
+                fontSize: '1rem',
+                fontWeight: '600',
+                color: '#f4f4f5',
+                margin: 0,
+                textShadow: '0 2px 8px rgba(0, 0, 0, 0.9)',
+                letterSpacing: '0.02em',
+                opacity: 0.95,
+              }}>
+                {currentSong?.title} • {currentSong?.movie} ({currentSong?.year})
               </p>
-            )}
+
+              {/* Rustic Telugu Quote Line */}
+              {currentSong?.quote && (
+                <p style={{
+                  fontSize: '0.95rem',
+                  fontWeight: '500',
+                  color: '#fef08a',
+                  margin: '2px 0 0 0',
+                  textShadow: '0 2px 8px rgba(0, 0, 0, 0.95)',
+                  fontStyle: 'italic',
+                  letterSpacing: '0.03em',
+                  maxWidth: '650px',
+                }}>
+                  {currentSong.quote}
+                </p>
+              )}
+            </div>
           </div>
 
           {/* Horn button on the left */}
@@ -431,7 +462,7 @@ export default function TractorAnna() {
             />
           </div>
 
-          {/* Bottom Floating HUD Capsule Controller (10% Accent UI Rule) */}
+          {/* Bottom Floating HUD Capsule Controller */}
           <div style={{
             position: 'relative',
             width: '100%',
@@ -717,39 +748,80 @@ export default function TractorAnna() {
 
       {/* Global Style Adjustments */}
       <style jsx global>{`
-        /* Core Hero Tractor Sprite (60% UI Dominance Rule) */
+        /* Core Hero Tractor Sprite (Huge Hero Image Dominance) */
         .tractor-hero-sprite {
           position: absolute;
-          bottom: 100px;
+          bottom: 75px;
           left: 50%;
           transform: translateX(-50%);
-          width: 520px;
-          max-width: 85vw;
-          max-height: 52vh;
+          width: 720px;
+          max-width: 92vw;
+          max-height: 68vh;
           object-fit: contain;
           height: auto;
-          animation: tractor-smooth-drive 3.6s ease-in-out infinite;
+          animation: tractor-forward-drive 2.4s ease-in-out infinite;
           z-index: 2;
-          filter: drop-shadow(0 15px 30px rgba(0,0,0,0.55));
+          filter: drop-shadow(0 20px 40px rgba(0,0,0,0.65));
           pointer-events: none;
         }
 
-        @keyframes tractor-smooth-drive {
+        @keyframes tractor-forward-drive {
           0% {
-            transform: translateX(-50%) translateY(0px) rotate(0deg);
-          }
-          25% {
-            transform: translateX(calc(-50% + 5px)) translateY(-6px) rotate(0.4deg);
+            transform: translateX(-50%) translateY(0px) scale(1);
           }
           50% {
-            transform: translateX(-50%) translateY(-2px) rotate(0deg);
-          }
-          75% {
-            transform: translateX(calc(-50% - 5px)) translateY(-7px) rotate(-0.4deg);
+            transform: translateX(-50%) translateY(-4px) scale(1.025);
           }
           100% {
-            transform: translateX(-50%) translateY(0px) rotate(0deg);
+            transform: translateX(-50%) translateY(0px) scale(1);
           }
+        }
+
+        /* Cinematic Speed & Dust Streak Animations */
+        .speed-lines-container, .dust-particle-container {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+        }
+
+        .speed-line {
+          position: absolute;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+          border-radius: 2px;
+          animation: speed-line-flow 1.4s linear infinite;
+        }
+        .speed-line-1 { top: 25%; left: 10%; width: 140px; animation-delay: 0s; }
+        .speed-line-2 { top: 40%; left: 70%; width: 220px; animation-delay: 0.3s; }
+        .speed-line-3 { top: 65%; left: 30%; width: 180px; animation-delay: 0.6s; }
+        .speed-line-4 { top: 80%; left: 80%; width: 160px; animation-delay: 0.9s; }
+        .speed-line-5 { top: 55%; left: 5%; width: 200px; animation-delay: 1.1s; }
+
+        @keyframes speed-line-flow {
+          0% { transform: scaleX(0.2) translateX(100vw); opacity: 0; }
+          40% { opacity: 0.6; }
+          100% { transform: scaleX(1.5) translateX(-50vw); opacity: 0; }
+        }
+
+        .dust-p {
+          position: absolute;
+          width: 4px;
+          height: 4px;
+          background: rgba(254, 240, 138, 0.6);
+          border-radius: 50%;
+          box-shadow: 0 0 6px rgba(254, 240, 138, 0.8);
+          animation: dust-particle-flow 2.2s ease-out infinite;
+        }
+        .dust-p-1 { bottom: 120px; left: 45%; animation-delay: 0s; }
+        .dust-p-2 { bottom: 110px; left: 55%; animation-delay: 0.4s; }
+        .dust-p-3 { bottom: 130px; left: 48%; animation-delay: 0.8s; }
+        .dust-p-4 { bottom: 100px; left: 52%; animation-delay: 1.2s; }
+        .dust-p-5 { bottom: 125px; left: 42%; animation-delay: 1.6s; }
+
+        @keyframes dust-particle-flow {
+          0% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+          30% { opacity: 0.8; }
+          100% { transform: translate(-120px, 40px) scale(1.4); opacity: 0; }
         }
 
         .hud-button:hover {
@@ -798,12 +870,12 @@ export default function TractorAnna() {
 
         @media (max-width: 768px) {
           .immersive-title {
-            font-size: 2.8rem !important;
+            font-size: 2.6rem !important;
           }
 
           .tractor-hero-sprite {
-            width: 320px !important;
-            bottom: 120px !important;
+            width: 380px !important;
+            bottom: 110px !important;
           }
           
           .capsule-hud {
