@@ -23,6 +23,8 @@ export default function TractorAnna() {
   const [ambientOn, setAmbientOn]       = useState(true);
   const [playerError, setPlayerError]   = useState(null);
   const [isShuffle, setIsShuffle]       = useState(false);
+  const [seekHovered, setSeekHovered]   = useState(false);
+  const [volumeHovered, setVolumeHovered] = useState(false);
 
   const playerRef  = useRef(null);
   const ambientRef = useRef(null);
@@ -176,7 +178,33 @@ export default function TractorAnna() {
   // ── Render ────────────────────────────────────────────────────────────────
   return (
     <div style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden' }}>
-      <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Telugu:wght@700;900&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Telugu:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+      {/* Top and Bottom Vignetting Gradient Overlays for High Contrast Visibility */}
+      {started && (
+        <>
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '180px',
+            background: 'linear-gradient(to bottom, rgba(5, 6, 11, 0.75) 0%, transparent 100%)',
+            pointerEvents: 'none',
+            zIndex: 4
+          }} />
+          <div style={{
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '240px',
+            background: 'linear-gradient(to top, rgba(5, 6, 11, 0.9) 0%, rgba(5, 6, 11, 0.3) 50%, transparent 100%)',
+            pointerEvents: 'none',
+            zIndex: 4
+          }} />
+        </>
+      )}
 
       {/* ── Start Overlay ─────────────────────────────────────────────────── */}
       {!started && (
@@ -291,11 +319,11 @@ export default function TractorAnna() {
               </header>
 
               {/* Title + quote */}
-              <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', userSelect: 'none', marginTop: '6px' }}>
+              <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', userSelect: 'none', marginTop: '1.6rem' }}>
                 <h2 style={{ fontSize: '3.8rem', fontWeight: '900', letterSpacing: '0.04em', color: '#fff', margin: 0, textShadow: '0 6px 28px rgba(0,0,0,0.85)', fontFamily: "'Noto Serif Telugu', serif" }} className="immersive-title">
                   ట్రాక్టర్ అన్న
                 </h2>
-                <p style={{ fontSize: '1.05rem', fontWeight: '500', color: '#fef08a', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.95)', fontStyle: 'italic', letterSpacing: '0.03em', maxWidth: '650px' }}>
+                <p style={{ fontSize: '1.05rem', fontWeight: '500', color: '#fef08a', margin: 0, textShadow: '0 2px 14px rgba(0,0,0,0.98)', fontStyle: 'italic', letterSpacing: '0.03em', maxWidth: '650px' }}>
                   {currentSong?.quote || 'చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾'}
                 </p>
               </div>
@@ -370,12 +398,12 @@ export default function TractorAnna() {
                   </div>
 
                   {/* Right: Controls & Volume */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexShrink: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1.3rem', flexShrink: 0 }}>
                     {/* Controls */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                       <button 
                         onClick={() => setIsShuffle(prev => !prev)} 
-                        title={isShuffle ? "Disable Shuffle" : "Enable Shuffle"}
+                        title={isShuffle ? "Disable Shuffle" : "Shuffle Tracks (🔀)"}
                         style={{ 
                           background: 'none', 
                           border: 'none', 
@@ -384,16 +412,17 @@ export default function TractorAnna() {
                           padding: '6px',
                           display: 'flex',
                           alignItems: 'center',
-                          transition: 'color 0.2s'
+                          transition: 'color 0.2s, transform 0.2s'
                         }} 
                         className="control-icon"
                       >
                         <Shuffle size={16} />
                       </button>
                       
-                      <button onClick={prev} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem' }} className="control-icon">⏮</button>
+                      <button onClick={prev} title="Previous Song (⏮)" style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem', transition: 'transform 0.2s' }} className="control-icon">⏮</button>
                       
                       <button onClick={togglePlay}
+                        title={isPlaying ? "Pause (⏸)" : "Play (▶)"}
                         style={{
                           width: '44px',
                           height: '44px',
@@ -405,24 +434,40 @@ export default function TractorAnna() {
                           alignItems: 'center',
                           justifyContent: 'center',
                           boxShadow: '0 4px 14px rgba(255,255,255,0.3)',
-                          transition: 'transform 0.15s, background-color 0.15s'
+                          transition: 'transform 0.2s, background-color 0.2s'
                         }}
-                        onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                        onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
                         onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
                         <span style={{ fontSize: '1.1rem', color: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                           {isPlaying ? '⏸' : '▶'}
                         </span>
                       </button>
                       
-                      <button onClick={next} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem' }} className="control-icon">⏭</button>
+                      <button onClick={next} title="Next Song (⏭)" style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem', transition: 'transform 0.2s' }} className="control-icon">⏭</button>
                     </div>
 
                     {/* Divider */}
                     <div style={{ width: '1px', height: '24px', backgroundColor: 'rgba(255,255,255,0.1)' }} />
 
                     {/* Volume */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="volume-slider-container">
-                      <button onClick={() => changeVolume(volume === 0 ? 60 : 0)} style={{ background: 'none', border: 'none', color: '#a1a1aa', cursor: 'pointer', padding: 0 }}>
+                    <div 
+                      style={{ display: 'flex', alignItems: 'center', gap: '8px' }} 
+                      className="volume-slider-container"
+                      onMouseEnter={() => setVolumeHovered(true)}
+                      onMouseLeave={() => setVolumeHovered(false)}
+                    >
+                      <button 
+                        onClick={() => changeVolume(volume === 0 ? 60 : 0)} 
+                        style={{ 
+                          background: 'none', 
+                          border: 'none', 
+                          color: volume === 0 ? '#ef4444' : '#a1a1aa', 
+                          cursor: 'pointer', 
+                          padding: 0,
+                          transition: 'color 0.2s'
+                        }}
+                        title={volume === 0 ? "Unmute" : "Mute"}
+                      >
                         {volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
                       </button>
                       <input 
@@ -433,11 +478,12 @@ export default function TractorAnna() {
                         onChange={e => changeVolume(parseInt(e.target.value))}
                         style={{ 
                           width: '70px', 
-                          height: '4px', 
-                          borderRadius: '2px', 
+                          height: volumeHovered ? '6px' : '4px', 
+                          borderRadius: '3px', 
                           background: 'rgba(255,255,255,0.15)', 
                           accentColor: '#fbbf24', 
-                          cursor: 'pointer' 
+                          cursor: 'pointer',
+                          transition: 'height 0.15s ease' 
                         }} 
                       />
                     </div>
@@ -450,25 +496,25 @@ export default function TractorAnna() {
                   {/* Progress Track Line (thicker and cleaner for dragging/seeking) */}
                   <div 
                     onClick={seek} 
+                    onMouseEnter={() => setSeekHovered(true)}
+                    onMouseLeave={() => setSeekHovered(false)}
                     style={{ 
-                      height: '6px', 
+                      height: seekHovered ? '8px' : '6px', 
                       width: '100%', 
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)', 
-                      borderRadius: '3px', 
+                      backgroundColor: 'rgba(255, 255, 255, 0.12)', 
+                      borderRadius: '4px', 
                       position: 'relative', 
                       cursor: 'pointer',
-                      transition: 'background-color 0.2s'
+                      transition: 'height 0.15s ease, background-color 0.2s'
                     }}
-                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.15)'}
-                    onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'}
                   >
                     <div 
                       style={{ 
                         height: '100%', 
                         width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`, 
                         background: '#fbbf24', 
-                        borderRadius: '3px',
-                        boxShadow: '0 0 8px rgba(251, 191, 36, 0.5)',
+                        borderRadius: '4px',
+                        boxShadow: '0 0 8px rgba(251, 191, 36, 0.6)',
                         transition: 'width 0.1s linear'
                       }} 
                     />
@@ -479,13 +525,14 @@ export default function TractorAnna() {
                         top: '50%',
                         left: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`,
                         transform: 'translate(-50%, -50%)',
-                        width: '12px',
-                        height: '12px',
+                        width: seekHovered ? '14px' : '10px',
+                        height: seekHovered ? '14px' : '10px',
                         borderRadius: '50%',
                         backgroundColor: '#fff',
-                        boxShadow: '0 2px 6px rgba(0,0,0,0.4)',
+                        boxShadow: '0 2px 6px rgba(0,0,0,0.5)',
                         opacity: 1,
-                        pointerEvents: 'none'
+                        pointerEvents: 'none',
+                        transition: 'width 0.15s ease, height 0.15s ease'
                       }}
                     />
                   </div>
