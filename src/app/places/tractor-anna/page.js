@@ -93,23 +93,15 @@ export default function TractorAnna() {
 
   // ── Player callbacks ─────────────────────────────────────────────────────
   const handlePlayerReady = (player) => {
+    // loadPlaylist() is called inside YouTubePlayer's onReady and auto-starts.
+    // We just store the ref and sync volume here.
     playerRef.current = player;
     player.setVolume(volume);
-    // Call playVideo immediately — mount happens inside user click so autoplay policy is met
-    player.playVideo();
-    // Belt-and-suspenders retry in case playlist takes time to load
-    setTimeout(() => {
-      try {
-        if (playerRef.current?.getPlayerState?.() !== window.YT?.PlayerState?.PLAYING) {
-          playerRef.current?.playVideo();
-        }
-      } catch (_) {}
-    }, 1500);
+    // setIsPlaying will update when onStateChange fires with PLAYING (1)
   };
 
   const handlePlayerError = (code) => {
     setPlayerError(code);
-    console.error('YouTube error code:', code, '| 101/150=embed blocked, 100=not found');
   };
 
   const handleStateChange = (code) => {
