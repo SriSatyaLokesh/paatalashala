@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { getSongsForPlace } from '@/data/songs';
 import YouTubePlayer from '@/components/YouTubePlayer';
 import AmbientWeather from '@/components/AmbientWeather';
-import { ChevronLeft, Tv, Volume2, VolumeX, Wind } from 'lucide-react';
+import { ChevronLeft, Tv, Volume2, VolumeX, Wind, Shuffle } from 'lucide-react';
 
 export default function TractorAnna() {
   const songs = getSongsForPlace('tractor-anna');
@@ -22,6 +22,7 @@ export default function TractorAnna() {
   const [videoVisible, setVideoVisible] = useState(false);
   const [ambientOn, setAmbientOn]       = useState(true);
   const [playerError, setPlayerError]   = useState(null);
+  const [isShuffle, setIsShuffle]       = useState(false);
 
   const playerRef  = useRef(null);
   const ambientRef = useRef(null);
@@ -115,7 +116,12 @@ export default function TractorAnna() {
 
   const next = () => {
     if (songs.length === 0) return;
-    setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songs.length);
+    if (isShuffle) {
+      const randomIndex = Math.floor(Math.random() * songs.length);
+      setCurrentSongIndex(randomIndex);
+    } else {
+      setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songs.length);
+    }
     setIsPlaying(true);
     setCurrentTime(0);
     setDuration(0);
@@ -123,7 +129,12 @@ export default function TractorAnna() {
 
   const prev = () => {
     if (songs.length === 0) return;
-    setCurrentSongIndex((prevIndex) => (prevIndex - 1 + songs.length) % songs.length);
+    if (isShuffle) {
+      const randomIndex = Math.floor(Math.random() * songs.length);
+      setCurrentSongIndex(randomIndex);
+    } else {
+      setCurrentSongIndex((prevIndex) => (prevIndex - 1 + songs.length) % songs.length);
+    }
     setIsPlaying(true);
     setCurrentTime(0);
     setDuration(0);
@@ -310,8 +321,16 @@ export default function TractorAnna() {
 
                 {/* Track info */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, minWidth: 0 }}>
-                  <div style={{ width: '44px', height: '44px', borderRadius: '50%', overflow: 'hidden', border: '2px solid rgba(255,255,255,0.2)', flexShrink: 0, background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', display: 'flex', alignItems: 'center', justifyContent: 'center', animationName: 'spin', animationDuration: '12s', animationTimingFunction: 'linear', animationIterationCount: 'infinite', animationPlayState: isPlaying ? 'running' : 'paused' }}>
-                    <span style={{ fontSize: '1.5rem' }}>🚜</span>
+                  <div style={{ width: '44px', height: '44px', borderRadius: '50%', overflow: 'hidden', border: '2px solid rgba(255,255,255,0.2)', flexShrink: 0, position: 'relative', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center', animationName: 'spin', animationDuration: '12s', animationTimingFunction: 'linear', animationIterationCount: 'infinite', animationPlayState: isPlaying ? 'running' : 'paused' }}>
+                    {currentSong.youtubeVideoId ? (
+                      <img 
+                        src={`https://img.youtube.com/vi/${currentSong.youtubeVideoId}/hqdefault.jpg`} 
+                        alt="Album Art" 
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                      />
+                    ) : (
+                      <span style={{ fontSize: '1.5rem' }}>🚜</span>
+                    )}
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
                     <span style={{ fontSize: '0.9rem', fontWeight: '700', color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -325,6 +344,23 @@ export default function TractorAnna() {
 
                 {/* Controls */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '0 18px' }}>
+                  <button 
+                    onClick={() => setIsShuffle(prev => !prev)} 
+                    title={isShuffle ? "Disable Shuffle" : "Enable Shuffle"}
+                    style={{ 
+                      background: 'none', 
+                      border: 'none', 
+                      color: isShuffle ? '#fbbf24' : 'rgba(255,255,255,0.4)', 
+                      cursor: 'pointer', 
+                      padding: '4px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      transition: 'color 0.2s'
+                    }} 
+                    className="control-icon"
+                  >
+                    <Shuffle size={15} />
+                  </button>
                   <button onClick={prev} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '8px', fontSize: '1.3rem' }} className="control-icon">⏮</button>
                   <button onClick={togglePlay}
                     style={{ width: '46px', height: '46px', borderRadius: '50%', background: '#fff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 14px rgba(255,255,255,0.4)', transition: 'transform 0.15s' }}
