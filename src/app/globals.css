@@ -1,0 +1,188 @@
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+  
+  /* Color Palette - Design Tokens */
+  --color-dark-bg: #090a0f;
+  --color-card-bg: rgba(18, 20, 29, 0.7);
+  --color-border: rgba(255, 255, 255, 0.08);
+  
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+  
+  --color-accent: #f59e0b; /* Sunset Amber */
+  --color-accent-rgb: 245, 158, 11;
+  --color-neon-blue: #0ea5e9;
+  --color-neon-blue-rgb: 14, 165, 233;
+  --color-neon-green: #10b981;
+  --color-neon-red: #ef4444;
+  
+  /* Transitions */
+  --transition-normal: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* UI heights */
+  --bottom-safe-area: env(safe-area-inset-bottom, 0px);
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-dark-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Ambient transitions */
+.ambient-transition {
+  transition: var(--transition-slow);
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: var(--color-card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+}
+
+/* Keyframe Animations */
+
+/* 1. Highway Road Line Animation */
+@keyframes highway-lines {
+  from {
+    background-position-y: 0px;
+  }
+  to {
+    background-position-y: 400px;
+  }
+}
+
+/* 2. Parallax background stars/lights moving */
+@keyframes bg-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 1000px 0;
+  }
+}
+
+/* 3. Rain Falling */
+@keyframes rain-fall {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 400px 800px;
+  }
+}
+
+/* 4. Windshield Wiper Swipe */
+@keyframes wiper-swipe {
+  0%, 100% {
+    transform: rotate(-85deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+/* 5. Ceiling Fan Rotation */
+@keyframes fan-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 6. Old TV Scanlines flicker */
+@keyframes scanline-flicker {
+  0% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 0.92;
+  }
+  100% {
+    opacity: 0.95;
+  }
+}
+
+/* 7. Retro Tube Light Flicker */
+@keyframes light-flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 0.99;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.15));
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.3;
+    filter: none;
+  }
+}
+
+/* 8. Pulsating glow */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* 9. Floating animation for vehicles on landing */
+@keyframes vehicle-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Apply accessibility settings */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+  
+  .highway-road-lines, .weather-rain, .fan-blades {
+    animation: none !important;
+  }
+}
