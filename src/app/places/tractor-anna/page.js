@@ -228,52 +228,60 @@ export default function TractorAnna() {
             background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)',
           }} />
 
-          {/* Animated Dirt Road Layout */}
-          <div className="farm-road-container" style={{
-            height: '150px',
-            width: '100%',
-            backgroundColor: '#8d6e63', // Rich brown dirt road color
-            position: 'relative',
-            borderTop: '6px solid #a1887f',
-            boxShadow: 'inset 0 10px 20px rgba(0,0,0,0.5)',
-            display: 'flex',
-            justifyContent: 'center',
-          }}>
-            {/* Center Lane Markings / Scrolling Pebbles */}
+          {/* Animated Road Layout */}
+          {currentSong?.ambience?.roadType !== 'hidden' && (
             <div 
+              className="farm-road-container" 
               style={{
+                height: '150px',
                 width: '100%',
-                height: '8px',
-                position: 'absolute',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                backgroundImage: 'linear-gradient(to right, #d7ccc8 30%, transparent 30%)',
-                backgroundSize: '160px 8px',
-                animation: `farm-road-scrolling ${currentSong?.ambience?.roadSpeed || '1.2s'} linear infinite`,
-                animationPlayState: isPlaying ? 'running' : 'paused',
-                opacity: 0.7,
-              }} 
-            />
+                backgroundColor: currentSong?.ambience?.roadType === 'highway' ? '#374151' : '#8d6e63',
+                position: 'relative',
+                borderTop: currentSong?.ambience?.roadType === 'highway' ? '5px solid #4b5563' : '6px solid #a1887f',
+                boxShadow: 'inset 0 10px 20px rgba(0,0,0,0.5)',
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+            >
+              {/* Center Lane Markings */}
+              <div 
+                style={{
+                  width: '100%',
+                  height: currentSong?.ambience?.roadType === 'highway' ? '6px' : '8px',
+                  position: 'absolute',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  backgroundImage: currentSong?.ambience?.roadType === 'highway' 
+                    ? 'linear-gradient(to right, #fbbf24 40%, transparent 40%)' 
+                    : 'linear-gradient(to right, #d7ccc8 30%, transparent 30%)',
+                  backgroundSize: currentSong?.ambience?.roadType === 'highway' ? '180px 6px' : '160px 8px',
+                  animation: `farm-road-scrolling ${currentSong?.ambience?.roadSpeed || '1.2s'} linear infinite`,
+                  animationPlayState: isPlaying ? 'running' : 'paused',
+                  opacity: currentSong?.ambience?.roadType === 'highway' ? 0.8 : 0.7,
+                }} 
+              />
 
-            {/* Road boundaries */}
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '4px',
-              backgroundColor: '#5d4037',
-              opacity: 0.3,
-            }} />
-          </div>
+              {/* Road boundary marker */}
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '4px',
+                backgroundColor: currentSong?.ambience?.roadType === 'highway' ? '#1f2937' : '#5d4037',
+                opacity: 0.3,
+              }} />
+            </div>
+          )}
 
           {/* Vibrant Tractor Foreground Sprite Asset */}
           <img 
-            src="/images/tractor_anna_sprite.png" 
+            src={currentSong?.ambience?.vehicleSprite || "/images/tractor_anna_sprite.png"} 
             alt="Tractor Anna" 
             className="tractor-sprite"
             style={{
               animationPlayState: isPlaying ? 'running' : 'paused',
+              bottom: currentSong?.ambience?.roadType === 'hidden' ? '60px' : '140px',
             }}
           />
 
