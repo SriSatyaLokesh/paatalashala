@@ -135,6 +135,8 @@ export default function TractorAnna() {
       position: 'relative',
       overflow: 'hidden',
     }} className="ambient-transition">
+      {/* Import Google Serif Font for Telugu */}
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Telugu:wght@700;900&family=Ramabhadra&display=swap" rel="stylesheet" />
 
       {/* Start Experience Overlay (Autoplay gatekeeper) */}
       {!isExperienceStarted && (
@@ -163,7 +165,7 @@ export default function TractorAnna() {
           }}>
             <div>
               <span style={{ fontSize: '3.5rem', display: 'block', marginBottom: '16px', animation: 'vehicle-float 3s ease-in-out infinite' }}>🚜</span>
-              <h1 style={{ fontSize: '2.2rem', fontWeight: '900', letterSpacing: '-0.02em', color: '#fff' }}>ట్రాక్టర్ అన్న</h1>
+              <h1 style={{ fontSize: '2.4rem', fontWeight: '900', letterSpacing: '-0.02em', color: '#fff', fontFamily: "'Noto Serif Telugu', serif" }}>ట్రాక్టర్ అన్న</h1>
               <p style={{ color: '#a1a1aa', fontSize: '1rem', marginTop: '6px' }}>
                 South Indian Village Beats & Rural Farmland Vibes.
               </p>
@@ -184,7 +186,7 @@ export default function TractorAnna() {
               border: '1px solid rgba(245, 158, 11, 0.2)'
             }}>
               <Users size={16} />
-              <span>{presenceCount} in the fields</span>
+              <span>{presenceCount} listeners on field</span>
             </div>
 
             <button
@@ -219,7 +221,7 @@ export default function TractorAnna() {
         />
       )}
 
-      {/* Cinematic Speed Lines & Wind Streaks Overlay */}
+      {/* Cinematic Speed Lines & Wind Streaks Overlay (Reversed Direction: Left to Right) */}
       {isExperienceStarted && isPlaying && (
         <div style={{
           position: 'fixed',
@@ -228,7 +230,7 @@ export default function TractorAnna() {
           zIndex: 3,
           overflow: 'hidden',
         }}>
-          {/* Horizontal Speed Lines Streaming Past */}
+          {/* Horizontal Speed Lines Streaming Left to Right */}
           <div className="speed-lines-container">
             <div className="speed-line speed-line-1" />
             <div className="speed-line speed-line-2" />
@@ -250,7 +252,7 @@ export default function TractorAnna() {
         </div>
       )}
 
-      {/* Hero Tractor Image: Core Highlight (Still Scale with Micro Engine Idle) */}
+      {/* Hero Tractor Image: Positioned lower so bottom tires sit directly behind bottom player capsule */}
       {isExperienceStarted && (
         <img 
           src={currentSong?.ambience?.vehicleSprite || "/images/tractor_anna_sprite.png"} 
@@ -326,7 +328,7 @@ export default function TractorAnna() {
                 borderRadius: '9999px',
               }}>
                 <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10b981', display: 'inline-block', boxShadow: '0 0 8px #10b981' }} />
-                <span>{presenceCount} in the fields</span>
+                <span>{presenceCount} listeners on field</span>
               </div>
 
               {/* Right: Video Preview Toggle */}
@@ -353,49 +355,37 @@ export default function TractorAnna() {
               </button>
             </header>
 
-            {/* Top-Aligned Title & Quote Block */}
+            {/* Top-Aligned Title & Quote Block (No song name below hero title) */}
             <div style={{
               textAlign: 'center',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: '4px',
+              gap: '6px',
               userSelect: 'none',
-              marginTop: '4px',
+              marginTop: '6px',
               zIndex: 5,
             }}>
               <h2 style={{
-                fontSize: '3.4rem',
+                fontSize: '3.8rem',
                 fontWeight: '900',
                 letterSpacing: '0.04em',
                 color: '#ffffff',
                 margin: 0,
-                textShadow: '0 4px 20px rgba(0, 0, 0, 0.8)',
-                fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+                textShadow: '0 6px 28px rgba(0, 0, 0, 0.85)',
+                fontFamily: "'Noto Serif Telugu', 'Ramabhadra', serif"
               }} className="immersive-title">
                 ట్రాక్టర్ అన్న
               </h2>
               
-              <p style={{
-                fontSize: '1rem',
-                fontWeight: '600',
-                color: '#f4f4f5',
-                margin: 0,
-                textShadow: '0 2px 8px rgba(0, 0, 0, 0.9)',
-                letterSpacing: '0.02em',
-                opacity: 0.95,
-              }}>
-                {currentSong?.title} • {currentSong?.movie} ({currentSong?.year})
-              </p>
-
               {/* Rustic Telugu Quote Line */}
               {currentSong?.quote && (
                 <p style={{
-                  fontSize: '0.95rem',
+                  fontSize: '1.05rem',
                   fontWeight: '500',
                   color: '#fef08a',
-                  margin: '2px 0 0 0',
-                  textShadow: '0 2px 8px rgba(0, 0, 0, 0.95)',
+                  margin: '0',
+                  textShadow: '0 2px 10px rgba(0, 0, 0, 0.95)',
                   fontStyle: 'italic',
                   letterSpacing: '0.03em',
                   maxWidth: '650px',
@@ -464,7 +454,7 @@ export default function TractorAnna() {
             />
           </div>
 
-          {/* Bottom Floating HUD Capsule Controller */}
+          {/* Bottom Floating HUD Capsule Controller (Positioned on top of bottom tractor tires for sleek crop overlay) */}
           <div style={{
             position: 'relative',
             width: '100%',
@@ -479,14 +469,14 @@ export default function TractorAnna() {
                 bottom: '90px',
                 left: 0,
                 right: 0,
-                background: 'rgba(15, 17, 23, 0.92)',
+                background: 'rgba(15, 17, 23, 0.94)',
                 backdropFilter: 'blur(24px)',
                 border: '1px solid rgba(255, 255, 255, 0.12)',
                 borderRadius: '24px',
                 padding: '20px',
                 maxHeight: '280px',
                 overflowY: 'auto',
-                boxShadow: '0 -12px 40px rgba(0,0,0,0.7)',
+                boxShadow: '0 -12px 40px rgba(0,0,0,0.8)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '8px',
@@ -545,15 +535,15 @@ export default function TractorAnna() {
 
             {/* Floating Glass Capsule HUD */}
             <div style={{
-              background: 'rgba(20, 22, 28, 0.8)',
-              backdropFilter: 'blur(20px) saturate(140%)',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
+              background: 'rgba(18, 20, 26, 0.92)',
+              backdropFilter: 'blur(24px) saturate(140%)',
+              border: '1px solid rgba(255, 255, 255, 0.14)',
               borderRadius: '28px',
               padding: '14px 24px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              boxShadow: '0 16px 40px rgba(0, 0, 0, 0.55)',
+              boxShadow: '0 20px 50px rgba(0, 0, 0, 0.75)',
               position: 'relative',
               overflow: 'hidden',
             }} className="capsule-hud">
@@ -750,15 +740,15 @@ export default function TractorAnna() {
 
       {/* Global Style Adjustments */}
       <style jsx global>{`
-        /* Core Hero Tractor Sprite (Solid Still Scale with Micro Idle Vibration) */
+        /* Hero Tractor Sprite (Layered lower so player capsule overlays bottom tires) */
         .tractor-hero-sprite {
           position: absolute;
-          bottom: 75px;
+          bottom: 25px;
           left: 50%;
           transform: translateX(-50%);
-          width: 720px;
-          max-width: 92vw;
-          max-height: 68vh;
+          width: 760px;
+          max-width: 95vw;
+          max-height: 72vh;
           object-fit: contain;
           height: auto;
           animation: tractor-engine-idle 0.12s linear infinite;
@@ -774,7 +764,7 @@ export default function TractorAnna() {
           100% { transform: translateX(-50%) translateY(0px); }
         }
 
-        /* Enhanced Cinematic Speed & Dust Streak Animations */
+        /* Cinematic Speed & Wind Streak Animations (Reversed Direction: Left to Right) */
         .speed-lines-container, .dust-particle-container {
           position: absolute;
           inset: 0;
@@ -797,10 +787,10 @@ export default function TractorAnna() {
         .speed-line-7 { top: 60%; left: 0%; width: 280px; animation-duration: 1.0s; animation-delay: 0.7s; }
 
         @keyframes speed-line-flow {
-          0% { transform: translateX(100vw); opacity: 0; }
+          0% { transform: translateX(-30vw); opacity: 0; }
           20% { opacity: 0.75; }
           80% { opacity: 0.75; }
-          100% { transform: translateX(-30vw); opacity: 0; }
+          100% { transform: translateX(100vw); opacity: 0; }
         }
 
         .dust-p {
@@ -812,16 +802,16 @@ export default function TractorAnna() {
           box-shadow: 0 0 8px rgba(254, 240, 138, 0.9);
           animation: dust-particle-flow 1.6s ease-out infinite;
         }
-        .dust-p-1 { bottom: 95px; left: 46%; animation-delay: 0s; }
-        .dust-p-2 { bottom: 85px; left: 54%; animation-delay: 0.3s; }
-        .dust-p-3 { bottom: 105px; left: 47%; animation-delay: 0.6s; }
-        .dust-p-4 { bottom: 90px; left: 52%; animation-delay: 0.9s; }
-        .dust-p-5 { bottom: 100px; left: 43%; animation-delay: 1.2s; }
+        .dust-p-1 { bottom: 65px; left: 46%; animation-delay: 0s; }
+        .dust-p-2 { bottom: 55px; left: 54%; animation-delay: 0.3s; }
+        .dust-p-3 { bottom: 75px; left: 47%; animation-delay: 0.6s; }
+        .dust-p-4 { bottom: 60px; left: 52%; animation-delay: 0.9s; }
+        .dust-p-5 { bottom: 70px; left: 43%; animation-delay: 1.6s; }
 
         @keyframes dust-particle-flow {
           0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
           30% { opacity: 0.9; }
-          100% { transform: translate(-180px, 35px) scale(1.6); opacity: 0; }
+          100% { transform: translate(180px, -20px) scale(1.6); opacity: 0; }
         }
 
         .hud-button:hover {
@@ -870,12 +860,12 @@ export default function TractorAnna() {
 
         @media (max-width: 768px) {
           .immersive-title {
-            font-size: 2.6rem !important;
+            font-size: 2.8rem !important;
           }
 
           .tractor-hero-sprite {
-            width: 380px !important;
-            bottom: 110px !important;
+            width: 420px !important;
+            bottom: 60px !important;
           }
           
           .capsule-hud {
