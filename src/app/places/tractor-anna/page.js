@@ -36,7 +36,7 @@ export default function TractorAnna() {
     particles: 'dust'
   };
 
-  // ── Clock ──────────────────────────────────────────────────────────────────
+  // === Clock ===
   useEffect(() => {
     const tick = () =>
       setTimeString(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }).toLowerCase());
@@ -45,7 +45,7 @@ export default function TractorAnna() {
     return () => clearInterval(t);
   }, []);
 
-  // ── Presence ───────────────────────────────────────────────────────────────
+  // === Presence ===
   useEffect(() => {
     const sim = () => {
       const s = Math.floor(Date.now() / 4000);
@@ -56,7 +56,7 @@ export default function TractorAnna() {
     return () => clearInterval(t);
   }, []);
 
-  // ── Background ────────────────────────────────────────────────────────────
+  // === Background ===
   useEffect(() => {
     if (!started || !ambience.background) return;
     document.body.style.transition = 'background 1.8s ease';
@@ -64,7 +64,7 @@ export default function TractorAnna() {
     return () => { document.body.style.background = ''; };
   }, [currentSongIndex, started, ambience.background]);
 
-  // ── Ambient tractor audio ─────────────────────────────────────────────────
+  // === Ambient tractor audio ===
   useEffect(() => {
     if (!started) return;
     if (!ambientRef.current) {
@@ -81,7 +81,7 @@ export default function TractorAnna() {
     return () => { ambientRef.current?.pause(); };
   }, [started, isPlaying, ambientOn]);
 
-  // ── Player callbacks ─────────────────────────────────────────────────────
+  // === Player callbacks ===
   const handlePlayerReady = (player) => {
     playerRef.current = player;
     player.setVolume(volume);
@@ -111,7 +111,7 @@ export default function TractorAnna() {
     setDuration(dur);
   };
 
-  // ── Controls ─────────────────────────────────────────────────────────────
+  // === Controls ===
   const togglePlay = () => {
     setIsPlaying(prev => !prev);
   };
@@ -175,7 +175,7 @@ export default function TractorAnna() {
     setIsPlaying(true);
   };
 
-  // ── Render ────────────────────────────────────────────────────────────────
+  // === Render ===
   return (
     <div style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden' }}>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -207,7 +207,7 @@ export default function TractorAnna() {
         </>
       )}
 
-      {/* ── Start Overlay ─────────────────────────────────────────────────── */}
+      {/* === Start Overlay === */}
       {!started && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(5,6,11,0.96)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100, padding: '20px' }}>
           <div style={{ padding: '40px', maxWidth: '440px', width: '100%', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '24px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '24px', backdropFilter: 'blur(16px)' }}>
@@ -232,7 +232,7 @@ export default function TractorAnna() {
         </div>
       )}
 
-      {/* ── EXPERIENCE (mounted only after user clicks START) ─────────────── */}
+      {/* === EXPERIENCE (mounted only after user clicks START) === */}
       {started && (
         <>
           {/* Ambient weather */}
@@ -253,6 +253,50 @@ export default function TractorAnna() {
           {/* Hero tractor */}
           <img src="/images/tractor_anna_sprite.png" alt="Tractor Anna" className="tractor-hero-sprite"
             style={{ animationPlayState: isPlaying ? 'running' : 'paused' }} />
+
+          {/* Hero Title & Subtitle (zIndex: 1, below the tractor sprite zIndex: 2) */}
+          <div style={{
+            position: 'absolute',
+            top: '20vh',
+            left: 0,
+            right: 0,
+            zIndex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            pointerEvents: 'none',
+            userSelect: 'none',
+            padding: '0 24px'
+          }}>
+            <h2 style={{
+              fontSize: '4.8rem',
+              fontWeight: '900',
+              letterSpacing: '0.04em',
+              color: '#fff',
+              margin: 0,
+              textShadow: '0 8px 36px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.95)',
+              fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif",
+              textAlign: 'center'
+            }} className="immersive-title">
+              ట్రాక్టర్ అన్న
+            </h2>
+            <p style={{
+              fontSize: '1.25rem',
+              fontWeight: '600',
+              color: 'rgba(254, 240, 138, 0.95)',
+              margin: '8px 0 0 0',
+              textShadow: '0 2px 14px rgba(0,0,0,1), 0 4px 28px rgba(0,0,0,1), 0 0 10px rgba(0,0,0,0.95)',
+              fontStyle: 'italic',
+              letterSpacing: '0.03em',
+              maxWidth: '620px',
+              textAlign: 'center',
+              lineHeight: '1.4',
+              fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif"
+            }}>
+              {currentSong?.quote || 'చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾'}
+            </p>
+          </div>
 
           {/* YouTube player — visibility:hidden keeps proper dimensions for YT init */}
           <div style={{
@@ -286,7 +330,7 @@ export default function TractorAnna() {
             </div>
           )}
 
-          {/* ── HUD Overlay ─────────────────────────────────────────────── */}
+          {/* === HUD Overlay === */}
           <div style={{ zIndex: 10, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100vh', width: '100%', position: 'relative', padding: '20px 32px 24px' }}>
 
             {/* Top */}
@@ -336,42 +380,21 @@ export default function TractorAnna() {
                   </button>
                 </div>
               </header>
-
-              {/* Title + quote */}
-              <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', userSelect: 'none', marginTop: '1.8rem' }}>
-                <h2 style={{ fontSize: '4.6rem', fontWeight: '900', letterSpacing: '0.04em', color: '#fff', margin: 0, textShadow: '0 8px 36px rgba(0,0,0,0.95)', fontFamily: "'Noto Serif Telugu', serif" }} className="immersive-title">
-                  ట్రాక్టర్ అన్న
-                </h2>
-                <p style={{
-                  fontSize: '0.95rem',
-                  fontWeight: '600',
-                  color: 'rgba(254, 240, 138, 0.85)',
-                  margin: '4px 0 0 0',
-                  textShadow: '0 2px 14px rgba(0,0,0,1), 0 4px 28px rgba(0,0,0,1), 0 0 8px rgba(0,0,0,0.9)',
-                  fontStyle: 'italic',
-                  letterSpacing: '0.03em',
-                  maxWidth: '600px',
-                  textAlign: 'center',
-                  lineHeight: '1.4'
-                }}>
-                  {currentSong?.quote || 'చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾'}
-                </p>
-              </div>
             </div>
 
             {/* Bottom HUD capsule */}
             <div style={{ position: 'relative', width: '100%', maxWidth: '680px', margin: '0 auto', zIndex: 30 }}>
 
               <div style={{
-                background: 'rgba(10, 11, 15, 0.88)',
+                background: 'rgba(10, 11, 15, 0.45)',
                 backdropFilter: 'blur(30px) saturate(160%)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
                 borderRadius: '24px',
                 padding: '20px 24px',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '16px',
-                boxShadow: '0 25px 60px -15px rgba(0,0,0,0.9), inset 0 1px 1px rgba(255,255,255,0.08)',
+                boxShadow: '0 25px 60px -15px rgba(0,0,0,0.7), inset 0 1px 1px rgba(255,255,255,0.06)',
                 position: 'relative'
               }} className="capsule-hud">
 
@@ -613,7 +636,7 @@ export default function TractorAnna() {
         </>
       )}
 
-      {/* ── Global CSS ───────────────────────────────────────────────────────── */}
+      {/* === Global CSS === */}
       <style jsx global>{`
         .tractor-hero-sprite {
           position: absolute; bottom: 45px; left: 50%;
