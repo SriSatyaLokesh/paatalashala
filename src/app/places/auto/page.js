@@ -213,66 +213,39 @@ export default function AutoRaja() {
       {/* Background Weather/Particles */}
       <AmbientWeather weather={ambience.weather} particles={ambience.particles} />
 
-      {/* Hidden YouTube Player Engine */}
-      <YouTubePlayer
-        videoId={currentSong?.youtubeVideoId}
-        onReady={(instance) => {
-          playerRef.current = instance;
-          setYtReady(true);
-          instance.setVolume(volume);
-          if (isPlaying) instance.playVideo();
-        }}
-        onStateChange={handleStateChange}
-        onTimeUpdate={(c, d) => { setCurrentTime(c); setDuration(d); }}
-        onError={(err) => { setPlayerError('Failed to play video'); next(); }}
-      />
-
-      {/* Video Overlay Modal */}
-      {videoVisible && currentSong?.youtubeVideoId && (
-        <div style={{
-          position: 'fixed',
-          inset: 0,
-          background: 'rgba(0,0,0,0.92)',
-          backdropFilter: 'blur(20px)',
-          zIndex: 100,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '20px'
-        }}>
-          <button
-            onClick={() => setVideoVisible(false)}
-            style={{
-              position: 'absolute',
-              top: '24px',
-              right: '24px',
-              background: 'rgba(255,255,255,0.15)',
-              border: '1px solid rgba(255,255,255,0.2)',
-              color: '#fff',
-              padding: '10px 20px',
-              borderRadius: '9999px',
-              cursor: 'pointer',
-              fontWeight: '700',
-              fontSize: '0.85rem'
-            }}
-          >
-            ✕ CLOSE VIDEO
-          </button>
-
-          <div style={{ width: '100%', maxWidth: '900px', aspectRatio: '16/9', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 25px 60px rgba(0,0,0,0.8)' }}>
-            <iframe
-              src={`https://www.youtube-nocookie.com/embed/${currentSong.youtubeVideoId}?autoplay=1`}
-              title="YouTube Video"
-              width="100%"
-              height="100%"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-        </div>
-      )}
+      {/* YouTube player — floating PiP corner container toggled by VIDEO button */}
+      <div style={{
+        position: 'fixed',
+        bottom: '100px',
+        right: '30px',
+        width: '220px',
+        height: '124px',
+        borderRadius: '16px',
+        overflow: 'hidden',
+        boxShadow: videoVisible ? '0 12px 24px rgba(0,0,0,0.5)' : 'none',
+        border: videoVisible ? '1px solid rgba(255,255,255,0.15)' : 'none',
+        opacity: videoVisible ? 1 : 0,
+        visibility: videoVisible ? 'visible' : 'hidden',
+        transition: 'opacity 0.3s, visibility 0.3s',
+        zIndex: videoVisible ? 40 : -1,
+        background: '#000',
+        pointerEvents: videoVisible ? 'auto' : 'none',
+      }}>
+        <YouTubePlayer
+          videoId={currentSong?.youtubeVideoId}
+          isPlaying={isPlaying}
+          volume={volume}
+          onStateChange={handleStateChange}
+          onPlayerReady={(instance) => {
+            playerRef.current = instance;
+            setYtReady(true);
+            instance.setVolume(volume);
+            if (isPlaying) instance.playVideo();
+          }}
+          onTimeUpdate={(c, d) => { setCurrentTime(c); setDuration(d); }}
+          onError={(err) => { setPlayerError('Failed to play video'); next(); }}
+        />
+      </div>
 
       {/* Main Container */}
       <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', zIndex: 10 }}>
@@ -342,7 +315,7 @@ export default function AutoRaja() {
             </button>
 
             <button
-              onClick={() => setVideoVisible(true)}
+              onClick={() => setVideoVisible(v => !v)}
               style={{
                 background: 'rgba(255,255,255,0.08)',
                 border: '1px solid rgba(255,255,255,0.12)',
