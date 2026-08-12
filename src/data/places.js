@@ -12,12 +12,12 @@ export const PLACES = [
   {
     id: "saloon",
     slug: "saloon",
-    name: "Deluxe Saloon",
-    tagline: "Retro barber shop nostalgic tunes",
+    name: "Royal Saloon (రాయల్ సెలూన్)",
+    tagline: "సెలూన్ అద్దంలో మధురమైన జ్ఞాపకాల పాటలు",
     emoji: "💈",
     active: true,
     theme: "blue",
-    description: "Relax in a local salon with standard vintage TV glows, rotating fans, and timeless Telugu classics.",
+    description: "పల్లెటూరి రాయల్ సెలూన్ టీవీ పాఠాలు, ఈల పాటలు మరియు మనసుకి హాయినిచ్చే తెలుగు క్లాసిక్స్.",
   },
   {
     id: "auto",

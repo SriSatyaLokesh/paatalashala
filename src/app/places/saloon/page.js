@@ -166,9 +166,9 @@ export default function DeluxeSaloon() {
           }}>
             <div>
               <span style={{ fontSize: '3.5rem', display: 'block', marginBottom: '16px', animation: 'vehicle-float 4s ease-in-out infinite' }}>💈</span>
-              <h1 style={{ fontSize: '2rem', fontWeight: '900', letterSpacing: '-0.02em', color: '#ffcc80' }}>DELUXE SALOON</h1>
+              <h1 style={{ fontSize: '2rem', fontWeight: '900', letterSpacing: '-0.02em', color: '#ffcc80' }}>రాయల్ సెలూన్</h1>
               <p style={{ color: 'var(--color-text-secondary)', fontSize: '1rem', marginTop: '6px' }}>
-                Retro barber shop ambiance and classic melodies.
+                పల్లెటూరి సెలూన్ వాతావరణం మరియు మధురమైన తెలుగు పాటలు.
               </p>
             </div>
 
@@ -187,7 +187,7 @@ export default function DeluxeSaloon() {
               border: '1px solid rgba(255, 204, 128, 0.2)'
             }}>
               <Users size={16} />
-              <span>{presenceCount} waiting in queue</span>
+              <span>{presenceCount} మంది వేచి ఉన్నారు</span>
             </div>
 
             <button
@@ -207,7 +207,7 @@ export default function DeluxeSaloon() {
               onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
               onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
             >
-              ENTER SALOON
+              సెలూన్‌లోకి వెళ్లండి
             </button>
           </div>
         </div>
@@ -271,12 +271,12 @@ export default function DeluxeSaloon() {
             onMouseLeave={(e) => e.currentTarget.style.color = '#d7ccc8'}
             >
               <ChevronLeft size={16} />
-              <span>Back</span>
+              <span>వెనుకకు</span>
             </Link>
 
             <div style={{ textAlign: 'center' }}>
               <h1 style={{ fontSize: '1.25rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px', color: '#ffcc80' }}>
-                <span>💈 DELUXE SALOON</span>
+                <span>💈 రాయల్ సెలూన్ (ROYAL SALOON)</span>
               </h1>
             </div>
 
@@ -292,7 +292,7 @@ export default function DeluxeSaloon() {
               borderRadius: '16px',
             }}>
               <Users size={12} style={{ color: '#ffb74d' }} />
-              <span>{presenceCount} inside</span>
+              <span>{presenceCount} లోపల ఉన్నారు</span>
             </div>
           </header>
 
