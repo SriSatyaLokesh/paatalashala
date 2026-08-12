@@ -38,11 +38,10 @@ export default function RoyalSaloon() {
 
   // === Ambient Saloon Indian Village audio ===
   useEffect(() => {
-    if (!started || !ytReady) return;
     if (!ambientRef.current) {
       const a = new Audio(prefixPath('/audio/saloon_ambient.mp3'));
       a.loop = true;
-      a.volume = 0.04;
+      a.volume = 0.15;
       ambientRef.current = a;
     }
     if (isPlaying && ambientOn) {
@@ -51,7 +50,7 @@ export default function RoyalSaloon() {
       ambientRef.current.pause();
     }
     return () => { ambientRef.current?.pause(); };
-  }, [started, isPlaying, ambientOn, ytReady]);
+  }, [isPlaying, ambientOn]);
 
   // === Random initial song ===
   useEffect(() => {

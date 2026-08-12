@@ -79,14 +79,12 @@ export default function AutoRaja() {
     return () => { document.body.style.background = ''; };
   }, [currentSongIndex, started, ambience.background]);
 
-  // === Ambient City Audio (Safe fallback) ===
+  // === Ambient City Traffic Audio ===
   useEffect(() => {
-    if (!started || !ytReady) return;
     if (!ambientRef.current) {
-      // Audio file will be added later by user; handled safely without error
       const a = new Audio(prefixPath('/audio/city_ambient.mp3'));
       a.loop = true;
-      a.volume = 0.03;
+      a.volume = 0.15;
       ambientRef.current = a;
     }
     if (isPlaying && ambientOn) {
@@ -95,7 +93,7 @@ export default function AutoRaja() {
       ambientRef.current.pause();
     }
     return () => { ambientRef.current?.pause(); };
-  }, [started, isPlaying, ambientOn, ytReady]);
+  }, [isPlaying, ambientOn]);
 
   // === Auto-unlock playback on click ===
   useEffect(() => {
@@ -103,10 +101,13 @@ export default function AutoRaja() {
       if (playerRef.current && isPlaying) {
         try { playerRef.current.playVideo(); } catch (e) {}
       }
+      if (ambientRef.current && ambientOn) {
+        ambientRef.current.play().catch(() => {});
+      }
     };
     window.addEventListener('click', handleFirstClick, { once: true });
     return () => window.removeEventListener('click', handleFirstClick);
-  }, [isPlaying]);
+  }, [isPlaying, ambientOn]);
 
   // === Navigation Handlers ===
   const next = () => {
