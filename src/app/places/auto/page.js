@@ -91,6 +91,16 @@ export default function AutoRaja() {
 
   // === Supabase Realtime Live Presence Counter ===
   useEffect(() => {
+    if (!supabase) {
+      const sim = () => {
+        const s = Math.floor(Date.now() / 4000);
+        setPresenceCount(Math.max(1, Math.round(98 + Math.sin(s * 0.5) * 6 + Math.cos(s * 0.2) * 3)));
+      };
+      sim();
+      const t = setInterval(sim, 4000);
+      return () => clearInterval(t);
+    }
+
     const channel = supabase.channel('presence-auto');
 
     channel

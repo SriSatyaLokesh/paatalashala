@@ -63,6 +63,16 @@ export default function TractorAnna() {
 
   // === Supabase Realtime Live Presence Counter ===
   useEffect(() => {
+    if (!supabase) {
+      const sim = () => {
+        const s = Math.floor(Date.now() / 4000);
+        setPresenceCount(Math.max(1, Math.round(83 + Math.sin(s * 0.5) * 5 + Math.cos(s * 0.2) * 2)));
+      };
+      sim();
+      const t = setInterval(sim, 4000);
+      return () => clearInterval(t);
+    }
+
     const channel = supabase.channel('presence-tractor');
 
     channel

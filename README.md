@@ -1,8 +1,10 @@
 # 🎵 Paatalashala (పాటలశాల)
 
+![Paatalashala Banner](public/images/readme_banner.png)
+
 > **Handcrafted Telugu ambient soundscapes from the nostalgic places that shaped us. Pick a place. Let it play.**
 
-Paatalashala is an immersive, interactive audio web application designed to trigger warm nostalgia by pairing traditional Telugu music with ambient background soundscapes. Escape to rural farms, retro street-corner barber shops, or the bustling neon-lit roads of Hyderabad.
+Paatalashala is an immersive, interactive audio web application designed to trigger warm nostalgia by pairing traditional Telugu music with ambient background soundscapes. Escape to rural farms, retro street-corner barber shops, or the bustling roads of Hyderabad.
 
 ---
 
@@ -28,7 +30,7 @@ Paatalashala is an immersive, interactive audio web application designed to trig
 ## 🚀 Key Features
 
 * **🎛️ Multi-Channel Ambient Mixer:** Adjust the volume of the ambient soundscapes (e.g. tractor hum, street traffic, wind) independently of the main music track.
-* **🌍 Real-Time Live Presence Tracking:** Displays the exact count of active, concurrent listeners on each page using secure, serverless **Supabase Presence** WebSockets.
+* **👥 Optional Real-Time Listener Counter:** Displays the exact count of active, concurrent listeners on each page using **Supabase Presence**. If no database configuration keys are provided, the system automatically falls back to clean, realistic simulated counters.
 * **⚡ Smooth Cross-Fade Transitions:** Implements the Double Background Layer Pattern to fade viewports seamlessly when changing songs, eliminating abrupt image resizing.
 * **🛱 Custom Air Horns & Sounds:** Interactive horn triggers that play custom vehicle audio overlays on demand.
 * **🌫️ Drifting Cinematic Fog:** Features procedural animated fog clouds generated via inline SVG fractal noise filters.
@@ -39,7 +41,7 @@ Paatalashala is an immersive, interactive audio web application designed to trig
 ## 🛠️ Tech Stack
 
 * **Framework:** Next.js (with Turbopack engine)
-* **Realtime Sync:** Supabase Realtime (Presence WebSockets)
+* **Realtime Sync:** Optional Supabase Realtime (Presence WebSockets)
 * **Styling:** Vanilla CSS, CSS modules, CSS Global, and Tailwind utility tokens
 * **Icons:** Custom SVG inline components and Lucide React
 
@@ -70,37 +72,6 @@ npm run build
 npm run serve:prod
 ```
 The optimized server will accept connections at `http://localhost:<PORT>/paatalashala`.
-
----
-
-## 📂 Project Structure
-
-```text
-paatalashala/
-├── public/                 # Static assets
-│   ├── audio/              # Ambient loops and custom horns
-│   └── images/             # Sprite components and city/farm backdrops
-├── src/
-│   ├── app/                # Next.js App Router pages
-│   │   ├── page.js         # Main landing dashboard
-│   │   └── places/         # Location page components
-│   │       ├── auto/       # Auto Janie workspace
-│   │       ├── saloon/     # Royal Saloon workspace
-│   │       └── tractor-anna/
-│   ├── components/         # Shared modules (YouTube Player, AmbientWeather)
-│   ├── data/               # Static places and song metadata
-│   └── utils/              # Path helpers & Supabase client wrapper
-└── .env.local              # Local environment credentials (git-ignored)
-```
-
----
-
-## 🔒 Environment Setup
-To run real-time listener counts locally or in production, configure the following keys inside a `.env.local` file in your root folder:
-```env
-NEXT_PUBLIC_SUPABASE_URL=https://yxtslmupjghwaypqeuvw.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_i1t8CS5lCP6cx4fovNEr1Q_n0e5l2mi
-```
 
 ---
 
