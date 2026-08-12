@@ -116,16 +116,17 @@ export default function RoyalSaloon() {
 
   const handlePlayerError = (code) => {
     setPlayerError(code);
+    console.error('YouTube player error code:', code);
   };
 
   const handleStateChange = (code) => {
-    if (code === 0) {
+    if (code === 0) { // ENDED - auto play next track
       next();
-    } else if (code === 1) {
+    } else if (code === 1) { // PLAYING
       setIsPlaying(true);
       setYtReady(true);
       setPlayerError(null);
-    } else if (code === 2) {
+    } else if (code === 2) { // PAUSED
       setIsPlaying(false);
     }
   };
@@ -143,37 +144,43 @@ export default function RoyalSaloon() {
   const next = () => {
     if (songs.length === 0) return;
     if (isShuffle) {
-      let r = Math.floor(Math.random() * songs.length);
-      if (r === currentSongIndex && songs.length > 1) r = (r + 1) % songs.length;
-      setCurrentSongIndex(r);
+      const randomIndex = Math.floor(Math.random() * songs.length);
+      setCurrentSongIndex(randomIndex);
     } else {
-      setCurrentSongIndex(prev => (prev + 1) % songs.length);
+      setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songs.length);
     }
     setIsPlaying(true);
+    setCurrentTime(0);
+    setDuration(0);
   };
 
   const prev = () => {
     if (songs.length === 0) return;
-    setCurrentSongIndex(p => (p - 1 + songs.length) % songs.length);
+    if (isShuffle) {
+      const randomIndex = Math.floor(Math.random() * songs.length);
+      setCurrentSongIndex(randomIndex);
+    } else {
+      setCurrentSongIndex((prevIndex) => (prevIndex - 1 + songs.length) % songs.length);
+    }
     setIsPlaying(true);
+    setCurrentTime(0);
+    setDuration(0);
   };
 
-  const changeVolume = (val) => {
-    setVolume(val);
-    if (playerRef.current && typeof playerRef.current.setVolume === 'function') {
-      playerRef.current.setVolume(val);
-    }
+  const changeVolume = (v) => {
+    setVolume(v);
   };
 
   const seek = (e) => {
-    if (!duration || !playerRef.current) return;
+    if (!duration) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    const target = ratio * duration;
-    setCurrentTime(target);
-    if (typeof playerRef.current.seekTo === 'function') {
-      playerRef.current.seekTo(target, true);
-    }
+    const t = ((e.clientX - rect.left) / rect.width) * duration;
+    setCurrentTime(t);
+    try {
+      if (playerRef.current && typeof playerRef.current.seekTo === 'function') {
+        playerRef.current.seekTo(t, true);
+      }
+    } catch (_) {}
   };
 
   const fmt = (s) => {
@@ -206,7 +213,7 @@ export default function RoyalSaloon() {
       {/* Weather / Dust particles effect */}
       <AmbientWeather weather="clear" particles="dust" active={isPlaying && ambientOn} />
 
-      {/* Hidden YouTube Video container */}
+      {/* YouTube player — visibility:hidden keeps proper dimensions for YT init */}
       <div style={{
         position: 'fixed',
         bottom: '100px',
@@ -224,15 +231,17 @@ export default function RoyalSaloon() {
         background: '#000',
         pointerEvents: videoVisible ? 'auto' : 'none',
       }}>
-        <YouTubePlayer
-          videoId={currentSong?.youtubeVideoId}
-          isPlaying={isPlaying}
-          volume={volume}
-          onStateChange={handleStateChange}
-          onPlayerReady={handlePlayerReady}
-          onTimeUpdate={handleTimeUpdate}
-          onError={handlePlayerError}
-        />
+        {currentSong?.youtubeVideoId && (
+          <YouTubePlayer
+            videoId={currentSong.youtubeVideoId}
+            isPlaying={isPlaying}
+            volume={volume}
+            onStateChange={handleStateChange}
+            onPlayerReady={handlePlayerReady}
+            onTimeUpdate={handleTimeUpdate}
+            onError={handlePlayerError}
+          />
+        )}
       </div>
 
       {playerError && (
