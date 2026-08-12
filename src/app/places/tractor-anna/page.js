@@ -523,6 +523,33 @@ export default function TractorAnna() {
                       </button>
                       
                       <button onClick={next} title="Next Song (⏭)" style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem', transition: 'transform 0.2s' }} className="control-icon">⏭</button>
+
+                      {/* Horn — mobile only, lives inside capsule */}
+                      <button
+                        onClick={playHorn}
+                        title="Horn!"
+                        style={{
+                          background: '#fbbf24',
+                          border: 'none',
+                          color: '#000',
+                          cursor: 'pointer',
+                          padding: '6px 10px',
+                          borderRadius: '9999px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          fontSize: '0.75rem',
+                          fontWeight: '700',
+                          boxShadow: '0 4px 12px rgba(245,158,11,0.4)',
+                          transition: 'transform 0.15s',
+                        }}
+                        className="horn-btn-mobile"
+                        onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.06)'}
+                        onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                      >
+                        <Megaphone size={14} fill="#000" />
+                        <span>HORN</span>
+                      </button>
                     </div>
 
                     {/* Divider */}
@@ -623,14 +650,28 @@ export default function TractorAnna() {
                   </div>
                 </div>
 
+                {/* Listeners row — mobile only */}
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  fontSize: '0.75rem',
+                  fontWeight: '600',
+                  color: '#a7f3d0',
+                  justifyContent: 'center',
+                }} className="mobile-listeners-row">
+                  <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#10b981', display: 'inline-block', boxShadow: '0 0 6px #10b981' }} />
+                  <span>{presenceCount} listeners on field</span>
+                </div>
+
               </div>
             </div>
           </div>
 
-          {/* Floating Horn button in bottom left */}
+          {/* Horn button + Listeners badge — desktop only */}
           <button 
             onClick={playHorn}
-            title="Horn Please! (📢)"
+            title="Horn!"
             style={{
               position: 'fixed',
               left: '32px',
@@ -649,6 +690,7 @@ export default function TractorAnna() {
               zIndex: 35,
               transition: 'transform 0.2s, background-color 0.2s'
             }}
+            className="horn-btn-desktop"
             onMouseEnter={e => {
               e.currentTarget.style.transform = 'scale(1.1)';
               e.currentTarget.style.backgroundColor = '#f59e0b';
@@ -661,7 +703,7 @@ export default function TractorAnna() {
             <Megaphone size={20} fill="#000" />
           </button>
 
-          {/* Floating Online Listeners badge in bottom right */}
+          {/* Listeners badge — desktop only */}
           <div style={{
             position: 'fixed',
             right: '32px',
@@ -680,7 +722,7 @@ export default function TractorAnna() {
             zIndex: 35,
             boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
             whiteSpace: 'nowrap'
-          }}>
+          }} className="listeners-badge-desktop">
             <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', display: 'inline-block', boxShadow: '0 0 8px #10b981' }} />
             <span>{presenceCount} listeners on field</span>
           </div>
@@ -742,18 +784,34 @@ export default function TractorAnna() {
         .horn-button:hover { background: rgba(255,255,255,0.16) !important; transform: scale(1.08) !important; }
         .control-icon:hover { color: #fff !important; transform: scale(1.1); }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* Desktop: hide mobile-only elements */
+        .horn-btn-mobile { display: none !important; }
+        .mobile-listeners-row { display: none !important; }
+
         @media (max-width: 768px) {
-          .immersive-title { font-size: 2.5rem !important; }
+          /* TRACTOR — massive, bleed off edges for impact */
           .tractor-hero-sprite {
-            width: 90vw !important;
-            max-width: 380px !important;
-            bottom: 120px !important;
-            opacity: 0.9 !important;
+            width: 120vw !important;
+            max-width: none !important;
+            bottom: 150px !important;
+            left: 50% !important;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.75)) !important;
           }
+          /* Title — smaller and higher up */
+          .immersive-title { font-size: 2rem !important; }
+          /* HUD capsule — tighter padding */
+          .capsule-hud { padding: 12px 14px !important; border-radius: 16px !important; gap: 8px !important; }
+          /* Hide desktop-only elements */
           .volume-slider-container { display: none !important; }
           .hud-time { display: none !important; }
-          .btn-label { font-size: 0.7rem !important; }
-          .capsule-hud { padding: 14px 16px !important; border-radius: 18px !important; }
+          .horn-btn-desktop { display: none !important; }
+          .listeners-badge-desktop { display: none !important; }
+          /* Show mobile-only elements */
+          .horn-btn-mobile { display: flex !important; }
+          .mobile-listeners-row { display: flex !important; }
+          /* Compact nav button labels */
+          .btn-label { display: none !important; }
         }
       `}</style>
     </div>
