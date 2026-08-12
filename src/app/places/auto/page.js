@@ -33,7 +33,7 @@ export default function AutoRaja() {
   const [isShuffle, setIsShuffle]       = useState(false);
   const [seekHovered, setSeekHovered]   = useState(false);
   const [volumeHovered, setVolumeHovered] = useState(false);
-  const [selectedSpriteIdx, setSelectedSpriteIdx] = useState(0);
+  const selectedSpriteIdx = currentSongIndex !== null ? (currentSongIndex % AUTO_SPRITES.length) : 0;
 
   const playerRef  = useRef(null);
   const ambientRef = useRef(null);
@@ -206,7 +206,7 @@ export default function AutoRaja() {
   };
 
   // Dynamic Telugu quote for auto sticker
-  const rawQuote = currentSong?.quote || 'జనం ప్రశాంతంగా ఉంటేనే... ఆటోకి ఏ ఇబ్బంది లేకుండా ముందుకు వెళ్తుంది';
+  const rawQuote = currentSong?.quote || 'Andhamaina ammayini, finance lo theskuna auto ni maintain cheyandam kastam.';
   const cleanQuote = rawQuote.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim();
 
   return (
@@ -252,88 +252,68 @@ export default function AutoRaja() {
       {/* Main Container */}
       <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', zIndex: 10 }}>
 
-        {/* Top Floating Glass Navigation Header */}
+        {/* Top Header (Matches Tractor Anna & Saloon navbar design) */}
         <header style={{
-          position: 'fixed',
-          top: '20px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: 'calc(100% - 40px)',
-          maxWidth: '1000px',
           zIndex: 40,
           display: 'flex',
-          alignItems: 'center',
           justifyContent: 'space-between',
-          background: 'rgba(10, 11, 15, 0.65)',
-          backdropFilter: 'blur(24px) saturate(160%)',
-          border: '1px solid rgba(255, 255, 255, 0.14)',
-          padding: '10px 18px',
-          borderRadius: '9999px',
-          boxShadow: '0 16px 36px rgba(0,0,0,0.5)'
-        }}>
-          {/* Back button */}
-          <Link
-            href="/"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              color: '#fff',
-              textDecoration: 'none',
-              fontSize: '0.8rem',
-              fontWeight: '700',
-              letterSpacing: '0.05em',
-              background: 'rgba(255,255,255,0.08)',
-              padding: '6px 14px',
-              borderRadius: '9999px',
-              border: '1px solid rgba(255,255,255,0.1)'
-            }}
-          >
-            <ChevronLeft size={16} />
-            <span>PLACES</span>
-          </Link>
-
-          {/* Center: Sprite Style Switcher */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'rgba(0,0,0,0.4)', padding: '3px', borderRadius: '9999px', border: '1px solid rgba(255,255,255,0.08)' }}>
-            {AUTO_SPRITES.map((item, idx) => (
-              <button
-                key={item.id}
-                onClick={() => setSelectedSpriteIdx(idx)}
-                style={{
-                  background: selectedSpriteIdx === idx ? '#fbbf24' : 'transparent',
-                  color: selectedSpriteIdx === idx ? '#000' : 'rgba(255,255,255,0.6)',
-                  border: 'none',
-                  borderRadius: '9999px',
-                  padding: '4px 10px',
-                  fontSize: '0.7rem',
-                  fontWeight: '800',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s'
-                }}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Right Action buttons */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <button
-              onClick={() => setAmbientOn(prev => !prev)}
+          alignItems: 'center',
+          padding: '16px 20px',
+          width: '100%',
+          position: 'relative'
+        }} className="hud-top-header">
+          {/* Left: Back button & time */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <Link
+              href="/"
               style={{
-                background: ambientOn ? 'rgba(245, 158, 11, 0.25)' : 'rgba(255,255,255,0.06)',
-                border: ambientOn ? '1px solid rgba(245, 158, 11, 0.45)' : '1px solid rgba(255,255,255,0.1)',
-                color: ambientOn ? '#fbbf24' : '#a1a1aa',
-                padding: '6px 12px',
-                borderRadius: '9999px',
-                cursor: 'pointer',
-                fontSize: '0.75rem',
-                fontWeight: '700',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
+                color: '#fff',
+                textDecoration: 'none',
+                fontSize: '0.85rem',
+                fontWeight: '600',
+                padding: '8px 14px',
+                borderRadius: '9999px',
+                background: 'rgba(255,255,255,0.08)',
+                border: '1px solid rgba(255,255,255,0.12)',
+                backdropFilter: 'blur(12px)',
                 whiteSpace: 'nowrap'
               }}
+              className="hud-button"
+            >
+              <ChevronLeft size={16} />
+              <span>PLACES</span>
+            </Link>
+            {timeString && (
+              <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }} className="hud-time">
+                {timeString}
+              </span>
+            )}
+          </div>
+
+          {/* Right: Ambience & Video controls */}
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <button
+              onClick={() => setAmbientOn(prev => !prev)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                color: ambientOn ? '#fbbf24' : 'rgba(255,255,255,0.5)',
+                fontSize: '0.78rem',
+                fontWeight: '600',
+                padding: '8px 12px',
+                borderRadius: '9999px',
+                background: ambientOn ? 'rgba(245, 158, 11, 0.15)' : 'rgba(255,255,255,0.06)',
+                border: ambientOn ? '1px solid rgba(245, 158, 11, 0.35)' : '1px solid rgba(255,255,255,0.1)',
+                backdropFilter: 'blur(12px)',
+                cursor: 'pointer',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.2s',
+              }}
+              className="hud-button"
             >
               <Wind size={14} />
               <span className="btn-label">{ambientOn ? 'AMBIENCE' : 'OFF'}</span>
@@ -342,19 +322,21 @@ export default function AutoRaja() {
             <button
               onClick={() => setVideoVisible(v => !v)}
               style={{
-                background: videoVisible ? 'rgba(239, 68, 68, 0.25)' : 'rgba(255,255,255,0.08)',
-                border: videoVisible ? '1px solid rgba(239, 68, 68, 0.45)' : '1px solid rgba(255,255,255,0.12)',
-                color: videoVisible ? '#fca5a5' : '#fff',
-                padding: '6px 12px',
-                borderRadius: '9999px',
-                cursor: 'pointer',
-                fontSize: '0.75rem',
-                fontWeight: '700',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
-                whiteSpace: 'nowrap'
+                color: videoVisible ? '#fbbf24' : '#fff',
+                fontSize: '0.78rem',
+                fontWeight: '600',
+                padding: '8px 12px',
+                borderRadius: '9999px',
+                background: videoVisible ? 'rgba(245, 158, 11, 0.2)' : 'rgba(255,255,255,0.08)',
+                border: videoVisible ? '1px solid rgba(245, 158, 11, 0.4)' : '1px solid rgba(255,255,255,0.12)',
+                backdropFilter: 'blur(12px)',
+                cursor: 'pointer',
+                whiteSpace: 'nowrap',
               }}
+              className="hud-button"
             >
               <SlidersHorizontal size={14} />
               <span className="btn-label">{videoVisible ? 'CLOSE VIDEO' : 'VIDEO'}</span>
@@ -362,39 +344,45 @@ export default function AutoRaja() {
           </div>
         </header>
 
-        {/* Center Telugu Title */}
+        {/* Screen Center Title (Matching Tractor Anna position & using new Ramabhadra Telugu font) */}
         <div style={{
           position: 'absolute',
-          top: '90px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          textAlign: 'center',
+          top: '4vh',
+          left: 0,
+          right: 0,
+          zIndex: 5,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
           pointerEvents: 'none',
-          zIndex: 15,
-          width: '100%'
-        }} className="title-container">
+          userSelect: 'none',
+          padding: '0 24px'
+        }}>
           <h1 style={{
-            fontSize: '3.6rem',
-            fontWeight: '900',
+            fontSize: '4.6rem',
+            fontWeight: '800',
             color: '#fef08a',
             margin: 0,
-            lineHeight: 1,
+            lineHeight: 1.1,
             letterSpacing: '0.02em',
-            textShadow: '0 4px 20px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,0.8)',
-            fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif"
+            textShadow: '0 4px 24px rgba(0,0,0,0.95), 0 2px 6px rgba(0,0,0,0.85)',
+            fontFamily: "'Ramabhadra', 'Anek Telugu', 'Outfit', sans-serif",
+            textAlign: 'center'
           }} className="immersive-title">
-            ఆటో రాజా
+            ఆటో జానీ
           </h1>
           <p style={{
             fontSize: '0.85rem',
-            color: 'rgba(253, 230, 138, 0.75)',
-            letterSpacing: '0.12em',
+            color: 'rgba(253, 230, 138, 0.85)',
+            letterSpacing: '0.14em',
             textTransform: 'uppercase',
-            marginTop: '4px',
-            fontWeight: '600',
+            marginTop: '6px',
+            fontWeight: '700',
+            fontFamily: "'Outfit', 'Anek Telugu', sans-serif",
             textShadow: '0 2px 8px rgba(0,0,0,0.8)'
           }} className="immersive-sub">
-            AUTO RAJA • MASS BEATS ON THE ROAD
+            AUTO JANIE • MASS BEATS ON THE ROAD
           </p>
         </div>
 
@@ -432,33 +420,23 @@ export default function AutoRaja() {
             <div className="smoke-puff smoke-puff-3" />
           </div>
 
-          {/* 60% SCREEN HERO AUTO RICKSHAW SPRITE CONTAINER */}
+          {/* HERO AUTO RICKSHAW SPRITE CONTAINER (60% SCREEN HEIGHT) */}
           <div className="auto-hero-60-container">
+            {/* Soft radial ground contact shadow merging auto wheels with the asphalt road */}
+            <div className="auto-ground-shadow" />
+
             <img
               src={ambience.vehicleSprite}
               alt="Auto Raja Hero"
               className="auto-hero-60-sprite"
             />
 
-            {/* DYNAMIC TELUGU AUTO STICKERS / QUOTATIONS (Anchored directly on Auto) */}
-            
-            {/* 1. Visor Windshield Sticker */}
+            {/* Front Windshield Visor Banner */}
             <div className="auto-sticker-visor-60">
               <span>నమస్తే • TS 09 AUTO • జై మైసమ్మ</span>
             </div>
 
-            {/* 2. Main Center Canopy Vinyl Sticker */}
-            <div className="auto-sticker-canopy-60">
-              <div className="sticker-border-dash" />
-              <p className="sticker-telugu-text-60">
-                {cleanQuote}
-              </p>
-              <div className="sticker-footer-60">
-                <span>★ ఆటో రాజా ★</span>
-              </div>
-            </div>
-
-            {/* 3. Front Bumper Badge */}
+            {/* Front Bumper Sticker */}
             <div className="auto-sticker-bumper-60">
               <span>FOR HIRE • మాస్ రాజా</span>
             </div>
@@ -469,6 +447,61 @@ export default function AutoRaja() {
         {/* Bottom Area: Controls & HUD */}
         <div style={{ position: 'relative', width: '100%', padding: '0 20px 24px', zIndex: 30 }}>
           <div style={{ position: 'relative', width: '100%', maxWidth: '680px', margin: '0 auto', zIndex: 30 }}>
+
+            {/* Authentic Auto Rickshaw Vinyl Sticker Quote Banner right above media player */}
+            <div style={{
+              textAlign: 'center',
+              marginBottom: '14px',
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              pointerEvents: 'none'
+            }}>
+              <div style={{
+                display: 'inline-flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                padding: '10px 22px',
+                background: 'rgba(15, 17, 26, 0.85)',
+                backdropFilter: 'blur(20px)',
+                border: '2px dashed rgba(251, 191, 36, 0.45)',
+                borderRadius: '16px',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.7), inset 0 0 15px rgba(245, 158, 11, 0.15)',
+                maxWidth: '620px',
+                position: 'relative'
+              }} className="auto-sticker-banner">
+
+                {/* Sticker Badge Header */}
+                <div style={{
+                  fontSize: '0.68rem',
+                  fontWeight: '800',
+                  letterSpacing: '0.14em',
+                  color: '#fbbf24',
+                  textTransform: 'uppercase',
+                  marginBottom: '4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}>
+                  <span>★</span>
+                  <span>ఆటో జానీ • AUTO JANIE STICKER</span>
+                  <span>★</span>
+                </div>
+
+                {/* Quote Text */}
+                <p style={{
+                  fontSize: '1.18rem',
+                  fontWeight: '700',
+                  color: '#fef08a',
+                  margin: 0,
+                  textShadow: '0 2px 10px rgba(0,0,0,0.95)',
+                  lineHeight: '1.4',
+                  fontFamily: "'Ramabhadra', 'Anek Telugu', sans-serif"
+                }}>
+                  {cleanQuote}
+                </p>
+              </div>
+            </div>
 
             {/* HUD Capsule */}
             <div style={{
@@ -800,13 +833,13 @@ export default function AutoRaja() {
         /* 60% SCREEN HERO AUTO CONTAINER */
         .auto-hero-60-container {
           position: absolute;
-          bottom: 25px;
+          bottom: 220px;
           left: 50%;
           transform: translateX(-50%);
-          width: 62vw;
-          max-width: 860px;
+          width: 60vw;
+          max-width: 840px;
           height: 60vh;
-          max-height: 680px;
+          max-height: 650px;
           z-index: 5;
           display: flex;
           align-items: center;
@@ -817,8 +850,25 @@ export default function AutoRaja() {
           width: 100%;
           height: 100%;
           object-fit: contain;
-          filter: drop-shadow(0 25px 45px rgba(0,0,0,0.8));
+          filter: drop-shadow(0 15px 30px rgba(0,0,0,0.85));
           animation: auto-engine-vibe 0.1s linear infinite;
+          pointer-events: none;
+          position: relative;
+          z-index: 5;
+        }
+
+        /* GROUND SHADOW MERGING AUTO WHEELS WITH ROAD BACKGROUND */
+        .auto-ground-shadow {
+          position: absolute;
+          bottom: 12px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 82%;
+          height: 48px;
+          border-radius: 50%;
+          background: radial-gradient(ellipse at center, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.65) 50%, transparent 82%);
+          filter: blur(10px);
+          z-index: 4;
           pointer-events: none;
         }
 
