@@ -88,6 +88,22 @@ export default function TractorAnna() {
     return () => { ambientRef.current?.pause(); };
   }, [started, isPlaying, ambientOn, ytReady]);
 
+  // === Auto-unlock playback on first click anywhere ===
+  useEffect(() => {
+    const unlock = () => {
+      try {
+        if (playerRef.current && typeof playerRef.current.playVideo === 'function') {
+          playerRef.current.playVideo();
+        }
+        if (ambientRef.current && ambientOn) {
+          ambientRef.current.play().catch(() => {});
+        }
+      } catch (_) {}
+    };
+    window.addEventListener('click', unlock, { once: true });
+    return () => window.removeEventListener('click', unlock);
+  }, [ambientOn]);
+
   // === Player callbacks ===
   const handlePlayerReady = (player) => {
     playerRef.current = player;

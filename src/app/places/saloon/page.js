@@ -37,6 +37,19 @@ export default function DeluxeSaloon() {
     return () => clearInterval(interval);
   }, []);
 
+  // === Auto-unlock playback on first click anywhere ===
+  useEffect(() => {
+    const unlock = () => {
+      try {
+        if (playerObject && typeof playerObject.playVideo === 'function') {
+          playerObject.playVideo();
+        }
+      } catch (_) {}
+    };
+    window.addEventListener('click', unlock, { once: true });
+    return () => window.removeEventListener('click', unlock);
+  }, [playerObject]);
+
   // Update room background when song changes
   useEffect(() => {
     if (currentSong && isExperienceStarted) {
