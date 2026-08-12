@@ -375,45 +375,60 @@ export default function Home() {
         }
         @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.35; } }
 
-        .card-body { display: flex; flex-direction: column; gap: 6px; }
+        .card-body { display: flex; flex-direction: column; gap: 0; }
 
+        /* Primary name — Telugu script, large and readable */
         .card-name-telugu {
           font-family: 'Akaya Telivigala', serif;
-          font-size: 1.7rem;
-          color: #f5ede0;
-          line-height: 1.15;
-          text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+          font-size: 1.9rem;
+          color: #f7f0e5;
+          line-height: 1.2;
+          text-shadow: 0 2px 16px rgba(0,0,0,0.8), 0 1px 4px rgba(0,0,0,0.9);
+          letter-spacing: 0.01em;
         }
+        /* English subtitle — small, clearly secondary */
         .card-name-en {
-          font-size: 0.85rem;
-          font-weight: 600;
-          color: rgba(210,175,120,0.75);
-          letter-spacing: 0.04em;
-        }
-        .card-desc {
-          font-size: 0.78rem;
-          color: rgba(200,170,130,0.55);
-          line-height: 1.55;
-          font-weight: 300;
+          font-size: 0.72rem;
+          font-weight: 500;
+          color: rgba(200,165,105,0.6);
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
           margin-top: 5px;
+        }
+        /* Tagline — italic mood line */
+        .card-tagline {
+          font-size: 0.76rem;
+          font-style: italic;
+          color: rgba(200,170,120,0.5);
+          margin-top: 2px;
+          font-weight: 300;
+          letter-spacing: 0.01em;
+        }
+        /* Description — legible, not overpowering */
+        .card-desc {
+          font-size: 0.8rem;
+          color: rgba(215,185,145,0.7);
+          line-height: 1.58;
+          font-weight: 400;
+          margin-top: 12px;
           display: -webkit-box;
-          -webkit-line-clamp: 3;
+          -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
         }
         .card-enter {
-          margin-top: 12px;
+          margin-top: 14px;
           display: inline-flex;
           align-items: center;
           gap: 7px;
-          font-size: 0.72rem;
+          font-size: 0.7rem;
           font-weight: 700;
-          letter-spacing: 0.12em;
+          letter-spacing: 0.14em;
           text-transform: uppercase;
           color: #c49a5a;
           transition: gap 0.22s ease;
         }
-        .featured-card:hover .card-enter { gap: 12px; }
+        .featured-card:hover .card-enter { gap: 13px; }
 
         /* ── COMING SOON GRID ── */
         .coming-grid {
@@ -570,13 +585,15 @@ export default function Home() {
                     )}
                   </div>
 
-                  {/* Bottom: name + desc + enter */}
+                  {/* Bottom: name block + desc + enter */}
                   <div className="card-body">
+                    {/* Name block: Telugu primary, English secondary */}
                     <div>
                       <div className="card-name-telugu">
                         {TELUGU_NAMES[place.slug] || place.name}
                       </div>
                       <div className="card-name-en">{place.name}</div>
+                      <div className="card-tagline">{place.tagline}</div>
                     </div>
                     <p className="card-desc">{place.description}</p>
                     <div className="card-enter">
