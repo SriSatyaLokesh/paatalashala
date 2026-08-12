@@ -249,7 +249,7 @@ export default function AutoRaja() {
   const cleanQuote = rawQuote.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim();
 
   return (
-    <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', userSelect: 'none', background: '#090a0f' }}>
+    <div style={{ position: 'relative', width: '100vw', height: '100dvh', overflow: 'hidden', userSelect: 'none', background: '#090a0f' }}>
       <link href="https://fonts.googleapis.com/css2?family=Lakki+Reddy&family=Anek+Telugu:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       
       {/* Background Layer 1: Previous Background */}
@@ -368,7 +368,7 @@ export default function AutoRaja() {
           pointerEvents: 'none',
           userSelect: 'none',
           padding: '0 24px'
-        }}>
+        }} className="immersive-title-container">
           <h1 style={{
             fontSize: '4.8rem',
             fontWeight: '400',
@@ -388,12 +388,12 @@ export default function AutoRaja() {
       {/* === HUD Overlay === */}
       {started && currentSong && (
         <>
-          <div style={{
+          <div className="hud-overlay" style={{
             zIndex: 10,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            height: '100vh',
+            height: '100dvh',
             width: '100%',
             position: 'relative',
             padding: '16px 20px 24px'
@@ -497,7 +497,7 @@ export default function AutoRaja() {
 
             {/* Quote — wrapped in a dark translucent glassmorphic pill for high legibility on busy graphics */}
             <div style={{ textAlign: 'center', marginBottom: '12px', width: '100%', pointerEvents: 'none' }}>
-              <span style={{
+              <span className="auto-quote-pill" style={{
                 display: 'inline-block',
                 background: 'rgba(10, 11, 15, 0.72)',
                 backdropFilter: 'blur(16px)',
@@ -516,7 +516,7 @@ export default function AutoRaja() {
                   letterSpacing: '0.01em',
                   lineHeight: '1.4',
                   fontFamily: "'Anek Telugu', 'Akaya Telivigala', sans-serif"
-                }}>
+                }} className="immersive-quote">
                   {cleanQuote}
                 </p>
               </span>
@@ -972,26 +972,20 @@ export default function AutoRaja() {
 
         /* Mobile Adjustments */
         @media (max-width: 768px) {
+          .hud-overlay {
+            padding: 12px 16px max(16px, env(safe-area-inset-bottom)) !important;
+          }
           .auto-hero-sprite {
             width: 120vw !important;
             max-width: none !important;
-            bottom: 150px !important;
+            bottom: 145px !important;
             left: 50% !important;
             filter: drop-shadow(0 20px 40px rgba(0,0,0,0.75)) !important;
           }
-          .immersive-title { font-size: 2.8rem !important; }
-          .auto-sticker-canopy-60 {
-            width: 72% !important;
-            padding: 8px 10px !important;
-          }
-          .sticker-telugu-text-60 {
-            font-size: 0.92rem !important;
-          }
-          .auto-sticker-visor-60 {
-            font-size: 0.68rem !important;
-            padding: 2px 8px !important;
-          }
           .immersive-title { font-size: 2.2rem !important; }
+          .immersive-title-container { top: 76px !important; }
+          .immersive-quote { font-size: 1.0rem !important; line-height: 1.3 !important; }
+          .auto-quote-pill { padding: 5px 16px !important; }
           .capsule-hud { padding: 12px 14px !important; border-radius: 16px !important; gap: 8px !important; }
           .volume-slider-container { display: none !important; }
           .hud-time { display: none !important; }

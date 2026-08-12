@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="100" height="100" rx="22" fill="#09090f"/>
+  <!-- Beam connecting both stems -->
+  <rect x="26" y="24" width="48" height="9" rx="4" fill="url(#g)"/>
+  <!-- Left stem -->
+  <rect x="26" y="24" width="9" height="49" rx="4" fill="url(#g)"/>
+  <!-- Right stem -->
+  <rect x="65" y="24" width="9" height="41" rx="4" fill="url(#g)"/>
+  <!-- Left note head -->
+  <ellipse cx="30" cy="76" rx="13" ry="9" fill="url(#g)" transform="rotate(-25 30 76)"/>
+  <!-- Right note head -->
+  <ellipse cx="69" cy="68" rx="13" ry="9" fill="url(#g)" transform="rotate(-25 69 68)"/>
+</svg>

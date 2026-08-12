@@ -232,7 +232,7 @@ export default function TractorAnna() {
 
   // === Render ===
   return (
-    <div style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden' }}>
+    <div style={{ minHeight: '100dvh', position: 'relative', overflow: 'hidden' }}>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
@@ -323,7 +323,7 @@ export default function TractorAnna() {
             pointerEvents: 'none',
             userSelect: 'none',
             padding: '0 24px'
-          }}>
+          }} className="immersive-title-container">
             <h2 style={{
               fontSize: '4.8rem',
               fontWeight: '900',
@@ -371,7 +371,7 @@ export default function TractorAnna() {
           )}
 
           {/* === HUD Overlay === */}
-          <div style={{ zIndex: 10, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100vh', width: '100%', position: 'relative', padding: '16px 20px 24px' }}>
+          <div style={{ zIndex: 10, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100dvh', width: '100%', position: 'relative', padding: '16px 20px 24px' }}>
 
             {/* Top */}
             <div style={{ width: '100%' }}>
@@ -414,7 +414,7 @@ export default function TractorAnna() {
                   letterSpacing: '0.03em',
                   lineHeight: '1.4',
                   fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif"
-                }}>
+                }} className="immersive-quote">
                   {(currentSong?.quote || 'చేను చెలకా మనదేరా, రైతు అన్న రాజేరా!').replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim()}
                 </p>
               </div>
@@ -822,6 +822,8 @@ export default function TractorAnna() {
           }
           /* Title — smaller and higher up */
           .immersive-title { font-size: 2rem !important; }
+          .immersive-title-container { top: 76px !important; }
+          .immersive-quote { font-size: 1.05rem !important; line-height: 1.3 !important; }
           /* HUD capsule — tighter padding */
           .capsule-hud { padding: 12px 14px !important; border-radius: 16px !important; gap: 8px !important; }
           /* Hide desktop-only elements */

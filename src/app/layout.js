@@ -2,6 +2,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
+// Set NEXT_PUBLIC_SITE_URL in .env to override (e.g. for custom domain)
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://srisatyalokesh.is-a.dev/paatalashala";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -16,8 +19,8 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Paatalashala",
-  "url": "https://paatalashala.space",
-  "logo": "https://paatalashala.space/images/landing_bg.avif",
+  "url": SITE_URL,
+  "logo": `${SITE_URL}/images/readme_banner.png`,
   "sameAs": [
     "https://github.com/SriSatyaLokesh/paatalashala",
     "https://srisatyalokesh.is-a.dev/"
@@ -29,7 +32,7 @@ const webAppSchema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Paatalashala",
-  "url": "https://paatalashala.space",
+  "url": SITE_URL,
   "applicationCategory": "MultimediaApplication",
   "operatingSystem": "All",
   "browserRequirements": "Requires JavaScript. Requires HTML5.",
@@ -75,21 +78,23 @@ const faqSchema = {
 export const metadata = {
   title: "Paatalashala — Telugu Cultural Ambience & Curation",
   description: "Handcrafted Telugu ambient soundscapes from nostalgic spaces. Cruise city streets in a Hyderabad mass auto, ride a farmland tractor, or relax in a retro saloon.",
-  metadataBase: new URL("https://paatalashala.space"),
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/",
   },
   icons: {
-    icon: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>',
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
   },
   openGraph: {
     title: "Paatalashala — Telugu Cultural Ambience & Curation",
     description: "Handcrafted Telugu ambient soundscapes from nostalgic spaces. Cruise city streets in a Hyderabad mass auto, ride a farmland tractor, or relax in a retro saloon.",
-    url: "https://paatalashala.space",
+    url: SITE_URL,
     siteName: "Paatalashala",
     images: [
       {
-        url: "https://paatalashala.space/images/readme_banner.png",
+        url: `${SITE_URL}/images/readme_banner.png`,
         width: 1200,
         height: 630,
         alt: "Paatalashala Ambient Player Dashboard",
@@ -102,7 +107,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Paatalashala — Telugu Cultural Ambience & Curation",
     description: "Handcrafted Telugu ambient soundscapes from nostalgic spaces. Cruise city streets in a Hyderabad mass auto, ride a farmland tractor, or relax in a retro saloon.",
-    images: ["https://paatalashala.space/images/readme_banner.png"],
+    images: [`${SITE_URL}/images/readme_banner.png`],
   },
 };
 

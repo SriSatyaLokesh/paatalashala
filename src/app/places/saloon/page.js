@@ -213,7 +213,7 @@ export default function RoyalSaloon() {
 
   return (
     <div style={{
-      minHeight: '100vh',
+      minHeight: '100dvh',
       width: '100vw',
       position: 'relative',
       overflow: 'hidden',
@@ -357,7 +357,6 @@ export default function RoyalSaloon() {
         </div>
       </header>
 
-      {/* Screen Center Title (Matching Tractor Anna position & typography) */}
       <div style={{
         position: 'absolute',
         top: '12vh',
@@ -369,7 +368,7 @@ export default function RoyalSaloon() {
         userSelect: 'none',
         padding: '0 24px',
         zIndex: 5,
-      }}>
+      }} className="immersive-title-container">
         <h2 style={{
           fontSize: '4.8rem',
           fontWeight: '900',
@@ -611,7 +610,8 @@ export default function RoyalSaloon() {
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .hud-button:hover { background: rgba(255,255,255,0.16) !important; transform: translateY(-1px); }
         @media (max-width: 768px) {
-          .immersive-title { font-size: 2.5rem !important; }
+          .immersive-title { font-size: 2.2rem !important; }
+          .immersive-title-container { top: 76px !important; }
           .volume-slider-container { display: none !important; }
           .listeners-badge { display: none !important; }
           .hud-time { display: none !important; }
