@@ -9,8 +9,8 @@ import AmbientWeather from '@/components/AmbientWeather';
 import { ChevronLeft, Volume2, VolumeX, Wind, Shuffle, Play, Pause, Megaphone, SlidersHorizontal } from 'lucide-react';
 
 const AUTO_SPRITES = [
-  { id: 'front', label: 'ఆటో రాజా', sprite: '/images/auto_hero_front.png' },
   { id: 'baasha', label: 'బాషా ఆటో', sprite: '/images/auto_hero_baasha.png' },
+  { id: 'front', label: 'ఆటో రాజా', sprite: '/images/auto_hero_front.png' },
   { id: 'floral', label: 'మాస్ ఆటో', sprite: '/images/auto_hero_floral.png' }
 ];
 
