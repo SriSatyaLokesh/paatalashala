@@ -1,10 +1,11 @@
 # 🎵 Paatalashala (పాటలశాల)
 
+<img width="1895" height="378" alt="image" src="https://github.com/user-attachments/assets/298a57a7-0f2f-4431-a4ff-bd3c4b63f395" />
+
+
 > **Handcrafted Telugu ambient soundscapes from the nostalgic places that shaped us. Pick a place. Let it play.**
 
 Paatalashala is an immersive, interactive audio web application designed to trigger warm nostalgia by pairing traditional Telugu music with ambient background soundscapes. Escape to rural farms, retro street-corner barber shops, or the bustling neon-lit roads of Hyderabad.
-
----
 
 ## 🗺️ Ambient Sound Spaces
 
@@ -92,16 +93,6 @@ paatalashala/
 │   └── utils/              # Path helpers & Supabase client wrapper
 └── .env.local              # Local environment credentials (git-ignored)
 ```
-
----
-
-## 🔒 Environment Setup
-To run real-time listener counts locally or in production, configure the following keys inside a `.env.local` file in your root folder:
-```env
-NEXT_PUBLIC_SUPABASE_URL=https://yxtslmupjghwaypqeuvw.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_i1t8CS5lCP6cx4fovNEr1Q_n0e5l2mi
-```
-
 ---
 
 *Handcrafted with ❤️ for nostalgic Telugu souls.*
