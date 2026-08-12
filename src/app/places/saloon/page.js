@@ -106,7 +106,11 @@ export default function RoyalSaloon() {
   useEffect(() => {
     if (!started || !bgUrl) return;
     document.body.style.transition = 'background 1.8s ease';
-    document.body.style.background = `${bgUrl} center/cover no-repeat fixed`;
+    document.body.style.backgroundImage = bgUrl;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center';
+    document.body.style.backgroundRepeat = 'no-repeat';
+    document.body.style.backgroundAttachment = 'fixed';
     return () => { document.body.style.background = ''; };
   }, [currentSongIndex, started, bgUrl]);
 

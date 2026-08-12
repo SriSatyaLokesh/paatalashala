@@ -2,10 +2,10 @@
 const isProd = process.env.NODE_ENV === 'production';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || '';
 
-// Only use basePath if deploying to subdirectory (srisatyalokesh.is-a.dev/paatalashala)
-// If using custom domain (paatalashala.space), don't add basePath
-const isCustomDomain = SITE_URL.includes('paatalashala.space') || SITE_URL.includes('localhost') || SITE_URL.includes('127.0.0.1');
-const basePath = isProd && !isCustomDomain ? '/paatalashala' : undefined;
+// Add /paatalashala prefix ONLY for GitHub subdirectory deployment
+// Custom domain or localhost: no prefix
+const shouldUseBasePath = SITE_URL.includes('srisatyalokesh.is-a.dev');
+const basePath = isProd && shouldUseBasePath ? '/paatalashala' : undefined;
 
 const nextConfig = {
   output: 'export',

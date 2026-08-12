@@ -97,7 +97,11 @@ export default function TractorAnna() {
   useEffect(() => {
     if (!started || !ambience.background) return;
     document.body.style.transition = 'background 1.8s ease';
-    document.body.style.background = `${ambience.background} center/cover no-repeat fixed`;
+    document.body.style.backgroundImage = ambience.background;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center';
+    document.body.style.backgroundRepeat = 'no-repeat';
+    document.body.style.backgroundAttachment = 'fixed';
     return () => { document.body.style.background = ''; };
   }, [currentSongIndex, started, ambience.background]);
 
