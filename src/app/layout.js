@@ -86,7 +86,7 @@ export const metadata = {
     siteName: "Paatalashala",
     images: [
       {
-        url: "/images/landing_bg.avif",
+        url: "https://paatalashala.space/images/readme_banner.png",
         width: 1200,
         height: 630,
         alt: "Paatalashala Ambient Player Dashboard",
@@ -99,7 +99,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Paatalashala — Telugu Cultural Ambience & Curation",
     description: "Handcrafted Telugu ambient soundscapes from nostalgic spaces. Cruise city streets in a Hyderabad mass auto, ride a farmland tractor, or relax in a retro saloon.",
-    images: ["/images/landing_bg.avif"],
+    images: ["https://paatalashala.space/images/readme_banner.png"],
   },
 };
 
