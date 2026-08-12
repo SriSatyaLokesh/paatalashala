@@ -245,7 +245,7 @@ export default function RoyalSaloon() {
             backdropFilter: 'blur(12px)',
           }} className="hud-button">
             <ChevronLeft size={16} />
-            <span>స్థలాలు (PLACES)</span>
+            <span>PLACES</span>
           </Link>
           {timeString && (
             <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }}>
@@ -254,17 +254,18 @@ export default function RoyalSaloon() {
           )}
         </div>
 
-        {/* Center Title */}
+        {/* Center Title - using same Telugu font as Tractor Anna */}
         <div style={{ textAlign: 'center' }}>
           <h1 style={{
-            fontSize: '1.25rem',
-            fontWeight: '800',
+            fontSize: '2.2rem',
+            fontWeight: '900',
             letterSpacing: '0.04em',
-            color: '#ffcc80',
+            color: '#fff',
             margin: 0,
             textShadow: '0 2px 8px rgba(0,0,0,0.8)',
+            fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif",
           }}>
-            💈 రాయల్ సెలూన్ (ROYAL SALOON)
+            రాయల్ సెలూన్
           </h1>
         </div>
 
@@ -316,26 +317,6 @@ export default function RoyalSaloon() {
           </button>
         </div>
       </header>
-
-      {/* Center Telugu Ambiance Display */}
-      <div style={{
-        zIndex: 10,
-        textAlign: 'center',
-        padding: '0 24px',
-        margin: 'auto 0',
-      }}>
-        <p style={{
-          fontSize: '1.4rem',
-          fontWeight: '500',
-          color: '#ffe0b2',
-          margin: 0,
-          textShadow: '0 3px 12px rgba(0,0,0,0.9)',
-          letterSpacing: '0.02em',
-          lineHeight: '1.5',
-        }}>
-          {currentSong?.quote || 'పాత జ్ఞాపకాలు... మధురమైన గీతాలు... 💈'}
-        </p>
-      </div>
 
       {/* Bottom HUD Capsule Media Player (Matches Tractor Anna UI) */}
       <div style={{
