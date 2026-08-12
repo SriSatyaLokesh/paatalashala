@@ -1,30 +1,41 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { getSongsForPlace } from '@/data/songs';
+import { prefixPath } from '@/utils/paths';
 import YouTubePlayer from '@/components/YouTubePlayer';
-import NowPlaying from '@/components/NowPlaying';
-import UpNext from '@/components/UpNext';
 import AmbientWeather from '@/components/AmbientWeather';
-import { ChevronLeft, Volume2, Users } from 'lucide-react';
+import { ChevronLeft, Tv, Volume2, VolumeX, Wind, Shuffle, Play, Pause, Users } from 'lucide-react';
 
-export default function DeluxeSaloon() {
+export default function RoyalSaloon() {
   const songs = getSongsForPlace('saloon');
 
   // State variables
-  const [isExperienceStarted, setIsExperienceStarted] = useState(true);
-  const [currentSongIndex, setCurrentSongIndex] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [volume, setVolume] = useState(40); // Saloons usually play music at lower volume
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [presenceCount, setPresenceCount] = useState(41);
-  const [playerObject, setPlayerObject] = useState(null);
+  const [started, setStarted]                     = useState(true);
+  const [currentSongIndex, setCurrentSongIndex]   = useState(null);
+  const [isPlaying, setIsPlaying]                 = useState(true);
+  const [ytReady, setYtReady]                     = useState(false);
+  const [volume, setVolume]                       = useState(50);
+  const [currentTime, setCurrentTime]             = useState(0);
+  const [duration, setDuration]                   = useState(0);
+  const [presenceCount, setPresenceCount]         = useState(43);
+  const [timeString, setTimeString]               = useState('');
+  const [videoVisible, setVideoVisible]           = useState(false);
+  const [ambientOn, setAmbientOn]                 = useState(true);
+  const [playerError, setPlayerError]             = useState(null);
+  const [isShuffle, setIsShuffle]                 = useState(false);
+  const [seekHovered, setSeekHovered]             = useState(false);
+  const [volumeHovered, setVolumeHovered]         = useState(false);
+  const [showQueue, setShowQueue]                 = useState(false);
 
-  const currentSong = currentSongIndex !== null ? songs[currentSongIndex] : null;
+  const playerRef = useRef(null);
 
-  // === Random initial song/background ===
+  const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
+  const rawBackground = currentSong?.ambience?.background || "url('/images/saloon_background.jpg')";
+  const bgUrl = prefixPath(rawBackground);
+
+  // === Random initial song ===
   useEffect(() => {
     if (songs.length > 0) {
       const rand = Math.floor(Math.random() * songs.length);
@@ -32,484 +43,527 @@ export default function DeluxeSaloon() {
     }
   }, []);
 
-  // Simulate dynamic presence count locally
+  // === Clock ===
   useEffect(() => {
-    const simulatePresence = () => {
-      const base = 41;
-      const seconds = Math.floor(Date.now() / 4000);
-      const variance = Math.sin(seconds * 0.5) * 4 + Math.cos(seconds * 0.2) * 1;
-      setPresenceCount(Math.max(1, Math.round(base + variance)));
-    };
-    simulatePresence();
-    const interval = setInterval(simulatePresence, 4000);
-    return () => clearInterval(interval);
+    const tick = () =>
+      setTimeString(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }).toLowerCase());
+    tick();
+    const t = setInterval(tick, 10000);
+    return () => clearInterval(t);
   }, []);
 
-  // === Auto-unlock playback on first click anywhere ===
+  // === Presence ===
+  useEffect(() => {
+    const sim = () => {
+      const s = Math.floor(Date.now() / 4000);
+      setPresenceCount(Math.max(1, Math.round(43 + Math.sin(s * 0.5) * 4 + Math.cos(s * 0.2) * 2)));
+    };
+    sim();
+    const t = setInterval(sim, 4000);
+    return () => clearInterval(t);
+  }, []);
+
+  // === Background ===
+  useEffect(() => {
+    if (!started || !bgUrl) return;
+    document.body.style.transition = 'background 1.8s ease';
+    document.body.style.background = `${bgUrl} center/cover no-repeat fixed`;
+    return () => { document.body.style.background = ''; };
+  }, [currentSongIndex, started, bgUrl]);
+
+  // === Auto-unlock playback on first click ===
   useEffect(() => {
     const unlock = () => {
       try {
-        if (playerObject && typeof playerObject.playVideo === 'function') {
-          playerObject.playVideo();
+        if (playerRef.current && typeof playerRef.current.playVideo === 'function') {
+          playerRef.current.playVideo();
         }
       } catch (_) {}
     };
     window.addEventListener('click', unlock, { once: true });
     return () => window.removeEventListener('click', unlock);
-  }, [playerObject]);
+  }, []);
 
-  // Update room background when song changes
-  useEffect(() => {
-    if (currentSong && isExperienceStarted) {
-      document.body.style.transition = 'background 1.8s ease';
-      document.body.style.background = currentSong.ambience.background;
-    }
-    return () => {
-      document.body.style.background = '';
-    };
-  }, [currentSongIndex, isExperienceStarted, currentSong]);
-
-  // Audio Handlers
-  const handlePlayPauseToggle = () => {
-    setIsPlaying(!isPlaying);
-  };
-
-  const handleNext = () => {
-    setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songs.length);
-    setIsPlaying(true);
-    setCurrentTime(0);
-  };
-
-  const handlePrev = () => {
-    setCurrentSongIndex((prevIndex) => (prevIndex - 1 + songs.length) % songs.length);
-    setIsPlaying(true);
-    setCurrentTime(0);
-  };
-
-  const handleVolumeChange = (newVolume) => {
-    setVolume(newVolume);
-  };
-
-  const handleSeek = (timeInSeconds) => {
-    setCurrentTime(timeInSeconds);
-    if (playerObject && typeof playerObject.seekTo === 'function') {
-      playerObject.seekTo(timeInSeconds, true);
-    }
-  };
-
-  const handleSongSelect = (index) => {
-    setCurrentSongIndex(index);
-    setIsPlaying(true);
-    setCurrentTime(0);
-  };
-
+  // === Player Callbacks ===
   const handlePlayerReady = (player) => {
-    setPlayerObject(player);
+    playerRef.current = player;
+    player.setVolume(volume);
+    if (isPlaying) {
+      player.playVideo();
+    }
   };
 
-  const handleStateChange = (stateCode) => {
-    if (stateCode === 0) { // ENDED
-      handleNext();
-    } else if (stateCode === 1) { // PLAYING
+  const handlePlayerError = (code) => {
+    setPlayerError(code);
+  };
+
+  const handleStateChange = (code) => {
+    if (code === 0) {
+      next();
+    } else if (code === 1) {
       setIsPlaying(true);
-    } else if (stateCode === 2) { // PAUSED
+      setYtReady(true);
+      setPlayerError(null);
+    } else if (code === 2) {
       setIsPlaying(false);
     }
   };
 
-  const handleTimeUpdate = (current, total) => {
-    setCurrentTime(current);
-    setDuration(total);
+  const handleTimeUpdate = (cur, dur) => {
+    setCurrentTime(cur);
+    setDuration(dur);
   };
 
-  const startExperience = () => {
-    setIsExperienceStarted(true);
+  // === Controls ===
+  const togglePlay = () => {
+    setIsPlaying(prev => !prev);
+  };
+
+  const next = () => {
+    if (songs.length === 0) return;
+    if (isShuffle) {
+      let r = Math.floor(Math.random() * songs.length);
+      if (r === currentSongIndex && songs.length > 1) r = (r + 1) % songs.length;
+      setCurrentSongIndex(r);
+    } else {
+      setCurrentSongIndex(prev => (prev + 1) % songs.length);
+    }
     setIsPlaying(true);
+  };
+
+  const prev = () => {
+    if (songs.length === 0) return;
+    setCurrentSongIndex(p => (p - 1 + songs.length) % songs.length);
+    setIsPlaying(true);
+  };
+
+  const changeVolume = (val) => {
+    setVolume(val);
+    if (playerRef.current && typeof playerRef.current.setVolume === 'function') {
+      playerRef.current.setVolume(val);
+    }
+  };
+
+  const seek = (e) => {
+    if (!duration || !playerRef.current) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    const target = ratio * duration;
+    setCurrentTime(target);
+    if (typeof playerRef.current.seekTo === 'function') {
+      playerRef.current.seekTo(target, true);
+    }
+  };
+
+  const fmt = (s) => {
+    if (!s || isNaN(s)) return '0:00';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec < 10 ? '0' : ''}${sec}`;
   };
 
   return (
     <div style={{
       minHeight: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
+      width: '100vw',
       position: 'relative',
       overflow: 'hidden',
-    }} className="ambient-transition">
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      color: '#fff',
+    }}>
+      {/* Dark Vignette Overlay to showcase background image nicely */}
+      <div style={{
+        position: 'fixed',
+        inset: 0,
+        background: 'radial-gradient(circle at center, rgba(15, 23, 42, 0.25) 0%, rgba(15, 23, 42, 0.75) 100%)',
+        pointerEvents: 'none',
+        zIndex: 1,
+      }} />
 
-      {currentSong && (
-        <>
-          {/* Start Experience Overlay */}
-      {!isExperienceStarted && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          backgroundColor: 'rgba(26, 18, 15, 0.96)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 100,
-          padding: '20px',
-        }}>
-          <div className="glass-panel" style={{
-            padding: '40px',
-            maxWidth: '480px',
-            width: '100%',
-            textAlign: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '24px',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.6)',
-            borderColor: 'rgba(62, 39, 35, 0.4)'
-          }}>
-            <div>
-              <span style={{ fontSize: '3.5rem', display: 'block', marginBottom: '16px', animation: 'vehicle-float 4s ease-in-out infinite' }}>💈</span>
-              <h1 style={{ fontSize: '2rem', fontWeight: '900', letterSpacing: '-0.02em', color: '#ffcc80' }}>రాయల్ సెలూన్</h1>
-              <p style={{ color: 'var(--color-text-secondary)', fontSize: '1rem', marginTop: '6px' }}>
-                పల్లెటూరి సెలూన్ వాతావరణం మరియు మధురమైన తెలుగు పాటలు.
-              </p>
-            </div>
+      {/* Weather / Dust particles effect */}
+      <AmbientWeather weather="clear" particles="dust" active={isPlaying && ambientOn} />
 
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
-              color: '#ffcc80',
-              fontSize: '0.9rem',
-              fontWeight: '600',
-              backgroundColor: 'rgba(255, 204, 128, 0.08)',
-              padding: '8px 16px',
-              borderRadius: '20px',
-              alignSelf: 'center',
-              border: '1px solid rgba(255, 204, 128, 0.2)'
-            }}>
-              <Users size={16} />
-              <span>{presenceCount} మంది వేచి ఉన్నారు</span>
-            </div>
+      {/* Hidden YouTube Video container */}
+      <div style={{
+        position: 'fixed',
+        bottom: '100px',
+        right: '30px',
+        width: '220px',
+        height: '124px',
+        borderRadius: '16px',
+        overflow: 'hidden',
+        boxShadow: videoVisible ? '0 12px 24px rgba(0,0,0,0.6)' : 'none',
+        border: videoVisible ? '1px solid rgba(255,255,255,0.15)' : 'none',
+        opacity: videoVisible ? 1 : 0,
+        visibility: videoVisible ? 'visible' : 'hidden',
+        transition: 'opacity 0.3s, visibility 0.3s',
+        zIndex: videoVisible ? 40 : -1,
+        background: '#000',
+        pointerEvents: videoVisible ? 'auto' : 'none',
+      }}>
+        <YouTubePlayer
+          videoId={currentSong?.youtubeVideoId}
+          isPlaying={isPlaying}
+          volume={volume}
+          onStateChange={handleStateChange}
+          onPlayerReady={handlePlayerReady}
+          onTimeUpdate={handleTimeUpdate}
+          onError={handlePlayerError}
+        />
+      </div>
 
-            <button
-              onClick={startExperience}
-              style={{
-                padding: '16px 32px',
-                borderRadius: '12px',
-                backgroundColor: '#ffb74d',
-                color: '#2e1c16',
-                fontSize: '1.1rem',
-                fontWeight: '800',
-                border: 'none',
-                cursor: 'pointer',
-                boxShadow: '0 4px 20px rgba(255, 183, 77, 0.4)',
-                transition: 'transform 0.2s',
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
-              onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-            >
-              సెలూన్‌లోకి వెళ్లండి
-            </button>
-          </div>
+      {playerError && (
+        <div style={{ position: 'fixed', bottom: '170px', right: '30px', background: 'rgba(220,38,38,0.9)', color: '#fff', padding: '8px 14px', borderRadius: '10px', fontSize: '0.75rem', zIndex: 50 }}>
+          ⚠ Video Error: {playerError}
         </div>
       )}
 
-      {/* Render salon dust motes in background */}
-      {isExperienceStarted && (
-        <AmbientWeather
-          weather="clear"
-          particles="dust-motes"
-          active={isPlaying}
-        />
-      )}
+      {/* Top Header */}
+      <header style={{
+        zIndex: 10,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '24px 32px',
+        width: '100%',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <Link href="/" style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            color: '#fff',
+            textDecoration: 'none',
+            fontSize: '0.85rem',
+            fontWeight: '600',
+            padding: '8px 16px',
+            borderRadius: '9999px',
+            background: 'rgba(255,255,255,0.08)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            backdropFilter: 'blur(12px)',
+          }} className="hud-button">
+            <ChevronLeft size={16} />
+            <span>స్థలాలు (PLACES)</span>
+          </Link>
+          {timeString && (
+            <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }}>
+              {timeString}
+            </span>
+          )}
+        </div>
 
-      {/* Retro Saloon Ambient Vignette */}
-      {isExperienceStarted && (
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          pointerEvents: 'none',
-          zIndex: 1,
-          boxShadow: 'inset 0 0 100px rgba(0,0,0,0.7), inset 0 0 160px rgba(0,0,0,0.5)',
-        }} />
-      )}
+        {/* Center Title */}
+        <div style={{ textAlign: 'center' }}>
+          <h1 style={{
+            fontSize: '1.25rem',
+            fontWeight: '800',
+            letterSpacing: '0.04em',
+            color: '#ffcc80',
+            margin: 0,
+            textShadow: '0 2px 8px rgba(0,0,0,0.8)',
+          }}>
+            💈 రాయల్ సెలూన్ (ROYAL SALOON)
+          </h1>
+        </div>
 
-      {/* Main View Layout */}
-      {isExperienceStarted && (
+        {/* Right Controls */}
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <button
+            onClick={() => setAmbientOn(a => !a)}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              color: ambientOn ? '#ffb74d' : 'rgba(255,255,255,0.5)',
+              fontSize: '0.8rem',
+              fontWeight: '600',
+              padding: '8px 14px',
+              borderRadius: '9999px',
+              background: ambientOn ? 'rgba(255, 183, 77, 0.15)' : 'rgba(255,255,255,0.06)',
+              border: ambientOn ? '1px solid rgba(255, 183, 77, 0.35)' : '1px solid rgba(255,255,255,0.1)',
+              backdropFilter: 'blur(12px)',
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+            }}
+            className="hud-button"
+          >
+            <Wind size={14} />
+            <span>{ambientOn ? 'AMBIENCE ON' : 'AMBIENCE OFF'}</span>
+          </button>
+          
+          <button
+            onClick={() => setVideoVisible(v => !v)}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              color: videoVisible ? '#ffb74d' : '#fff',
+              fontSize: '0.8rem',
+              fontWeight: '600',
+              padding: '8px 14px',
+              borderRadius: '9999px',
+              background: videoVisible ? 'rgba(255, 183, 77, 0.2)' : 'rgba(255,255,255,0.08)',
+              border: videoVisible ? '1px solid rgba(255, 183, 77, 0.4)' : '1px solid rgba(255,255,255,0.12)',
+              backdropFilter: 'blur(12px)',
+              cursor: 'pointer',
+            }}
+            className="hud-button"
+          >
+            <Tv size={14} />
+            <span>{videoVisible ? 'HIDE TV' : 'SHOW TV'}</span>
+          </button>
+        </div>
+      </header>
+
+      {/* Center Telugu Ambiance Display */}
+      <div style={{
+        zIndex: 10,
+        textAlign: 'center',
+        padding: '0 24px',
+        margin: 'auto 0',
+      }}>
+        <p style={{
+          fontSize: '1.4rem',
+          fontWeight: '500',
+          color: '#ffe0b2',
+          margin: 0,
+          textShadow: '0 3px 12px rgba(0,0,0,0.9)',
+          letterSpacing: '0.02em',
+          lineHeight: '1.5',
+        }}>
+          {currentSong?.quote || 'పాత జ్ఞాపకాలు... మధురమైన గీతాలు... 💈'}
+        </p>
+      </div>
+
+      {/* Bottom HUD Capsule Media Player (Matches Tractor Anna UI) */}
+      <div style={{
+        zIndex: 20,
+        width: '100%',
+        maxWidth: '680px',
+        margin: '0 auto 24px',
+        padding: '0 20px',
+      }}>
         <div style={{
-          zIndex: 10,
+          background: 'rgba(15, 17, 26, 0.65)',
+          backdropFilter: 'blur(30px) saturate(160%)',
+          border: '1px solid rgba(255, 204, 128, 0.2)',
+          borderRadius: '24px',
+          padding: '20px 24px',
           display: 'flex',
           flexDirection: 'column',
-          flex: 1,
-          padding: '36px',
-          paddingBottom: 'calc(36px + var(--bottom-safe-area))',
+          gap: '16px',
+          boxShadow: '0 25px 60px -15px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.1)',
         }}>
-          {/* Header */}
-          <header style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '30px',
-          }}>
-            <Link href="/" style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              color: '#d7ccc8',
-              textDecoration: 'none',
-              fontSize: '0.9rem',
-              fontWeight: '600',
-              padding: '8px 12px',
-              borderRadius: '8px',
-              backgroundColor: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.05)',
-              transition: 'color 0.2s',
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.color = '#ffcc80'}
-            onMouseLeave={(e) => e.currentTarget.style.color = '#d7ccc8'}
-            >
-              <ChevronLeft size={16} />
-              <span>వెనుకకు</span>
-            </Link>
-
-            <div style={{ textAlign: 'center' }}>
-              <h1 style={{ fontSize: '1.25rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px', color: '#ffcc80' }}>
-                <span>💈 రాయల్ సెలూన్ (ROYAL SALOON)</span>
-              </h1>
-            </div>
-
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontSize: '0.75rem',
-              color: '#d7ccc8',
-              backgroundColor: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.05)',
-              padding: '6px 12px',
-              borderRadius: '16px',
-            }}>
-              <Users size={12} style={{ color: '#ffb74d' }} />
-              <span>{presenceCount} లోపల ఉన్నారు</span>
-            </div>
-          </header>
-
-          {/* Grid Panel Area */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(0, 1.2fr) minmax(0, 1fr)',
-            gap: '32px',
-            flex: 1,
-            alignItems: 'start',
-            maxWidth: '1200px',
-            width: '100%',
-            margin: '0 auto',
-          }} className="responsive-grid-layout">
+          {/* Top Row: Track Info & Album Art (Left) | Controls & Volume (Right) */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '16px' }}>
             
-            {/* Left Panel: The Retro CRT TV Frame wrapping YouTube Player */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              
-              {/* Outer CRT TV Cabinet Container */}
-              <div 
-                style={{
-                  backgroundColor: '#4e342e', // Retro dark brown TV plastic/wood casing
-                  borderRadius: '24px',
-                  padding: '24px 36px 24px 24px',
-                  boxShadow: '0 20px 40px rgba(0,0,0,0.6), inset 0 2px 10px rgba(255,255,255,0.1)',
-                  border: '8px solid #3e2723',
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 80px', // Screen vs controls column
-                  gap: '20px',
-                  alignItems: 'center',
-                  position: 'relative',
-                }}
-                className="responsive-tv-layout"
-              >
-                {/* Screen outer bezel */}
-                <div style={{
-                  backgroundColor: '#151515',
-                  padding: '16px',
-                  borderRadius: '20px',
-                  border: '6px solid #2e1c16',
-                  boxShadow: 'inset 0 0 20px rgba(0,0,0,0.9)',
-                  position: 'relative',
-                  aspectRatio: '4/3', // Vintage ratio representation
-                  width: '100%',
-                }}>
-                  {/* Scanline Flickering overlay filter */}
-                  <div 
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      background: 'linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06))',
-                      backgroundSize: '100% 4px, 6px 100%',
-                      zIndex: 6,
-                      pointerEvents: 'none',
-                      opacity: 0.45,
-                      animation: 'scanline-flicker 0.15s infinite',
-                    }}
+            {/* Track Info & Vinyl Art */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
+              <div style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '50%',
+                overflow: 'hidden',
+                border: '3px solid #2e1c16',
+                boxShadow: '0 0 0 2px rgba(255, 183, 77, 0.3), 0 8px 16px rgba(0,0,0,0.6)',
+                flexShrink: 0,
+                position: 'relative',
+                background: '#000',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                animationName: 'spin',
+                animationDuration: '8s',
+                animationTimingFunction: 'linear',
+                animationIterationCount: 'infinite',
+                animationPlayState: isPlaying ? 'running' : 'paused'
+              }}>
+                {currentSong?.youtubeVideoId ? (
+                  <img
+                    src={`https://img.youtube.com/vi/${currentSong.youtubeVideoId}/hqdefault.jpg`}
+                    alt="Track Art"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
-                  
-                  {/* Embedded Player */}
-                  <div style={{ width: '100%', height: '100%', borderRadius: '8px', overflow: 'hidden' }}>
-                    <YouTubePlayer
-                      videoId={currentSong?.youtubeVideoId}
-                      isPlaying={isPlaying}
-                      volume={volume}
-                      onStateChange={handleStateChange}
-                      onPlayerReady={handlePlayerReady}
-                      onTimeUpdate={handleTimeUpdate}
-                    />
-                  </div>
-                </div>
-
-                {/* TV Cabinet Dial Controls */}
+                ) : (
+                  <span style={{ fontSize: '1.2rem' }}>💈</span>
+                )}
                 <div style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  height: '80%',
-                  gap: '16px',
-                }} className="tv-dials">
-                  {/* Channel Knob */}
-                  <div style={{ textAlign: 'center', width: '100%' }}>
-                    <div style={{
-                      width: '40px',
-                      height: '40px',
-                      borderRadius: '50%',
-                      backgroundColor: '#2e1c16',
-                      border: '3px solid #ffb74d',
-                      margin: '0 auto 4px',
-                      position: 'relative',
-                      boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
-                      transform: `rotate(${currentSongIndex * 60}deg)`,
-                      transition: 'transform 0.4s ease',
-                      cursor: 'pointer'
-                    }}
-                    onClick={handleNext}
-                    >
-                      {/* Knob Indicator line */}
-                      <div style={{
-                        position: 'absolute',
-                        top: '4px',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '4px',
-                        height: '10px',
-                        backgroundColor: '#ffb74d',
-                        borderRadius: '2px'
-                      }} />
-                    </div>
-                    <span style={{ fontSize: '0.65rem', color: '#ffcc80', fontWeight: 'bold', fontFamily: 'var(--font-mono)' }}>CHANNELS</span>
-                  </div>
-
-                  {/* Volume Knob representation */}
-                  <div style={{ textAlign: 'center', width: '100%' }}>
-                    <div style={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '50%',
-                      backgroundColor: '#2e1c16',
-                      border: '3px solid #d7ccc8',
-                      margin: '0 auto 4px',
-                      position: 'relative',
-                      boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
-                      transform: `rotate(${volume * 2.7}deg)`,
-                      transition: 'transform 0.1s ease',
-                    }} />
-                    <span style={{ fontSize: '0.65rem', color: '#d7ccc8', fontFamily: 'var(--font-mono)' }}>VOLUME</span>
-                  </div>
-
-                  {/* Speaker Grill slats */}
-                  <div style={{
-                    width: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '4px',
-                    padding: '8px 0',
-                    borderTop: '2px solid rgba(0,0,0,0.4)',
-                    borderBottom: '2px solid rgba(0,0,0,0.4)',
-                  }}>
-                    <div style={{ height: '3px', backgroundColor: 'rgba(0,0,0,0.4)', borderRadius: '1px' }} />
-                    <div style={{ height: '3px', backgroundColor: 'rgba(0,0,0,0.4)', borderRadius: '1px' }} />
-                    <div style={{ height: '3px', backgroundColor: 'rgba(0,0,0,0.4)', borderRadius: '1px' }} />
-                    <div style={{ height: '3px', backgroundColor: 'rgba(0,0,0,0.4)', borderRadius: '1px' }} />
-                    <div style={{ height: '3px', backgroundColor: 'rgba(0,0,0,0.4)', borderRadius: '1px' }} />
-                  </div>
-
-                  {/* TV power indicator light */}
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
-                    <span style={{
-                      width: '8px',
-                      height: '8px',
-                      borderRadius: '50%',
-                      backgroundColor: isPlaying ? '#4caf50' : '#d84315',
-                      boxShadow: isPlaying ? '0 0 8px #4caf50' : '0 0 8px #d84315',
-                      display: 'inline-block'
-                    }} />
-                    <span style={{ fontSize: '0.55rem', color: '#d7ccc8', fontFamily: 'var(--font-mono)' }}>POWER</span>
-                  </div>
-                </div>
-
+                  position: 'absolute',
+                  width: '8px',
+                  height: '8px',
+                  borderRadius: '50%',
+                  background: '#151515',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: 2
+                }} />
               </div>
 
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
+                <span style={{ fontSize: '1.05rem', fontWeight: '800', color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {currentSong?.title || 'రాయల్ సెలూన్ గీతాలు'}
+                </span>
+                <span style={{ fontSize: '0.78rem', color: '#ffcc80', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {currentSong?.movie ? `${currentSong.movie} • ${currentSong.year}` : 'S.A. Rajkumar Melodies'}
+                </span>
+              </div>
             </div>
 
-            {/* Right Panel: Controls & Queue */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <NowPlaying
-                song={currentSong}
-                isPlaying={isPlaying}
-                volume={volume}
-                currentTime={currentTime}
-                duration={duration}
-                onPlayPauseToggle={handlePlayPauseToggle}
-                onNext={handleNext}
-                onPrev={handlePrev}
-                onVolumeChange={handleVolumeChange}
-                onSeek={handleSeek}
-              />
+            {/* Playback Controls & Volume */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', flexShrink: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <button
+                  onClick={() => setIsShuffle(prev => !prev)}
+                  title={isShuffle ? "Shuffle On" : "Shuffle Off"}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: isShuffle ? '#ffb74d' : 'rgba(255,255,255,0.4)',
+                    cursor: 'pointer',
+                    padding: '6px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    transition: 'color 0.2s',
+                  }}
+                >
+                  <Shuffle size={16} />
+                </button>
 
-              <UpNext
-                songs={songs}
-                currentSongIndex={currentSongIndex}
-                onSongSelect={handleSongSelect}
-              />
+                <button onClick={prev} title="Previous Track" style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.8)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem' }}>⏮</button>
+
+                <button
+                  onClick={togglePlay}
+                  title={isPlaying ? "Pause" : "Play"}
+                  style={{
+                    width: '44px',
+                    height: '44px',
+                    borderRadius: '50%',
+                    background: '#ffb74d',
+                    border: 'none',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 4px 16px rgba(255, 183, 77, 0.4)',
+                    transition: 'transform 0.2s',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
+                  onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                >
+                  {isPlaying ? (
+                    <Pause size={18} fill="#2e1c16" color="#2e1c16" />
+                  ) : (
+                    <Play size={18} fill="#2e1c16" color="#2e1c16" style={{ transform: 'translateX(1px)' }} />
+                  )}
+                </button>
+
+                <button onClick={next} title="Next Track" style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.8)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem' }}>⏭</button>
+              </div>
+
+              <div style={{ width: '1px', height: '24px', backgroundColor: 'rgba(255,255,255,0.12)' }} />
+
+              {/* Volume Control */}
+              <div
+                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+                onMouseEnter={() => setVolumeHovered(true)}
+                onMouseLeave={() => setVolumeHovered(false)}
+              >
+                <button
+                  onClick={() => changeVolume(volume === 0 ? 50 : 0)}
+                  style={{ background: 'none', border: 'none', color: volume === 0 ? '#ef4444' : '#ffcc80', cursor: 'pointer', padding: 0 }}
+                >
+                  {volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                </button>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={volume}
+                  onChange={e => changeVolume(parseInt(e.target.value))}
+                  style={{
+                    width: '65px',
+                    height: volumeHovered ? '6px' : '4px',
+                    borderRadius: '3px',
+                    background: 'rgba(255,255,255,0.2)',
+                    accentColor: '#ffb74d',
+                    cursor: 'pointer',
+                    transition: 'height 0.15s ease',
+                  }}
+                />
+              </div>
             </div>
 
           </div>
 
-        </div>
-      )}
-        </>
-      )}
+          {/* Bottom Row: Timeline Progress & Timestamps */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', width: '100%' }}>
+            <div
+              onClick={seek}
+              onMouseEnter={() => setSeekHovered(true)}
+              onMouseLeave={() => setSeekHovered(false)}
+              style={{
+                height: seekHovered ? '8px' : '6px',
+                width: '100%',
+                backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                borderRadius: '4px',
+                position: 'relative',
+                cursor: 'pointer',
+                transition: 'height 0.15s ease',
+              }}
+            >
+              <div
+                style={{
+                  height: '100%',
+                  width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`,
+                  background: '#ffb74d',
+                  borderRadius: '4px',
+                  boxShadow: '0 0 10px rgba(255, 183, 77, 0.7)',
+                  transition: 'width 0.1s linear',
+                }}
+              />
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#ffcc80', fontFamily: 'monospace' }}>
+              <span>{fmt(currentTime)}</span>
+              <span>{duration > 0 ? fmt(duration) : '0:00'}</span>
+            </div>
+          </div>
 
+        </div>
+      </div>
+
+      {/* Floating Listeners Badge (Bottom Right) */}
+      <div style={{
+        position: 'fixed',
+        right: '24px',
+        bottom: '24px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        fontSize: '0.85rem',
+        fontWeight: '600',
+        color: '#ffe0b2',
+        background: 'rgba(15, 17, 26, 0.7)',
+        border: '1px solid rgba(255, 204, 128, 0.25)',
+        backdropFilter: 'blur(12px)',
+        padding: '8px 16px',
+        borderRadius: '9999px',
+        zIndex: 35,
+        boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
+      }}>
+        <Users size={14} style={{ color: '#ffb74d' }} />
+        <span>{presenceCount} మంది సెలూన్‌లో ఉన్నారు</span>
+      </div>
+
+      {/* CSS Animations */}
       <style jsx global>{`
-        @media (max-width: 768px) {
-          .responsive-grid-layout {
-            grid-template-columns: 1fr !important;
-            gap: 16px !important;
-          }
-          .responsive-tv-layout {
-            grid-template-columns: 1fr !important;
-            padding: 16px !important;
-          }
-          .tv-dials {
-            flex-direction: row !important;
-            height: auto !important;
-            width: 100% !important;
-            justify-content: space-around !important;
-            border-top: 1px solid rgba(0,0,0,0.2) !important;
-            padding-top: 16px !important;
-          }
-        }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .hud-button:hover { background: rgba(255,255,255,0.16) !important; transform: translateY(-1px); }
       `}</style>
     </div>
   );
 }
+
