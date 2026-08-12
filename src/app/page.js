@@ -598,6 +598,66 @@ export default function Home() {
           .featured-card { height: 250px; }
           .card-name-telugu { font-size: 1.35rem; }
         }
+
+        /* ── FAQ Section Styles ── */
+        .faq-section {
+          width: 100%;
+          max-width: 1020px;
+          margin-top: 64px;
+          margin-bottom: 32px;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+        .faq-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.6rem;
+          color: #f7efe2;
+          font-weight: 700;
+          letter-spacing: -0.01em;
+          border-left: 3px solid #b45309;
+          padding-left: 12px;
+        }
+        .faq-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+        }
+        .faq-item {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 14px;
+          padding: 20px;
+          backdrop-filter: blur(8px);
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+        .faq-question {
+          font-size: 0.92rem;
+          font-weight: 600;
+          color: #e6c8a0;
+          line-height: 1.4;
+        }
+        .faq-answer {
+          font-size: 0.82rem;
+          font-weight: 300;
+          color: rgba(240, 232, 220, 0.65);
+          line-height: 1.5;
+        }
+        @media (max-width: 960px) {
+          .faq-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        @media (max-width: 680px) {
+          .faq-grid {
+            grid-template-columns: 1fr;
+          }
+          .faq-section {
+            margin-top: 48px;
+          }
+        }
       `}</style>
 
       {/* ── Background layers ── */}
@@ -625,10 +685,10 @@ export default function Home() {
         </header>
 
         {/* ── FEATURED ── */}
-        <div className="section-label fade-up d2">
+        <h2 className="section-label fade-up d2" style={{ fontSize: 'inherit', fontWeight: 'inherit', margin: '0 0 12px 0' }}>
           <span className="section-label-text">Open now</span>
-          <div className="section-hr" />
-        </div>
+          <span className="section-hr" />
+        </h2>
 
         <div className="featured-grid fade-up d3">
           {active.map((place) => {
@@ -679,10 +739,10 @@ export default function Home() {
         </div>
 
         {/* ── COMING SOON ── */}
-        <div className="section-label fade-up d4">
+        <h2 className="section-label fade-up d4" style={{ fontSize: 'inherit', fontWeight: 'inherit', margin: '0 0 12px 0' }}>
           <span className="section-label-text">Coming soon</span>
-          <div className="section-hr" />
-        </div>
+          <span className="section-hr" />
+        </h2>
 
         <div className="coming-grid fade-up d5">
           {coming.map((place) => {
@@ -704,6 +764,31 @@ export default function Home() {
             );
           })}
         </div>
+
+        {/* ── FAQ SECTION ── */}
+        <section className="faq-section fade-up d5">
+          <h2 className="faq-title">Frequently Asked Questions</h2>
+          <div className="faq-grid">
+            <div className="faq-item">
+              <h3 className="faq-question">What is Paatalashala?</h3>
+              <p className="faq-answer">
+                Paatalashala is an interactive ambient audio player that blends curated Telugu music with nostalgic cultural soundscapes like farmland tractors, retro saloons, and Hyderabad city auto-rickshaws.
+              </p>
+            </div>
+            <div className="faq-item">
+              <h3 className="faq-question">How does the live listener counter work?</h3>
+              <p className="faq-answer">
+                The live listener counters are powered in real-time by Supabase Presence WebSocket channels, showing the exact count of concurrent visitors on each space.
+              </p>
+            </div>
+            <div className="faq-item">
+              <h3 className="faq-question">Are the music files hosted on Paatalashala?</h3>
+              <p className="faq-answer">
+                No, all music is streamed dynamically in real-time using the official YouTube Player API. No audio files are hosted on our servers.
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* FOOTER */}
         <footer className="site-footer fade-up d5">
