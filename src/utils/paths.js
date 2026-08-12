@@ -1,5 +1,9 @@
 const isProd = process.env.NODE_ENV === 'production';
-const basePath = isProd ? '/paatalashala' : '';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || '';
+
+// Only add /paatalashala prefix if deployed to subdirectory, not on custom domain
+const isCustomDomain = SITE_URL.includes('paatalashala.space') || SITE_URL.includes('localhost') || SITE_URL.includes('127.0.0.1');
+const basePath = isProd && !isCustomDomain ? '/paatalashala' : '';
 
 export function prefixPath(path) {
   if (!path) return '';
