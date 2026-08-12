@@ -13,9 +13,9 @@ export default function DeluxeSaloon() {
   const songs = getSongsForPlace('saloon');
 
   // State variables
-  const [isExperienceStarted, setIsExperienceStarted] = useState(false);
+  const [isExperienceStarted, setIsExperienceStarted] = useState(true);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [volume, setVolume] = useState(40); // Saloons usually play music at lower volume
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
