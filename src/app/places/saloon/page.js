@@ -256,10 +256,10 @@ export default function RoyalSaloon() {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: '24px 32px',
+        padding: '16px 20px',
         width: '100%',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+      }} className="hud-top-header">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <Link href="/" style={{
             display: 'flex',
             alignItems: 'center',
@@ -268,24 +268,25 @@ export default function RoyalSaloon() {
             textDecoration: 'none',
             fontSize: '0.85rem',
             fontWeight: '600',
-            padding: '8px 16px',
+            padding: '8px 14px',
             borderRadius: '9999px',
             background: 'rgba(255,255,255,0.08)',
             border: '1px solid rgba(255,255,255,0.12)',
             backdropFilter: 'blur(12px)',
+            whiteSpace: 'nowrap'
           }} className="hud-button">
             <ChevronLeft size={16} />
             <span>PLACES</span>
           </Link>
           {timeString && (
-            <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }} className="hud-time">
               {timeString}
             </span>
           )}
         </div>
 
         {/* Right Controls */}
-        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
           <button
             onClick={() => setAmbientOn(a => !a)}
             style={{
@@ -293,20 +294,21 @@ export default function RoyalSaloon() {
               alignItems: 'center',
               gap: '6px',
               color: ambientOn ? '#ffb74d' : 'rgba(255,255,255,0.5)',
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               fontWeight: '600',
-              padding: '8px 14px',
+              padding: '8px 12px',
               borderRadius: '9999px',
               background: ambientOn ? 'rgba(255, 183, 77, 0.15)' : 'rgba(255,255,255,0.06)',
               border: ambientOn ? '1px solid rgba(255, 183, 77, 0.35)' : '1px solid rgba(255,255,255,0.1)',
               backdropFilter: 'blur(12px)',
               cursor: 'pointer',
+              whiteSpace: 'nowrap',
               transition: 'all 0.2s',
             }}
             className="hud-button"
           >
             <Wind size={14} />
-            <span>{ambientOn ? 'AMBIENCE ON' : 'AMBIENCE OFF'}</span>
+            <span className="btn-label">{ambientOn ? 'AMBIENCE' : 'OFF'}</span>
           </button>
           
           <button
@@ -316,19 +318,20 @@ export default function RoyalSaloon() {
               alignItems: 'center',
               gap: '6px',
               color: videoVisible ? '#ffb74d' : '#fff',
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               fontWeight: '600',
-              padding: '8px 14px',
+              padding: '8px 12px',
               borderRadius: '9999px',
               background: videoVisible ? 'rgba(255, 183, 77, 0.2)' : 'rgba(255,255,255,0.08)',
               border: videoVisible ? '1px solid rgba(255, 183, 77, 0.4)' : '1px solid rgba(255,255,255,0.12)',
               backdropFilter: 'blur(12px)',
               cursor: 'pointer',
+              whiteSpace: 'nowrap',
             }}
             className="hud-button"
           >
             <Tv size={14} />
-            <span>{videoVisible ? 'HIDE TV' : 'SHOW TV'}</span>
+            <span className="btn-label">{videoVisible ? 'HIDE' : 'VIDEO'}</span>
           </button>
         </div>
       </header>
@@ -336,7 +339,8 @@ export default function RoyalSaloon() {
       {/* Screen Center Title (Matching Tractor Anna position & typography) */}
       <div style={{
         position: 'absolute',
-        top: 0, left: 0, right: 0, bottom: '180px',
+        top: '12vh',
+        left: 0, right: 0,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -351,7 +355,7 @@ export default function RoyalSaloon() {
           letterSpacing: '0.04em',
           color: '#fff',
           margin: 0,
-          textShadow: '0 2px 8px rgba(0,0,0,0.7)',
+          textShadow: '0 2px 8px rgba(0,0,0,0.75)',
           fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif",
           textAlign: 'center'
         }} className="immersive-title">
@@ -586,9 +590,11 @@ export default function RoyalSaloon() {
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .hud-button:hover { background: rgba(255,255,255,0.16) !important; transform: translateY(-1px); }
         @media (max-width: 768px) {
-          .immersive-title { font-size: 2.8rem !important; }
+          .immersive-title { font-size: 2.5rem !important; }
           .volume-slider-container { display: none !important; }
           .listeners-badge { display: none !important; }
+          .hud-time { display: none !important; }
+          .btn-label { font-size: 0.7rem !important; }
         }
       `}</style>
     </div>

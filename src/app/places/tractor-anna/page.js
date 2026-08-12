@@ -349,29 +349,29 @@ export default function TractorAnna() {
           )}
 
           {/* === HUD Overlay === */}
-          <div style={{ zIndex: 10, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100vh', width: '100%', position: 'relative', padding: '20px 32px 24px' }}>
+          <div style={{ zIndex: 10, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100vh', width: '100%', position: 'relative', padding: '16px 20px 24px' }}>
 
             {/* Top */}
             <div style={{ width: '100%' }}>
               <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', width: '100%', minHeight: '44px' }}>
                 {/* Left */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                  <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#fff', textDecoration: 'none', fontSize: '0.85rem', fontWeight: '600', padding: '8px 16px', borderRadius: '9999px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)' }} className="hud-button">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#fff', textDecoration: 'none', fontSize: '0.85rem', fontWeight: '600', padding: '8px 14px', borderRadius: '9999px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)', whiteSpace: 'nowrap' }} className="hud-button">
                     <ChevronLeft size={16} /><span>PLACES</span>
                   </Link>
-                  {timeString && <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }}>{timeString}</span>}
+                  {timeString && <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }} className="hud-time">{timeString}</span>}
                 </div>
 
 
                 {/* Right */}
-                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                   <button onClick={() => setAmbientOn(a => !a)}
-                    style={{ display: 'flex', alignItems: 'center', gap: '6px', color: ambientOn ? '#fbbf24' : 'rgba(255,255,255,0.5)', fontSize: '0.8rem', fontWeight: '600', padding: '8px 14px', borderRadius: '9999px', background: ambientOn ? 'rgba(245,158,11,0.15)' : 'rgba(255,255,255,0.06)', border: ambientOn ? '1px solid rgba(245,158,11,0.35)' : '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(12px)', cursor: 'pointer', transition: 'all 0.2s' }} className="hud-button">
-                    <Wind size={14} /><span>{ambientOn ? 'AMBIENCE ON' : 'AMBIENCE OFF'}</span>
+                    style={{ display: 'flex', alignItems: 'center', gap: '6px', color: ambientOn ? '#fbbf24' : 'rgba(255,255,255,0.5)', fontSize: '0.78rem', fontWeight: '600', padding: '8px 12px', borderRadius: '9999px', background: ambientOn ? 'rgba(245,158,11,0.15)' : 'rgba(255,255,255,0.06)', border: ambientOn ? '1px solid rgba(245,158,11,0.35)' : '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(12px)', cursor: 'pointer', whiteSpace: 'nowrap', transition: 'all 0.2s' }} className="hud-button">
+                    <Wind size={14} /><span className="btn-label">{ambientOn ? 'AMBIENCE' : 'OFF'}</span>
                   </button>
                   <button onClick={() => setVideoVisible(v => !v)}
-                    style={{ display: 'flex', alignItems: 'center', gap: '6px', color: videoVisible ? '#fbbf24' : '#fff', fontSize: '0.8rem', fontWeight: '600', padding: '8px 14px', borderRadius: '9999px', background: videoVisible ? 'rgba(245,158,11,0.2)' : 'rgba(255,255,255,0.08)', border: videoVisible ? '1px solid rgba(245,158,11,0.4)' : '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)', cursor: 'pointer' }} className="hud-button">
-                    <Tv size={14} /><span>{videoVisible ? 'HIDE VIDEO' : 'SHOW VIDEO'}</span>
+                    style={{ display: 'flex', alignItems: 'center', gap: '6px', color: videoVisible ? '#fbbf24' : '#fff', fontSize: '0.78rem', fontWeight: '600', padding: '8px 12px', borderRadius: '9999px', background: videoVisible ? 'rgba(245,158,11,0.2)' : 'rgba(255,255,255,0.08)', border: videoVisible ? '1px solid rgba(245,158,11,0.4)' : '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)', cursor: 'pointer', whiteSpace: 'nowrap' }} className="hud-button">
+                    <Tv size={14} /><span className="btn-label">{videoVisible ? 'HIDE' : 'VIDEO'}</span>
                   </button>
                 </div>
               </header>
@@ -743,9 +743,17 @@ export default function TractorAnna() {
         .control-icon:hover { color: #fff !important; transform: scale(1.1); }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @media (max-width: 768px) {
-          .immersive-title { font-size: 2.8rem !important; }
-          .tractor-hero-sprite { width: 420px !important; }
+          .immersive-title { font-size: 2.5rem !important; }
+          .tractor-hero-sprite {
+            width: 90vw !important;
+            max-width: 380px !important;
+            bottom: 120px !important;
+            opacity: 0.9 !important;
+          }
           .volume-slider-container { display: none !important; }
+          .hud-time { display: none !important; }
+          .btn-label { font-size: 0.7rem !important; }
+          .capsule-hud { padding: 14px 16px !important; border-radius: 18px !important; }
         }
       `}</style>
     </div>
