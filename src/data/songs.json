@@ -4539,17 +4539,16 @@
     "spotifyUrl": "https://open.spotify.com/search/Door No 1",
     "sequence": 1,
     "active": true,
-    "quote": "జనం ప్రశాంతంగా ఉంటేనే... ఆటోకి ఏ ఇబ్బంది లేకుండా ముందుకు వెళ్తుంది",
+    "quote": "Andhamaina ammayini, finance lo theskuna auto ni maintain cheyandam kastam.",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-1",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 1"
     }
   },
   {
@@ -4565,17 +4564,16 @@
     "spotifyUrl": "https://open.spotify.com/search/Tauba Tauba",
     "sequence": 2,
     "active": true,
-    "quote": "డ్రైవింగ్ నా వృత్తి... ధర్మం నా మార్గం!",
+    "quote": "No money for Volkswagen, thus Auto.",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-2",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 2"
     }
   },
   {
@@ -4591,17 +4589,16 @@
     "spotifyUrl": "https://open.spotify.com/search/Blockbuster",
     "sequence": 3,
     "active": true,
-    "quote": "కష్టపడితేనే గౌరవం... ఆటో రాజా మార్గం!",
+    "quote": "Love is Name, Sex is Game, Take the Name, Play the Game",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-3",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 3"
     }
   },
   {
@@ -4617,17 +4614,16 @@
     "spotifyUrl": "https://open.spotify.com/search/Welcome Kanakam",
     "sequence": 4,
     "active": true,
-    "quote": "ప్రేమతో వస్తే స్నేహితుడిని... వేగంతో వస్తే కింగ్‌ని!",
+    "quote": "If you love a lady Don’t touch the body, If you touch the body You become a daddy…",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-4",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 4"
     }
   },
   {
@@ -4643,17 +4639,16 @@
     "spotifyUrl": "https://open.spotify.com/search/Chinuku Chinuku Andelatho",
     "sequence": 5,
     "active": true,
-    "quote": "నా స్పీడుకి స్టీరింగ్ ఫిదా... నా మాస్‌కి రోడ్డు ఫిదా!",
+    "quote": "కష్టపడితేనే గౌరవం... ఆటో జానీ మార్గం!",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-5",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 5"
     }
   },
   {
@@ -4669,17 +4664,16 @@
     "spotifyUrl": "https://open.spotify.com/search/Ayyo Paapam",
     "sequence": 6,
     "active": true,
-    "quote": "నవ్వుతూ సాగిపో... కాలం మనదేరా!",
+    "quote": "ఆటో జానీ... ఊరంతా నాదే హవా!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-6",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 6"
     }
   },
   {
@@ -4695,17 +4689,16 @@
     "spotifyUrl": "https://open.spotify.com/search/Ittage Recchipodham",
     "sequence": 7,
     "active": true,
-    "quote": "ఆటో రాజా... ఊరంతా నాదే హవా!",
+    "quote": "జనం ప్రశాంతంగా ఉంటేనే... ఆటో జానీ ముందుకు వెళ్తాడు",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-7",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 7"
     }
   },
   {
@@ -4721,17 +4714,16 @@
     "spotifyUrl": "https://open.spotify.com/search/Monalisa Na Sister",
     "sequence": 8,
     "active": true,
-    "quote": "మనస్సు మంచిదైతే మార్గం సుగమమే!",
+    "quote": "ఎంత అందమైన పువ్వైనా వాడిపోక తప్పదు... ఎంత అందమైన అమ్మాయైనా ఆంటీ అవ్వక తప్పదు!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-8",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 8"
     }
   },
   {
@@ -4749,15 +4741,14 @@
     "active": true,
     "quote": "ట్రాఫిక్ ఎన్నున్నా... నా దారి రహదారి!",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-9",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 9"
     }
   },
   {
@@ -4775,15 +4766,14 @@
     "active": true,
     "quote": "నమ్మకమే నా పెట్రోల్... ప్రేమయే నా బ్రేక్!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-10",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 10"
     }
   },
   {
@@ -4801,15 +4791,14 @@
     "active": true,
     "quote": "రహదారి రాజు... మాస్ రాజా ఆటో!",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-11",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 11"
     }
   },
   {
@@ -4827,15 +4816,14 @@
     "active": true,
     "quote": "సంగీతమే ఇంధనం... పాటలే ప్రయాణం!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-12",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 12"
     }
   },
   {
@@ -4853,15 +4841,14 @@
     "active": true,
     "quote": "జనం ప్రశాంతంగా ఉంటేనే... ఆటోకి ఏ ఇబ్బంది లేకుండా ముందుకు వెళ్తుంది",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-13",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 13"
     }
   },
   {
@@ -4879,15 +4866,14 @@
     "active": true,
     "quote": "డ్రైవింగ్ నా వృత్తి... ధర్మం నా మార్గం!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-14",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 14"
     }
   },
   {
@@ -4905,15 +4891,14 @@
     "active": true,
     "quote": "కష్టపడితేనే గౌరవం... ఆటో రాజా మార్గం!",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-15",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 15"
     }
   },
   {
@@ -4931,15 +4916,14 @@
     "active": true,
     "quote": "ప్రేమతో వస్తే స్నేహితుడిని... వేగంతో వస్తే కింగ్‌ని!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-16",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 16"
     }
   },
   {
@@ -4957,15 +4941,14 @@
     "active": true,
     "quote": "నా స్పీడుకి స్టీరింగ్ ఫిదా... నా మాస్‌కి రోడ్డు ఫిదా!",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-17",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 17"
     }
   },
   {
@@ -4983,15 +4966,14 @@
     "active": true,
     "quote": "నవ్వుతూ సాగిపో... కాలం మనదేరా!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-18",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 18"
     }
   },
   {
@@ -5009,15 +4991,14 @@
     "active": true,
     "quote": "ఆటో రాజా... ఊరంతా నాదే హవా!",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-19",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 19"
     }
   },
   {
@@ -5035,15 +5016,14 @@
     "active": true,
     "quote": "మనస్సు మంచిదైతే మార్గం సుగమమే!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-20",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 20"
     }
   },
   {
@@ -5061,15 +5041,14 @@
     "active": true,
     "quote": "ట్రాఫిక్ ఎన్నున్నా... నా దారి రహదారి!",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-21",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 21"
     }
   },
   {
@@ -5087,15 +5066,14 @@
     "active": true,
     "quote": "నమ్మకమే నా పెట్రోల్... ప్రేమయే నా బ్రేక్!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-22",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 22"
     }
   },
   {
@@ -5113,15 +5091,14 @@
     "active": true,
     "quote": "రహదారి రాజు... మాస్ రాజా ఆటో!",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-23",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 23"
     }
   },
   {
@@ -5139,15 +5116,14 @@
     "active": true,
     "quote": "సంగీతమే ఇంధనం... పాటలే ప్రయాణం!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-24",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 24"
     }
   },
   {
@@ -5165,15 +5141,14 @@
     "active": true,
     "quote": "జనం ప్రశాంతంగా ఉంటేనే... ఆటోకి ఏ ఇబ్బంది లేకుండా ముందుకు వెళ్తుంది",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-25",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 25"
     }
   },
   {
@@ -5191,15 +5166,14 @@
     "active": true,
     "quote": "డ్రైవింగ్ నా వృత్తి... ధర్మం నా మార్గం!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-26",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 26"
     }
   },
   {
@@ -5217,15 +5191,14 @@
     "active": true,
     "quote": "కష్టపడితేనే గౌరవం... ఆటో రాజా మార్గం!",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-27",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 27"
     }
   },
   {
@@ -5243,15 +5216,14 @@
     "active": true,
     "quote": "ప్రేమతో వస్తే స్నేహితుడిని... వేగంతో వస్తే కింగ్‌ని!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-28",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 28"
     }
   },
   {
@@ -5269,15 +5241,14 @@
     "active": true,
     "quote": "నా స్పీడుకి స్టీరింగ్ ఫిదా... నా మాస్‌కి రోడ్డు ఫిదా!",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-29",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 29"
     }
   },
   {
@@ -5295,15 +5266,14 @@
     "active": true,
     "quote": "నవ్వుతూ సాగిపో... కాలం మనదేరా!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-30",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 30"
     }
   },
   {
@@ -5321,15 +5291,14 @@
     "active": true,
     "quote": "ఆటో రాజా... ఊరంతా నాదే హవా!",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-31",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 31"
     }
   },
   {
@@ -5347,15 +5316,14 @@
     "active": true,
     "quote": "మనస్సు మంచిదైతే మార్గం సుగమమే!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-32",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 32"
     }
   },
   {
@@ -5373,15 +5341,14 @@
     "active": true,
     "quote": "ట్రాఫిక్ ఎన్నున్నా... నా దారి రహదారి!",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-33",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 33"
     }
   },
   {
@@ -5399,15 +5366,14 @@
     "active": true,
     "quote": "నమ్మకమే నా పెట్రోల్... ప్రేమయే నా బ్రేక్!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-34",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 34"
     }
   },
   {
@@ -5425,15 +5391,14 @@
     "active": true,
     "quote": "రహదారి రాజు... మాస్ రాజా ఆటో!",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-35",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 35"
     }
   },
   {
@@ -5451,15 +5416,14 @@
     "active": true,
     "quote": "సంగీతమే ఇంధనం... పాటలే ప్రయాణం!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-36",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 36"
     }
   },
   {
@@ -5477,15 +5441,14 @@
     "active": true,
     "quote": "జనం ప్రశాంతంగా ఉంటేనే... ఆటోకి ఏ ఇబ్బంది లేకుండా ముందుకు వెళ్తుంది",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-37",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 37"
     }
   },
   {
@@ -5503,15 +5466,14 @@
     "active": true,
     "quote": "డ్రైవింగ్ నా వృత్తి... ధర్మం నా మార్గం!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-38",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 38"
     }
   },
   {
@@ -5529,15 +5491,14 @@
     "active": true,
     "quote": "కష్టపడితేనే గౌరవం... ఆటో రాజా మార్గం!",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-39",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 39"
     }
   },
   {
@@ -5555,15 +5516,14 @@
     "active": true,
     "quote": "ప్రేమతో వస్తే స్నేహితుడిని... వేగంతో వస్తే కింగ్‌ని!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-40",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 40"
     }
   },
   {
@@ -5581,15 +5541,14 @@
     "active": true,
     "quote": "నా స్పీడుకి స్టీరింగ్ ఫిదా... నా మాస్‌కి రోడ్డు ఫిదా!",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-41",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 41"
     }
   },
   {
@@ -5607,15 +5566,14 @@
     "active": true,
     "quote": "నవ్వుతూ సాగిపో... కాలం మనదేరా!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-42",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 42"
     }
   },
   {
@@ -5633,15 +5591,14 @@
     "active": true,
     "quote": "ఆటో రాజా... ఊరంతా నాదే హవా!",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-43",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 43"
     }
   },
   {
@@ -5659,15 +5616,14 @@
     "active": true,
     "quote": "మనస్సు మంచిదైతే మార్గం సుగమమే!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-44",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 44"
     }
   },
   {
@@ -5685,15 +5641,14 @@
     "active": true,
     "quote": "ట్రాఫిక్ ఎన్నున్నా... నా దారి రహదారి!",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-45",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 45"
     }
   },
   {
@@ -5711,15 +5666,14 @@
     "active": true,
     "quote": "నమ్మకమే నా పెట్రోల్... ప్రేమయే నా బ్రేక్!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-46",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 46"
     }
   },
   {
@@ -5737,15 +5691,14 @@
     "active": true,
     "quote": "రహదారి రాజు... మాస్ రాజా ఆటో!",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-47",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 47"
     }
   },
   {
@@ -5763,15 +5716,14 @@
     "active": true,
     "quote": "సంగీతమే ఇంధనం... పాటలే ప్రయాణం!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-48",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 48"
     }
   },
   {
@@ -5789,15 +5741,14 @@
     "active": true,
     "quote": "జనం ప్రశాంతంగా ఉంటేనే... ఆటోకి ఏ ఇబ్బంది లేకుండా ముందుకు వెళ్తుంది",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-49",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 49"
     }
   },
   {
@@ -5815,15 +5766,14 @@
     "active": true,
     "quote": "డ్రైవింగ్ నా వృత్తి... ధర్మం నా మార్గం!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-50",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 50"
     }
   },
   {
@@ -5841,15 +5791,14 @@
     "active": true,
     "quote": "కష్టపడితేనే గౌరవం... ఆటో రాజా మార్గం!",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-51",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 51"
     }
   },
   {
@@ -5867,15 +5816,14 @@
     "active": true,
     "quote": "ప్రేమతో వస్తే స్నేహితుడిని... వేగంతో వస్తే కింగ్‌ని!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-52",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 52"
     }
   },
   {
@@ -5893,15 +5841,14 @@
     "active": true,
     "quote": "నా స్పీడుకి స్టీరింగ్ ఫిదా... నా మాస్‌కి రోడ్డు ఫిదా!",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-53",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 53"
     }
   },
   {
@@ -5919,15 +5866,14 @@
     "active": true,
     "quote": "నవ్వుతూ సాగిపో... కాలం మనదేరా!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-54",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 54"
     }
   },
   {
@@ -5945,15 +5891,14 @@
     "active": true,
     "quote": "ఆటో రాజా... ఊరంతా నాదే హవా!",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-55",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 55"
     }
   },
   {
@@ -5971,15 +5916,14 @@
     "active": true,
     "quote": "మనస్సు మంచిదైతే మార్గం సుగమమే!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-56",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 56"
     }
   },
   {
@@ -5997,15 +5941,14 @@
     "active": true,
     "quote": "ట్రాఫిక్ ఎన్నున్నా... నా దారి రహదారి!",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-57",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 57"
     }
   },
   {
@@ -6023,15 +5966,14 @@
     "active": true,
     "quote": "నమ్మకమే నా పెట్రోల్... ప్రేమయే నా బ్రేక్!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-58",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 58"
     }
   },
   {
@@ -6049,15 +5991,14 @@
     "active": true,
     "quote": "రహదారి రాజు... మాస్ రాజా ఆటో!",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-59",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 59"
     }
   },
   {
@@ -6075,15 +6016,14 @@
     "active": true,
     "quote": "సంగీతమే ఇంధనం... పాటలే ప్రయాణం!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-60",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 60"
     }
   },
   {
@@ -6101,15 +6041,14 @@
     "active": true,
     "quote": "జనం ప్రశాంతంగా ఉంటేనే... ఆటోకి ఏ ఇబ్బంది లేకుండా ముందుకు వెళ్తుంది",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-61",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 61"
     }
   },
   {
@@ -6127,15 +6066,14 @@
     "active": true,
     "quote": "డ్రైవింగ్ నా వృత్తి... ధర్మం నా మార్గం!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-62",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 62"
     }
   },
   {
@@ -6153,15 +6091,14 @@
     "active": true,
     "quote": "కష్టపడితేనే గౌరవం... ఆటో రాజా మార్గం!",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-63",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 63"
     }
   },
   {
@@ -6179,15 +6116,14 @@
     "active": true,
     "quote": "ప్రేమతో వస్తే స్నేహితుడిని... వేగంతో వస్తే కింగ్‌ని!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-64",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 64"
     }
   },
   {
@@ -6205,15 +6141,14 @@
     "active": true,
     "quote": "నా స్పీడుకి స్టీరింగ్ ఫిదా... నా మాస్‌కి రోడ్డు ఫిదా!",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-65",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 65"
     }
   },
   {
@@ -6231,15 +6166,14 @@
     "active": true,
     "quote": "నవ్వుతూ సాగిపో... కాలం మనదేరా!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-66",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 66"
     }
   },
   {
@@ -6257,15 +6191,14 @@
     "active": true,
     "quote": "ఆటో రాజా... ఊరంతా నాదే హవా!",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-67",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 67"
     }
   },
   {
@@ -6283,15 +6216,14 @@
     "active": true,
     "quote": "మనస్సు మంచిదైతే మార్గం సుగమమే!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-68",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 68"
     }
   },
   {
@@ -6309,15 +6241,14 @@
     "active": true,
     "quote": "ట్రాఫిక్ ఎన్నున్నా... నా దారి రహదారి!",
     "ambience": {
-      "id": "city-perspective-1",
+      "id": "auto-ambience-69",
       "theme": "city",
       "background": "url('/images/city_perspective_road1.jpg')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "City Street Road Perspective"
+      "description": "Auto Road Combination 69"
     }
   },
   {
@@ -6335,15 +6266,14 @@
     "active": true,
     "quote": "నమ్మకమే నా పెట్రోల్... ప్రేమయే నా బ్రేక్!",
     "ambience": {
-      "id": "city-perspective-2",
-      "theme": "sunset",
+      "id": "auto-ambience-70",
+      "theme": "city",
       "background": "url('/images/city_perspective_road2.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.95,
-      "description": "Sunset City Highway Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 70"
     }
   },
   {
@@ -6361,15 +6291,14 @@
     "active": true,
     "quote": "రహదారి రాజు... మాస్ రాజా ఆటో!",
     "ambience": {
-      "id": "city-vector-street",
-      "theme": "vector",
-      "background": "url('/images/city_vector_road.png')",
-      "vehicleSprite": "/images/auto_hero_front.png",
+      "id": "auto-ambience-71",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road3.jpg')",
+      "vehicleSprite": "/images/auto_hero_baasha.png",
       "weather": "clear",
-      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Town Shopping Street Perspective"
+      "description": "Auto Road Combination 71"
     }
   },
   {
@@ -6387,15 +6316,14 @@
     "active": true,
     "quote": "సంగీతమే ఇంధనం... పాటలే ప్రయాణం!",
     "ambience": {
-      "id": "city-skyline-road",
-      "theme": "skyline",
-      "background": "url('/images/city_skyline_road.png')",
+      "id": "auto-ambience-72",
+      "theme": "city",
+      "background": "url('/images/hyderabad_street_background.jpg')",
       "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Skyline Highway Curve Perspective"
+      "brightness": 1.0,
+      "description": "Auto Road Combination 72"
     }
   }
 ]

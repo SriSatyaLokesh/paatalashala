@@ -34,22 +34,18 @@ export default function AutoRaja() {
   const [seekHovered, setSeekHovered]   = useState(false);
   const [volumeHovered, setVolumeHovered] = useState(false);
   const selectedSpriteIdx = currentSongIndex !== null ? (currentSongIndex % AUTO_SPRITES.length) : 0;
-
-  const playerRef  = useRef(null);
-  const ambientRef = useRef(null);
-
   const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
   const rawAmbience = currentSong?.ambience || {
     background: "url('/images/city_perspective_road1.jpg')",
+    vehicleSprite: "/images/auto_hero_baasha.png",
     weather: 'clear',
     particles: 'dust'
   };
 
-  const activeSpritePath = AUTO_SPRITES[selectedSpriteIdx].sprite;
   const ambience = {
     ...rawAmbience,
     background: prefixPath(rawAmbience.background),
-    vehicleSprite: prefixPath(activeSpritePath)
+    vehicleSprite: prefixPath(rawAmbience.vehicleSprite || "/images/auto_hero_baasha.png")
   };
 
   // === Clock ===
@@ -833,13 +829,13 @@ export default function AutoRaja() {
         /* 60% SCREEN HERO AUTO CONTAINER */
         .auto-hero-60-container {
           position: absolute;
-          bottom: 220px;
+          bottom: 150px;
           left: 50%;
           transform: translateX(-50%);
-          width: 60vw;
-          max-width: 840px;
-          height: 60vh;
-          max-height: 650px;
+          width: 50vw;
+          max-width: 680px;
+          height: 48vh;
+          max-height: 480px;
           z-index: 5;
           display: flex;
           align-items: center;
