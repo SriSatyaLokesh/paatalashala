@@ -493,19 +493,19 @@ export default function Home() {
           background: rgba(255,255,255,0.04);
           border: 1px solid rgba(255,255,255,0.07);
           display: flex; align-items: center; justify-content: center;
-          color: rgba(180,140,90,0.35);
+          color: rgba(229, 185, 126, 0.7);
         }
         .coming-name {
           font-size: 0.8rem;
           font-weight: 600;
-          color: rgba(230,200,160,0.4);
+          color: rgba(243, 222, 194, 0.9);
           line-height: 1.3;
         }
         .coming-tag {
           display: inline-flex; align-items: center; gap: 4px;
           font-size: 0.6rem; font-weight: 700;
           letter-spacing: 0.12em; text-transform: uppercase;
-          color: rgba(140,100,60,0.5);
+          color: rgba(245, 158, 11, 0.85);
         }
 
         /* ── Footer ── */
@@ -752,7 +752,7 @@ export default function Home() {
                 <div className="coming-icon"><Icon /></div>
                 <div>
                   <div className="coming-name">{place.name}</div>
-                  <div style={{ fontSize: '0.67rem', color: 'rgba(150,110,70,0.38)', marginTop: '3px', fontStyle: 'italic' }}>
+                  <div style={{ fontSize: '0.67rem', color: 'rgba(230, 220, 200, 0.62)', marginTop: '3px', fontStyle: 'italic' }}>
                     {place.tagline}
                   </div>
                 </div>
