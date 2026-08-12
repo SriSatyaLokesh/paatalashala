@@ -1,12 +1,11 @@
 # 🎵 Paatalashala (పాటలశాల)
 
-![Paatalashala Banner](public/images/readme_banner.png)
+<img width="1895" height="378" alt="image" src="https://github.com/user-attachments/assets/298a57a7-0f2f-4431-a4ff-bd3c4b63f395" />
+
 
 > **Handcrafted Telugu ambient soundscapes from the nostalgic places that shaped us. Pick a place. Let it play.**
 
 Paatalashala is an immersive, interactive audio web application designed to trigger warm nostalgia by pairing traditional Telugu music with ambient background soundscapes. Escape to rural farms, retro street-corner barber shops, or the bustling roads of Hyderabad.
-
----
 
 ## 🗺️ Ambient Sound Spaces
 
@@ -73,6 +72,27 @@ npm run serve:prod
 ```
 The optimized server will accept connections at `http://localhost:<PORT>/paatalashala`.
 
+---
+
+## 📂 Project Structure
+
+```text
+paatalashala/
+├── public/                 # Static assets
+│   ├── audio/              # Ambient loops and custom horns
+│   └── images/             # Sprite components and city/farm backdrops
+├── src/
+│   ├── app/                # Next.js App Router pages
+│   │   ├── page.js         # Main landing dashboard
+│   │   └── places/         # Location page components
+│   │       ├── auto/       # Auto Janie workspace
+│   │       ├── saloon/     # Royal Saloon workspace
+│   │       └── tractor-anna/
+│   ├── components/         # Shared modules (YouTube Player, AmbientWeather)
+│   ├── data/               # Static places and song metadata
+│   └── utils/              # Path helpers & Supabase client wrapper
+└── .env.local              # Local environment credentials (git-ignored)
+```
 ---
 
 *Handcrafted with ❤️ for nostalgic Telugu souls.*
