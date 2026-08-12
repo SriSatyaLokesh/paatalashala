@@ -43,6 +43,34 @@ const IconCanteen = () => (
     <line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
   </svg>
 );
+const IconRadio = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="8" width="20" height="14" rx="2" ry="2"/>
+    <path d="M6 14h.01"/><path d="M10 14h.01"/><path d="M14 14h.01"/><path d="M18 14h.01"/>
+    <circle cx="12" cy="18" r="2"/>
+    <path d="M16 3L8 8"/>
+  </svg>
+);
+const IconTape = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
+    <circle cx="8" cy="12" r="3"/><circle cx="16" cy="12" r="3"/>
+    <path d="M6 12h12"/><path d="M6 16h12"/>
+  </svg>
+);
+const IconBusLocal = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="18" height="13" rx="2"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/>
+    <path d="M3 10h18"/><path d="M8 3v7"/><path d="M16 3v7"/>
+  </svg>
+);
+const IconVanTrip = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M14 18H6a2 2 0 01-2-2V8a2 2 0 012-2h12l4 4v6a2 2 0 01-2 2h-2"/>
+    <circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>
+    <path d="M4 10h18"/><path d="M9 6v4"/>
+  </svg>
+);
 const IconArrow = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
@@ -65,14 +93,16 @@ const ICONS = {
   'saloon': IconScissors,
   'auto': IconAuto,
   'tea-stall': IconCup,
-  'rtc-bus': IconBus,
-  'college-canteen': IconCanteen,
+  'radio': IconRadio,
+  'tape-recorder': IconTape,
+  'palle-velugu': IconBusLocal,
+  'trip-bus': IconVanTrip,
 };
 
 const TELUGU_NAMES = {
   'tractor-anna': 'ట్రాక్టర్ అన్న',
   'saloon': 'రాయల్ సెలూన్',
-  'auto': 'ఆటో రాజా',
+  'auto': 'ఆటో జానీ',
 };
 
 const CARD_BG = {
@@ -193,7 +223,7 @@ export default function Home() {
         /* ── Header ── */
         .site-header {
           text-align: center;
-          margin-bottom: 64px;
+          margin-bottom: 24px;
           max-width: 560px;
           width: 100%;
         }
@@ -242,9 +272,9 @@ export default function Home() {
           display: flex;
           align-items: center;
           gap: 14px;
-          margin-bottom: 22px;
+          margin-bottom: 12px;
           width: 100%;
-          max-width: 900px;
+          max-width: 1020px;
         }
         .section-label-text {
           font-size: 0.65rem;
@@ -263,10 +293,10 @@ export default function Home() {
         /* ── FEATURED CARDS ── */
         .featured-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(3, 1fr);
           gap: 18px;
           width: 100%;
-          max-width: 900px;
+          max-width: 1020px;
           margin-bottom: 52px;
         }
 
@@ -427,10 +457,10 @@ export default function Home() {
         /* ── COMING SOON GRID ── */
         .coming-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(5, 1fr);
           gap: 12px;
           width: 100%;
-          max-width: 900px;
+          max-width: 1020px;
         }
         .coming-card {
           border-radius: 16px;
@@ -531,6 +561,20 @@ export default function Home() {
         .d3 { animation-delay: 0.36s; }
         .d4 { animation-delay: 0.52s; }
         .d5 { animation-delay: 0.66s; }
+
+        @media (max-width: 960px) {
+          .featured-grid {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 680px;
+          }
+          .section-label {
+            max-width: 680px;
+          }
+          .coming-grid {
+            grid-template-columns: repeat(3, 1fr);
+            max-width: 680px;
+          }
+        }
 
         /* ── Mobile ── */
         @media (max-width: 680px) {

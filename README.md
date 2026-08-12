@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎵 Paatalashala (పాటలశాల)
 
-## Getting Started
+> **Handcrafted Telugu ambient soundscapes from the nostalgic places that shaped us. Pick a place. Let it play.**
 
-First, run the development server:
+Paatalashala is an immersive, interactive audio web application designed to trigger warm nostalgia by pairing traditional Telugu music with ambient background soundscapes. Escape to rural farms, retro street-corner barber shops, or the bustling neon-lit roads of Hyderabad.
 
+---
+
+## 🗺️ Ambient Sound Spaces
+
+### 1. 🚜 Tractor Anna (ట్రాక్టర్ అన్న)
+* **Vibe:** Telugu farmland driving vibes.
+* **Atmosphere:** Rhythmic tractor engine rattles, golden rice fields, gentle afternoon breezes, and high-fidelity birds chirping.
+* **Music:** Authentic rural and traditional Telugu folk beats.
+
+### 2. 💈 Royal Saloon (రాయల్ సెలూన్)
+* **Vibe:** Nostalgic neighborhood saloon memories.
+* **Atmosphere:** Clatter of scissors, running ceiling fans, muffled conversations, street traffic, and vintage radio filters.
+* **Music:** Timeless Telugu cinema classics from the golden era.
+
+### 3. 🛺 Auto Janie (ఆటో జానీ)
+* **Vibe:** High-energy Hyderabad street cruise.
+* **Atmosphere:** Revving 3-wheeler engine hums, dynamic rain/dust city weather particle lines, street noise, and loud pneumatic air-horn triggers.
+* **Music:** High-octane Telugu mass beats and commercial chart-busters.
+
+---
+
+## 🚀 Key Features
+
+* **🎛️ Multi-Channel Ambient Mixer:** Adjust the volume of the ambient soundscapes (e.g. tractor hum, street traffic, wind) independently of the main music track.
+* **🌍 Real-Time Live Presence Tracking:** Displays the exact count of active, concurrent listeners on each page using secure, serverless **Supabase Presence** WebSockets.
+* **⚡ Smooth Cross-Fade Transitions:** Implements the Double Background Layer Pattern to fade viewports seamlessly when changing songs, eliminating abrupt image resizing.
+* **🛱 Custom Air Horns & Sounds:** Interactive horn triggers that play custom vehicle audio overlays on demand.
+* **🌫️ Drifting Cinematic Fog:** Features procedural animated fog clouds generated via inline SVG fractal noise filters.
+* **📱 Responsive HUD Canopy:** Designed to resemble actual vehicle windshield sticker frames and dashboard audio decks. Full mobile optimization with specialized swipe/tap HUD actions.
+
+---
+
+## 🛠️ Tech Stack
+
+* **Framework:** Next.js (with Turbopack engine)
+* **Realtime Sync:** Supabase Realtime (Presence WebSockets)
+* **Styling:** Vanilla CSS, CSS modules, CSS Global, and Tailwind utility tokens
+* **Icons:** Custom SVG inline components and Lucide React
+
+---
+
+## 💻 Getting Started
+
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org) installed on your system.
+
+### Installation
+Clone the repository and install the dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Local Development
+Run the hot-reloading Next.js dev server:
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Production Build & Serve
+Build the static application and host the local serving proxy:
+```bash
+npm run build
+npm run serve:prod
+```
+The optimized server will accept connections at `http://localhost:<PORT>/paatalashala`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📂 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```text
+paatalashala/
+├── public/                 # Static assets
+│   ├── audio/              # Ambient loops and custom horns
+│   └── images/             # Sprite components and city/farm backdrops
+├── src/
+│   ├── app/                # Next.js App Router pages
+│   │   ├── page.js         # Main landing dashboard
+│   │   └── places/         # Location page components
+│   │       ├── auto/       # Auto Janie workspace
+│   │       ├── saloon/     # Royal Saloon workspace
+│   │       └── tractor-anna/
+│   ├── components/         # Shared modules (YouTube Player, AmbientWeather)
+│   ├── data/               # Static places and song metadata
+│   └── utils/              # Path helpers & Supabase client wrapper
+└── .env.local              # Local environment credentials (git-ignored)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔒 Environment Setup
+To run real-time listener counts locally or in production, configure the following keys inside a `.env.local` file in your root folder:
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://yxtslmupjghwaypqeuvw.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_i1t8CS5lCP6cx4fovNEr1Q_n0e5l2mi
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*Handcrafted with ❤️ for nostalgic Telugu souls.*

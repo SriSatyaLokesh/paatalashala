@@ -6,6 +6,7 @@ import { getSongsForPlace } from '@/data/songs';
 import { prefixPath } from '@/utils/paths';
 import YouTubePlayer from '@/components/YouTubePlayer';
 import AmbientWeather from '@/components/AmbientWeather';
+import { supabase } from '@/utils/supabase';
 import { ChevronLeft, Tv, Volume2, VolumeX, Wind, Shuffle, Play, Pause, Users } from 'lucide-react';
 
 export default function RoyalSaloon() {
@@ -69,15 +70,26 @@ export default function RoyalSaloon() {
     return () => clearInterval(t);
   }, []);
 
-  // === Presence ===
+  // === Supabase Realtime Live Presence Counter ===
   useEffect(() => {
-    const sim = () => {
-      const s = Math.floor(Date.now() / 4000);
-      setPresenceCount(Math.max(1, Math.round(43 + Math.sin(s * 0.5) * 4 + Math.cos(s * 0.2) * 2)));
+    const channel = supabase.channel('presence-saloon');
+
+    channel
+      .on('presence', { event: 'sync' }, () => {
+        const state = channel.presenceState();
+        // Count active concurrent members
+        const count = Object.keys(state).length;
+        setPresenceCount(count);
+      })
+      .subscribe(async (status) => {
+        if (status === 'SUBSCRIBED') {
+          await channel.track({ online_at: new Date().toISOString() });
+        }
+      });
+
+    return () => {
+      channel.unsubscribe();
     };
-    sim();
-    const t = setInterval(sim, 4000);
-    return () => clearInterval(t);
   }, []);
 
   // === Background ===

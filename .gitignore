@@ -41,3 +41,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Chrome DevTools local profile (generated during testing, not part of source)
+/chrome-profile/
+
+# Design system & planning (AI-generated local docs, not source code)
+/design-system/
+/.planning/
+
+# Local music cache
+/music/
+
+# Local scratch test scripts
+/scripts/test_full_parse*.py
+/public/images/auto_raja_sprite.jpg

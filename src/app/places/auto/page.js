@@ -6,20 +6,29 @@ import { getSongsForPlace } from '@/data/songs';
 import { prefixPath } from '@/utils/paths';
 import YouTubePlayer from '@/components/YouTubePlayer';
 import AmbientWeather from '@/components/AmbientWeather';
+import { supabase } from '@/utils/supabase';
 import { ChevronLeft, Volume2, VolumeX, Wind, Shuffle, Play, Pause, Megaphone, SlidersHorizontal } from 'lucide-react';
 
 const AUTO_SPRITES = [
-  { id: 'baasha', label: 'బాషా ఆటో', sprite: '/images/auto_hero_baasha.png' },
-  { id: 'front', label: 'ఆటో రాజా', sprite: '/images/auto_hero_front.png' },
-  { id: 'floral', label: 'మాస్ ఆటో', sprite: '/images/auto_hero_floral.png' }
+  { id: 'baasha', label: 'బాషా ఆటో', sprite: '/images/image-removebg-preview (1).png' },
+  { id: 'front', label: 'ఆటో రాజా', sprite: '/images/image-removebg-preview.png' },
+  { id: 'floral', label: 'మాస్ ఆటో', sprite: '/images/image-removebg-preview (2).png' }
+];
+
+const AUTO_BACKGROUNDS = [
+  "url('/images/city_perspective_road1.jpg')",
+  "url('/images/city_perspective_road2.jpg')",
+  "url('/images/city_perspective_road3.jpg')",
+  "url('/images/city_skyline_road.png')",
+  "url('/images/city_vector_road.png')"
 ];
 
 export default function AutoRaja() {
   const songs = getSongsForPlace('auto');
 
   // State variables
-  const [started, setStarted]             = useState(true);
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [started, setStarted]             = useState(false);
+  const [currentSongIndex, setCurrentSongIndex] = useState(null);
   const [isPlaying, setIsPlaying]       = useState(true);
   const [ytReady, setYtReady]           = useState(false);
   const [volume, setVolume]             = useState(60);
@@ -33,6 +42,15 @@ export default function AutoRaja() {
   const [isShuffle, setIsShuffle]       = useState(false);
   const [seekHovered, setSeekHovered]   = useState(false);
   const [volumeHovered, setVolumeHovered] = useState(false);
+
+  const playerRef  = useRef(null);
+  const ambientRef = useRef(null);
+
+  // Background Transition States
+  const [activeBg, setActiveBg]               = useState("url('/images/city_perspective_road1.jpg')");
+  const [prevBg, setPrevBg]                   = useState(null);
+  const [bgTransitioning, setBgTransitioning] = useState(false);
+
   const selectedSpriteIdx = currentSongIndex !== null ? (currentSongIndex % AUTO_SPRITES.length) : 0;
   const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
   const rawAmbience = currentSong?.ambience || {
@@ -42,11 +60,25 @@ export default function AutoRaja() {
     particles: 'dust'
   };
 
+  const selectedSprite = AUTO_SPRITES[selectedSpriteIdx]?.sprite || "/images/image-removebg-preview.png";
+  const selectedBgIdx = currentSongIndex !== null ? (currentSongIndex % AUTO_BACKGROUNDS.length) : 0;
+  const selectedBg = AUTO_BACKGROUNDS[selectedBgIdx];
+
   const ambience = {
     ...rawAmbience,
-    background: prefixPath(rawAmbience.background),
-    vehicleSprite: prefixPath(rawAmbience.vehicleSprite || "/images/auto_hero_baasha.png")
+    background: prefixPath(selectedBg),
+    vehicleSprite: prefixPath(selectedSprite)
   };
+
+  // === Random initial song ===
+  useEffect(() => {
+    if (songs.length > 0) {
+      const rand = Math.floor(Math.random() * songs.length);
+      setCurrentSongIndex(rand);
+    }
+    // Mark as started (client-side only) after hydration
+    setStarted(true);
+  }, []);
 
   // === Clock ===
   useEffect(() => {
@@ -57,27 +89,45 @@ export default function AutoRaja() {
     return () => clearInterval(t);
   }, []);
 
-  // === Presence ===
+  // === Supabase Realtime Live Presence Counter ===
   useEffect(() => {
-    const sim = () => {
-      const s = Math.floor(Date.now() / 4000);
-      setPresenceCount(Math.max(1, Math.round(98 + Math.sin(s * 0.5) * 6 + Math.cos(s * 0.2) * 3)));
+    const channel = supabase.channel('presence-auto');
+
+    channel
+      .on('presence', { event: 'sync' }, () => {
+        const state = channel.presenceState();
+        // Count active concurrent members
+        const count = Object.keys(state).length;
+        setPresenceCount(count);
+      })
+      .subscribe(async (status) => {
+        if (status === 'SUBSCRIBED') {
+          await channel.track({ online_at: new Date().toISOString() });
+        }
+      });
+
+    return () => {
+      channel.unsubscribe();
     };
-    sim();
-    const t = setInterval(sim, 4000);
-    return () => clearInterval(t);
   }, []);
 
-  // === Background ===
+  // === Background Transition Effect ===
   useEffect(() => {
-    if (!started || !ambience.background) return;
-    document.body.style.transition = 'background 1.8s ease';
-    document.body.style.background = `${ambience.background} center/cover no-repeat fixed`;
-    return () => { document.body.style.background = ''; };
-  }, [currentSongIndex, started, ambience.background]);
+    if (started && selectedBg && selectedBg !== activeBg) {
+      setPrevBg(activeBg);
+      setActiveBg(selectedBg);
+      setBgTransitioning(true);
+      const t = setTimeout(() => {
+        setBgTransitioning(false);
+        setPrevBg(null);
+      }, 1000); // 1s cross-fade transition
+      return () => clearTimeout(t);
+    }
+  }, [selectedBg, activeBg, started]);
 
   // === Ambient City Traffic Audio ===
   useEffect(() => {
+    if (!ytReady) return;
     if (!ambientRef.current) {
       const a = new Audio(prefixPath('/audio/city_ambient.mp3'));
       a.loop = true;
@@ -90,7 +140,7 @@ export default function AutoRaja() {
       ambientRef.current.pause();
     }
     return () => { ambientRef.current?.pause(); };
-  }, [isPlaying, ambientOn]);
+  }, [isPlaying, ambientOn, ytReady]);
 
   // === Auto-unlock playback on click ===
   useEffect(() => {
@@ -157,30 +207,12 @@ export default function AutoRaja() {
     setCurrentTime(targetTime);
   };
 
-  // Auto Horn Beep Synthesizer
+  // Play custom auto horn MP3 sound
   const playHorn = () => {
     try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc1 = ctx.createOscillator();
-      const osc2 = ctx.createOscillator();
-      const gain = ctx.createGain();
-
-      osc1.type = 'sawtooth';
-      osc2.type = 'square';
-      osc1.frequency.setValueAtTime(420, ctx.currentTime);
-      osc2.frequency.setValueAtTime(445, ctx.currentTime);
-
-      gain.gain.setValueAtTime(0.20, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
-
-      osc1.connect(gain);
-      osc2.connect(gain);
-      gain.connect(ctx.destination);
-
-      osc1.start();
-      osc2.start();
-      osc1.stop(ctx.currentTime + 0.35);
-      osc2.stop(ctx.currentTime + 0.35);
+      const audio = new Audio(prefixPath('/audio/auto_horn.mp3'));
+      audio.volume = 0.45;
+      audio.play().catch(() => {});
     } catch (e) {}
   };
 
@@ -195,10 +227,11 @@ export default function AutoRaja() {
     }
   };
 
-  const fmt = (sec) => {
-    const m = Math.floor(sec / 60);
-    const s = Math.floor(sec % 60);
-    return `${m}:${s < 10 ? '0' : ''}${s}`;
+  const fmt = (s) => {
+    if (typeof s !== 'number' || isNaN(s) || !isFinite(s)) return '0:00';
+    const m   = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec.toString().padStart(2, '0')}`;
   };
 
   // Dynamic Telugu quote for auto sticker
@@ -206,7 +239,38 @@ export default function AutoRaja() {
   const cleanQuote = rawQuote.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim();
 
   return (
-    <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', userSelect: 'none' }}>
+    <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', userSelect: 'none', background: '#090a0f' }}>
+      <link href="https://fonts.googleapis.com/css2?family=Lakki+Reddy&family=Anek+Telugu:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+      
+      {/* Background Layer 1: Previous Background */}
+      {prevBg && (
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: prefixPath(prevBg),
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          zIndex: 0
+        }} />
+      )}
+
+      {/* Background Layer 2: Active Background */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        backgroundImage: prefixPath(activeBg),
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        zIndex: 0,
+        opacity: bgTransitioning ? 0 : 1,
+        transition: 'opacity 1000ms ease-out',
+      }} />
+
+      {/* Fog/Atmospheric Layers */}
+      <div className="fog-overlay" />
+      <div className="fog-cloud" />
       
       {/* Background Weather/Particles */}
       <AmbientWeather weather={ambience.weather} particles={ambience.particles} />
@@ -229,121 +293,61 @@ export default function AutoRaja() {
         background: '#000',
         pointerEvents: videoVisible ? 'auto' : 'none',
       }}>
-        <YouTubePlayer
-          videoId={currentSong?.youtubeVideoId}
-          isPlaying={isPlaying}
-          volume={volume}
-          onStateChange={handleStateChange}
-          onPlayerReady={(instance) => {
-            playerRef.current = instance;
-            setYtReady(true);
-            instance.setVolume(volume);
-            if (isPlaying) instance.playVideo();
-          }}
-          onTimeUpdate={(c, d) => { setCurrentTime(c); setDuration(d); }}
-          onError={(err) => { setPlayerError('Failed to play video'); next(); }}
-        />
+        {currentSong?.youtubeVideoId && (
+          <YouTubePlayer
+            videoId={currentSong.youtubeVideoId}
+            isPlaying={isPlaying}
+            volume={volume}
+            onStateChange={handleStateChange}
+            onPlayerReady={(instance) => {
+              playerRef.current = instance;
+              setYtReady(true);
+              instance.setVolume(volume);
+              if (isPlaying) instance.playVideo();
+            }}
+            onTimeUpdate={(c, d) => { setCurrentTime(c); setDuration(d); }}
+            onError={(err) => { setPlayerError('Failed to play video'); next(); }}
+          />
+        )}
       </div>
-
-      {/* Main Container */}
-      <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', zIndex: 10 }}>
-
-        {/* Top Header (Matches Tractor Anna & Saloon navbar design) */}
-        <header style={{
-          zIndex: 40,
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '16px 20px',
-          width: '100%',
-          position: 'relative'
-        }} className="hud-top-header">
-          {/* Left: Back button & time */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <Link
-              href="/"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                color: '#fff',
-                textDecoration: 'none',
-                fontSize: '0.85rem',
-                fontWeight: '600',
-                padding: '8px 14px',
-                borderRadius: '9999px',
-                background: 'rgba(255,255,255,0.08)',
-                border: '1px solid rgba(255,255,255,0.12)',
-                backdropFilter: 'blur(12px)',
-                whiteSpace: 'nowrap'
-              }}
-              className="hud-button"
-            >
-              <ChevronLeft size={16} />
-              <span>PLACES</span>
-            </Link>
-            {timeString && (
-              <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }} className="hud-time">
-                {timeString}
-              </span>
-            )}
+      {started && (
+        <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 3, overflow: 'hidden' }}>
+          <div className="speed-lines-container">
+            <div className="speed-line speed-line-1" />
+            <div className="speed-line speed-line-2" />
+            <div className="speed-line speed-line-3" />
+            <div className="speed-line speed-line-4" />
+            <div className="speed-line speed-line-5" />
           </div>
-
-          {/* Right: Ambience & Video controls */}
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-            <button
-              onClick={() => setAmbientOn(prev => !prev)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                color: ambientOn ? '#fbbf24' : 'rgba(255,255,255,0.5)',
-                fontSize: '0.78rem',
-                fontWeight: '600',
-                padding: '8px 12px',
-                borderRadius: '9999px',
-                background: ambientOn ? 'rgba(245, 158, 11, 0.15)' : 'rgba(255,255,255,0.06)',
-                border: ambientOn ? '1px solid rgba(245, 158, 11, 0.35)' : '1px solid rgba(255,255,255,0.1)',
-                backdropFilter: 'blur(12px)',
-                cursor: 'pointer',
-                whiteSpace: 'nowrap',
-                transition: 'all 0.2s',
-              }}
-              className="hud-button"
-            >
-              <Wind size={14} />
-              <span className="btn-label">{ambientOn ? 'AMBIENCE' : 'OFF'}</span>
-            </button>
-
-            <button
-              onClick={() => setVideoVisible(v => !v)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                color: videoVisible ? '#fbbf24' : '#fff',
-                fontSize: '0.78rem',
-                fontWeight: '600',
-                padding: '8px 12px',
-                borderRadius: '9999px',
-                background: videoVisible ? 'rgba(245, 158, 11, 0.2)' : 'rgba(255,255,255,0.08)',
-                border: videoVisible ? '1px solid rgba(245, 158, 11, 0.4)' : '1px solid rgba(255,255,255,0.12)',
-                backdropFilter: 'blur(12px)',
-                cursor: 'pointer',
-                whiteSpace: 'nowrap',
-              }}
-              className="hud-button"
-            >
-              <SlidersHorizontal size={14} />
-              <span className="btn-label">{videoVisible ? 'CLOSE VIDEO' : 'VIDEO'}</span>
-            </button>
+          <div className="dust-particle-container">
+            <div className="dust-spec dust-spec-1" />
+            <div className="dust-spec dust-spec-2" />
+            <div className="dust-spec dust-spec-3" />
+            <div className="dust-spec dust-spec-4" />
           </div>
-        </header>
+          <div className="smoke-container">
+            <div className="smoke-puff smoke-puff-1" />
+            <div className="smoke-puff smoke-puff-2" />
+            <div className="smoke-puff smoke-puff-3" />
+          </div>
+        </div>
+      )}
 
-        {/* Screen Center Title (Matching Tractor Anna position & using new Ramabhadra Telugu font) */}
+      {/* HERO AUTO — same pattern as tractor-anna: absolute img, bleeds off sides */}
+      {started && currentSong && (
+        <img
+          src={ambience.vehicleSprite}
+          alt="Auto Raja Hero"
+          className="auto-hero-sprite"
+          style={{ animationPlayState: isPlaying ? 'running' : 'paused' }}
+        />
+      )}
+
+      {/* Screen Center Title (zIndex: 5, above weather/auto layers) */}
+      {started && (
         <div style={{
           position: 'absolute',
-          top: '4vh',
+          top: '68px',
           left: 0,
           right: 0,
           zIndex: 5,
@@ -356,150 +360,158 @@ export default function AutoRaja() {
           padding: '0 24px'
         }}>
           <h1 style={{
-            fontSize: '4.6rem',
-            fontWeight: '800',
+            fontSize: '4.8rem',
+            fontWeight: '400',
             color: '#fef08a',
             margin: 0,
             lineHeight: 1.1,
             letterSpacing: '0.02em',
             textShadow: '0 4px 24px rgba(0,0,0,0.95), 0 2px 6px rgba(0,0,0,0.85)',
-            fontFamily: "'Ramabhadra', 'Anek Telugu', 'Outfit', sans-serif",
+            fontFamily: "'Lakki Reddy', 'Ramabhadra', 'Anek Telugu', serif",
             textAlign: 'center'
           }} className="immersive-title">
             ఆటో జానీ
           </h1>
-          <p style={{
-            fontSize: '0.85rem',
-            color: 'rgba(253, 230, 138, 0.85)',
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-            marginTop: '6px',
-            fontWeight: '700',
-            fontFamily: "'Outfit', 'Anek Telugu', sans-serif",
-            textShadow: '0 2px 8px rgba(0,0,0,0.8)'
-          }} className="immersive-sub">
-            AUTO JANIE • MASS BEATS ON THE ROAD
-          </p>
         </div>
+      )}
 
-        {/* 60% SCREEN HERO AUTO RICKSHAW & PERSPECTIVE ROAD LAYER */}
-        <div style={{
-          position: 'relative',
-          flex: 1,
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden'
-        }}>
-          {/* Speed Lines & Road Flow */}
-          <div className="speed-lines-container">
-            <div className="speed-line speed-line-1" />
-            <div className="speed-line speed-line-2" />
-            <div className="speed-line speed-line-3" />
-            <div className="speed-line speed-line-4" />
-            <div className="speed-line speed-line-5" />
+      {/* === HUD Overlay === */}
+      {started && currentSong && (
+        <>
+          <div style={{
+            zIndex: 10,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            height: '100vh',
+            width: '100%',
+            position: 'relative',
+            padding: '16px 20px 24px'
+          }}>
+          {/* Top Header */}
+          <div style={{ width: '100%' }}>
+            <header style={{
+              zIndex: 40,
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '100%',
+              position: 'relative',
+              minHeight: '44px'
+            }} className="hud-top-header">
+              {/* Left: Back button & time */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <Link
+                  href="/"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    color: '#fff',
+                    textDecoration: 'none',
+                    fontSize: '0.85rem',
+                    fontWeight: '600',
+                    padding: '8px 14px',
+                    borderRadius: '9999px',
+                    background: 'rgba(255,255,255,0.08)',
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    backdropFilter: 'blur(12px)',
+                    whiteSpace: 'nowrap'
+                  }}
+                  className="hud-button"
+                >
+                  <ChevronLeft size={16} />
+                  <span>PLACES</span>
+                </Link>
+                {timeString && (
+                  <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }} className="hud-time">
+                    {timeString}
+                  </span>
+                )}
+              </div>
+
+              {/* Right: Ambience & Video controls */}
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <button
+                  onClick={() => setAmbientOn(prev => !prev)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    color: ambientOn ? '#fbbf24' : 'rgba(255,255,255,0.5)',
+                    fontSize: '0.78rem',
+                    fontWeight: '600',
+                    padding: '8px 12px',
+                    borderRadius: '9999px',
+                    background: ambientOn ? 'rgba(245, 158, 11, 0.15)' : 'rgba(255,255,255,0.06)',
+                    border: ambientOn ? '1px solid rgba(245, 158, 11, 0.35)' : '1px solid rgba(255,255,255,0.1)',
+                    backdropFilter: 'blur(12px)',
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                    transition: 'all 0.2s',
+                  }}
+                  className="hud-button"
+                >
+                  <Wind size={14} />
+                  <span className="btn-label">{ambientOn ? 'AMBIENCE' : 'OFF'}</span>
+                </button>
+
+                <button
+                  onClick={() => setVideoVisible(v => !v)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    color: videoVisible ? '#fbbf24' : '#fff',
+                    fontSize: '0.78rem',
+                    fontWeight: '600',
+                    padding: '8px 12px',
+                    borderRadius: '9999px',
+                    background: videoVisible ? 'rgba(245, 158, 11, 0.2)' : 'rgba(255,255,255,0.08)',
+                    border: videoVisible ? '1px solid rgba(245, 158, 11, 0.4)' : '1px solid rgba(255,255,255,0.12)',
+                    backdropFilter: 'blur(12px)',
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                  }}
+                  className="hud-button"
+                >
+                  <SlidersHorizontal size={14} />
+                  <span className="btn-label">{videoVisible ? 'CLOSE VIDEO' : 'VIDEO'}</span>
+                </button>
+              </div>
+            </header>
           </div>
 
-          {/* Dust Spec Particles */}
-          <div className="dust-particle-container">
-            <div className="dust-spec dust-spec-1" />
-            <div className="dust-spec dust-spec-2" />
-            <div className="dust-spec dust-spec-3" />
-            <div className="dust-spec dust-spec-4" />
-          </div>
-
-          {/* Silencer Smoke Puffs */}
-          <div className="smoke-container">
-            <div className="smoke-puff smoke-puff-1" />
-            <div className="smoke-puff smoke-puff-2" />
-            <div className="smoke-puff smoke-puff-3" />
-          </div>
-
-          {/* HERO AUTO RICKSHAW SPRITE CONTAINER (60% SCREEN HEIGHT) */}
-          <div className="auto-hero-60-container">
-            {/* Soft radial ground contact shadow merging auto wheels with the asphalt road */}
-            <div className="auto-ground-shadow" />
-
-            <img
-              src={ambience.vehicleSprite}
-              alt="Auto Raja Hero"
-              className="auto-hero-60-sprite"
-            />
-
-            {/* Front Windshield Visor Banner */}
-            <div className="auto-sticker-visor-60">
-              <span>నమస్తే • TS 09 AUTO • జై మైసమ్మ</span>
-            </div>
-
-            {/* Front Bumper Sticker */}
-            <div className="auto-sticker-bumper-60">
-              <span>FOR HIRE • మాస్ రాజా</span>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Bottom Area: Controls & HUD */}
-        <div style={{ position: 'relative', width: '100%', padding: '0 20px 24px', zIndex: 30 }}>
+          {/* Bottom Area: Controls & HUD */}
           <div style={{ position: 'relative', width: '100%', maxWidth: '680px', margin: '0 auto', zIndex: 30 }}>
 
-            {/* Authentic Auto Rickshaw Vinyl Sticker Quote Banner right above media player */}
-            <div style={{
-              textAlign: 'center',
-              marginBottom: '14px',
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'center',
-              pointerEvents: 'none'
-            }}>
-              <div style={{
-                display: 'inline-flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                padding: '10px 22px',
-                background: 'rgba(15, 17, 26, 0.85)',
-                backdropFilter: 'blur(20px)',
-                border: '2px dashed rgba(251, 191, 36, 0.45)',
-                borderRadius: '16px',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.7), inset 0 0 15px rgba(245, 158, 11, 0.15)',
-                maxWidth: '620px',
-                position: 'relative'
-              }} className="auto-sticker-banner">
-
-                {/* Sticker Badge Header */}
-                <div style={{
-                  fontSize: '0.68rem',
-                  fontWeight: '800',
-                  letterSpacing: '0.14em',
-                  color: '#fbbf24',
-                  textTransform: 'uppercase',
-                  marginBottom: '4px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px'
-                }}>
-                  <span>★</span>
-                  <span>ఆటో జానీ • AUTO JANIE STICKER</span>
-                  <span>★</span>
-                </div>
-
-                {/* Quote Text */}
+            {/* Quote — wrapped in a dark translucent glassmorphic pill for high legibility on busy graphics */}
+            <div style={{ textAlign: 'center', marginBottom: '12px', width: '100%', pointerEvents: 'none' }}>
+              <span style={{
+                display: 'inline-block',
+                background: 'rgba(10, 11, 15, 0.72)',
+                backdropFilter: 'blur(16px)',
+                padding: '8px 24px',
+                borderRadius: '9999px',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
+                maxWidth: '90%'
+              }}>
                 <p style={{
-                  fontSize: '1.18rem',
-                  fontWeight: '700',
-                  color: '#fef08a',
+                  fontSize: '1.15rem',
+                  fontWeight: '500',
+                  color: 'rgba(254, 240, 138, 0.95)',
                   margin: 0,
-                  textShadow: '0 2px 10px rgba(0,0,0,0.95)',
+                  textShadow: '0 1px 3px rgba(0,0,0,0.5)',
+                  letterSpacing: '0.01em',
                   lineHeight: '1.4',
-                  fontFamily: "'Ramabhadra', 'Anek Telugu', sans-serif"
+                  fontFamily: "'Anek Telugu', 'Akaya Telivigala', sans-serif"
                 }}>
                   {cleanQuote}
                 </p>
-              </div>
+              </span>
             </div>
 
-            {/* HUD Capsule */}
             <div style={{
               background: 'rgba(10, 11, 15, 0.55)',
               backdropFilter: 'blur(30px) saturate(160%)',
@@ -821,137 +833,58 @@ export default function AutoRaja() {
           <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', display: 'inline-block', boxShadow: '0 0 8px #10b981' }} />
           <span>{presenceCount} riders on road</span>
         </div>
-
-      </div>
+      </>
+      )}
 
       {/* Global & Auto-Specific Styles */}
       <style jsx global>{`
-        /* 60% SCREEN HERO AUTO CONTAINER */
-        .auto-hero-60-container {
+        /* FOG & ATMOSPHERE EFFECTS */
+        .fog-overlay {
           position: absolute;
-          bottom: 150px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 50vw;
-          max-width: 680px;
-          height: 48vh;
-          max-height: 480px;
-          z-index: 5;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .auto-hero-60-sprite {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          filter: drop-shadow(0 15px 30px rgba(0,0,0,0.85));
-          animation: auto-engine-vibe 0.1s linear infinite;
+          inset: 0;
           pointer-events: none;
-          position: relative;
-          z-index: 5;
+          z-index: 1;
+          background: linear-gradient(to bottom, rgba(8, 9, 12, 0.45) 0%, transparent 40%, rgba(8, 9, 12, 0.65) 100%);
         }
 
-        /* GROUND SHADOW MERGING AUTO WHEELS WITH ROAD BACKGROUND */
-        .auto-ground-shadow {
+        .fog-cloud {
           position: absolute;
-          bottom: 12px;
+          width: 200%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='fog'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 1 0 1 0 0 1 0 0 1 0 1 0 0 0 0.14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23fog)'/%3E%3C/svg%3E");
+          opacity: 0.22;
+          animation: fog-drift 75s linear infinite;
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        @keyframes fog-drift {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        /* AUTO HERO SPRITE — exact tractor-anna pattern */
+        .auto-hero-sprite {
+          position: absolute;
+          bottom: 40px;
           left: 50%;
-          transform: translateX(-50%);
-          width: 82%;
-          height: 48px;
-          border-radius: 50%;
-          background: radial-gradient(ellipse at center, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.65) 50%, transparent 82%);
-          filter: blur(10px);
-          z-index: 4;
+          width: 980px;
+          max-width: 98vw;
+          max-height: 82vh;
+          object-fit: contain;
+          height: auto;
+          animation: auto-engine-vibe 0.12s linear infinite;
+          z-index: 2;
+          filter: drop-shadow(0 20px 40px rgba(0,0,0,0.7));
           pointer-events: none;
         }
 
         @keyframes auto-engine-vibe {
-          0%   { transform: translateY(0px); }
-          50%  { transform: translateY(-1.5px); }
-          100% { transform: translateY(0px); }
-        }
-
-        /* DYNAMIC TELUGU AUTO STICKERS STICKED DIRECTLY ON AUTO */
-        .auto-sticker-canopy-60 {
-          position: absolute;
-          top: 38%;
-          left: 50%;
-          transform: translate(-50%, -50%) rotate(-1deg);
-          width: 52%;
-          background: rgba(14, 15, 18, 0.93);
-          border: 2px solid rgba(251, 191, 36, 0.75);
-          border-radius: 12px;
-          padding: 10px 14px;
-          text-align: center;
-          box-shadow: 0 8px 22px rgba(0,0,0,0.85), inset 0 0 12px rgba(0,0,0,0.95);
-          backdrop-filter: blur(4px);
-          z-index: 8;
-          transition: all 0.4s ease;
-        }
-
-        .sticker-border-dash {
-          position: absolute;
-          inset: 2px;
-          border-radius: 9px;
-          border: 1px dashed rgba(255,255,255,0.25);
-          pointer-events: none;
-        }
-
-        .sticker-telugu-text-60 {
-          font-family: "'Akaya Telivigala', 'Ravi Prakash', 'Gurajada', serif";
-          font-size: clamp(0.95rem, 1.6vw, 1.25rem);
-          font-weight: 700;
-          color: #fef08a;
-          margin: 0;
-          line-height: 1.35;
-          letter-spacing: 0.02em;
-          text-shadow: 0 2px 6px rgba(0,0,0,0.9);
-        }
-
-        .sticker-footer-60 {
-          margin-top: 4px;
-          font-size: 0.65rem;
-          font-weight: 800;
-          color: #ef4444;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-        }
-
-        .auto-sticker-visor-60 {
-          position: absolute;
-          top: 18%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          background: rgba(16, 185, 129, 0.88);
-          color: #fff;
-          font-family: "'Akaya Telivigala', serif";
-          font-size: clamp(0.7rem, 1.1vw, 0.85rem);
-          font-weight: 700;
-          padding: 3px 14px;
-          border-radius: 4px;
-          border: 1px solid rgba(255,255,255,0.4);
-          box-shadow: 0 3px 8px rgba(0,0,0,0.6);
-          white-space: nowrap;
-          z-index: 8;
-        }
-
-        .auto-sticker-bumper-60 {
-          position: absolute;
-          bottom: 22%;
-          left: 50%;
-          transform: translate(-50%, 0);
-          background: #fbbf24;
-          color: #000;
-          font-size: 0.72rem;
-          font-weight: 900;
-          padding: 2px 10px;
-          border-radius: 3px;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.7);
-          letter-spacing: 0.08em;
-          z-index: 8;
+          0%   { transform: translateX(-50%) translateY(0px); }
+          50%  { transform: translateX(-50%) translateY(-2px); }
+          100% { transform: translateX(-50%) translateY(0px); }
         }
 
         /* MOTION EFFECTS: SPEED LINES, DUST & SMOKE */
@@ -1029,13 +962,14 @@ export default function AutoRaja() {
 
         /* Mobile Adjustments */
         @media (max-width: 768px) {
-          .auto-hero-60-container {
-            width: 92vw !important;
-            height: 52vh !important;
+          .auto-hero-sprite {
+            width: 120vw !important;
             max-width: none !important;
-            bottom: 135px !important;
+            bottom: 150px !important;
             left: 50% !important;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.75)) !important;
           }
+          .immersive-title { font-size: 2.8rem !important; }
           .auto-sticker-canopy-60 {
             width: 72% !important;
             padding: 8px 10px !important;
