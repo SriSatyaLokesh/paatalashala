@@ -46,9 +46,7 @@ jobs:
           cache: ${{ steps.detect-package-manager.outputs.manager }}
           
       - name: Setup Pages
-        uses: actions/configure-pages@v4
-        with:
-          static_site_generator: next
+        uses: actions/configure-pages@v5
           
       - name: Restore cache
         uses: actions/cache@v4
