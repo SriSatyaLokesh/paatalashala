@@ -37,7 +37,31 @@ function copyFolderSync(from, to) {
 console.log('Structuring build directory for /paatalashala path...');
 copyFolderSync(outDir, targetDir);
 
-console.log('Starting local serve server on local-serve directory...');
+// ── Fix 1: Wire up custom 404 page ──────────────────────────────────────────
+// Next.js static export puts the 404 page at _not-found/index.html
+// `serve` looks for 404.html in the root of the served subdirectory
+const notFoundSrc = path.join(targetDir, '_not-found', 'index.html');
+const notFoundDest = path.join(targetDir, '404.html');
+if (fs.existsSync(notFoundSrc)) {
+  fs.copyFileSync(notFoundSrc, notFoundDest);
+  console.log('✓ Custom 404 page wired (404.html)');
+} else {
+  console.warn('⚠ _not-found/index.html not found — custom 404 will not show');
+}
+
+// ── Fix 2: serve.json — disable directory listing ────────────────────────────
+// Prevents /places/ and other directories from showing file tree
+const serveConfig = {
+  "directoryListing": false,
+  "cleanUrls": true
+};
+fs.writeFileSync(
+  path.join(localServeDir, 'serve.json'),
+  JSON.stringify(serveConfig, null, 2)
+);
+console.log('✓ serve.json written (directoryListing: false)');
+
+console.log('\nStarting local serve server → http://localhost:3000/paatalashala\n');
 try {
   execSync('npx serve local-serve', { stdio: 'inherit' });
 } catch (err) {
