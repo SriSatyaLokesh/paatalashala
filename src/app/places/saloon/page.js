@@ -222,7 +222,7 @@ export default function DeluxeSaloon() {
         />
       )}
 
-      {/* Retro Saloon Environmental Overlays */}
+      {/* Retro Saloon Ambient Vignette */}
       {isExperienceStarted && (
         <div style={{
           position: 'absolute',
@@ -232,75 +232,8 @@ export default function DeluxeSaloon() {
           height: '100%',
           pointerEvents: 'none',
           zIndex: 1,
-        }}>
-          {/* Ceiling Fan Blades (Spinning in center-top) */}
-          <div style={{
-            position: 'absolute',
-            top: '-60px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '280px',
-            height: '280px',
-            opacity: 0.12,
-            zIndex: 2,
-          }}>
-            {/* Fan Base */}
-            <div style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              width: '16px',
-              height: '16px',
-              borderRadius: '50%',
-              backgroundColor: '#fff',
-              transform: 'translate(-50%, -50%)',
-            }} />
-            {/* Blades */}
-            <div 
-              className="fan-blades"
-              style={{
-                width: '100%',
-                height: '100%',
-                backgroundImage: 'linear-gradient(to right, transparent 45%, #fff 45%, #fff 55%, transparent 55%), linear-gradient(to bottom, transparent 45%, #fff 45%, #fff 55%, transparent 55%)',
-                animationName: 'fan-spin',
-                animationDuration: '3s',
-                animationTimingFunction: 'linear',
-                animationIterationCount: 'infinite',
-                animationPlayState: isPlaying ? 'running' : 'paused',
-              }} 
-            />
-          </div>
-
-          {/* Flickering Tube Light Visual Element */}
-          <div 
-            style={{
-              position: 'absolute',
-              top: '15px',
-              left: '25%',
-              width: '50%',
-              height: '12px',
-              backgroundColor: '#e2f1ff',
-              borderRadius: '6px',
-              border: '2px solid rgba(255, 255, 255, 0.4)',
-              boxShadow: '0 0 20px rgba(226, 241, 255, 0.8)',
-              animation: currentSong?.ambience?.lighting === 'flickering-neon' ? 'light-flicker 10s infinite' : 'none',
-              opacity: 0.95,
-              zIndex: 3,
-            }}
-          />
-
-          {/* Retro counter shadows / mirror frame styling */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            boxShadow: 'inset 0 0 100px rgba(0,0,0,0.85), inset 0 0 200px rgba(0,0,0,0.5)',
-            border: '20px solid #271612', // Wooden room frame borders
-            zIndex: 4,
-          }} />
-        </div>
+          boxShadow: 'inset 0 0 100px rgba(0,0,0,0.7), inset 0 0 160px rgba(0,0,0,0.5)',
+        }} />
       )}
 
       {/* Main View Layout */}

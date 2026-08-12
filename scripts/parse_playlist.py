@@ -20,22 +20,12 @@ SALOON_AMBIENCES = [
   {
     "id": "saloon-cozy",
     "theme": "vintage",
-    "background": "linear-gradient(to bottom, #1e1b4b, #0f172a)",
+    "background": "url('/images/saloon_background.jpg')",
     "weather": "clear",
     "skyState": "night",
     "particles": "dust",
     "brightness": 0.9,
-    "description": "Cozy retro salon vibe"
-  },
-  {
-    "id": "saloon-warm",
-    "theme": "retro",
-    "background": "linear-gradient(to bottom, #31101e, #0f172a)",
-    "weather": "clear",
-    "skyState": "dusk",
-    "particles": "none",
-    "brightness": 0.95,
-    "description": "Warm evening salon vibe"
+    "description": "Authentic South Indian Salon"
   }
 ]
 
