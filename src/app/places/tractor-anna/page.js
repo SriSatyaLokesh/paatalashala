@@ -15,6 +15,7 @@ export default function TractorAnna() {
   const [started, setStarted]             = useState(true);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying]       = useState(true);
+  const [ytReady, setYtReady]           = useState(false);
   const [volume, setVolume]             = useState(60);
   const [currentTime, setCurrentTime]   = useState(0);
   const [duration, setDuration]         = useState(0);
@@ -72,7 +73,7 @@ export default function TractorAnna() {
 
   // === Ambient tractor audio ===
   useEffect(() => {
-    if (!started) return;
+    if (!started || !ytReady) return;
     if (!ambientRef.current) {
       const a = new Audio(prefixPath('/audio/tractor_ambient.mp3'));
       a.loop   = true;
@@ -85,7 +86,7 @@ export default function TractorAnna() {
       ambientRef.current.pause();
     }
     return () => { ambientRef.current?.pause(); };
-  }, [started, isPlaying, ambientOn]);
+  }, [started, isPlaying, ambientOn, ytReady]);
 
   // === Player callbacks ===
   const handlePlayerReady = (player) => {
@@ -106,6 +107,7 @@ export default function TractorAnna() {
       next();
     } else if (code === 1) {  // PLAYING
       setIsPlaying(true);
+      setYtReady(true);
       setPlayerError(null);
     } else if (code === 2) {  // PAUSED
       setIsPlaying(false);
