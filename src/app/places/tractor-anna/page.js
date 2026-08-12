@@ -260,10 +260,10 @@ export default function TractorAnna() {
           <img src={ambience.vehicleSprite} alt="Tractor Anna" className="tractor-hero-sprite"
             style={{ animationPlayState: isPlaying ? 'running' : 'paused' }} />
 
-          {/* Hero Title & Subtitle (zIndex: 1, below the tractor sprite zIndex: 2) */}
+          {/* Hero Title (zIndex: 1, below the tractor sprite zIndex: 2) */}
           <div style={{
             position: 'absolute',
-            top: '20vh',
+            top: '10vh',
             left: 0,
             right: 0,
             zIndex: 1,
@@ -287,21 +287,6 @@ export default function TractorAnna() {
             }} className="immersive-title">
               ట్రాక్టర్ అన్న
             </h2>
-            <p style={{
-              fontSize: '1.25rem',
-              fontWeight: '600',
-              color: 'rgba(254, 240, 138, 0.95)',
-              margin: '8px 0 0 0',
-              textShadow: '0 2px 14px rgba(0,0,0,1), 0 4px 28px rgba(0,0,0,1), 0 0 10px rgba(0,0,0,0.95)',
-              fontStyle: 'italic',
-              letterSpacing: '0.03em',
-              maxWidth: '620px',
-              textAlign: 'center',
-              lineHeight: '1.4',
-              fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif"
-            }}>
-              {currentSong?.quote || 'చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾'}
-            </p>
           </div>
 
           {/* YouTube player — visibility:hidden keeps proper dimensions for YT init */}
@@ -350,29 +335,6 @@ export default function TractorAnna() {
                   {timeString && <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }}>{timeString}</span>}
                 </div>
 
-                {/* Center - Absolutely Centered */}
-                <div style={{
-                  position: 'absolute',
-                  left: '50%',
-                  top: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  fontSize: '0.85rem',
-                  fontWeight: '600',
-                  color: '#a7f3d0',
-                  background: 'rgba(255,255,255,0.08)',
-                  border: '1px solid rgba(255,255,255,0.12)',
-                  backdropFilter: 'blur(12px)',
-                  padding: '8px 18px',
-                  borderRadius: '9999px',
-                  zIndex: 5,
-                  whiteSpace: 'nowrap'
-                }}>
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', display: 'inline-block', boxShadow: '0 0 8px #10b981' }} />
-                  <span>{presenceCount} listeners on field</span>
-                </div>
 
                 {/* Right */}
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
@@ -485,26 +447,7 @@ export default function TractorAnna() {
                     {/* Controls */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                       
-                      {/* Horn button - Leftmost */}
-                      <button 
-                        onClick={playHorn} 
-                        title="Horn Please (📢)"
-                        style={{ 
-                          background: 'none', 
-                          border: 'none', 
-                          color: 'rgba(255,255,255,0.4)', 
-                          cursor: 'pointer', 
-                          padding: '6px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          transition: 'color 0.2s, transform 0.2s'
-                        }}
-                        onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.15)'}
-                        onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                        className="control-icon"
-                      >
-                        <Megaphone size={16} />
-                      </button>
+
 
                       <button 
                         onClick={() => setIsShuffle(prev => !prev)} 
@@ -655,6 +598,64 @@ export default function TractorAnna() {
 
               </div>
             </div>
+          </div>
+
+          {/* Floating Horn button in bottom left */}
+          <button 
+            onClick={playHorn}
+            title="Horn Please! (📢)"
+            style={{
+              position: 'fixed',
+              left: '32px',
+              bottom: '24px',
+              width: '48px',
+              height: '48px',
+              borderRadius: '50%',
+              background: '#fbbf24',
+              color: '#000',
+              border: 'none',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 8px 24px rgba(245, 158, 11, 0.45)',
+              zIndex: 35,
+              transition: 'transform 0.2s, background-color 0.2s'
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = 'scale(1.1)';
+              e.currentTarget.style.backgroundColor = '#f59e0b';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.backgroundColor = '#fbbf24';
+            }}
+          >
+            <Megaphone size={20} fill="#000" />
+          </button>
+
+          {/* Floating Online Listeners badge in bottom right */}
+          <div style={{
+            position: 'fixed',
+            right: '32px',
+            bottom: '24px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            fontSize: '0.85rem',
+            fontWeight: '600',
+            color: '#a7f3d0',
+            background: 'rgba(10, 11, 15, 0.65)',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            backdropFilter: 'blur(12px)',
+            padding: '8px 16px',
+            borderRadius: '9999px',
+            zIndex: 35,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
+            whiteSpace: 'nowrap'
+          }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', display: 'inline-block', boxShadow: '0 0 8px #10b981' }} />
+            <span>{presenceCount} listeners on field</span>
           </div>
         </>
       )}

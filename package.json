@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "serve:prod": "node scripts/local-serve.js",
     "start": "next start",
     "lint": "eslint"
   },
