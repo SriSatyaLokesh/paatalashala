@@ -13,7 +13,7 @@ export default function AutoRaja() {
 
   // State variables
   const [started, setStarted]             = useState(true);
-  const [currentSongIndex, setCurrentSongIndex] = useState(null);
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying]       = useState(true);
   const [ytReady, setYtReady]           = useState(false);
   const [volume, setVolume]             = useState(60);

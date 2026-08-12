@@ -72,11 +72,13 @@ const ICONS = {
 const TELUGU_NAMES = {
   'tractor-anna': 'ట్రాక్టర్ అన్న',
   'saloon': 'రాయల్ సెలూన్',
+  'auto': 'ఆటో రాజా',
 };
 
 const CARD_BG = {
   'tractor-anna': '/images/sunset_farm_background.png',
   'saloon': '/images/saloon_background.jpg',
+  'auto': '/images/hyderabad_street_background.jpg',
 };
 
 export default function Home() {
