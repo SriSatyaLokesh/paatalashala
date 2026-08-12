@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { getSongsForPlace } from '@/data/songs';
+import { prefixPath } from '@/utils/paths';
 import YouTubePlayer from '@/components/YouTubePlayer';
 import AmbientWeather from '@/components/AmbientWeather';
 import { ChevronLeft, Tv, Volume2, VolumeX, Wind, Shuffle, Play, Pause, Megaphone } from 'lucide-react';
@@ -30,10 +31,15 @@ export default function TractorAnna() {
   const ambientRef = useRef(null);
 
   const currentSong = songs[currentSongIndex] || {};
-  const ambience = currentSong.ambience || {
+  const rawAmbience = currentSong.ambience || {
     background: "url('/images/sunset_farm_background.png')",
     weather: 'clear',
     particles: 'dust'
+  };
+  const ambience = {
+    ...rawAmbience,
+    background: prefixPath(rawAmbience.background),
+    vehicleSprite: prefixPath(rawAmbience.vehicleSprite || '/images/tractor_anna_sprite.png')
   };
 
   // === Clock ===
@@ -68,7 +74,7 @@ export default function TractorAnna() {
   useEffect(() => {
     if (!started) return;
     if (!ambientRef.current) {
-      const a = new Audio('/audio/tractor_ambient.mp3');
+      const a = new Audio(prefixPath('/audio/tractor_ambient.mp3'));
       a.loop   = true;
       a.volume = 0.03;
       ambientRef.current = a;
@@ -159,7 +165,7 @@ export default function TractorAnna() {
   };
 
   const playHorn = () => {
-    const a = new Audio('/audio/horn.mp3');
+    const a = new Audio(prefixPath('/audio/horn.mp3'));
     a.volume = 0.55;
     a.play().catch(() => {});
   };
@@ -251,7 +257,7 @@ export default function TractorAnna() {
           )}
 
           {/* Hero tractor */}
-          <img src="/images/tractor_anna_sprite.png" alt="Tractor Anna" className="tractor-hero-sprite"
+          <img src={ambience.vehicleSprite} alt="Tractor Anna" className="tractor-hero-sprite"
             style={{ animationPlayState: isPlaying ? 'running' : 'paused' }} />
 
           {/* Hero Title & Subtitle (zIndex: 1, below the tractor sprite zIndex: 2) */}
@@ -380,6 +386,23 @@ export default function TractorAnna() {
                   </button>
                 </div>
               </header>
+            </div>
+
+            {/* Quote shifted above the player HUD */}
+            <div style={{ textAlign: 'center', marginBottom: '14px', width: '100%', pointerEvents: 'none', zIndex: 30 }}>
+              <p style={{
+                fontSize: '1.25rem',
+                fontWeight: '600',
+                color: 'rgba(254, 240, 138, 0.95)',
+                margin: 0,
+                textShadow: '0 2px 14px rgba(0,0,0,1), 0 4px 28px rgba(0,0,0,1), 0 0 10px rgba(0,0,0,0.95)',
+                fontStyle: 'italic',
+                letterSpacing: '0.03em',
+                lineHeight: '1.4',
+                fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif"
+              }}>
+                {currentSong?.quote || 'చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾'}
+              </p>
             </div>
 
             {/* Bottom HUD capsule */}
