@@ -4541,15 +4541,15 @@
     "active": true,
     "quote": "జనం ప్రశాంతంగా ఉంటేనే... ఆటోకి ఏ ఇబ్బంది లేకుండా ముందుకు వెళ్తుంది",
     "ambience": {
-      "id": "hyderabad-street",
+      "id": "city-perspective-1",
       "theme": "city",
-      "background": "url('/images/hyderabad_street_background.jpg')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
+      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Hyderabad City Night Cruise"
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -4567,15 +4567,15 @@
     "active": true,
     "quote": "డ్రైవింగ్ నా వృత్తి... ధర్మం నా మార్గం!",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "highway",
-      "background": "url('/images/ghats_highway_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-2",
+      "theme": "sunset",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "day",
+      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 1.0,
-      "description": "Ghats Highway Drive"
+      "brightness": 0.95,
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -4593,15 +4593,15 @@
     "active": true,
     "quote": "కష్టపడితేనే గౌరవం... ఆటో రాజా మార్గం!",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "coastal",
-      "background": "url('/images/lake_dawn_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.95,
-      "description": "Early Morning Coastal Cruise"
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
+      "weather": "clear",
+      "skyState": "day",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -4619,15 +4619,15 @@
     "active": true,
     "quote": "ప్రేమతో వస్తే స్నేహితుడిని... వేగంతో వస్తే కింగ్‌ని!",
     "ambience": {
-      "id": "sunset-city",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
       "brightness": 0.9,
-      "description": "Golden Hour Highway"
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -4645,15 +4645,15 @@
     "active": true,
     "quote": "నా స్పీడుకి స్టీరింగ్ ఫిదా... నా మాస్‌కి రోడ్డు ఫిదా!",
     "ambience": {
-      "id": "night-city",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-1",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.7,
-      "description": "Midnight Expressway"
+      "skyState": "day",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -4671,15 +4671,15 @@
     "active": true,
     "quote": "నవ్వుతూ సాగిపో... కాలం మనదేరా!",
     "ambience": {
-      "id": "hyderabad-street",
-      "theme": "city",
-      "background": "url('/images/hyderabad_street_background.jpg')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-2",
+      "theme": "sunset",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
       "skyState": "sunset",
       "particles": "dust",
-      "brightness": 1.0,
-      "description": "Hyderabad City Night Cruise"
+      "brightness": 0.95,
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -4697,15 +4697,15 @@
     "active": true,
     "quote": "ఆటో రాజా... ఊరంతా నాదే హవా!",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "highway",
-      "background": "url('/images/ghats_highway_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
       "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Ghats Highway Drive"
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -4723,15 +4723,15 @@
     "active": true,
     "quote": "మనస్సు మంచిదైతే మార్గం సుగమమే!",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "coastal",
-      "background": "url('/images/lake_dawn_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.95,
-      "description": "Early Morning Coastal Cruise"
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 0.9,
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -4749,15 +4749,15 @@
     "active": true,
     "quote": "ట్రాఫిక్ ఎన్నున్నా... నా దారి రహదారి!",
     "ambience": {
-      "id": "sunset-city",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-1",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
+      "skyState": "day",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Golden Hour Highway"
+      "brightness": 1.0,
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -4775,15 +4775,15 @@
     "active": true,
     "quote": "నమ్మకమే నా పెట్రోల్... ప్రేమయే నా బ్రేక్!",
     "ambience": {
-      "id": "night-city",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-2",
+      "theme": "sunset",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.7,
-      "description": "Midnight Expressway"
+      "skyState": "sunset",
+      "particles": "dust",
+      "brightness": 0.95,
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -4801,15 +4801,15 @@
     "active": true,
     "quote": "రహదారి రాజు... మాస్ రాజా ఆటో!",
     "ambience": {
-      "id": "hyderabad-street",
-      "theme": "city",
-      "background": "url('/images/hyderabad_street_background.jpg')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
+      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Hyderabad City Night Cruise"
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -4827,15 +4827,15 @@
     "active": true,
     "quote": "సంగీతమే ఇంధనం... పాటలే ప్రయాణం!",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "highway",
-      "background": "url('/images/ghats_highway_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "day",
+      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 1.0,
-      "description": "Ghats Highway Drive"
+      "brightness": 0.9,
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -4853,15 +4853,15 @@
     "active": true,
     "quote": "జనం ప్రశాంతంగా ఉంటేనే... ఆటోకి ఏ ఇబ్బంది లేకుండా ముందుకు వెళ్తుంది",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "coastal",
-      "background": "url('/images/lake_dawn_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.95,
-      "description": "Early Morning Coastal Cruise"
+      "id": "city-perspective-1",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
+      "weather": "clear",
+      "skyState": "day",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -4879,15 +4879,15 @@
     "active": true,
     "quote": "డ్రైవింగ్ నా వృత్తి... ధర్మం నా మార్గం!",
     "ambience": {
-      "id": "sunset-city",
+      "id": "city-perspective-2",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
+      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Golden Hour Highway"
+      "brightness": 0.95,
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -4905,15 +4905,15 @@
     "active": true,
     "quote": "కష్టపడితేనే గౌరవం... ఆటో రాజా మార్గం!",
     "ambience": {
-      "id": "night-city",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.7,
-      "description": "Midnight Expressway"
+      "skyState": "day",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -4931,15 +4931,15 @@
     "active": true,
     "quote": "ప్రేమతో వస్తే స్నేహితుడిని... వేగంతో వస్తే కింగ్‌ని!",
     "ambience": {
-      "id": "hyderabad-street",
-      "theme": "city",
-      "background": "url('/images/hyderabad_street_background.jpg')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
+      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 1.0,
-      "description": "Hyderabad City Night Cruise"
+      "brightness": 0.9,
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -4957,15 +4957,15 @@
     "active": true,
     "quote": "నా స్పీడుకి స్టీరింగ్ ఫిదా... నా మాస్‌కి రోడ్డు ఫిదా!",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "highway",
-      "background": "url('/images/ghats_highway_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-1",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
       "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Ghats Highway Drive"
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -4983,15 +4983,15 @@
     "active": true,
     "quote": "నవ్వుతూ సాగిపో... కాలం మనదేరా!",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "coastal",
-      "background": "url('/images/lake_dawn_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
+      "id": "city-perspective-2",
+      "theme": "sunset",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
+      "weather": "clear",
+      "skyState": "sunset",
+      "particles": "dust",
       "brightness": 0.95,
-      "description": "Early Morning Coastal Cruise"
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -5009,15 +5009,15 @@
     "active": true,
     "quote": "ఆటో రాజా... ఊరంతా నాదే హవా!",
     "ambience": {
-      "id": "sunset-city",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
+      "skyState": "day",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Golden Hour Highway"
+      "brightness": 1.0,
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -5035,15 +5035,15 @@
     "active": true,
     "quote": "మనస్సు మంచిదైతే మార్గం సుగమమే!",
     "ambience": {
-      "id": "night-city",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.7,
-      "description": "Midnight Expressway"
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 0.9,
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -5061,15 +5061,15 @@
     "active": true,
     "quote": "ట్రాఫిక్ ఎన్నున్నా... నా దారి రహదారి!",
     "ambience": {
-      "id": "hyderabad-street",
+      "id": "city-perspective-1",
       "theme": "city",
-      "background": "url('/images/hyderabad_street_background.jpg')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
+      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Hyderabad City Night Cruise"
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -5087,15 +5087,15 @@
     "active": true,
     "quote": "నమ్మకమే నా పెట్రోల్... ప్రేమయే నా బ్రేక్!",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "highway",
-      "background": "url('/images/ghats_highway_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-2",
+      "theme": "sunset",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "day",
+      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 1.0,
-      "description": "Ghats Highway Drive"
+      "brightness": 0.95,
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -5113,15 +5113,15 @@
     "active": true,
     "quote": "రహదారి రాజు... మాస్ రాజా ఆటో!",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "coastal",
-      "background": "url('/images/lake_dawn_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.95,
-      "description": "Early Morning Coastal Cruise"
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
+      "weather": "clear",
+      "skyState": "day",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -5139,15 +5139,15 @@
     "active": true,
     "quote": "సంగీతమే ఇంధనం... పాటలే ప్రయాణం!",
     "ambience": {
-      "id": "sunset-city",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
       "brightness": 0.9,
-      "description": "Golden Hour Highway"
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -5165,15 +5165,15 @@
     "active": true,
     "quote": "జనం ప్రశాంతంగా ఉంటేనే... ఆటోకి ఏ ఇబ్బంది లేకుండా ముందుకు వెళ్తుంది",
     "ambience": {
-      "id": "night-city",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-1",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.7,
-      "description": "Midnight Expressway"
+      "skyState": "day",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -5191,15 +5191,15 @@
     "active": true,
     "quote": "డ్రైవింగ్ నా వృత్తి... ధర్మం నా మార్గం!",
     "ambience": {
-      "id": "hyderabad-street",
-      "theme": "city",
-      "background": "url('/images/hyderabad_street_background.jpg')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-2",
+      "theme": "sunset",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
       "skyState": "sunset",
       "particles": "dust",
-      "brightness": 1.0,
-      "description": "Hyderabad City Night Cruise"
+      "brightness": 0.95,
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -5217,15 +5217,15 @@
     "active": true,
     "quote": "కష్టపడితేనే గౌరవం... ఆటో రాజా మార్గం!",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "highway",
-      "background": "url('/images/ghats_highway_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
       "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Ghats Highway Drive"
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -5243,15 +5243,15 @@
     "active": true,
     "quote": "ప్రేమతో వస్తే స్నేహితుడిని... వేగంతో వస్తే కింగ్‌ని!",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "coastal",
-      "background": "url('/images/lake_dawn_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.95,
-      "description": "Early Morning Coastal Cruise"
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 0.9,
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -5269,15 +5269,15 @@
     "active": true,
     "quote": "నా స్పీడుకి స్టీరింగ్ ఫిదా... నా మాస్‌కి రోడ్డు ఫిదా!",
     "ambience": {
-      "id": "sunset-city",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-1",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
+      "skyState": "day",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Golden Hour Highway"
+      "brightness": 1.0,
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -5295,15 +5295,15 @@
     "active": true,
     "quote": "నవ్వుతూ సాగిపో... కాలం మనదేరా!",
     "ambience": {
-      "id": "night-city",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-2",
+      "theme": "sunset",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.7,
-      "description": "Midnight Expressway"
+      "skyState": "sunset",
+      "particles": "dust",
+      "brightness": 0.95,
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -5321,15 +5321,15 @@
     "active": true,
     "quote": "ఆటో రాజా... ఊరంతా నాదే హవా!",
     "ambience": {
-      "id": "hyderabad-street",
-      "theme": "city",
-      "background": "url('/images/hyderabad_street_background.jpg')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
+      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Hyderabad City Night Cruise"
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -5347,15 +5347,15 @@
     "active": true,
     "quote": "మనస్సు మంచిదైతే మార్గం సుగమమే!",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "highway",
-      "background": "url('/images/ghats_highway_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "day",
+      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 1.0,
-      "description": "Ghats Highway Drive"
+      "brightness": 0.9,
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -5373,15 +5373,15 @@
     "active": true,
     "quote": "ట్రాఫిక్ ఎన్నున్నా... నా దారి రహదారి!",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "coastal",
-      "background": "url('/images/lake_dawn_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.95,
-      "description": "Early Morning Coastal Cruise"
+      "id": "city-perspective-1",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
+      "weather": "clear",
+      "skyState": "day",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -5399,15 +5399,15 @@
     "active": true,
     "quote": "నమ్మకమే నా పెట్రోల్... ప్రేమయే నా బ్రేక్!",
     "ambience": {
-      "id": "sunset-city",
+      "id": "city-perspective-2",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
+      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Golden Hour Highway"
+      "brightness": 0.95,
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -5425,15 +5425,15 @@
     "active": true,
     "quote": "రహదారి రాజు... మాస్ రాజా ఆటో!",
     "ambience": {
-      "id": "night-city",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.7,
-      "description": "Midnight Expressway"
+      "skyState": "day",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -5451,15 +5451,15 @@
     "active": true,
     "quote": "సంగీతమే ఇంధనం... పాటలే ప్రయాణం!",
     "ambience": {
-      "id": "hyderabad-street",
-      "theme": "city",
-      "background": "url('/images/hyderabad_street_background.jpg')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
+      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 1.0,
-      "description": "Hyderabad City Night Cruise"
+      "brightness": 0.9,
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -5477,15 +5477,15 @@
     "active": true,
     "quote": "జనం ప్రశాంతంగా ఉంటేనే... ఆటోకి ఏ ఇబ్బంది లేకుండా ముందుకు వెళ్తుంది",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "highway",
-      "background": "url('/images/ghats_highway_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-1",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
       "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Ghats Highway Drive"
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -5503,15 +5503,15 @@
     "active": true,
     "quote": "డ్రైవింగ్ నా వృత్తి... ధర్మం నా మార్గం!",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "coastal",
-      "background": "url('/images/lake_dawn_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
+      "id": "city-perspective-2",
+      "theme": "sunset",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
+      "weather": "clear",
+      "skyState": "sunset",
+      "particles": "dust",
       "brightness": 0.95,
-      "description": "Early Morning Coastal Cruise"
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -5529,15 +5529,15 @@
     "active": true,
     "quote": "కష్టపడితేనే గౌరవం... ఆటో రాజా మార్గం!",
     "ambience": {
-      "id": "sunset-city",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
+      "skyState": "day",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Golden Hour Highway"
+      "brightness": 1.0,
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -5555,15 +5555,15 @@
     "active": true,
     "quote": "ప్రేమతో వస్తే స్నేహితుడిని... వేగంతో వస్తే కింగ్‌ని!",
     "ambience": {
-      "id": "night-city",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.7,
-      "description": "Midnight Expressway"
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 0.9,
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -5581,15 +5581,15 @@
     "active": true,
     "quote": "నా స్పీడుకి స్టీరింగ్ ఫిదా... నా మాస్‌కి రోడ్డు ఫిదా!",
     "ambience": {
-      "id": "hyderabad-street",
+      "id": "city-perspective-1",
       "theme": "city",
-      "background": "url('/images/hyderabad_street_background.jpg')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
+      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Hyderabad City Night Cruise"
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -5607,15 +5607,15 @@
     "active": true,
     "quote": "నవ్వుతూ సాగిపో... కాలం మనదేరా!",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "highway",
-      "background": "url('/images/ghats_highway_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-2",
+      "theme": "sunset",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "day",
+      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 1.0,
-      "description": "Ghats Highway Drive"
+      "brightness": 0.95,
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -5633,15 +5633,15 @@
     "active": true,
     "quote": "ఆటో రాజా... ఊరంతా నాదే హవా!",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "coastal",
-      "background": "url('/images/lake_dawn_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.95,
-      "description": "Early Morning Coastal Cruise"
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
+      "weather": "clear",
+      "skyState": "day",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -5659,15 +5659,15 @@
     "active": true,
     "quote": "మనస్సు మంచిదైతే మార్గం సుగమమే!",
     "ambience": {
-      "id": "sunset-city",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
       "brightness": 0.9,
-      "description": "Golden Hour Highway"
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -5685,15 +5685,15 @@
     "active": true,
     "quote": "ట్రాఫిక్ ఎన్నున్నా... నా దారి రహదారి!",
     "ambience": {
-      "id": "night-city",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-1",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.7,
-      "description": "Midnight Expressway"
+      "skyState": "day",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -5711,15 +5711,15 @@
     "active": true,
     "quote": "నమ్మకమే నా పెట్రోల్... ప్రేమయే నా బ్రేక్!",
     "ambience": {
-      "id": "hyderabad-street",
-      "theme": "city",
-      "background": "url('/images/hyderabad_street_background.jpg')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-2",
+      "theme": "sunset",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
       "skyState": "sunset",
       "particles": "dust",
-      "brightness": 1.0,
-      "description": "Hyderabad City Night Cruise"
+      "brightness": 0.95,
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -5737,15 +5737,15 @@
     "active": true,
     "quote": "రహదారి రాజు... మాస్ రాజా ఆటో!",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "highway",
-      "background": "url('/images/ghats_highway_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
       "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Ghats Highway Drive"
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -5763,15 +5763,15 @@
     "active": true,
     "quote": "సంగీతమే ఇంధనం... పాటలే ప్రయాణం!",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "coastal",
-      "background": "url('/images/lake_dawn_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.95,
-      "description": "Early Morning Coastal Cruise"
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 0.9,
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -5789,15 +5789,15 @@
     "active": true,
     "quote": "జనం ప్రశాంతంగా ఉంటేనే... ఆటోకి ఏ ఇబ్బంది లేకుండా ముందుకు వెళ్తుంది",
     "ambience": {
-      "id": "sunset-city",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-1",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
+      "skyState": "day",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Golden Hour Highway"
+      "brightness": 1.0,
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -5815,15 +5815,15 @@
     "active": true,
     "quote": "డ్రైవింగ్ నా వృత్తి... ధర్మం నా మార్గం!",
     "ambience": {
-      "id": "night-city",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-2",
+      "theme": "sunset",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.7,
-      "description": "Midnight Expressway"
+      "skyState": "sunset",
+      "particles": "dust",
+      "brightness": 0.95,
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -5841,15 +5841,15 @@
     "active": true,
     "quote": "కష్టపడితేనే గౌరవం... ఆటో రాజా మార్గం!",
     "ambience": {
-      "id": "hyderabad-street",
-      "theme": "city",
-      "background": "url('/images/hyderabad_street_background.jpg')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
+      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Hyderabad City Night Cruise"
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -5867,15 +5867,15 @@
     "active": true,
     "quote": "ప్రేమతో వస్తే స్నేహితుడిని... వేగంతో వస్తే కింగ్‌ని!",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "highway",
-      "background": "url('/images/ghats_highway_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "day",
+      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 1.0,
-      "description": "Ghats Highway Drive"
+      "brightness": 0.9,
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -5893,15 +5893,15 @@
     "active": true,
     "quote": "నా స్పీడుకి స్టీరింగ్ ఫిదా... నా మాస్‌కి రోడ్డు ఫిదా!",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "coastal",
-      "background": "url('/images/lake_dawn_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.95,
-      "description": "Early Morning Coastal Cruise"
+      "id": "city-perspective-1",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
+      "weather": "clear",
+      "skyState": "day",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -5919,15 +5919,15 @@
     "active": true,
     "quote": "నవ్వుతూ సాగిపో... కాలం మనదేరా!",
     "ambience": {
-      "id": "sunset-city",
+      "id": "city-perspective-2",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
+      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Golden Hour Highway"
+      "brightness": 0.95,
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -5945,15 +5945,15 @@
     "active": true,
     "quote": "ఆటో రాజా... ఊరంతా నాదే హవా!",
     "ambience": {
-      "id": "night-city",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.7,
-      "description": "Midnight Expressway"
+      "skyState": "day",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -5971,15 +5971,15 @@
     "active": true,
     "quote": "మనస్సు మంచిదైతే మార్గం సుగమమే!",
     "ambience": {
-      "id": "hyderabad-street",
-      "theme": "city",
-      "background": "url('/images/hyderabad_street_background.jpg')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
+      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 1.0,
-      "description": "Hyderabad City Night Cruise"
+      "brightness": 0.9,
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -5997,15 +5997,15 @@
     "active": true,
     "quote": "ట్రాఫిక్ ఎన్నున్నా... నా దారి రహదారి!",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "highway",
-      "background": "url('/images/ghats_highway_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-1",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
       "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Ghats Highway Drive"
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -6023,15 +6023,15 @@
     "active": true,
     "quote": "నమ్మకమే నా పెట్రోల్... ప్రేమయే నా బ్రేక్!",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "coastal",
-      "background": "url('/images/lake_dawn_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
+      "id": "city-perspective-2",
+      "theme": "sunset",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
+      "weather": "clear",
+      "skyState": "sunset",
+      "particles": "dust",
       "brightness": 0.95,
-      "description": "Early Morning Coastal Cruise"
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -6049,15 +6049,15 @@
     "active": true,
     "quote": "రహదారి రాజు... మాస్ రాజా ఆటో!",
     "ambience": {
-      "id": "sunset-city",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
+      "skyState": "day",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Golden Hour Highway"
+      "brightness": 1.0,
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -6075,15 +6075,15 @@
     "active": true,
     "quote": "సంగీతమే ఇంధనం... పాటలే ప్రయాణం!",
     "ambience": {
-      "id": "night-city",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.7,
-      "description": "Midnight Expressway"
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 0.9,
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -6101,15 +6101,15 @@
     "active": true,
     "quote": "జనం ప్రశాంతంగా ఉంటేనే... ఆటోకి ఏ ఇబ్బంది లేకుండా ముందుకు వెళ్తుంది",
     "ambience": {
-      "id": "hyderabad-street",
+      "id": "city-perspective-1",
       "theme": "city",
-      "background": "url('/images/hyderabad_street_background.jpg')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
+      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Hyderabad City Night Cruise"
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -6127,15 +6127,15 @@
     "active": true,
     "quote": "డ్రైవింగ్ నా వృత్తి... ధర్మం నా మార్గం!",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "highway",
-      "background": "url('/images/ghats_highway_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-2",
+      "theme": "sunset",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "day",
+      "skyState": "sunset",
       "particles": "dust",
-      "brightness": 1.0,
-      "description": "Ghats Highway Drive"
+      "brightness": 0.95,
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -6153,15 +6153,15 @@
     "active": true,
     "quote": "కష్టపడితేనే గౌరవం... ఆటో రాజా మార్గం!",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "coastal",
-      "background": "url('/images/lake_dawn_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.95,
-      "description": "Early Morning Coastal Cruise"
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
+      "weather": "clear",
+      "skyState": "day",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -6179,15 +6179,15 @@
     "active": true,
     "quote": "ప్రేమతో వస్తే స్నేహితుడిని... వేగంతో వస్తే కింగ్‌ని!",
     "ambience": {
-      "id": "sunset-city",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
       "brightness": 0.9,
-      "description": "Golden Hour Highway"
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -6205,15 +6205,15 @@
     "active": true,
     "quote": "నా స్పీడుకి స్టీరింగ్ ఫిదా... నా మాస్‌కి రోడ్డు ఫిదా!",
     "ambience": {
-      "id": "night-city",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-1",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.7,
-      "description": "Midnight Expressway"
+      "skyState": "day",
+      "particles": "dust",
+      "brightness": 1.0,
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -6231,15 +6231,15 @@
     "active": true,
     "quote": "నవ్వుతూ సాగిపో... కాలం మనదేరా!",
     "ambience": {
-      "id": "hyderabad-street",
-      "theme": "city",
-      "background": "url('/images/hyderabad_street_background.jpg')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-2",
+      "theme": "sunset",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
       "skyState": "sunset",
       "particles": "dust",
-      "brightness": 1.0,
-      "description": "Hyderabad City Night Cruise"
+      "brightness": 0.95,
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -6257,15 +6257,15 @@
     "active": true,
     "quote": "ఆటో రాజా... ఊరంతా నాదే హవా!",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "highway",
-      "background": "url('/images/ghats_highway_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
       "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Ghats Highway Drive"
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -6283,15 +6283,15 @@
     "active": true,
     "quote": "మనస్సు మంచిదైతే మార్గం సుగమమే!",
     "ambience": {
-      "id": "lake-dawn",
-      "theme": "coastal",
-      "background": "url('/images/lake_dawn_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
-      "weather": "misty",
-      "skyState": "sunrise",
-      "particles": "fog",
-      "brightness": 0.95,
-      "description": "Early Morning Coastal Cruise"
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
+      "weather": "clear",
+      "skyState": "dusk",
+      "particles": "dust",
+      "brightness": 0.9,
+      "description": "Skyline Highway Curve Perspective"
     }
   },
   {
@@ -6309,15 +6309,15 @@
     "active": true,
     "quote": "ట్రాఫిక్ ఎన్నున్నా... నా దారి రహదారి!",
     "ambience": {
-      "id": "sunset-city",
-      "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-1",
+      "theme": "city",
+      "background": "url('/images/city_perspective_road1.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "dusk",
+      "skyState": "day",
       "particles": "dust",
-      "brightness": 0.9,
-      "description": "Golden Hour Highway"
+      "brightness": 1.0,
+      "description": "City Street Road Perspective"
     }
   },
   {
@@ -6335,15 +6335,15 @@
     "active": true,
     "quote": "నమ్మకమే నా పెట్రోల్... ప్రేమయే నా బ్రేక్!",
     "ambience": {
-      "id": "night-city",
-      "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-perspective-2",
+      "theme": "sunset",
+      "background": "url('/images/city_perspective_road2.jpg')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "night",
-      "particles": "stars",
-      "brightness": 0.7,
-      "description": "Midnight Expressway"
+      "skyState": "sunset",
+      "particles": "dust",
+      "brightness": 0.95,
+      "description": "Sunset City Highway Perspective"
     }
   },
   {
@@ -6361,15 +6361,15 @@
     "active": true,
     "quote": "రహదారి రాజు... మాస్ రాజా ఆటో!",
     "ambience": {
-      "id": "hyderabad-street",
-      "theme": "city",
-      "background": "url('/images/hyderabad_street_background.jpg')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-vector-street",
+      "theme": "vector",
+      "background": "url('/images/city_vector_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "sunset",
+      "skyState": "day",
       "particles": "dust",
       "brightness": 1.0,
-      "description": "Hyderabad City Night Cruise"
+      "description": "Town Shopping Street Perspective"
     }
   },
   {
@@ -6387,15 +6387,15 @@
     "active": true,
     "quote": "సంగీతమే ఇంధనం... పాటలే ప్రయాణం!",
     "ambience": {
-      "id": "ghats-highway",
-      "theme": "highway",
-      "background": "url('/images/ghats_highway_background.png')",
-      "vehicleSprite": "/images/auto_raja_sprite.png",
+      "id": "city-skyline-road",
+      "theme": "skyline",
+      "background": "url('/images/city_skyline_road.png')",
+      "vehicleSprite": "/images/auto_hero_front.png",
       "weather": "clear",
-      "skyState": "day",
+      "skyState": "dusk",
       "particles": "dust",
-      "brightness": 1.0,
-      "description": "Ghats Highway Drive"
+      "brightness": 0.9,
+      "description": "Skyline Highway Curve Perspective"
     }
   }
 ]

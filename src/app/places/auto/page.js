@@ -6,7 +6,13 @@ import { getSongsForPlace } from '@/data/songs';
 import { prefixPath } from '@/utils/paths';
 import YouTubePlayer from '@/components/YouTubePlayer';
 import AmbientWeather from '@/components/AmbientWeather';
-import { ChevronLeft, Tv, Volume2, VolumeX, Wind, Shuffle, Play, Pause, Megaphone } from 'lucide-react';
+import { ChevronLeft, Volume2, VolumeX, Wind, Shuffle, Play, Pause, Megaphone, SlidersHorizontal } from 'lucide-react';
+
+const AUTO_SPRITES = [
+  { id: 'front', label: 'ఆటో రాజా', sprite: '/images/auto_hero_front.png' },
+  { id: 'baasha', label: 'బాషా ఆటో', sprite: '/images/auto_hero_baasha.png' },
+  { id: 'floral', label: 'మాస్ ఆటో', sprite: '/images/auto_hero_floral.png' }
+];
 
 export default function AutoRaja() {
   const songs = getSongsForPlace('auto');
@@ -19,7 +25,7 @@ export default function AutoRaja() {
   const [volume, setVolume]             = useState(60);
   const [currentTime, setCurrentTime]   = useState(0);
   const [duration, setDuration]         = useState(0);
-  const [presenceCount, setPresenceCount] = useState(94);
+  const [presenceCount, setPresenceCount] = useState(98);
   const [timeString, setTimeString]     = useState('');
   const [videoVisible, setVideoVisible] = useState(false);
   const [ambientOn, setAmbientOn]       = useState(true);
@@ -27,29 +33,24 @@ export default function AutoRaja() {
   const [isShuffle, setIsShuffle]       = useState(false);
   const [seekHovered, setSeekHovered]   = useState(false);
   const [volumeHovered, setVolumeHovered] = useState(false);
+  const [selectedSpriteIdx, setSelectedSpriteIdx] = useState(0);
 
   const playerRef  = useRef(null);
   const ambientRef = useRef(null);
 
   const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
   const rawAmbience = currentSong?.ambience || {
-    background: "url('/images/hyderabad_street_background.jpg')",
+    background: "url('/images/city_perspective_road1.jpg')",
     weather: 'clear',
     particles: 'dust'
   };
+
+  const activeSpritePath = AUTO_SPRITES[selectedSpriteIdx].sprite;
   const ambience = {
     ...rawAmbience,
     background: prefixPath(rawAmbience.background),
-    vehicleSprite: prefixPath('/images/auto_raja_sprite.png')
+    vehicleSprite: prefixPath(activeSpritePath)
   };
-
-  // === Random initial song ===
-  useEffect(() => {
-    if (songs.length > 0) {
-      const rand = Math.floor(Math.random() * songs.length);
-      setCurrentSongIndex(rand);
-    }
-  }, []);
 
   // === Clock ===
   useEffect(() => {
@@ -64,7 +65,7 @@ export default function AutoRaja() {
   useEffect(() => {
     const sim = () => {
       const s = Math.floor(Date.now() / 4000);
-      setPresenceCount(Math.max(1, Math.round(94 + Math.sin(s * 0.5) * 6 + Math.cos(s * 0.2) * 3)));
+      setPresenceCount(Math.max(1, Math.round(98 + Math.sin(s * 0.5) * 6 + Math.cos(s * 0.2) * 3)));
     };
     sim();
     const t = setInterval(sim, 4000);
@@ -173,7 +174,7 @@ export default function AutoRaja() {
       osc1.frequency.setValueAtTime(420, ctx.currentTime);
       osc2.frequency.setValueAtTime(445, ctx.currentTime);
 
-      gain.gain.setValueAtTime(0.18, ctx.currentTime);
+      gain.gain.setValueAtTime(0.20, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
 
       osc1.connect(gain);
@@ -214,21 +215,21 @@ export default function AutoRaja() {
       {/* Background Weather/Particles */}
       <AmbientWeather weather={ambience.weather} particles={ambience.particles} />
 
-      {/* YouTube player — floating PiP corner container toggled by VIDEO button */}
+      {/* Floating YouTube Player Engine (Corner PiP toggled by VIDEO button) */}
       <div style={{
         position: 'fixed',
-        bottom: '100px',
+        bottom: '110px',
         right: '30px',
         width: '220px',
         height: '124px',
         borderRadius: '16px',
         overflow: 'hidden',
-        boxShadow: videoVisible ? '0 12px 24px rgba(0,0,0,0.5)' : 'none',
-        border: videoVisible ? '1px solid rgba(255,255,255,0.15)' : 'none',
+        boxShadow: videoVisible ? '0 12px 28px rgba(0,0,0,0.6)' : 'none',
+        border: videoVisible ? '1px solid rgba(255,255,255,0.2)' : 'none',
         opacity: videoVisible ? 1 : 0,
         visibility: videoVisible ? 'visible' : 'hidden',
         transition: 'opacity 0.3s, visibility 0.3s',
-        zIndex: videoVisible ? 40 : -1,
+        zIndex: videoVisible ? 45 : -1,
         background: '#000',
         pointerEvents: videoVisible ? 'auto' : 'none',
       }}>
@@ -263,12 +264,12 @@ export default function AutoRaja() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: 'rgba(10, 11, 15, 0.55)',
-          backdropFilter: 'blur(20px) saturate(160%)',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
+          background: 'rgba(10, 11, 15, 0.65)',
+          backdropFilter: 'blur(24px) saturate(160%)',
+          border: '1px solid rgba(255, 255, 255, 0.14)',
           padding: '10px 18px',
           borderRadius: '9999px',
-          boxShadow: '0 16px 36px rgba(0,0,0,0.4)'
+          boxShadow: '0 16px 36px rgba(0,0,0,0.5)'
         }}>
           {/* Back button */}
           <Link
@@ -292,13 +293,36 @@ export default function AutoRaja() {
             <span>PLACES</span>
           </Link>
 
+          {/* Center: Sprite Style Switcher */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'rgba(0,0,0,0.4)', padding: '3px', borderRadius: '9999px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            {AUTO_SPRITES.map((item, idx) => (
+              <button
+                key={item.id}
+                onClick={() => setSelectedSpriteIdx(idx)}
+                style={{
+                  background: selectedSpriteIdx === idx ? '#fbbf24' : 'transparent',
+                  color: selectedSpriteIdx === idx ? '#000' : 'rgba(255,255,255,0.6)',
+                  border: 'none',
+                  borderRadius: '9999px',
+                  padding: '4px 10px',
+                  fontSize: '0.7rem',
+                  fontWeight: '800',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s'
+                }}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+
           {/* Right Action buttons */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <button
               onClick={() => setAmbientOn(prev => !prev)}
               style={{
-                background: ambientOn ? 'rgba(245, 158, 11, 0.2)' : 'rgba(255,255,255,0.06)',
-                border: ambientOn ? '1px solid rgba(245, 158, 11, 0.4)' : '1px solid rgba(255,255,255,0.1)',
+                background: ambientOn ? 'rgba(245, 158, 11, 0.25)' : 'rgba(255,255,255,0.06)',
+                border: ambientOn ? '1px solid rgba(245, 158, 11, 0.45)' : '1px solid rgba(255,255,255,0.1)',
                 color: ambientOn ? '#fbbf24' : '#a1a1aa',
                 padding: '6px 12px',
                 borderRadius: '9999px',
@@ -318,9 +342,9 @@ export default function AutoRaja() {
             <button
               onClick={() => setVideoVisible(v => !v)}
               style={{
-                background: 'rgba(255,255,255,0.08)',
-                border: '1px solid rgba(255,255,255,0.12)',
-                color: '#fff',
+                background: videoVisible ? 'rgba(239, 68, 68, 0.25)' : 'rgba(255,255,255,0.08)',
+                border: videoVisible ? '1px solid rgba(239, 68, 68, 0.45)' : '1px solid rgba(255,255,255,0.12)',
+                color: videoVisible ? '#fca5a5' : '#fff',
                 padding: '6px 12px',
                 borderRadius: '9999px',
                 cursor: 'pointer',
@@ -332,15 +356,9 @@ export default function AutoRaja() {
                 whiteSpace: 'nowrap'
               }}
             >
-              <Tv size={14} />
-              <span className="btn-label">VIDEO</span>
+              <SlidersHorizontal size={14} />
+              <span className="btn-label">{videoVisible ? 'CLOSE VIDEO' : 'VIDEO'}</span>
             </button>
-
-            {timeString && (
-              <span style={{ fontSize: '0.75rem', fontWeight: '600', color: 'rgba(255,255,255,0.5)', paddingLeft: '6px' }} className="hud-time">
-                {timeString}
-              </span>
-            )}
           </div>
         </header>
 
@@ -380,7 +398,7 @@ export default function AutoRaja() {
           </p>
         </div>
 
-        {/* Center Vehicle & Motion Layer */}
+        {/* 60% SCREEN HERO AUTO RICKSHAW & PERSPECTIVE ROAD LAYER */}
         <div style={{
           position: 'relative',
           flex: 1,
@@ -390,7 +408,7 @@ export default function AutoRaja() {
           justifyContent: 'center',
           overflow: 'hidden'
         }}>
-          {/* Speed Lines */}
+          {/* Speed Lines & Road Flow */}
           <div className="speed-lines-container">
             <div className="speed-line speed-line-1" />
             <div className="speed-line speed-line-2" />
@@ -407,41 +425,41 @@ export default function AutoRaja() {
             <div className="dust-spec dust-spec-4" />
           </div>
 
-          {/* Exhaust Smoke Puffs */}
+          {/* Silencer Smoke Puffs */}
           <div className="smoke-container">
             <div className="smoke-puff smoke-puff-1" />
             <div className="smoke-puff smoke-puff-2" />
             <div className="smoke-puff smoke-puff-3" />
           </div>
 
-          {/* HERO AUTO RICKSHAW SPRITE CONTAINER */}
-          <div className="auto-hero-container">
+          {/* 60% SCREEN HERO AUTO RICKSHAW SPRITE CONTAINER */}
+          <div className="auto-hero-60-container">
             <img
               src={ambience.vehicleSprite}
-              alt="Auto Raja"
-              className="auto-hero-sprite"
+              alt="Auto Raja Hero"
+              className="auto-hero-60-sprite"
             />
 
-            {/* REALISTIC TELUGU AUTO STICKERS / QUOTATION BADGES (Sticked on Auto) */}
+            {/* DYNAMIC TELUGU AUTO STICKERS / QUOTATIONS (Anchored directly on Auto) */}
             
-            {/* 1. Main Rear Canopy Sticker */}
-            <div className="auto-sticker-canopy">
-              <div className="sticker-glow" />
-              <p className="sticker-telugu-text">
+            {/* 1. Visor Windshield Sticker */}
+            <div className="auto-sticker-visor-60">
+              <span>నమస్తే • TS 09 AUTO • జై మైసమ్మ</span>
+            </div>
+
+            {/* 2. Main Center Canopy Vinyl Sticker */}
+            <div className="auto-sticker-canopy-60">
+              <div className="sticker-border-dash" />
+              <p className="sticker-telugu-text-60">
                 {cleanQuote}
               </p>
-              <div className="sticker-footer-badge">
+              <div className="sticker-footer-60">
                 <span>★ ఆటో రాజా ★</span>
               </div>
             </div>
 
-            {/* 2. Top Visor Banner Sticker */}
-            <div className="auto-sticker-visor">
-              <span>నమస్తే • TS 09 AUTO • జై మైసమ్మ</span>
-            </div>
-
-            {/* 3. Front Bumper Sticker */}
-            <div className="auto-sticker-bumper">
+            {/* 3. Front Bumper Badge */}
+            <div className="auto-sticker-bumper-60">
               <span>FOR HIRE • మాస్ రాజా</span>
             </div>
           </div>
@@ -454,15 +472,15 @@ export default function AutoRaja() {
 
             {/* HUD Capsule */}
             <div style={{
-              background: 'rgba(10, 11, 15, 0.45)',
+              background: 'rgba(10, 11, 15, 0.55)',
               backdropFilter: 'blur(30px) saturate(160%)',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
+              border: '1px solid rgba(255, 255, 255, 0.14)',
               borderRadius: '24px',
               padding: '20px 24px',
               display: 'flex',
               flexDirection: 'column',
               gap: '16px',
-              boxShadow: '0 25px 60px -15px rgba(0,0,0,0.7), inset 0 1px 1px rgba(255,255,255,0.06)',
+              boxShadow: '0 25px 60px -15px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.08)',
               position: 'relative'
             }} className="capsule-hud">
 
@@ -779,65 +797,66 @@ export default function AutoRaja() {
 
       {/* Global & Auto-Specific Styles */}
       <style jsx global>{`
-        /* Hero Auto Rickshaw Container */
-        .auto-hero-container {
+        /* 60% SCREEN HERO AUTO CONTAINER */
+        .auto-hero-60-container {
           position: absolute;
-          bottom: 35px;
+          bottom: 25px;
           left: 50%;
           transform: translateX(-50%);
-          width: 820px;
-          max-width: 90vw;
-          max-height: 75vh;
+          width: 62vw;
+          max-width: 860px;
+          height: 60vh;
+          max-height: 680px;
           z-index: 5;
           display: flex;
           align-items: center;
           justify-content: center;
         }
 
-        .auto-hero-sprite {
+        .auto-hero-60-sprite {
           width: 100%;
-          height: auto;
+          height: 100%;
           object-fit: contain;
-          filter: drop-shadow(0 20px 35px rgba(0,0,0,0.7));
+          filter: drop-shadow(0 25px 45px rgba(0,0,0,0.8));
           animation: auto-engine-vibe 0.1s linear infinite;
           pointer-events: none;
         }
 
         @keyframes auto-engine-vibe {
           0%   { transform: translateY(0px); }
-          50%  { transform: translateY(-1.2px); }
+          50%  { transform: translateY(-1.5px); }
           100% { transform: translateY(0px); }
         }
 
-        /* REALISTIC TELUGU AUTO STICKERS STICKED ON AUTO */
-        .auto-sticker-canopy {
+        /* DYNAMIC TELUGU AUTO STICKERS STICKED DIRECTLY ON AUTO */
+        .auto-sticker-canopy-60 {
           position: absolute;
-          top: 36%;
-          left: 48%;
+          top: 38%;
+          left: 50%;
           transform: translate(-50%, -50%) rotate(-1deg);
-          width: 55%;
-          background: rgba(15, 15, 18, 0.92);
-          border: 2px solid rgba(251, 191, 36, 0.7);
+          width: 52%;
+          background: rgba(14, 15, 18, 0.93);
+          border: 2px solid rgba(251, 191, 36, 0.75);
           border-radius: 12px;
           padding: 10px 14px;
           text-align: center;
-          box-shadow: 0 6px 18px rgba(0,0,0,0.7), inset 0 0 10px rgba(0,0,0,0.9);
+          box-shadow: 0 8px 22px rgba(0,0,0,0.85), inset 0 0 12px rgba(0,0,0,0.95);
           backdrop-filter: blur(4px);
           z-index: 8;
           transition: all 0.4s ease;
         }
 
-        .sticker-glow {
+        .sticker-border-dash {
           position: absolute;
-          inset: 0;
-          border-radius: 10px;
+          inset: 2px;
+          border-radius: 9px;
           border: 1px dashed rgba(255,255,255,0.25);
           pointer-events: none;
         }
 
-        .sticker-telugu-text {
+        .sticker-telugu-text-60 {
           font-family: "'Akaya Telivigala', 'Ravi Prakash', 'Gurajada', serif";
-          font-size: 1.15rem;
+          font-size: clamp(0.95rem, 1.6vw, 1.25rem);
           font-weight: 700;
           color: #fef08a;
           margin: 0;
@@ -846,7 +865,7 @@ export default function AutoRaja() {
           text-shadow: 0 2px 6px rgba(0,0,0,0.9);
         }
 
-        .sticker-footer-badge {
+        .sticker-footer-60 {
           margin-top: 4px;
           font-size: 0.65rem;
           font-weight: 800;
@@ -855,15 +874,15 @@ export default function AutoRaja() {
           text-transform: uppercase;
         }
 
-        .auto-sticker-visor {
+        .auto-sticker-visor-60 {
           position: absolute;
           top: 18%;
-          left: 48%;
+          left: 50%;
           transform: translate(-50%, -50%);
-          background: rgba(16, 185, 129, 0.85);
+          background: rgba(16, 185, 129, 0.88);
           color: #fff;
           font-family: "'Akaya Telivigala', serif";
-          font-size: 0.8rem;
+          font-size: clamp(0.7rem, 1.1vw, 0.85rem);
           font-weight: 700;
           padding: 3px 14px;
           border-radius: 4px;
@@ -873,14 +892,14 @@ export default function AutoRaja() {
           z-index: 8;
         }
 
-        .auto-sticker-bumper {
+        .auto-sticker-bumper-60 {
           position: absolute;
           bottom: 22%;
-          left: 48%;
+          left: 50%;
           transform: translate(-50%, 0);
           background: #fbbf24;
           color: #000;
-          font-size: 0.7rem;
+          font-size: 0.72rem;
           font-weight: 900;
           padding: 2px 10px;
           border-radius: 3px;
@@ -889,7 +908,7 @@ export default function AutoRaja() {
           z-index: 8;
         }
 
-        /* MOTION EFFECTS: DUST, AIR & SPEED LINES */
+        /* MOTION EFFECTS: SPEED LINES, DUST & SMOKE */
         .speed-lines-container, .dust-particle-container, .smoke-container {
           position: absolute;
           inset: 0;
@@ -899,50 +918,50 @@ export default function AutoRaja() {
         .speed-line {
           position: absolute;
           height: 2px;
-          background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%);
+          background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.65) 50%, transparent 100%);
           border-radius: 2px;
-          animation: speed-flow 0.9s linear infinite;
+          animation: speed-flow 0.85s linear infinite;
         }
-        .speed-line-1 { top: 25%; width: 220px; animation-duration: 0.8s;  animation-delay: 0s; }
-        .speed-line-2 { top: 40%; width: 280px; animation-duration: 1.0s;  animation-delay: 0.2s; }
-        .speed-line-3 { top: 58%; width: 240px; animation-duration: 0.75s; animation-delay: 0.4s; }
-        .speed-line-4 { top: 72%; width: 310px; animation-duration: 0.95s; animation-delay: 0.6s; }
-        .speed-line-5 { top: 84%; width: 200px; animation-duration: 0.85s; animation-delay: 0.3s; }
+        .speed-line-1 { top: 22%; width: 260px; animation-duration: 0.75s; animation-delay: 0s; }
+        .speed-line-2 { top: 38%; width: 320px; animation-duration: 0.95s; animation-delay: 0.2s; }
+        .speed-line-3 { top: 55%; width: 280px; animation-duration: 0.7s;  animation-delay: 0.4s; }
+        .speed-line-4 { top: 70%; width: 340px; animation-duration: 0.9s;  animation-delay: 0.6s; }
+        .speed-line-5 { top: 82%; width: 240px; animation-duration: 0.8s;  animation-delay: 0.3s; }
 
         @keyframes speed-flow {
           0%   { transform: translateX(-30vw); opacity: 0; }
-          40%  { opacity: 0.8; }
+          40%  { opacity: 0.85; }
           100% { transform: translateX(100vw); opacity: 0; }
         }
 
         .dust-spec {
           position: absolute;
-          width: 5px;
-          height: 5px;
+          width: 6px;
+          height: 6px;
           border-radius: 50%;
-          background: rgba(253, 230, 138, 0.7);
-          box-shadow: 0 0 6px rgba(251,191,36,0.8);
-          animation: dust-flow 1.4s ease-out infinite;
+          background: rgba(253, 230, 138, 0.8);
+          box-shadow: 0 0 8px rgba(251,191,36,0.9);
+          animation: dust-flow 1.3s ease-out infinite;
         }
-        .dust-spec-1 { bottom: 85px; left: 42%; animation-delay: 0s; }
-        .dust-spec-2 { bottom: 70px; left: 52%; animation-delay: 0.3s; }
-        .dust-spec-3 { bottom: 90px; left: 45%; animation-delay: 0.7s; }
-        .dust-spec-4 { bottom: 65px; left: 58%; animation-delay: 1.1s; }
+        .dust-spec-1 { bottom: 95px; left: 42%; animation-delay: 0s; }
+        .dust-spec-2 { bottom: 80px; left: 52%; animation-delay: 0.3s; }
+        .dust-spec-3 { bottom: 100px; left: 45%; animation-delay: 0.7s; }
+        .dust-spec-4 { bottom: 75px; left: 58%; animation-delay: 1.1s; }
 
         @keyframes dust-flow {
           0%   { transform: translate(0,0) scale(0.4); opacity: 0; }
           30%  { opacity: 0.9; }
-          100% { transform: translate(160px, -25px) scale(1.5); opacity: 0; }
+          100% { transform: translate(170px, -30px) scale(1.6); opacity: 0; }
         }
 
         .smoke-puff {
           position: absolute;
-          bottom: 75px;
+          bottom: 85px;
           left: 36%;
-          width: 14px;
-          height: 14px;
+          width: 16px;
+          height: 16px;
           border-radius: 50%;
-          background: rgba(200, 200, 200, 0.35);
+          background: rgba(210, 210, 210, 0.4);
           filter: blur(4px);
           animation: smoke-puff 1.2s ease-out infinite;
         }
@@ -952,7 +971,7 @@ export default function AutoRaja() {
 
         @keyframes smoke-puff {
           0%   { transform: translate(0,0) scale(0.5); opacity: 0.7; }
-          100% { transform: translate(-90px, -40px) scale(3.5); opacity: 0; }
+          100% { transform: translate(-100px, -45px) scale(3.8); opacity: 0; }
         }
 
         .control-icon:hover { color: #fff !important; transform: scale(1.1); }
@@ -964,20 +983,21 @@ export default function AutoRaja() {
 
         /* Mobile Adjustments */
         @media (max-width: 768px) {
-          .auto-hero-container {
-            width: 110vw !important;
+          .auto-hero-60-container {
+            width: 92vw !important;
+            height: 52vh !important;
             max-width: none !important;
-            bottom: 140px !important;
+            bottom: 135px !important;
             left: 50% !important;
           }
-          .auto-sticker-canopy {
-            width: 70% !important;
+          .auto-sticker-canopy-60 {
+            width: 72% !important;
             padding: 8px 10px !important;
           }
-          .sticker-telugu-text {
+          .sticker-telugu-text-60 {
             font-size: 0.92rem !important;
           }
-          .auto-sticker-visor {
+          .auto-sticker-visor-60 {
             font-size: 0.68rem !important;
             padding: 2px 8px !important;
           }
