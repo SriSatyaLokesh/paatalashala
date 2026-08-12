@@ -14,7 +14,7 @@ export default function DeluxeSaloon() {
 
   // State variables
   const [isExperienceStarted, setIsExperienceStarted] = useState(true);
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [currentSongIndex, setCurrentSongIndex] = useState(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [volume, setVolume] = useState(40); // Saloons usually play music at lower volume
   const [currentTime, setCurrentTime] = useState(0);
@@ -22,7 +22,15 @@ export default function DeluxeSaloon() {
   const [presenceCount, setPresenceCount] = useState(41);
   const [playerObject, setPlayerObject] = useState(null);
 
-  const currentSong = songs[currentSongIndex];
+  const currentSong = currentSongIndex !== null ? songs[currentSongIndex] : null;
+
+  // === Random initial song/background ===
+  useEffect(() => {
+    if (songs.length > 0) {
+      const rand = Math.floor(Math.random() * songs.length);
+      setCurrentSongIndex(rand);
+    }
+  }, []);
 
   // Simulate dynamic presence count locally
   useEffect(() => {
@@ -128,7 +136,9 @@ export default function DeluxeSaloon() {
       overflow: 'hidden',
     }} className="ambient-transition">
 
-      {/* Start Experience Overlay */}
+      {currentSong && (
+        <>
+          {/* Start Experience Overlay */}
       {!isExperienceStarted && (
         <div style={{
           position: 'fixed',
@@ -543,6 +553,8 @@ export default function DeluxeSaloon() {
           </div>
 
         </div>
+      )}
+        </>
       )}
 
       <style jsx global>{`

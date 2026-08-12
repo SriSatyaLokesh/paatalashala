@@ -63,7 +63,7 @@ export default function YouTubePlayer({
         width: '100%',
         videoId: videoId,
         playerVars: {
-          autoplay: 0,
+          autoplay: isPlaying ? 1 : 0,
           controls: 1, // Keep player controls visible per PRD
           disablekb: 0,
           fs: 1,

@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -25,8 +26,17 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://www.youtube.com" />
+        <link rel="preconnect" href="https://s.ytimg.com" />
+      </head>
       <body>
         {children}
+        <Script
+          id="youtube-iframe-api-global-script"
+          src="https://www.youtube.com/iframe_api"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

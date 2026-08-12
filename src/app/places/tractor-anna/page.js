@@ -13,7 +13,7 @@ export default function TractorAnna() {
 
   // State variables
   const [started, setStarted]             = useState(true);
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [currentSongIndex, setCurrentSongIndex] = useState(null);
   const [isPlaying, setIsPlaying]       = useState(true);
   const [ytReady, setYtReady]           = useState(false);
   const [volume, setVolume]             = useState(60);
@@ -31,8 +31,8 @@ export default function TractorAnna() {
   const playerRef  = useRef(null);
   const ambientRef = useRef(null);
 
-  const currentSong = songs[currentSongIndex] || {};
-  const rawAmbience = currentSong.ambience || {
+  const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
+  const rawAmbience = currentSong?.ambience || {
     background: "url('/images/sunset_farm_background.png')",
     weather: 'clear',
     particles: 'dust'
@@ -42,6 +42,14 @@ export default function TractorAnna() {
     background: prefixPath(rawAmbience.background),
     vehicleSprite: prefixPath(rawAmbience.vehicleSprite || '/images/tractor_anna_sprite.png')
   };
+
+  // === Random initial song/background ===
+  useEffect(() => {
+    if (songs.length > 0) {
+      const rand = Math.floor(Math.random() * songs.length);
+      setCurrentSongIndex(rand);
+    }
+  }, []);
 
   // === Clock ===
   useEffect(() => {
@@ -189,6 +197,7 @@ export default function TractorAnna() {
   };
 
   const fmt = (s) => {
+    if (typeof s !== 'number' || isNaN(s) || !isFinite(s)) return '0:00';
     const m   = Math.floor(s / 60);
     const sec = Math.floor(s % 60);
     return `${m}:${sec.toString().padStart(2, '0')}`;
@@ -257,7 +266,7 @@ export default function TractorAnna() {
       )}
 
       {/* === EXPERIENCE (mounted only after user clicks START) === */}
-      {started && (
+      {started && currentSong && (
         <>
           {/* Ambient weather */}
           <AmbientWeather weather={ambience.weather} particles={ambience.particles} active={isPlaying} />
@@ -278,13 +287,13 @@ export default function TractorAnna() {
           <img src={ambience.vehicleSprite} alt="Tractor Anna" className="tractor-hero-sprite"
             style={{ animationPlayState: isPlaying ? 'running' : 'paused' }} />
 
-          {/* Hero Title (zIndex: 1, below the tractor sprite zIndex: 2) */}
+          {/* Hero Title (zIndex: 5, above weather/ tractor layers) */}
           <div style={{
             position: 'absolute',
-            top: '10vh',
+            top: '4vh',
             left: 0,
             right: 0,
-            zIndex: 1,
+            zIndex: 5,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -299,7 +308,7 @@ export default function TractorAnna() {
               letterSpacing: '0.04em',
               color: '#fff',
               margin: 0,
-              textShadow: '0 8px 36px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.95)',
+              textShadow: '0 2px 4px rgba(0,0,0,0.5)',
               fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif",
               textAlign: 'center'
             }} className="immersive-title">
@@ -368,25 +377,25 @@ export default function TractorAnna() {
               </header>
             </div>
 
-            {/* Quote shifted above the player HUD */}
-            <div style={{ textAlign: 'center', marginBottom: '14px', width: '100%', pointerEvents: 'none', zIndex: 30 }}>
-              <p style={{
-                fontSize: '1.25rem',
-                fontWeight: '600',
-                color: 'rgba(254, 240, 138, 0.95)',
-                margin: 0,
-                textShadow: '0 2px 14px rgba(0,0,0,1), 0 4px 28px rgba(0,0,0,1), 0 0 10px rgba(0,0,0,0.95)',
-                fontStyle: 'italic',
-                letterSpacing: '0.03em',
-                lineHeight: '1.4',
-                fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif"
-              }}>
-                {currentSong?.quote || 'చేను చెలకా మనదేరా, రైతు అన్న రాజేరా! 🌾'}
-              </p>
-            </div>
-
             {/* Bottom HUD capsule */}
             <div style={{ position: 'relative', width: '100%', maxWidth: '680px', margin: '0 auto', zIndex: 30 }}>
+
+              {/* Quote right above the player capsule */}
+              <div style={{ textAlign: 'center', marginBottom: '12px', width: '100%', pointerEvents: 'none' }}>
+                <p style={{
+                  fontSize: '1.2rem',
+                  fontWeight: '400',
+                  color: 'rgba(254, 240, 138, 0.95)',
+                  margin: 0,
+                  textShadow: '0 2px 8px rgba(0,0,0,0.85)',
+                  fontStyle: 'normal',
+                  letterSpacing: '0.03em',
+                  lineHeight: '1.4',
+                  fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif"
+                }}>
+                  {(currentSong?.quote || 'చేను చెలకా మనదేరా, రైతు అన్న రాజేరా!').replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim()}
+                </p>
+              </div>
 
               <div style={{
                 background: 'rgba(10, 11, 15, 0.45)',
