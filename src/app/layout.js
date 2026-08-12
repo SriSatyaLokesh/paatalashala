@@ -76,7 +76,7 @@ const faqSchema = {
 };
 
 export const metadata = {
-  title: "Paatalashala — Telugu Cultural Ambience & Curation",
+  title: "Paatalashala - Telugu Cultural Ambience & Curation",
   description: "Handcrafted Telugu ambient soundscapes from nostalgic spaces. Cruise city streets in a Hyderabad mass auto, ride a farmland tractor, or relax in a retro saloon.",
   metadataBase: new URL(SITE_URL),
   alternates: {
@@ -88,7 +88,7 @@ export const metadata = {
     apple: '/favicon.svg',
   },
   openGraph: {
-    title: "Paatalashala — Telugu Cultural Ambience & Curation",
+    title: "Paatalashala - Telugu Cultural Ambience & Curation",
     description: "Handcrafted Telugu ambient soundscapes from nostalgic spaces. Cruise city streets in a Hyderabad mass auto, ride a farmland tractor, or relax in a retro saloon.",
     url: SITE_URL,
     siteName: "Paatalashala",
@@ -105,7 +105,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Paatalashala — Telugu Cultural Ambience & Curation",
+    title: "Paatalashala - Telugu Cultural Ambience & Curation",
     description: "Handcrafted Telugu ambient soundscapes from nostalgic spaces. Cruise city streets in a Hyderabad mass auto, ride a farmland tractor, or relax in a retro saloon.",
     images: [`${SITE_URL}/images/readme_banner.png`],
   },
