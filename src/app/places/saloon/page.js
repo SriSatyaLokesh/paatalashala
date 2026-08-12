@@ -30,10 +30,28 @@ export default function RoyalSaloon() {
   const [showQueue, setShowQueue]                 = useState(false);
 
   const playerRef = useRef(null);
+  const ambientRef = useRef(null);
 
   const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
   const rawBackground = currentSong?.ambience?.background || "url('/images/saloon_background.jpg')";
   const bgUrl = prefixPath(rawBackground);
+
+  // === Ambient Saloon Indian Village audio ===
+  useEffect(() => {
+    if (!started || !ytReady) return;
+    if (!ambientRef.current) {
+      const a = new Audio(prefixPath('/audio/saloon_ambient.mp3'));
+      a.loop = true;
+      a.volume = 0.04;
+      ambientRef.current = a;
+    }
+    if (isPlaying && ambientOn) {
+      ambientRef.current.play().catch(() => {});
+    } else {
+      ambientRef.current.pause();
+    }
+    return () => { ambientRef.current?.pause(); };
+  }, [started, isPlaying, ambientOn, ytReady]);
 
   // === Random initial song ===
   useEffect(() => {
@@ -78,11 +96,14 @@ export default function RoyalSaloon() {
         if (playerRef.current && typeof playerRef.current.playVideo === 'function') {
           playerRef.current.playVideo();
         }
+        if (ambientRef.current && ambientOn) {
+          ambientRef.current.play().catch(() => {});
+        }
       } catch (_) {}
     };
     window.addEventListener('click', unlock, { once: true });
     return () => window.removeEventListener('click', unlock);
-  }, []);
+  }, [ambientOn]);
 
   // === Player Callbacks ===
   const handlePlayerReady = (player) => {
@@ -254,21 +275,6 @@ export default function RoyalSaloon() {
           )}
         </div>
 
-        {/* Center Title - using same Telugu font as Tractor Anna */}
-        <div style={{ textAlign: 'center' }}>
-          <h1 style={{
-            fontSize: '2.2rem',
-            fontWeight: '900',
-            letterSpacing: '0.04em',
-            color: '#fff',
-            margin: 0,
-            textShadow: '0 2px 8px rgba(0,0,0,0.8)',
-            fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif",
-          }}>
-            రాయల్ సెలూన్
-          </h1>
-        </div>
-
         {/* Right Controls */}
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
           <button
@@ -317,6 +323,32 @@ export default function RoyalSaloon() {
           </button>
         </div>
       </header>
+
+      {/* Screen Center Title (Matching Tractor Anna position & typography) */}
+      <div style={{
+        position: 'absolute',
+        top: 0, left: 0, right: 0, bottom: '180px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        pointerEvents: 'none',
+        userSelect: 'none',
+        padding: '0 24px',
+        zIndex: 5,
+      }}>
+        <h2 style={{
+          fontSize: '4.8rem',
+          fontWeight: '900',
+          letterSpacing: '0.04em',
+          color: '#fff',
+          margin: 0,
+          textShadow: '0 2px 8px rgba(0,0,0,0.7)',
+          fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif",
+          textAlign: 'center'
+        }} className="immersive-title">
+          రాయల్ సెలూన్
+        </h2>
+      </div>
 
       {/* Bottom HUD Capsule Media Player (Matches Tractor Anna UI) */}
       <div style={{
@@ -450,6 +482,7 @@ export default function RoyalSaloon() {
               {/* Volume Control */}
               <div
                 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+                className="volume-slider-container"
                 onMouseEnter={() => setVolumeHovered(true)}
                 onMouseLeave={() => setVolumeHovered(false)}
               >
@@ -534,15 +567,20 @@ export default function RoyalSaloon() {
         borderRadius: '9999px',
         zIndex: 35,
         boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
-      }}>
+      }} className="listeners-badge">
         <Users size={14} style={{ color: '#ffb74d' }} />
-        <span>{presenceCount} మంది సెలూన్‌లో ఉన్నారు</span>
+        <span>{presenceCount} listeners</span>
       </div>
 
-      {/* CSS Animations */}
+      {/* CSS Animations & Mobile Responsiveness */}
       <style jsx global>{`
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .hud-button:hover { background: rgba(255,255,255,0.16) !important; transform: translateY(-1px); }
+        @media (max-width: 768px) {
+          .immersive-title { font-size: 2.8rem !important; }
+          .volume-slider-container { display: none !important; }
+          .listeners-badge { display: none !important; }
+        }
       `}</style>
     </div>
   );
