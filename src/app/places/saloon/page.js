@@ -15,7 +15,7 @@ export default function RoyalSaloon() {
   // State variables
   const [started, setStarted]                     = useState(true);
   const [currentSongIndex, setCurrentSongIndex]   = useState(null);
-  const [isPlaying, setIsPlaying]                 = useState(true);
+  const [isPlaying, setIsPlaying]                 = useState(false);
   const [ytReady, setYtReady]                     = useState(false);
   const [volume, setVolume]                       = useState(50);
   const [currentTime, setCurrentTime]             = useState(0);
@@ -40,7 +40,7 @@ export default function RoyalSaloon() {
   // === Ambient Saloon Indian Village audio ===
   useEffect(() => {
     if (!ambientRef.current) {
-      const a = new Audio(prefixPath('/audio/saloon_ambient.mp3'));
+      const a = new Audio(prefixPath('/audio/village_ambience.mp3'));
       a.loop = true;
       a.volume = 0.15;
       ambientRef.current = a;

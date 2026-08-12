@@ -15,7 +15,7 @@ export default function TractorAnna() {
   // State variables
   const [started, setStarted]             = useState(true);
   const [currentSongIndex, setCurrentSongIndex] = useState(null);
-  const [isPlaying, setIsPlaying]       = useState(true);
+  const [isPlaying, setIsPlaying]       = useState(false);
   const [ytReady, setYtReady]           = useState(false);
   const [volume, setVolume]             = useState(60);
   const [currentTime, setCurrentTime]   = useState(0);
