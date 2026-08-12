@@ -7,7 +7,7 @@ export const PLACES = [
     emoji: "🚜",
     active: true,
     theme: "amber",
-    description: "Riding alongside green crop fields and ploughed farming land on a rustic tractor with rural mass folk beats.",
+    description: "Riding the tractor through paddy fields with the earth\u2019s hum, golden harvests and rustic Telugu folk beats.",
   },
   {
     id: "saloon",
@@ -17,7 +17,7 @@ export const PLACES = [
     emoji: "💈",
     active: true,
     theme: "blue",
-    description: "Old village barber chair, a wall-mounted TV, classic melodies drifting through the warm afternoon air.",
+    description: "The saloon chair, a wall-mounted TV, old Telugu classics drifting through warm afternoon air.",
   },
   {
     id: "auto",

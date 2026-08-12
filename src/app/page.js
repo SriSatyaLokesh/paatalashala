@@ -118,7 +118,8 @@ export default function Home() {
           inset: 0;
           background-image: url('${bgUrl}');
           background-size: cover;
-          background-position: center top;
+          /* Push right so woman is centre-left; decorative text falls behind card area */
+          background-position: 18% top;
           background-repeat: no-repeat;
           filter: brightness(0.55) saturate(0.85);
           z-index: 0;
@@ -377,37 +378,28 @@ export default function Home() {
 
         .card-body { display: flex; flex-direction: column; gap: 0; }
 
-        /* Primary name — Telugu script, large and readable */
+        /* PRIMARY — Telugu name, bold headline */
         .card-name-telugu {
           font-family: 'Akaya Telivigala', serif;
           font-size: 1.9rem;
           color: #f7f0e5;
           line-height: 1.2;
-          text-shadow: 0 2px 16px rgba(0,0,0,0.8), 0 1px 4px rgba(0,0,0,0.9);
+          text-shadow: 0 2px 18px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,0.95);
           letter-spacing: 0.01em;
         }
-        /* English subtitle — small, clearly secondary */
+        /* SECONDARY — English subtitle, clearly subordinate */
         .card-name-en {
-          font-size: 0.72rem;
-          font-weight: 500;
-          color: rgba(200,165,105,0.6);
-          letter-spacing: 0.1em;
+          font-size: 0.7rem;
+          font-weight: 600;
+          color: rgba(200,162,100,0.62);
+          letter-spacing: 0.13em;
           text-transform: uppercase;
-          margin-top: 5px;
+          margin-top: 6px;
         }
-        /* Tagline — italic mood line */
-        .card-tagline {
-          font-size: 0.76rem;
-          font-style: italic;
-          color: rgba(200,170,120,0.5);
-          margin-top: 2px;
-          font-weight: 300;
-          letter-spacing: 0.01em;
-        }
-        /* Description — legible, not overpowering */
+        /* Description */
         .card-desc {
           font-size: 0.8rem;
-          color: rgba(215,185,145,0.7);
+          color: rgba(218,188,148,0.72);
           line-height: 1.58;
           font-weight: 400;
           margin-top: 12px;
@@ -512,18 +504,25 @@ export default function Home() {
 
         /* ── Mobile ── */
         @media (max-width: 680px) {
+          /* Shift bg left so woman is visible, decorative text pushed off right */
+          .landing-bg {
+            background-position: left top !important;
+          }
           .page { padding: 44px 16px 60px; }
           .site-header { margin-bottom: 48px; }
           .featured-grid {
             grid-template-columns: 1fr;
             gap: 14px;
           }
-          .featured-card { height: 280px; }
-          .card-name-telugu { font-size: 1.45rem; }
+          .featured-card { height: 270px; }
+          .card-name-telugu { font-size: 1.5rem; }
+          .card-desc { -webkit-line-clamp: 2; }
           .coming-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
         }
         @media (max-width: 380px) {
-          .featured-card { height: 260px; }
+          .landing-bg { background-position: left top !important; }
+          .featured-card { height: 250px; }
+          .card-name-telugu { font-size: 1.35rem; }
         }
       `}</style>
 
@@ -585,15 +584,13 @@ export default function Home() {
                     )}
                   </div>
 
-                  {/* Bottom: name block + desc + enter */}
+                  {/* Bottom: just two lines — Telugu + English */}
                   <div className="card-body">
-                    {/* Name block: Telugu primary, English secondary */}
                     <div>
                       <div className="card-name-telugu">
                         {TELUGU_NAMES[place.slug] || place.name}
                       </div>
                       <div className="card-name-en">{place.name}</div>
-                      <div className="card-tagline">{place.tagline}</div>
                     </div>
                     <p className="card-desc">{place.description}</p>
                     <div className="card-enter">
