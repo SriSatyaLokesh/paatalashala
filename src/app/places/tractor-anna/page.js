@@ -835,7 +835,7 @@ export default function TractorAnna() {
           .horn-btn-mobile { display: flex !important; }
           .mobile-listeners-row { display: flex !important; }
           /* Compact nav button labels */
-          .btn-label { display: none !important; }
+          .btn-label { font-size: 0.65rem !important; }
         }
       `}</style>
     </div>

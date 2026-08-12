@@ -993,7 +993,7 @@ export default function AutoRaja() {
           .listeners-badge-desktop { display: none !important; }
           .horn-btn-mobile { display: flex !important; }
           .mobile-listeners-row { display: flex !important; }
-          .btn-label { display: none !important; }
+          .btn-label { font-size: 0.65rem !important; }
         }
       `}</style>
 
