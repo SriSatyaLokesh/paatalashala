@@ -10,7 +10,7 @@ export const metadata = {
     description: "High-energy driving simulation across beautiful Telugu farmlands with pumping local rhythms.",
     url: "https://srisatyalokesh.is-a.dev/paatalashala/spaces/tractor-anna",
     siteName: "Paatalashala",
-    images: [{ url: "https://srisatyalokesh.is-a.dev/paatalashala/images/sunset_farm_background.png" }],
+    images: [{ url: "https://srisatyalokesh.is-a.dev/paatalashala/images/sunset_farm_background.webp" }],
     locale: "en_US",
     type: "website"
   },
@@ -18,7 +18,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Tractor Anna | Immersive Telugu Farmland Beats | Paatalashala",
     description: "High-energy driving simulation across beautiful Telugu farmlands with pumping local rhythms.",
-    images: ["https://srisatyalokesh.is-a.dev/paatalashala/images/sunset_farm_background.png"]
+    images: ["https://srisatyalokesh.is-a.dev/paatalashala/images/sunset_farm_background.webp"]
   }
 };
 

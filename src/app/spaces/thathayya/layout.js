@@ -10,7 +10,7 @@ export const metadata = {
     description: "Relax on a vintage veranda with a warm cup of tea and timeless classic Telugu melodies playing from an old cassette tape recorder.",
     url: "https://srisatyalokesh.is-a.dev/paatalashala/spaces/thathayya",
     siteName: "Paatalashala",
-    images: [{ url: "https://srisatyalokesh.is-a.dev/paatalashala/images/tape_recorder_background.png" }],
+    images: [{ url: "https://srisatyalokesh.is-a.dev/paatalashala/images/tape_recorder_background.webp" }],
     locale: "en_US",
     type: "website"
   },
@@ -18,7 +18,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Thathayya Tape Recorder | Timeless Telugu Classics | Paatalashala",
     description: "Relax on a vintage veranda with a warm cup of tea and timeless classic Telugu melodies playing from an old cassette tape recorder.",
-    images: ["https://srisatyalokesh.is-a.dev/paatalashala/images/tape_recorder_background.png"]
+    images: ["https://srisatyalokesh.is-a.dev/paatalashala/images/tape_recorder_background.webp"]
   }
 };
 

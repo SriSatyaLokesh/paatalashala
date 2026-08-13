@@ -36,9 +36,9 @@ export default function Thathayya() {
   const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
   
   const bgImages = [
-    '/images/grandpa_1.png',
-    '/images/grandpa_2.png',
-    '/images/grandpa_3.png'
+    '/images/grandpa_1.webp',
+    '/images/grandpa_2.webp',
+    '/images/grandpa_3.webp'
   ];
   const bgIndex = currentSongIndex !== null ? (currentSongIndex % bgImages.length) : 0;
   const rawBackground = `url('${bgImages[bgIndex]}')`;

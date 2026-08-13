@@ -36,9 +36,9 @@ export default function Vennallo() {
   const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
   
   const bgImages = [
-    '/images/vennela_1.png',
-    '/images/vennela_2.png',
-    '/images/vennela_3.png'
+    '/images/vennela_1.webp',
+    '/images/vennela_2.webp',
+    '/images/vennela_3.webp'
   ];
   const bgIndex = currentSongIndex !== null ? (currentSongIndex % bgImages.length) : 0;
   const rawBackground = `url('${bgImages[bgIndex]}')`;

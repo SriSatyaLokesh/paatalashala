@@ -10,7 +10,7 @@ export const metadata = {
     description: "Play the famous Amma radio playlist, classic lullabies, and vintage Telugu playlists from a nostalgic kitchen transistor radio.",
     url: "https://srisatyalokesh.is-a.dev/paatalashala/spaces/ammama",
     siteName: "Paatalashala",
-    images: [{ url: "https://srisatyalokesh.is-a.dev/paatalashala/images/grandma_1.png" }],
+    images: [{ url: "https://srisatyalokesh.is-a.dev/paatalashala/images/grandma_1.webp" }],
     locale: "en_US",
     type: "website"
   },
@@ -18,7 +18,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Ammama Radio | Amma Radio Playlist & Lullabies | Paatalashala",
     description: "Play the famous Amma radio playlist, classic lullabies, and vintage Telugu playlists from a nostalgic kitchen transistor radio.",
-    images: ["https://srisatyalokesh.is-a.dev/paatalashala/images/grandma_1.png"]
+    images: ["https://srisatyalokesh.is-a.dev/paatalashala/images/grandma_1.webp"]
   }
 };
 

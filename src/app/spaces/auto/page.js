@@ -19,8 +19,8 @@ const AUTO_BACKGROUNDS = [
   "url('/images/city_perspective_road1.jpg')",
   "url('/images/city_perspective_road2.jpg')",
   "url('/images/city_perspective_road3.jpg')",
-  "url('/images/city_skyline_road.png')",
-  "url('/images/city_vector_road.png')"
+  "url('/images/city_skyline_road.webp')",
+  "url('/images/city_vector_road.webp')"
 ];
 
 export default function AutoRaja() {

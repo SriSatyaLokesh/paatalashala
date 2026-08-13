@@ -36,9 +36,9 @@ export default function AmmamaRadio() {
   const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
   
   const bgImages = [
-    '/images/grandma_1.png',
-    '/images/grandma_2.png',
-    '/images/grandma_3.png'
+    '/images/grandma_1.webp',
+    '/images/grandma_2.webp',
+    '/images/grandma_3.webp'
   ];
   const bgIndex = currentSongIndex !== null ? (currentSongIndex % bgImages.length) : 0;
   const rawBackground = `url('${bgImages[bgIndex]}')`;

@@ -115,12 +115,12 @@ const TELUGU_NAMES = {
 };
 
 const CARD_BG = {
-  'tractor-anna': '/images/sunset_farm_background.png',
+  'tractor-anna': '/images/sunset_farm_background.webp',
   'saloon': '/images/saloon_background.jpg',
   'auto': '/images/hyderabad_street_background.jpg',
-  'thathayya': '/images/tape_recorder_background.png',
-  'ammama': '/images/grandma_1.png',
-  'vennallo': '/images/vennela_1.png',
+  'thathayya': '/images/tape_recorder_background.webp',
+  'ammama': '/images/grandma_1.webp',
+  'vennallo': '/images/vennela_1.webp',
 };
 
 export default function Home() {
