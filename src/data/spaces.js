@@ -60,6 +60,16 @@ export const SPACES = [
     description: "Veranda chair, hot cup of tea, and old Telugu melodies drifting from the tape recorder cassette player.",
   },
   {
+    id: "vennallo",
+    slug: "vennallo",
+    name: "మేడ మీద వెన్నెల్లో",
+    tagline: "Terrace midnight breeze & stars",
+    emoji: "🌌",
+    active: true,
+    theme: "indigo",
+    description: "Soothing breeze on the terrace, kids looking at the starry sky with the moon, and cozy Telugu melodies in a calm village setup.",
+  },
+  {
     id: "palle-velugu",
     slug: "palle-velugu",
     name: "Palle Velugu Bus",
