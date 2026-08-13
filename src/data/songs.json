@@ -16549,7 +16549,7 @@
     }
   },
   {
-    "youtubeVideoId": "gS-H-9h3G34",
+    "youtubeVideoId": "WoMh1xCFKV8",
     "title": "Choopultho Guchi Guchi",
     "movie": "Idiot",
     "year": "2002",
@@ -16557,7 +16557,7 @@
     "musicDirector": "Chakri",
     "place": "saloon",
     "active": true,
-    "id": "sal-gS-H-9h3G34-2",
+    "id": "sal-WoMh1xCFKV8-2",
     "sequence": 2,
     "quote": "సలూన్ అద్దంలో కనిపించే చిన్ననాటి రోజులు...",
     "ambience": {
@@ -16569,7 +16569,8 @@
       "particles": "dust",
       "brightness": 0.9,
       "description": "Authentic South Indian Salon"
-    }
+    },
+    "youtubeUrl": "https://www.youtube.com/watch?v=WoMh1xCFKV8"
   },
   {
     "youtubeVideoId": "1vSsYG-wp3E",
