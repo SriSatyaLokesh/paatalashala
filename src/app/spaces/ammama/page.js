@@ -199,13 +199,6 @@ export default function AmmamaRadio() {
   const handlePlayerError = (code) => {
     setPlayerError(code);
     console.error('YouTube player error code:', code);
-    if ((code === 101 || code === 150) && currentSong?.youtubeVideoId) {
-      fetch('/api/delete-song', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ videoId: currentSong.youtubeVideoId })
-      }).catch(err => console.error('Failed to report bad song:', err));
-    }
   };
 
   // === Auto-skip on unplayable video errors ===
