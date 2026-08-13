@@ -324,6 +324,12 @@ export default function AutoRaja() {
             }}
             onTimeUpdate={(c, d) => { setCurrentTime(c); setDuration(d); }}
             onError={(err) => { setPlayerError('Failed to play video'); next(); }}
+            trackTitle={currentSong?.title}
+            trackArtist={currentSong?.artist}
+            trackAlbum={currentSong?.movie}
+            onPrev={prev}
+            onNext={next}
+            onPlayPause={togglePlay}
           />
         )}
       </div>

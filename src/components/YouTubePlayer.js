@@ -10,11 +10,74 @@ export default function YouTubePlayer({
   onPlayerReady,
   onTimeUpdate,
   onError,
+  // Media Session Props
+  trackTitle,
+  trackArtist,
+  trackAlbum,
+  onPrev,
+  onNext,
+  onPlayPause,
 }) {
   const containerRef = useRef(null);
   const playerRef = useRef(null);
   const progressIntervalRef = useRef(null);
   const isReadyRef = useRef(false);
+
+  // Sync Media Session metadata and action handlers
+  useEffect(() => {
+    if (!('mediaSession' in navigator)) return;
+
+    if (videoId && trackTitle) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: trackTitle,
+        artist: trackArtist || 'Paatalashala',
+        album: trackAlbum || 'Telugu Melodies',
+        artwork: [
+          {
+            src: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+            sizes: '480x360',
+            type: 'image/jpeg'
+          }
+        ]
+      });
+    }
+
+    if (onPlayPause) {
+      navigator.mediaSession.setActionHandler('play', onPlayPause);
+      navigator.mediaSession.setActionHandler('pause', onPlayPause);
+    } else {
+      navigator.mediaSession.setActionHandler('play', null);
+      navigator.mediaSession.setActionHandler('pause', null);
+    }
+
+    if (onPrev) {
+      navigator.mediaSession.setActionHandler('previoustrack', onPrev);
+    } else {
+      navigator.mediaSession.setActionHandler('previoustrack', null);
+    }
+
+    if (onNext) {
+      navigator.mediaSession.setActionHandler('nexttrack', onNext);
+    } else {
+      navigator.mediaSession.setActionHandler('nexttrack', null);
+    }
+
+    return () => {
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.setActionHandler('play', null);
+        navigator.mediaSession.setActionHandler('pause', null);
+        navigator.mediaSession.setActionHandler('previoustrack', null);
+        navigator.mediaSession.setActionHandler('nexttrack', null);
+      }
+    };
+  }, [videoId, trackTitle, trackArtist, trackAlbum, onPrev, onNext, onPlayPause]);
+
+  // Sync Media Session Playback State
+  useEffect(() => {
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
+    }
+  }, [isPlaying]);
 
   useEffect(() => {
     // Helper to check and initialize the player
