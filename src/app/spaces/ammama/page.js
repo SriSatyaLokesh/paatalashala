@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import Link from 'next/link';
 import { getSongsForPlace } from '@/data/songs';
 import { prefixPath } from '@/utils/paths';
@@ -9,8 +9,8 @@ import AmbientWeather from '@/components/AmbientWeather';
 import { supabase } from '@/utils/supabase';
 import { ChevronLeft, Tv, Volume2, VolumeX, Wind, Shuffle, Play, Pause, Users } from 'lucide-react';
 
-export default function RoyalSaloon() {
-  const songs = getSongsForPlace('saloon');
+export default function AmmamaRadio() {
+  const songs = useMemo(() => getSongsForPlace('ammama'), []);
 
   // State variables
   const [started, setStarted]                     = useState(true);
@@ -34,13 +34,33 @@ export default function RoyalSaloon() {
   const ambientRef = useRef(null);
 
   const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
-  const rawBackground = currentSong?.ambience?.background || "url('/images/saloon_background.jpg')";
+  
+  const bgImages = [
+    '/images/grandma_1.png',
+    '/images/grandma_2.png',
+    '/images/grandma_3.png'
+  ];
+  const bgIndex = currentSongIndex !== null ? (currentSongIndex % bgImages.length) : 0;
+  const rawBackground = `url('${bgImages[bgIndex]}')`;
   const bgUrl = prefixPath(rawBackground);
 
-  // === Ambient Saloon Indian Village audio ===
+  const AMMAMA_LYRICS = [
+    "జో అచ్యుతానంద జోజో ముకుందా... రావె పరమానంద రామ గోవిందా...",
+    "చందమామ రావే జాబిల్లి రావే... కొండెక్కి రావే గోరుముద్ద తీవే...",
+    "లాలీ లాలీ జో లాలీ... లాలీ లాలీ వటపత్ర శాయీ...",
+    "చిన్ని చిన్ని కలలే ఏవేవో కంటూ... వెన్నెలమ్మ ఒడిలో నిదురించు బాబు...",
+    "అమ్మ ఒడి ప్రశాంతమైన ఆలయము... అమ్మ పిలుపు అమృత భాండము...",
+    "గోరుముద్దలు తినిపించు అమ్మ ప్రేమ... గోవుల కాచే గోపాలుని చల్లని నీడ...",
+    "జో జో లాలి జో జో లాలి... జోల పాడుతా నిదురపోవమ్మ...",
+    "తెలిమంచు కరిగింది తూరుపు కనులలో... తొలికిరణమొచ్చింది నీ నయనాలలో...",
+    "చిన్నారి పొన్నారి చిరునవ్వులు... చిలకమ్మ పలికిన తీయని పలుకులు..."
+  ];
+  const currentLyric = currentSongIndex !== null ? AMMAMA_LYRICS[currentSongIndex % AMMAMA_LYRICS.length] : "";
+
+  // === Ambient Village audio ===
   useEffect(() => {
     if (!ambientRef.current) {
-      const a = new Audio(prefixPath('/audio/village_ambience.mp3'));
+      const a = new Audio(prefixPath('/audio/grandfather_ambient.mp3'));
       a.loop = true;
       a.volume = 0.15;
       ambientRef.current = a;
@@ -82,20 +102,18 @@ export default function RoyalSaloon() {
       return () => clearInterval(t);
     }
 
-    const channel = supabase.channel('presence-saloon');
+    const channel = supabase.channel('presence-ammama');
 
     channel
       .on('presence', { event: 'sync' }, () => {
         try {
           const state = channel.presenceState();
-          // Count unique users in presence state
-          // Each key is a user ID, value is an array of presence objects
           const userIds = Object.keys(state || {});
-          const count = Math.max(1, userIds.length + 8); // Add realistic base count
+          const count = Math.max(1, userIds.length + 9);
           setPresenceCount(count);
         } catch (e) {
           console.error('Error reading presence state:', e);
-          setPresenceCount(Math.max(1, 43 + Math.floor(Math.random() * 15) - 7));
+          setPresenceCount(Math.max(1, 43 + Math.floor(Math.random() * 8) - 4));
         }
       })
       .subscribe(async (status) => {
@@ -115,7 +133,7 @@ export default function RoyalSaloon() {
     document.body.style.transition = 'background 1.8s ease';
     document.body.style.backgroundImage = bgUrl;
     document.body.style.backgroundSize = 'cover';
-    document.body.style.backgroundPosition = 'center';
+    document.body.style.backgroundPosition = 'center 30%';
     document.body.style.backgroundRepeat = 'no-repeat';
     document.body.style.backgroundAttachment = 'fixed';
     return () => { document.body.style.background = ''; };
@@ -137,6 +155,39 @@ export default function RoyalSaloon() {
     return () => window.removeEventListener('click', unlock);
   }, [ambientOn]);
 
+  // === Controls ===
+  const next = useCallback(() => {
+    if (songs.length === 0) return;
+    if (isShuffle) {
+      const randomIndex = Math.floor(Math.random() * songs.length);
+      setCurrentSongIndex(randomIndex);
+    } else {
+      setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songs.length);
+    }
+    setIsPlaying(true);
+    setCurrentTime(0);
+    setDuration(0);
+    setPlayerError(null);
+  }, [songs, isShuffle]);
+
+  const prev = useCallback(() => {
+    if (songs.length === 0) return;
+    if (isShuffle) {
+      const randomIndex = Math.floor(Math.random() * songs.length);
+      setCurrentSongIndex(randomIndex);
+    } else {
+      setCurrentSongIndex((prevIndex) => (prevIndex - 1 + songs.length) % songs.length);
+    }
+    setIsPlaying(true);
+    setCurrentTime(0);
+    setDuration(0);
+    setPlayerError(null);
+  }, [songs, isShuffle]);
+
+  const togglePlay = () => {
+    setIsPlaying(prev => !prev);
+  };
+
   // === Player Callbacks ===
   const handlePlayerReady = (player) => {
     playerRef.current = player;
@@ -149,7 +200,24 @@ export default function RoyalSaloon() {
   const handlePlayerError = (code) => {
     setPlayerError(code);
     console.error('YouTube player error code:', code);
+    if ((code === 101 || code === 150) && currentSong?.youtubeVideoId) {
+      fetch('/api/delete-song', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ videoId: currentSong.youtubeVideoId })
+      }).catch(err => console.error('Failed to report bad song:', err));
+    }
   };
+
+  // === Auto-skip on unplayable video errors ===
+  useEffect(() => {
+    if (playerError === 2 || playerError === 100 || playerError === 101 || playerError === 150) {
+      const timer = setTimeout(() => {
+        next();
+      }, 2500);
+      return () => clearTimeout(timer);
+    }
+  }, [playerError, next]);
 
   const handleStateChange = (code) => {
     if (code === 0) { // ENDED - auto play next track
@@ -166,37 +234,6 @@ export default function RoyalSaloon() {
   const handleTimeUpdate = (cur, dur) => {
     setCurrentTime(cur);
     setDuration(dur);
-  };
-
-  // === Controls ===
-  const togglePlay = () => {
-    setIsPlaying(prev => !prev);
-  };
-
-  const next = () => {
-    if (songs.length === 0) return;
-    if (isShuffle) {
-      const randomIndex = Math.floor(Math.random() * songs.length);
-      setCurrentSongIndex(randomIndex);
-    } else {
-      setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songs.length);
-    }
-    setIsPlaying(true);
-    setCurrentTime(0);
-    setDuration(0);
-  };
-
-  const prev = () => {
-    if (songs.length === 0) return;
-    if (isShuffle) {
-      const randomIndex = Math.floor(Math.random() * songs.length);
-      setCurrentSongIndex(randomIndex);
-    } else {
-      setCurrentSongIndex((prevIndex) => (prevIndex - 1 + songs.length) % songs.length);
-    }
-    setIsPlaying(true);
-    setCurrentTime(0);
-    setDuration(0);
   };
 
   const changeVolume = (v) => {
@@ -237,13 +274,13 @@ export default function RoyalSaloon() {
       <div style={{
         position: 'fixed',
         inset: 0,
-        background: 'radial-gradient(circle at center, rgba(15, 23, 42, 0.25) 0%, rgba(15, 23, 42, 0.75) 100%)',
+        background: 'radial-gradient(circle at center, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.65) 100%)',
         pointerEvents: 'none',
         zIndex: 1,
       }} />
 
-      {/* Weather / Dust particles effect */}
-      <AmbientWeather weather="clear" particles="dust" active={isPlaying && ambientOn} />
+      {/* Weather / Dust particles effect (both fog and dust concurrently) */}
+      <AmbientWeather weather="fog" particles="dust" active={isPlaying && ambientOn} />
 
       {/* YouTube player — visibility:hidden keeps proper dimensions for YT init */}
       <div style={{
@@ -278,7 +315,7 @@ export default function RoyalSaloon() {
 
       {playerError && (
         <div style={{ position: 'fixed', bottom: '170px', right: '30px', background: 'rgba(220,38,38,0.9)', color: '#fff', padding: '8px 14px', borderRadius: '10px', fontSize: '0.75rem', zIndex: 50 }}>
-          ⚠ Video Error: {playerError}
+          {playerError === 150 || playerError === 101 ? '⚠ Embedding restricted on localhost (Auto-skipping...)' : `⚠ Video Error: ${playerError}`}
         </div>
       )}
 
@@ -308,7 +345,7 @@ export default function RoyalSaloon() {
             whiteSpace: 'nowrap'
           }} className="hud-button">
             <ChevronLeft size={16} />
-            <span>PLACES</span>
+            <span>SPACES</span>
           </Link>
           {timeString && (
             <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }} className="hud-time">
@@ -390,18 +427,42 @@ export default function RoyalSaloon() {
           fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif",
           textAlign: 'center'
         }} className="immersive-title">
-          రాయల్ సెలూన్
+          అమ్మమ్మ రేడియో
         </h2>
       </div>
 
-      {/* Bottom HUD Capsule Media Player (Matches Tractor Anna UI) */}
+      {/* Bottom HUD Capsule Media Player */}
       <div style={{
         zIndex: 20,
         width: '100%',
         maxWidth: '680px',
         margin: '0 auto 24px',
         padding: '0 20px',
+        display: 'flex',
+        flexDirection: 'column',
       }}>
+        {/* Lullaby Lyric Display */}
+        {currentLyric && (
+          <div style={{
+            textAlign: 'center',
+            fontSize: '0.95rem',
+            fontWeight: '500',
+            color: '#ffcc80',
+            textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 0 10px rgba(255, 183, 77, 0.3)',
+            marginBottom: '14px',
+            padding: '8px 16px',
+            background: 'rgba(23, 14, 11, 0.7)',
+            backdropFilter: 'blur(10px)',
+            borderRadius: '16px',
+            border: '1px solid rgba(255, 183, 77, 0.2)',
+            width: 'fit-content',
+            alignSelf: 'center',
+            fontFamily: "'Akaya Telivigala', 'Gurajada', serif",
+          }}>
+            "{currentLyric}"
+          </div>
+        )}
+
         <div style={{
           background: 'rgba(15, 17, 26, 0.65)',
           backdropFilter: 'blur(30px) saturate(160%)',
@@ -419,15 +480,15 @@ export default function RoyalSaloon() {
             {/* Track Info & Vinyl Art */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
               <div style={{
-                width: '48px',
-                height: '48px',
+                width: '46px',
+                height: '46px',
                 borderRadius: '50%',
                 overflow: 'hidden',
-                border: '3px solid #2e1c16',
-                boxShadow: '0 0 0 2px rgba(255, 183, 77, 0.3), 0 8px 16px rgba(0,0,0,0.6)',
+                border: '2px solid rgba(255,255,255,0.15)',
+                boxShadow: '0 4px 10px rgba(0,0,0,0.4)',
                 flexShrink: 0,
                 position: 'relative',
-                background: '#000',
+                background: '#151515',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -444,7 +505,7 @@ export default function RoyalSaloon() {
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
                 ) : (
-                  <span style={{ fontSize: '1.2rem' }}>💈</span>
+                  <span style={{ fontSize: '1.2rem' }}>📻</span>
                 )}
                 <div style={{
                   position: 'absolute',
@@ -462,10 +523,10 @@ export default function RoyalSaloon() {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
                 <span style={{ fontSize: '1.05rem', fontWeight: '800', color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {currentSong?.title || 'రాయల్ సెలూన్ గీతాలు'}
+                  {currentSong?.title || 'అమ్మమ్మ రేడియో గీతాలు'}
                 </span>
                 <span style={{ fontSize: '0.78rem', color: '#ffcc80', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {currentSong?.movie ? `${currentSong.movie} • ${currentSong.year}` : 'S.A. Rajkumar Melodies'}
+                  {currentSong?.movie ? `${currentSong.movie} • ${currentSong.year}` : 'Classic Telugu Melodies'}
                 </span>
               </div>
             </div>
@@ -590,6 +651,8 @@ export default function RoyalSaloon() {
             </div>
           </div>
 
+          {/* Quote Display Removed */}
+
         </div>
       </div>
 
@@ -632,4 +695,3 @@ export default function RoyalSaloon() {
     </div>
   );
 }
-

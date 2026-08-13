@@ -390,7 +390,7 @@ export default function TractorAnna() {
                 {/* Left */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#fff', textDecoration: 'none', fontSize: '0.85rem', fontWeight: '600', padding: '8px 14px', borderRadius: '9999px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)', whiteSpace: 'nowrap' }} className="hud-button">
-                    <ChevronLeft size={16} /><span>PLACES</span>
+                    <ChevronLeft size={16} /><span>SPACES</span>
                   </Link>
                   {timeString && <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }} className="hud-time">{timeString}</span>}
                 </div>

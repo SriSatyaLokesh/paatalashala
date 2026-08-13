@@ -69,8 +69,7 @@ export default function YouTubePlayer({
           fs: 1,
           modestbranding: 1,
           rel: 0,
-          showinfo: 0,
-          origin: typeof window !== 'undefined' ? window.location.origin : ''
+          showinfo: 0
         },
         events: {
           onReady: (event) => {

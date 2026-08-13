@@ -49,19 +49,19 @@ export default function AmbientWeather({ weather, particles, active = true }) {
           this.size = 0.6 + Math.random() * 1.4;
           this.color = `rgba(255, 255, 255, ${0.15 + Math.random() * 0.7})`;
         } else if (this.type === 'dust-motes') {
-          // saloon floating dust
+          // floating dust
           this.y = height + Math.random() * 20;
-          this.vy = -0.2 - Math.random() * 0.4; // slow upward drift
-          this.vx = (Math.random() - 0.5) * 0.25; // drift side to side
-          this.size = 1.2 + Math.random() * 2.5;
-          this.color = `rgba(245, 158, 11, ${0.06 + Math.random() * 0.14})`; // Amber warm dust glow
+          this.vy = -0.2 - Math.random() * 0.5; // slow upward drift
+          this.vx = (Math.random() - 0.5) * 0.3; // drift side to side
+          this.size = 1.5 + Math.random() * 3.0; // slightly larger
+          this.color = `rgba(245, 158, 11, ${0.18 + Math.random() * 0.32})`; // Brighter Amber warm dust glow
         } else {
           // fog / mist
           this.y = Math.random() * height;
-          this.vy = (Math.random() - 0.5) * 0.1;
-          this.vx = -0.5 - Math.random() * 0.5;
-          this.size = 50 + Math.random() * 90;
-          this.color = `rgba(255, 255, 255, ${0.01 + Math.random() * 0.04})`;
+          this.vy = (Math.random() - 0.5) * 0.15;
+          this.vx = -0.3 - Math.random() * 0.4;
+          this.size = 80 + Math.random() * 120; // larger fog patches
+          this.color = `rgba(245, 237, 219, ${0.015 + Math.random() * 0.03})`; // Soft warm kitchen fog/mist
         }
       }
 
@@ -122,36 +122,36 @@ export default function AmbientWeather({ weather, particles, active = true }) {
     }
 
     // Determine target counts and type
-    let particleType = '';
-    let targetCount = 0;
+    const pools = [];
 
+    // 1. Weather effect
     if (weather === 'rain') {
-      particleType = 'rain';
-      targetCount = 75;
-    } else if (particles === 'stars') {
-      particleType = 'stars';
-      targetCount = 45;
-    } else if (particles === 'dust' || particles === 'dust-motes') {
-      particleType = 'dust-motes';
-      targetCount = 20;
+      for (let i = 0; i < 75; i++) {
+        pools.push(new Particle('rain'));
+      }
     } else if (weather === 'misty' || weather === 'fog') {
-      particleType = 'fog';
-      targetCount = 12;
+      for (let i = 0; i < 15; i++) {
+        pools.push(new Particle('fog'));
+      }
     }
 
-    const pool = [];
-    if (particleType) {
-      for (let i = 0; i < targetCount; i++) {
-        pool.push(new Particle(particleType));
+    // 2. Extra particles
+    if (particles === 'stars') {
+      for (let i = 0; i < 45; i++) {
+        pools.push(new Particle('stars'));
+      }
+    } else if (particles === 'dust' || particles === 'dust-motes') {
+      for (let i = 0; i < 80; i++) {
+        pools.push(new Particle('dust-motes'));
       }
     }
 
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
-      if (active && particleType && pool.length > 0) {
-        for (let i = 0; i < pool.length; i++) {
-          pool[i].update();
-          pool[i].draw();
+      if (active && pools.length > 0) {
+        for (let i = 0; i < pools.length; i++) {
+          pools[i].update();
+          pools[i].draw();
         }
       }
       animationFrameId = requestAnimationFrame(animate);

@@ -1,4 +1,4 @@
-export const PLACES = [
+export const SPACES = [
   {
     id: "tractor-anna",
     slug: "tractor-anna",
@@ -40,24 +40,24 @@ export const PLACES = [
     description: "Misty mornings with steam rising from brass pots, hot glasses of tea, and soft golden melodies.",
   },
   {
-    id: "radio",
-    slug: "radio",
-    name: "Thattayya Radio",
-    tagline: "Classic news announcements & old air melodies",
+    id: "ammama",
+    slug: "ammama",
+    name: "Ammama Radio",
+    tagline: "అమ్మమ్మ వంట గదిలో వీనులవిందైన పాత రేడియో పాటలు",
     emoji: "📻",
-    active: false,
+    active: true,
     theme: "orange",
-    description: "Rhythmic hum of ancient dial knobs, evening news broadcasts, and timeless vintage melodies.",
+    description: "The delicious aroma of traditional spices, hot brass pots, and nostalgic Telugu melodies drifting from the vintage radio in grandma's kitchen.",
   },
   {
-    id: "tape-recorder",
-    slug: "tape-recorder",
-    name: "Ammama Tape Recorder",
-    tagline: "Spooling cassette tapes & nostalgic beats",
+    id: "thathayya",
+    slug: "thathayya",
+    name: "Thathayya Tape Recorder",
+    tagline: "తాతయ్య గదిలో మధురమైన పాత రికార్డులు",
     emoji: "📼",
-    active: false,
+    active: true,
     theme: "silver",
-    description: "Click of the play button, spooling magnetic tapes, and hand-recorded mix tapes from the golden era.",
+    description: "Veranda chair, hot cup of tea, and old Telugu melodies drifting from the tape recorder cassette player.",
   },
   {
     id: "palle-velugu",

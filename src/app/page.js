@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { PLACES } from '@/data/places';
+import { SPACES } from '@/data/spaces';
 import { prefixPath } from '@/utils/paths';
 
 // ── SVG Icons (no emoji) ──────────────────────────────────────────────────────
@@ -93,8 +93,8 @@ const ICONS = {
   'saloon': IconScissors,
   'auto': IconAuto,
   'tea-stall': IconCup,
-  'radio': IconRadio,
-  'tape-recorder': IconTape,
+  'ammama': IconRadio,
+  'thathayya': IconTape,
   'palle-velugu': IconBusLocal,
   'trip-bus': IconVanTrip,
 };
@@ -103,12 +103,16 @@ const TELUGU_NAMES = {
   'tractor-anna': 'ట్రాక్టర్ అన్న',
   'saloon': 'రాయల్ సెలూన్',
   'auto': 'ఆటో జానీ',
+  'thathayya': 'తాతయ్య టేప్ రికార్డర్',
+  'ammama': 'అమ్మమ్మ రేడియో',
 };
 
 const CARD_BG = {
   'tractor-anna': '/images/sunset_farm_background.png',
   'saloon': '/images/saloon_background.jpg',
   'auto': '/images/hyderabad_street_background.jpg',
+  'thathayya': '/images/tape_recorder_background.png',
+  'ammama': '/images/grandma_1.png',
 };
 
 export default function Home() {
@@ -117,7 +121,7 @@ export default function Home() {
   useEffect(() => {
     const sim = () => {
       const c = {};
-      for (const p of PLACES) {
+      for (const p of SPACES) {
         if (p.active) {
           const base = p.slug === 'tractor-anna' ? 83 : 41;
           const s = Math.floor(Date.now() / 4000);
@@ -131,8 +135,8 @@ export default function Home() {
     return () => clearInterval(iv);
   }, []);
 
-  const active = PLACES.filter(p => p.active);
-  const coming = PLACES.filter(p => !p.active);
+  const active = SPACES.filter(p => p.active);
+  const coming = SPACES.filter(p => !p.active);
   const bgUrl = prefixPath('/images/landing_bg.avif');
 
   return (
@@ -679,8 +683,8 @@ export default function Home() {
             <span className="telugu-title">పాటలశాల</span>
           </h1>
           <p className="site-tagline">
-            Handcrafted soundscapes from the places that shaped us.<br />
-            Pick a place. Let it play.
+            Handcrafted soundscapes from the spaces that shaped us.<br />
+            Pick a space. Let it play.
           </p>
         </header>
 
@@ -696,7 +700,7 @@ export default function Home() {
             const bg = CARD_BG[place.slug];
 
             return (
-              <Link href={`/places/${place.slug}`} key={place.id} className="featured-card">
+              <Link href={`/spaces/${place.slug}`} key={place.id} className="featured-card">
                 {bg && (
                   <div
                     className="card-scene"
