@@ -3,7 +3,7 @@
 <img width="1895" height="378" alt="image" src="https://github.com/user-attachments/assets/298a57a7-0f2f-4431-a4ff-bd3c4b63f395" />
 
 
-> **Handcrafted Telugu ambient soundscapes from the nostalgic places that shaped us. Pick a place. Let it play.**
+> **Handcrafted Telugu ambient soundscapes from the nostalgic spaces that shaped us. Pick a space. Let it play.**
 
 Paatalashala is an immersive, interactive audio web application designed to trigger warm nostalgia by pairing traditional Telugu music with ambient background soundscapes. Escape to rural farms, retro street-corner barber shops, or the bustling roads of Hyderabad.
 
@@ -24,15 +24,28 @@ Paatalashala is an immersive, interactive audio web application designed to trig
 * **Atmosphere:** Revving 3-wheeler engine hums, dynamic rain/dust city weather particle lines, street noise, and loud pneumatic air-horn triggers.
 * **Music:** High-octane Telugu mass beats and commercial chart-busters.
 
+### 4. 📼 Thathayya Tape Recorder (తాతయ్య టేప్ రికార్డర్)
+* **Vibe:** Nostalgic village veranda music.
+* **Atmosphere:** Rhythmic hums of birds, gentle nature, and classic Telugu lyrics display banner. Shifted camera view to make the tape recorder and grandfather's face clearly visible.
+* **Music:** Legendary classic melodies by Ghantasala, SPB, and Ilaiyaraaja.
+* **Dynamic Visuals:** Cycles through three custom veranda background pictures on song changes.
+
+### 5. 📻 Ammama Radio (అమ్మమ్మ రేడియో)
+* **Vibe:** Traditional village kitchen cooking vibes.
+* **Atmosphere:** Gentle morning birds, warm kitchen mist fog + dust particle effects, and classic maternal lullaby lyrics displayed above the player.
+* **Music:** Beautiful vintage tracks and maternal melodies by S. Janaki, Susheela, and Koti.
+* **Dynamic Visuals:** Cycles through three custom village kitchen background pictures on song changes.
+
 ---
 
 ## 🚀 Key Features
 
 * **🎛️ Multi-Channel Ambient Mixer:** Adjust the volume of the ambient soundscapes (e.g. tractor hum, street traffic, wind) independently of the main music track.
 * **👥 Optional Real-Time Listener Counter:** Displays the exact count of active, concurrent listeners on each page using **Supabase Presence**. If no database configuration keys are provided, the system automatically falls back to clean, realistic simulated counters.
+* **🩹 Self-Healing Playlist Loop:** When the client player catches a blocked/restricted embedding error (YouTube Error `150` or `101`), it calls the Next.js API route `/api/delete-song` to automatically and permanently purge the unplayable track from `songs.json` in real-time, then seamlessly skips to the next track.
+* **🌪️ Concurrent Weather Particle Systems:** The upgraded Canvas weather engine in `AmbientWeather` supports displaying multiple particle systems at once, rendering both glowing upward-drifting dust motes and soft kitchen mist/fog concurrently.
 * **⚡ Smooth Cross-Fade Transitions:** Implements the Double Background Layer Pattern to fade viewports seamlessly when changing songs, eliminating abrupt image resizing.
-* **🛱 Custom Air Horns & Sounds:** Interactive horn triggers that play custom vehicle audio overlays on demand.
-* **🌫️ Drifting Cinematic Fog:** Features procedural animated fog clouds generated via inline SVG fractal noise filters.
+* **🎛️ Rich Page-Level SEO:** Each space utilizes static Server Component layouts to inject tailored, highly descriptive metadata, titles, canonical tags, and OpenGraph schemas for optimal search engine indexing.
 * **📱 Responsive HUD Canopy:** Designed to resemble actual vehicle windshield sticker frames and dashboard audio decks. Full mobile optimization with specialized swipe/tap HUD actions.
 
 ---
@@ -83,13 +96,18 @@ paatalashala/
 │   └── images/             # Sprite components and city/farm backdrops
 ├── src/
 │   ├── app/                # Next.js App Router pages
+│   │   ├── api/            # API endpoints (Self-healing playlist route)
+│   │   │   └── delete-song/
+│   │   ├── spaces/         # Location page components
+│   │   │   ├── ammama/     # Ammama Radio space
+│   │   │   ├── auto/       # Auto Janie space
+│   │   │   ├── saloon/     # Royal Saloon space
+│   │   │   ├── thathayya/  # Thathayya Tape Recorder space
+│   │   │   └── tractor-anna/
 │   │   ├── page.js         # Main landing dashboard
-│   │   └── places/         # Location page components
-│   │       ├── auto/       # Auto Janie workspace
-│   │       ├── saloon/     # Royal Saloon workspace
-│   │       └── tractor-anna/
+│   │   └── layout.js       # Root layout with WebApp and FAQ schemas
 │   ├── components/         # Shared modules (YouTube Player, AmbientWeather)
-│   ├── data/               # Static places and song metadata
+│   ├── data/               # Static spaces and song metadata
 │   └── utils/              # Path helpers & Supabase client wrapper
 └── .env.local              # Local environment credentials (git-ignored)
 ```

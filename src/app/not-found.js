@@ -304,11 +304,11 @@ export default function NotFound() {
         {/* CTA */}
         <Link href="/" className="nf-cta nf-enter nf-d5">
           <IconHome />
-          <span>Find your place</span>
+          <span>Find your space</span>
         </Link>
 
         <p className="nf-caption nf-enter nf-d5">
-          Go home · Explore all places
+          Go home · Explore all spaces
         </p>
 
       </div>

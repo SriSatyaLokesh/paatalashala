@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
+process.env.LOCAL_SERVE = 'true';
+
 console.log('Building Next.js project...');
 try {
   execSync('npm run build', { stdio: 'inherit' });
@@ -50,7 +52,7 @@ if (fs.existsSync(notFoundSrc)) {
 }
 
 // ── Fix 2: serve.json — disable directory listing ────────────────────────────
-// Prevents /places/ and other directories from showing file tree
+// Prevents /spaces/ and other directories from showing file tree
 const serveConfig = {
   "directoryListing": false,
   "cleanUrls": true

@@ -438,7 +438,7 @@ export default function AutoRaja() {
                   className="hud-button"
                 >
                   <ChevronLeft size={16} />
-                  <span>PLACES</span>
+                  <span>SPACES</span>
                 </Link>
                 {timeString && (
                   <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }} className="hud-time">
