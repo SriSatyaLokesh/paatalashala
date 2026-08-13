@@ -16,8 +16,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -42,8 +42,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -68,8 +68,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -94,8 +94,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -120,8 +120,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -146,8 +146,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -172,8 +172,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -198,8 +198,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -224,8 +224,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -250,8 +250,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -276,8 +276,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -302,8 +302,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -328,8 +328,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -354,8 +354,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -380,8 +380,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -406,8 +406,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -432,8 +432,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -458,8 +458,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -484,8 +484,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -510,8 +510,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -536,8 +536,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -562,8 +562,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -588,8 +588,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -614,8 +614,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -640,8 +640,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -666,8 +666,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -692,8 +692,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -718,8 +718,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -744,8 +744,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -770,8 +770,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -796,8 +796,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -822,8 +822,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -848,8 +848,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -874,8 +874,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -900,8 +900,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -926,8 +926,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -952,8 +952,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -978,8 +978,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -1004,8 +1004,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -1030,8 +1030,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -1056,8 +1056,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -1082,8 +1082,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -1108,8 +1108,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -1134,8 +1134,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -1160,8 +1160,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -1186,8 +1186,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -1212,8 +1212,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -1238,8 +1238,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -1264,8 +1264,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -1290,8 +1290,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -1316,8 +1316,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -1342,8 +1342,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -1368,8 +1368,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -1394,8 +1394,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -1420,8 +1420,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -1446,8 +1446,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -1472,8 +1472,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -1498,8 +1498,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -1524,8 +1524,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -1550,8 +1550,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -1576,8 +1576,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -1602,8 +1602,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -1628,8 +1628,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -1654,8 +1654,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -1680,8 +1680,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -1706,8 +1706,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -1732,8 +1732,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -1758,8 +1758,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -1784,8 +1784,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -1810,8 +1810,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -1836,8 +1836,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -1862,8 +1862,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -1888,8 +1888,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -1914,8 +1914,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -1940,8 +1940,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -1966,8 +1966,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -1992,8 +1992,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -2018,8 +2018,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -2044,8 +2044,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -2070,8 +2070,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -2096,8 +2096,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -2122,8 +2122,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -2148,8 +2148,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -2174,8 +2174,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -2200,8 +2200,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -2226,8 +2226,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -2252,8 +2252,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -2278,8 +2278,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -2304,8 +2304,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -2330,8 +2330,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -2356,8 +2356,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -2382,8 +2382,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -2408,8 +2408,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -2434,8 +2434,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -2460,8 +2460,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -2486,8 +2486,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -2512,8 +2512,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -2538,8 +2538,8 @@
     "ambience": {
       "id": "night-farm",
       "theme": "night",
-      "background": "url('/images/night_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/night_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -2564,8 +2564,8 @@
     "ambience": {
       "id": "rainy-farm",
       "theme": "rainy",
-      "background": "url('/images/rainy_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/rainy_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "rain",
       "skyState": "stormy",
       "particles": "rain",
@@ -2590,8 +2590,8 @@
     "ambience": {
       "id": "sunset-farm",
       "theme": "sunset",
-      "background": "url('/images/sunset_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/sunset_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "clear",
       "skyState": "dusk",
       "particles": "dust",
@@ -2616,8 +2616,8 @@
     "ambience": {
       "id": "morning-farm",
       "theme": "morning",
-      "background": "url('/images/morning_farm_background.png')",
-      "vehicleSprite": "/images/tractor_anna_sprite.png",
+      "background": "url('/images/morning_farm_background.webp')",
+      "vehicleSprite": "/images/tractor_anna_sprite.webp",
       "weather": "misty",
       "skyState": "sunrise",
       "particles": "fog",
@@ -4442,7 +4442,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4467,7 +4467,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4492,7 +4492,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4517,7 +4517,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4542,7 +4542,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4567,7 +4567,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4592,7 +4592,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4617,7 +4617,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4642,7 +4642,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4667,7 +4667,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4692,7 +4692,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4717,7 +4717,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4742,7 +4742,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4767,7 +4767,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4792,7 +4792,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4817,7 +4817,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4842,7 +4842,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4867,7 +4867,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4892,7 +4892,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4917,7 +4917,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4942,7 +4942,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4967,7 +4967,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -4992,7 +4992,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5017,7 +5017,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5042,7 +5042,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5067,7 +5067,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5092,7 +5092,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5117,7 +5117,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5142,7 +5142,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5167,7 +5167,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5192,7 +5192,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5217,7 +5217,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5242,7 +5242,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5267,7 +5267,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5292,7 +5292,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5317,7 +5317,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5342,7 +5342,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5367,7 +5367,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5392,7 +5392,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5417,7 +5417,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5442,7 +5442,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5467,7 +5467,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5492,7 +5492,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5517,7 +5517,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5542,7 +5542,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5567,7 +5567,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5592,7 +5592,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5617,7 +5617,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5642,7 +5642,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5667,7 +5667,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5692,7 +5692,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5717,7 +5717,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5742,7 +5742,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5767,7 +5767,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5792,7 +5792,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5817,7 +5817,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5842,7 +5842,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5867,7 +5867,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5892,7 +5892,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5917,7 +5917,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5942,7 +5942,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5967,7 +5967,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -5992,7 +5992,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6017,7 +6017,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6042,7 +6042,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6067,7 +6067,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6092,7 +6092,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6117,7 +6117,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6142,7 +6142,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6167,7 +6167,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6192,7 +6192,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6217,7 +6217,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6242,7 +6242,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6267,7 +6267,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6292,7 +6292,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6317,7 +6317,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6342,7 +6342,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6367,7 +6367,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6392,7 +6392,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6417,7 +6417,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6442,7 +6442,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6467,7 +6467,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6492,7 +6492,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6517,7 +6517,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6542,7 +6542,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6567,7 +6567,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6592,7 +6592,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6617,7 +6617,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6642,7 +6642,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6667,7 +6667,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6692,7 +6692,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6717,7 +6717,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6742,7 +6742,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6767,7 +6767,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6792,7 +6792,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6817,7 +6817,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6842,7 +6842,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6867,7 +6867,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6892,7 +6892,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6917,7 +6917,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6942,7 +6942,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6967,7 +6967,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -6992,7 +6992,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7017,7 +7017,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7042,7 +7042,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7067,7 +7067,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7092,7 +7092,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7117,7 +7117,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7142,7 +7142,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7167,7 +7167,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7192,7 +7192,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7217,7 +7217,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7242,7 +7242,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7267,7 +7267,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7292,7 +7292,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7317,7 +7317,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7342,7 +7342,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7367,7 +7367,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7392,7 +7392,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7417,7 +7417,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7442,7 +7442,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7467,7 +7467,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7492,7 +7492,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7517,7 +7517,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7542,7 +7542,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7567,7 +7567,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7592,7 +7592,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7617,7 +7617,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7642,7 +7642,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7667,7 +7667,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7692,7 +7692,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7717,7 +7717,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7742,7 +7742,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7767,7 +7767,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7792,7 +7792,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7817,7 +7817,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7842,7 +7842,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7867,7 +7867,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7892,7 +7892,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7917,7 +7917,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7942,7 +7942,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7967,7 +7967,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -7992,7 +7992,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8017,7 +8017,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8042,7 +8042,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8067,7 +8067,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8092,7 +8092,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8117,7 +8117,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8142,7 +8142,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8167,7 +8167,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8192,7 +8192,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8217,7 +8217,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8242,7 +8242,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8267,7 +8267,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8292,7 +8292,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8317,7 +8317,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8342,7 +8342,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8367,7 +8367,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8392,7 +8392,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8417,7 +8417,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8442,7 +8442,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8467,7 +8467,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8492,7 +8492,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8517,7 +8517,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8542,7 +8542,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8567,7 +8567,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8592,7 +8592,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8617,7 +8617,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8642,7 +8642,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8667,7 +8667,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8692,7 +8692,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8717,7 +8717,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8742,7 +8742,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8767,7 +8767,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8792,7 +8792,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8817,7 +8817,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8842,7 +8842,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8867,7 +8867,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8892,7 +8892,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8917,7 +8917,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8942,7 +8942,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8967,7 +8967,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -8992,7 +8992,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9017,7 +9017,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9042,7 +9042,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9067,7 +9067,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9092,7 +9092,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9117,7 +9117,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9142,7 +9142,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9167,7 +9167,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9192,7 +9192,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9217,7 +9217,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9242,7 +9242,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9267,7 +9267,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9292,7 +9292,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9317,7 +9317,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9342,7 +9342,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9367,7 +9367,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9392,7 +9392,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9417,7 +9417,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9442,7 +9442,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9467,7 +9467,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9492,7 +9492,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9517,7 +9517,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9542,7 +9542,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9567,7 +9567,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9592,7 +9592,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9617,7 +9617,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9642,7 +9642,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9667,7 +9667,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9692,7 +9692,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9717,7 +9717,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9742,7 +9742,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9767,7 +9767,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9792,7 +9792,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9817,7 +9817,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9842,7 +9842,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9867,7 +9867,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9892,7 +9892,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9917,7 +9917,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9942,7 +9942,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9967,7 +9967,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -9992,7 +9992,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10017,7 +10017,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10042,7 +10042,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10067,7 +10067,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10092,7 +10092,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10117,7 +10117,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10142,7 +10142,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10167,7 +10167,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10192,7 +10192,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10217,7 +10217,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10242,7 +10242,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10267,7 +10267,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10292,7 +10292,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10317,7 +10317,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10342,7 +10342,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10367,7 +10367,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10392,7 +10392,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10417,7 +10417,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10442,7 +10442,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10467,7 +10467,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10492,7 +10492,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10517,7 +10517,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10542,7 +10542,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10567,7 +10567,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10592,7 +10592,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10617,7 +10617,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10642,7 +10642,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10667,7 +10667,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10692,7 +10692,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10717,7 +10717,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10742,7 +10742,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10767,7 +10767,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10792,7 +10792,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10817,7 +10817,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10842,7 +10842,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10867,7 +10867,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10892,7 +10892,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10917,7 +10917,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10942,7 +10942,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10967,7 +10967,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -10992,7 +10992,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11017,7 +11017,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11042,7 +11042,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11067,7 +11067,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11092,7 +11092,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11117,7 +11117,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11142,7 +11142,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11167,7 +11167,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11192,7 +11192,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11217,7 +11217,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11242,7 +11242,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11267,7 +11267,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11292,7 +11292,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11317,7 +11317,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11342,7 +11342,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11367,7 +11367,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11392,7 +11392,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11417,7 +11417,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11442,7 +11442,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11467,7 +11467,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11492,7 +11492,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11517,7 +11517,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11542,7 +11542,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11567,7 +11567,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11592,7 +11592,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11617,7 +11617,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11642,7 +11642,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11667,7 +11667,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11692,7 +11692,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11717,7 +11717,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11742,7 +11742,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11767,7 +11767,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11792,7 +11792,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11817,7 +11817,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11842,7 +11842,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11867,7 +11867,7 @@
     "ambience": {
       "id": "tape-recorder-cozy",
       "theme": "vintage",
-      "background": "url('/images/tape_recorder_background.png')",
+      "background": "url('/images/tape_recorder_background.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "dust",
@@ -11891,7 +11891,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -11915,7 +11915,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -11939,7 +11939,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -11963,7 +11963,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -11987,7 +11987,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12011,7 +12011,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12035,7 +12035,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12059,7 +12059,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12083,7 +12083,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12107,7 +12107,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12131,7 +12131,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12155,7 +12155,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12179,7 +12179,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12203,7 +12203,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12227,7 +12227,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12251,7 +12251,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12275,7 +12275,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12299,7 +12299,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12323,7 +12323,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12347,7 +12347,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12371,7 +12371,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12395,7 +12395,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12419,7 +12419,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12443,7 +12443,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12467,7 +12467,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12491,7 +12491,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12515,7 +12515,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12539,7 +12539,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12563,7 +12563,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12587,7 +12587,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12611,7 +12611,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12635,7 +12635,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12659,7 +12659,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12683,7 +12683,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12707,7 +12707,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12731,7 +12731,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12755,7 +12755,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12779,7 +12779,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12803,7 +12803,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12827,7 +12827,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12851,7 +12851,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12875,7 +12875,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12899,7 +12899,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12923,7 +12923,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12947,7 +12947,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12971,7 +12971,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -12995,7 +12995,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13019,7 +13019,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13043,7 +13043,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13067,7 +13067,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13091,7 +13091,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13115,7 +13115,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13139,7 +13139,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13163,7 +13163,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13187,7 +13187,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13211,7 +13211,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13235,7 +13235,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13259,7 +13259,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13283,7 +13283,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13307,7 +13307,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13331,7 +13331,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13355,7 +13355,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13379,7 +13379,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13403,7 +13403,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13427,7 +13427,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13451,7 +13451,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13475,7 +13475,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13499,7 +13499,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13523,7 +13523,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13547,7 +13547,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13571,7 +13571,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13595,7 +13595,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13619,7 +13619,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13643,7 +13643,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13667,7 +13667,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13691,7 +13691,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13715,7 +13715,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13739,7 +13739,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13763,7 +13763,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13787,7 +13787,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13811,7 +13811,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13835,7 +13835,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13859,7 +13859,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13883,7 +13883,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13907,7 +13907,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13931,7 +13931,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13955,7 +13955,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -13979,7 +13979,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14003,7 +14003,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14027,7 +14027,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14051,7 +14051,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14075,7 +14075,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14099,7 +14099,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14123,7 +14123,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14147,7 +14147,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14171,7 +14171,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14195,7 +14195,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14219,7 +14219,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14243,7 +14243,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14267,7 +14267,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14291,7 +14291,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14315,7 +14315,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14339,7 +14339,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14363,7 +14363,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14387,7 +14387,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14411,7 +14411,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14435,7 +14435,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14459,7 +14459,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14483,7 +14483,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14507,7 +14507,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14531,7 +14531,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14555,7 +14555,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14579,7 +14579,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14603,7 +14603,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14627,7 +14627,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14651,7 +14651,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14675,7 +14675,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14699,7 +14699,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14723,7 +14723,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14747,7 +14747,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14771,7 +14771,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14795,7 +14795,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14819,7 +14819,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14843,7 +14843,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14867,7 +14867,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14891,7 +14891,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14915,7 +14915,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14939,7 +14939,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14963,7 +14963,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -14987,7 +14987,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -15011,7 +15011,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -15035,7 +15035,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -15059,7 +15059,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -15083,7 +15083,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -15107,7 +15107,7 @@
     "ambience": {
       "id": "radio-cozy",
       "theme": "vintage",
-      "background": "url('/images/grandma_1.png')",
+      "background": "url('/images/grandma_1.webp')",
       "weather": "fog",
       "skyState": "night",
       "particles": "dust",
@@ -15132,7 +15132,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15157,7 +15157,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15182,7 +15182,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15207,7 +15207,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15232,7 +15232,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15257,7 +15257,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15282,7 +15282,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15307,7 +15307,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15332,7 +15332,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15357,7 +15357,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15382,7 +15382,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15407,7 +15407,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15432,7 +15432,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15457,7 +15457,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15482,7 +15482,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15507,7 +15507,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15532,7 +15532,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15557,7 +15557,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15582,7 +15582,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15607,7 +15607,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15632,7 +15632,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15657,7 +15657,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15682,7 +15682,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15707,7 +15707,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15732,7 +15732,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15757,7 +15757,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15782,7 +15782,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15807,7 +15807,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15832,7 +15832,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15857,7 +15857,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15882,7 +15882,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15907,7 +15907,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15932,7 +15932,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15957,7 +15957,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -15982,7 +15982,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16007,7 +16007,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16032,7 +16032,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16057,7 +16057,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16082,7 +16082,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16107,7 +16107,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16132,7 +16132,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16157,7 +16157,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16182,7 +16182,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16207,7 +16207,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16232,7 +16232,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16257,7 +16257,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16282,7 +16282,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16307,7 +16307,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16332,7 +16332,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16357,7 +16357,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16382,7 +16382,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16407,7 +16407,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16432,7 +16432,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16457,7 +16457,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
@@ -16482,7 +16482,7 @@
     "ambience": {
       "id": "terrace-night",
       "theme": "midnight",
-      "background": "url('/images/vennela_1.png')",
+      "background": "url('/images/vennela_1.webp')",
       "weather": "clear",
       "skyState": "night",
       "particles": "stars",
