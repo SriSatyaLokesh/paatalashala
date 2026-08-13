@@ -34,7 +34,7 @@ export default function RoyalSaloon() {
   const ambientRef = useRef(null);
 
   const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
-  const rawBackground = currentSong?.ambience?.background || "url('/images/saloon_background.jpg')";
+  const rawBackground = currentSong?.ambience?.background || "url('/images/saloon_background.webp')";
   const bgUrl = prefixPath(rawBackground);
 
   // === Ambient Saloon Indian Village audio ===
