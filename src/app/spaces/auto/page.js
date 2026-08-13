@@ -70,11 +70,10 @@ export default function AutoRaja() {
     vehicleSprite: prefixPath(selectedSprite)
   };
 
-  // === Random initial song ===
+  // === Initial song ===
   useEffect(() => {
     if (songs.length > 0) {
-      const rand = Math.floor(Math.random() * songs.length);
-      setCurrentSongIndex(rand);
+      setCurrentSongIndex(0);
     }
     // Mark as started (client-side only) after hydration
     setStarted(true);

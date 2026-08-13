@@ -44,11 +44,10 @@ export default function TractorAnna() {
     vehicleSprite: prefixPath(rawAmbience.vehicleSprite || '/images/tractor_anna_sprite.webp')
   };
 
-  // === Random initial song/background ===
+  // === Initial song/background ===
   useEffect(() => {
     if (songs.length > 0) {
-      const rand = Math.floor(Math.random() * songs.length);
-      setCurrentSongIndex(rand);
+      setCurrentSongIndex(0);
     }
   }, []);
 

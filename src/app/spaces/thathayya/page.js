@@ -79,11 +79,10 @@ export default function Thathayya() {
     return () => { ambientRef.current?.pause(); };
   }, [isPlaying, ambientOn]);
 
-  // === Random initial song ===
+  // === Initial song ===
   useEffect(() => {
     if (songs.length > 0) {
-      const rand = Math.floor(Math.random() * songs.length);
-      setCurrentSongIndex(rand);
+      setCurrentSongIndex(0);
     }
   }, []);
 
