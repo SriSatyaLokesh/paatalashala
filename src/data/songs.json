@@ -16491,7 +16491,7 @@
     }
   },
   {
-    "youtubeVideoId": "R9iY_L4iBqM",
+    "youtubeVideoId": "G_rYspW_MyU",
     "title": "Roju Roju Roja Puvva",
     "movie": "Allari Priyudu",
     "year": "1993",
@@ -16499,7 +16499,9 @@
     "musicDirector": "M.M. Keeravani",
     "place": "tractor-anna",
     "active": true,
-    "sequence": 3
+    "sequence": 3,
+    "youtubeUrl": "https://www.youtube.com/watch?v=G_rYspW_MyU",
+    "id": "ta-G_rYspW_MyU-3"
   },
   {
     "youtubeVideoId": "S0T0y8JvW0U",
