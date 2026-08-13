@@ -76,8 +76,9 @@ const faqSchema = {
 };
 
 export const metadata = {
-  title: "Paatalashala - Telugu Cultural Ambience & Curation",
-  description: "Handcrafted Telugu ambient soundscapes from nostalgic spaces. Cruise city streets in a Hyderabad mass auto, ride a farmland tractor, or relax in a retro saloon.",
+  title: "Paatalashala | Handcrafted Nostalgic Telugu Playlists & Ambience",
+  description: "Explore the best handcrafted Telugu playlists and cultural ambient soundscapes. Relive memories with Amma radio playlist, Thathayya tape recorder, saloon TV classics, and city auto rides.",
+  keywords: ["paatalashala", "telugu playlists", "amma radio playlist", "ammama radio", "thathayya tape recorder", "telugu old songs playlist", "retro telugu soundscapes", "nostalgic telugu music", "telugu ambient audio"],
   metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/",
@@ -88,8 +89,8 @@ export const metadata = {
     apple: '/favicon.svg',
   },
   openGraph: {
-    title: "Paatalashala - Telugu Cultural Ambience & Curation",
-    description: "Handcrafted Telugu ambient soundscapes from nostalgic spaces. Cruise city streets in a Hyderabad mass auto, ride a farmland tractor, or relax in a retro saloon.",
+    title: "Paatalashala | Handcrafted Nostalgic Telugu Playlists & Ambience",
+    description: "Explore the best handcrafted Telugu playlists and cultural ambient soundscapes. Relive memories with Amma radio playlist, Thathayya tape recorder, saloon TV classics, and city auto rides.",
     url: SITE_URL,
     siteName: "Paatalashala",
     images: [
@@ -105,8 +106,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Paatalashala - Telugu Cultural Ambience & Curation",
-    description: "Handcrafted Telugu ambient soundscapes from nostalgic spaces. Cruise city streets in a Hyderabad mass auto, ride a farmland tractor, or relax in a retro saloon.",
+    title: "Paatalashala | Handcrafted Nostalgic Telugu Playlists & Ambience",
+    description: "Explore the best handcrafted Telugu playlists and cultural ambient soundscapes. Relive memories with Amma radio playlist, Thathayya tape recorder, saloon TV classics, and city auto rides.",
     images: [`${SITE_URL}/images/readme_banner.png`],
   },
 };
