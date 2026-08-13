@@ -36,9 +36,9 @@ export default function AmmamaRadio() {
   const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
   
   const bgImages = [
-    '/images/grandma_1.png',
-    '/images/grandma_2.png',
-    '/images/grandma_3.png'
+    '/images/grandma_1.webp',
+    '/images/grandma_2.webp',
+    '/images/grandma_3.webp'
   ];
   const bgIndex = currentSongIndex !== null ? (currentSongIndex % bgImages.length) : 0;
   const rawBackground = `url('${bgImages[bgIndex]}')`;
@@ -73,11 +73,10 @@ export default function AmmamaRadio() {
     return () => { ambientRef.current?.pause(); };
   }, [isPlaying, ambientOn]);
 
-  // === Random initial song ===
+  // === Initial song ===
   useEffect(() => {
     if (songs.length > 0) {
-      const rand = Math.floor(Math.random() * songs.length);
-      setCurrentSongIndex(rand);
+      setCurrentSongIndex(0);
     }
   }, []);
 
@@ -200,13 +199,6 @@ export default function AmmamaRadio() {
   const handlePlayerError = (code) => {
     setPlayerError(code);
     console.error('YouTube player error code:', code);
-    if ((code === 101 || code === 150) && currentSong?.youtubeVideoId) {
-      fetch('/api/delete-song', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ videoId: currentSong.youtubeVideoId })
-      }).catch(err => console.error('Failed to report bad song:', err));
-    }
   };
 
   // === Auto-skip on unplayable video errors ===

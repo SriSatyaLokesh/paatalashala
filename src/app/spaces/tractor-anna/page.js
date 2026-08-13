@@ -34,21 +34,20 @@ export default function TractorAnna() {
 
   const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
   const rawAmbience = currentSong?.ambience || {
-    background: "url('/images/sunset_farm_background.png')",
+    background: "url('/images/sunset_farm_background.webp')",
     weather: 'clear',
     particles: 'dust'
   };
   const ambience = {
     ...rawAmbience,
     background: prefixPath(rawAmbience.background),
-    vehicleSprite: prefixPath(rawAmbience.vehicleSprite || '/images/tractor_anna_sprite.png')
+    vehicleSprite: prefixPath(rawAmbience.vehicleSprite || '/images/tractor_anna_sprite.webp')
   };
 
-  // === Random initial song/background ===
+  // === Initial song/background ===
   useEffect(() => {
     if (songs.length > 0) {
-      const rand = Math.floor(Math.random() * songs.length);
-      setCurrentSongIndex(rand);
+      setCurrentSongIndex(0);
     }
   }, []);
 

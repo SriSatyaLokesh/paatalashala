@@ -10,7 +10,7 @@ export const metadata = {
     description: "Relax on an open terrace under a starry night sky with a soothing cool breeze and the best Telugu sleep songs playlist playing.",
     url: "https://srisatyalokesh.is-a.dev/paatalashala/spaces/vennallo",
     siteName: "Paatalashala",
-    images: [{ url: "https://srisatyalokesh.is-a.dev/paatalashala/images/vennela_1.png" }],
+    images: [{ url: "https://srisatyalokesh.is-a.dev/paatalashala/images/vennela_1.webp" }],
     locale: "en_US",
     type: "website"
   },
@@ -18,7 +18,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "మేడ మీద వెన్నెల్లో | Best Telugu Sleep Songs & Soothing Night Playlist | Paatalashala",
     description: "Relax on an open terrace under a starry night sky with a soothing cool breeze and the best Telugu sleep songs playlist playing.",
-    images: ["https://srisatyalokesh.is-a.dev/paatalashala/images/vennela_1.png"]
+    images: ["https://srisatyalokesh.is-a.dev/paatalashala/images/vennela_1.webp"]
   }
 };
 

@@ -36,9 +36,9 @@ export default function Vennallo() {
   const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
   
   const bgImages = [
-    '/images/vennela_1.png',
-    '/images/vennela_2.png',
-    '/images/vennela_3.png'
+    '/images/vennela_1.webp',
+    '/images/vennela_2.webp',
+    '/images/vennela_3.webp'
   ];
   const bgIndex = currentSongIndex !== null ? (currentSongIndex % bgImages.length) : 0;
   const rawBackground = `url('${bgImages[bgIndex]}')`;
@@ -72,11 +72,10 @@ export default function Vennallo() {
     return () => { ambientRef.current?.pause(); };
   }, [isPlaying, ambientOn]);
 
-  // === Random initial song ===
+  // === Initial song ===
   useEffect(() => {
     if (songs.length > 0) {
-      const rand = Math.floor(Math.random() * songs.length);
-      setCurrentSongIndex(rand);
+      setCurrentSongIndex(0);
     }
   }, []);
 
@@ -199,13 +198,6 @@ export default function Vennallo() {
   const handlePlayerError = (code) => {
     setPlayerError(code);
     console.error('YouTube player error code:', code);
-    if ((code === 101 || code === 150) && currentSong?.youtubeVideoId) {
-      fetch('/api/delete-song', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ videoId: currentSong.youtubeVideoId })
-      }).catch(err => console.error('Failed to report bad song:', err));
-    }
   };
 
   // === Auto-skip on unplayable video errors ===

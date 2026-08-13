@@ -34,7 +34,7 @@ export default function RoyalSaloon() {
   const ambientRef = useRef(null);
 
   const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
-  const rawBackground = currentSong?.ambience?.background || "url('/images/saloon_background.jpg')";
+  const rawBackground = currentSong?.ambience?.background || "url('/images/saloon_background.webp')";
   const bgUrl = prefixPath(rawBackground);
 
   // === Ambient Saloon Indian Village audio ===
@@ -53,11 +53,10 @@ export default function RoyalSaloon() {
     return () => { ambientRef.current?.pause(); };
   }, [isPlaying, ambientOn]);
 
-  // === Random initial song ===
+  // === Initial song ===
   useEffect(() => {
     if (songs.length > 0) {
-      const rand = Math.floor(Math.random() * songs.length);
-      setCurrentSongIndex(rand);
+      setCurrentSongIndex(0);
     }
   }, []);
 
