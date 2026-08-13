@@ -87,6 +87,11 @@ const IconUsers = () => (
     <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
   </svg>
 );
+const IconStars = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+  </svg>
+);
 
 const ICONS = {
   'tractor-anna': IconTractor,
@@ -95,6 +100,7 @@ const ICONS = {
   'tea-stall': IconCup,
   'ammama': IconRadio,
   'thathayya': IconTape,
+  'vennallo': IconStars,
   'palle-velugu': IconBusLocal,
   'trip-bus': IconVanTrip,
 };
@@ -105,6 +111,7 @@ const TELUGU_NAMES = {
   'auto': 'ఆటో జానీ',
   'thathayya': 'తాతయ్య టేప్ రికార్డర్',
   'ammama': 'అమ్మమ్మ రేడియో',
+  'vennallo': 'మేడ మీద వెన్నెల్లో',
 };
 
 const CARD_BG = {
@@ -113,6 +120,7 @@ const CARD_BG = {
   'auto': '/images/hyderabad_street_background.jpg',
   'thathayya': '/images/tape_recorder_background.png',
   'ammama': '/images/grandma_1.png',
+  'vennallo': '/images/vennela_1.png',
 };
 
 export default function Home() {

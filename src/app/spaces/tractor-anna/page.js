@@ -373,6 +373,12 @@ export default function TractorAnna() {
               onPlayerReady={handlePlayerReady}
               onTimeUpdate={handleTimeUpdate}
               onError={handlePlayerError}
+              trackTitle={currentSong?.title}
+              trackArtist={currentSong?.artist}
+              trackAlbum={currentSong?.movie}
+              onPrev={prev}
+              onNext={next}
+              onPlayPause={togglePlay}
             />
           </div>
           {playerError && (

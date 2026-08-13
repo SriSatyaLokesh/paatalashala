@@ -9,8 +9,8 @@ import AmbientWeather from '@/components/AmbientWeather';
 import { supabase } from '@/utils/supabase';
 import { ChevronLeft, Tv, Volume2, VolumeX, Wind, Shuffle, Play, Pause, Users } from 'lucide-react';
 
-export default function Thathayya() {
-  const songs = useMemo(() => getSongsForPlace('thathayya'), []);
+export default function Vennallo() {
+  const songs = useMemo(() => getSongsForPlace('vennallo'), []);
 
   // State variables
   const [started, setStarted]                     = useState(true);
@@ -20,7 +20,7 @@ export default function Thathayya() {
   const [volume, setVolume]                       = useState(50);
   const [currentTime, setCurrentTime]             = useState(0);
   const [duration, setDuration]                   = useState(0);
-  const [presenceCount, setPresenceCount]         = useState(43);
+  const [presenceCount, setPresenceCount]         = useState(68);
   const [timeString, setTimeString]               = useState('');
   const [videoVisible, setVideoVisible]           = useState(false);
   const [ambientOn, setAmbientOn]                 = useState(true);
@@ -36,39 +36,32 @@ export default function Thathayya() {
   const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
   
   const bgImages = [
-    '/images/grandpa_1.png',
-    '/images/grandpa_2.png',
-    '/images/grandpa_3.png'
+    '/images/vennela_1.png',
+    '/images/vennela_2.png',
+    '/images/vennela_3.png'
   ];
   const bgIndex = currentSongIndex !== null ? (currentSongIndex % bgImages.length) : 0;
   const rawBackground = `url('${bgImages[bgIndex]}')`;
   const bgUrl = prefixPath(rawBackground);
 
-  const VETURI_LYRICS = [
-    "రాలిపోయే పువ్వా నీకు రాగాలెందుకే... వాడిపోయే నవ్వునకూ వీడ్కోలెందుకే...",
-    "కీరవాణి రాగంలో పిలిచింది కృష్ణవేణి... ఈ వేళ నాలోన రేగింది ఏదో కీరవాణి రాగం...",
-    "ఆమని పాడవే ప్రణయ గీతికా... మనసున రేగని మమతల తారక...",
-    "మళ్ళీ మళ్ళీ ఇది రాని రోజు... మళ్ళీ మళ్ళీ ఈ వెలుగుల పండగ రోజు...",
-    "ఓ ప్రియా ప్రియతమా... రాగాల పల్లకిలో కోయిలమ్మ పాడనీ...",
-    "వేదం అణువణువున నాదం... నాదం ప్రాణపదమైన వేదం...",
-    "మౌనమే నీ భాష ఓ మూగ మనసా... తలపులు ఎన్నెన్నో తపనలు ఎన్నెన్నో...",
-    "ఆకాశ దేశాన ఆషాఢ మాసాన... పడిలేచే కడలి తరంగాలనడుగు...",
-    "తకిట తదిమి తకిట తదిమి తందానా... హృదయలయల జతుల గతుల తందానా...",
-    "తెలిమంచు కరిగింది తూరుపు కనులలో... తొలికిరణమొచ్చింది నీ నయనాలలో...",
-    "గోదారి గట్టుంది గట్టు మీద చెట్టుంది... చెట్టు కొమ్మన పిట్ట పిట్ట మనసున ఏముంది...",
+  const VENNELA_LYRICS = [
+    "జామురాతిరి జాబిలమ్మ జోలపాడనా ఇలా... జోరుగాలిలో జోడు చేరి జోడు పాడనా...",
+    "వెన్నెలве వెన్నెలవే నాతో కొంచెం మాట్లాడవా... వానలాగా కురవమంటే గుండె తలుపు తీయుదునే...",
+    "చుక్కలారా చుక్కలారా చుట్టుముట్టండి... మా అన్నయ్యకు జోల పాడండి...",
     "జాబిలి కోసం ఆకాశమల్లే వేచి చూశాను నీ రాక కోసం...",
-    "చిలకమ్మ చిటికేయంగా చింతలన్నీ తీరిపోవా... రాగాలమ్మ రేగంగా గుండెల్లోన హాయి నిండదా...",
-    "బొటనీ పాఠముంది మేటనీ ఆటనుంది... చదువుకు వెలుతుంది సరదాకు టైముంది...",
+    "చిన్న చిన్న ఆశ చిలిపి చిన్న ఆశ... వెన్నెలని పట్టి ముద్దెట్టుకోవాలని ఆశ...",
+    "గుసగుసలాడే వెన్నెల... హృదయమున రేగె కొత్త అల...",
+    "మౌనమే నీ భాష ఓ మూగ మనసా... వెన్నెల లోన విరిసిన నీలి కలువల కలువ పూల వనమా...",
     "కమ్మని ఈ ప్రేమలేఖ రాసింది హృదయమే... ప్రియతమా నీవను రాగమే అనురాగమై..."
   ];
-  const currentLyric = currentSongIndex !== null ? VETURI_LYRICS[currentSongIndex % VETURI_LYRICS.length] : "";
+  const currentLyric = currentSongIndex !== null ? VENNELA_LYRICS[currentSongIndex % VENNELA_LYRICS.length] : "";
 
-  // === Ambient Village audio ===
+  // === Ambient Night Sky audio ===
   useEffect(() => {
     if (!ambientRef.current) {
-      const a = new Audio(prefixPath('/audio/grandfather_ambient.mp3'));
+      const a = new Audio(prefixPath('/audio/night_sky_ambience.mp3'));
       a.loop = true;
-      a.volume = 0.15;
+      a.volume = 0.12;
       ambientRef.current = a;
     }
     if (isPlaying && ambientOn) {
@@ -101,25 +94,25 @@ export default function Thathayya() {
     if (!supabase) {
       const sim = () => {
         const s = Math.floor(Date.now() / 4000);
-        setPresenceCount(Math.max(1, Math.round(35 + Math.sin(s * 0.5) * 3 + Math.cos(s * 0.2) * 1)));
+        setPresenceCount(Math.max(1, Math.round(52 + Math.sin(s * 0.5) * 5 + Math.cos(s * 0.2) * 2)));
       };
       sim();
       const t = setInterval(sim, 4000);
       return () => clearInterval(t);
     }
 
-    const channel = supabase.channel('presence-thathayya');
+    const channel = supabase.channel('presence-vennela');
 
     channel
       .on('presence', { event: 'sync' }, () => {
         try {
           const state = channel.presenceState();
           const userIds = Object.keys(state || {});
-          const count = Math.max(1, userIds.length + 6); // Add realistic base count
+          const count = Math.max(1, userIds.length + 18); // Add realistic base count for late night
           setPresenceCount(count);
         } catch (e) {
           console.error('Error reading presence state:', e);
-          setPresenceCount(Math.max(1, 35 + Math.floor(Math.random() * 10) - 5));
+          setPresenceCount(Math.max(1, 52 + Math.floor(Math.random() * 8) - 4));
         }
       })
       .subscribe(async (status) => {
@@ -136,10 +129,10 @@ export default function Thathayya() {
   // === Background ===
   useEffect(() => {
     if (!started || !bgUrl) return;
-    document.body.style.transition = 'background 1.8s ease';
+    document.body.style.transition = 'background 2.0s ease';
     document.body.style.backgroundImage = bgUrl;
     document.body.style.backgroundSize = 'cover';
-    document.body.style.backgroundPosition = 'center 30%';
+    document.body.style.backgroundPosition = 'center 40%';
     document.body.style.backgroundRepeat = 'no-repeat';
     document.body.style.backgroundAttachment = 'fixed';
     return () => { document.body.style.background = ''; };
@@ -276,19 +269,19 @@ export default function Thathayya() {
       justifyContent: 'space-between',
       color: '#fff',
     }}>
-      {/* Dark Vignette Overlay to showcase background image nicely */}
+      {/* Night Ambient Darkness Overlay to create a magical terrace midnight vibe */}
       <div style={{
         position: 'fixed',
         inset: 0,
-        background: 'radial-gradient(circle at center, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.65) 100%)',
+        background: 'radial-gradient(circle at center, rgba(12, 16, 33, 0.25) 0%, rgba(8, 10, 24, 0.75) 100%)',
         pointerEvents: 'none',
         zIndex: 1,
       }} />
 
-      {/* Weather / Dust particles effect */}
-      <AmbientWeather weather="fog" particles="dust" active={isPlaying && ambientOn} />
+      {/* Starry Night Weather particles effect */}
+      <AmbientWeather weather="clear" particles="stars" active={isPlaying} />
 
-      {/* YouTube player — visibility:hidden keeps proper dimensions for YT init */}
+      {/* YouTube player */}
       <div style={{
         position: 'fixed',
         bottom: '100px',
@@ -374,13 +367,13 @@ export default function Thathayya() {
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              color: ambientOn ? '#ffb74d' : 'rgba(255,255,255,0.5)',
+              color: ambientOn ? '#818cf8' : 'rgba(255,255,255,0.5)',
               fontSize: '0.78rem',
               fontWeight: '600',
               padding: '8px 12px',
               borderRadius: '9999px',
-              background: ambientOn ? 'rgba(255, 183, 77, 0.15)' : 'rgba(255,255,255,0.06)',
-              border: ambientOn ? '1px solid rgba(255, 183, 77, 0.35)' : '1px solid rgba(255,255,255,0.1)',
+              background: ambientOn ? 'rgba(129, 140, 248, 0.15)' : 'rgba(255,255,255,0.06)',
+              border: ambientOn ? '1px solid rgba(129, 140, 248, 0.35)' : '1px solid rgba(255,255,255,0.1)',
               backdropFilter: 'blur(12px)',
               cursor: 'pointer',
               whiteSpace: 'nowrap',
@@ -398,13 +391,13 @@ export default function Thathayya() {
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              color: videoVisible ? '#ffb74d' : '#fff',
+              color: videoVisible ? '#818cf8' : '#fff',
               fontSize: '0.78rem',
               fontWeight: '600',
               padding: '8px 12px',
               borderRadius: '9999px',
-              background: videoVisible ? 'rgba(255, 183, 77, 0.2)' : 'rgba(255,255,255,0.08)',
-              border: videoVisible ? '1px solid rgba(255, 183, 77, 0.4)' : '1px solid rgba(255,255,255,0.12)',
+              background: videoVisible ? 'rgba(129, 140, 248, 0.2)' : 'rgba(255,255,255,0.08)',
+              border: videoVisible ? '1px solid rgba(129, 140, 248, 0.4)' : '1px solid rgba(255,255,255,0.12)',
               backdropFilter: 'blur(12px)',
               cursor: 'pointer',
               whiteSpace: 'nowrap',
@@ -417,6 +410,7 @@ export default function Thathayya() {
         </div>
       </header>
 
+      {/* Immersive Title Overlay */}
       <div style={{
         position: 'absolute',
         top: '12vh',
@@ -435,11 +429,11 @@ export default function Thathayya() {
           letterSpacing: '0.04em',
           color: '#fff',
           margin: 0,
-          textShadow: '0 2px 8px rgba(0,0,0,0.75)',
+          textShadow: '0 2px 10px rgba(0,0,0,0.85), 0 0 30px rgba(99, 102, 241, 0.3)',
           fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif",
           textAlign: 'center'
         }} className="immersive-title">
-          తాతయ్య టేప్ రికార్డర్
+          మేడ మీద వెన్నెల్లో
         </h2>
       </div>
 
@@ -453,51 +447,30 @@ export default function Thathayya() {
         display: 'flex',
         flexDirection: 'column',
       }}>
-        {/* Veturi Lyric Display */}
-        {currentLyric && (
-          <div style={{
-            textAlign: 'center',
-            fontSize: '0.95rem',
-            fontWeight: '500',
-            color: '#ffcc80',
-            textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 0 10px rgba(255, 183, 77, 0.3)',
-            marginBottom: '14px',
-            padding: '8px 16px',
-            background: 'rgba(23, 14, 11, 0.7)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: '16px',
-            border: '1px solid rgba(255, 183, 77, 0.2)',
-            width: 'fit-content',
-            alignSelf: 'center',
-            fontFamily: "'Akaya Telivigala', 'Gurajada', serif",
-          }}>
-            "{currentLyric}"
-          </div>
-        )}
 
         <div style={{
-          background: 'rgba(15, 17, 26, 0.65)',
-          backdropFilter: 'blur(30px) saturate(160%)',
-          border: '1px solid rgba(255, 204, 128, 0.2)',
+          background: 'rgba(10, 12, 26, 0.7)',
+          backdropFilter: 'blur(30px) saturate(150%)',
+          border: '1px solid rgba(129, 140, 248, 0.2)',
           borderRadius: '24px',
           padding: '20px 24px',
           display: 'flex',
           flexDirection: 'column',
           gap: '16px',
-          boxShadow: '0 25px 60px -15px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.1)',
+          boxShadow: '0 25px 60px -15px rgba(0,0,0,0.85), inset 0 1px 1px rgba(255,255,255,0.08)',
         }}>
           {/* Top Row: Track Info & Album Art (Left) | Controls & Volume (Right) */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '16px' }}>
+          <div className="player-main-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '16px' }}>
             
             {/* Track Info & Vinyl Art */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
+            <div className="track-info-container" style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
               <div style={{
                 width: '48px',
                 height: '48px',
                 borderRadius: '50%',
                 overflow: 'hidden',
-                border: '3px solid #2e1c16',
-                boxShadow: '0 0 0 2px rgba(255, 183, 77, 0.3), 0 8px 16px rgba(0,0,0,0.6)',
+                border: '3px solid #1e2238',
+                boxShadow: '0 0 0 2px rgba(129, 140, 248, 0.3), 0 8px 16px rgba(0,0,0,0.6)',
                 flexShrink: 0,
                 position: 'relative',
                 background: '#000',
@@ -517,14 +490,14 @@ export default function Thathayya() {
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
                 ) : (
-                  <span style={{ fontSize: '1.2rem' }}>📼</span>
+                  <span style={{ fontSize: '1.2rem' }}>🌌</span>
                 )}
                 <div style={{
                   position: 'absolute',
                   width: '8px',
                   height: '8px',
                   borderRadius: '50%',
-                  background: '#151515',
+                  background: '#0d0e1a',
                   border: '1px solid rgba(255,255,255,0.2)',
                   top: '50%',
                   left: '50%',
@@ -535,16 +508,16 @@ export default function Thathayya() {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
                 <span style={{ fontSize: '1.05rem', fontWeight: '800', color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {currentSong?.title || 'తాతయ్య టేప్ రికార్డర్ గీతాలు'}
+                  {currentSong?.title || 'వెన్నెల్లో మైమరపు గీతాలు'}
                 </span>
-                <span style={{ fontSize: '0.78rem', color: '#ffcc80', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {currentSong?.movie ? `${currentSong.movie} • ${currentSong.year}` : 'Ilaiyaraaja & SPB Classics'}
+                <span style={{ fontSize: '0.78rem', color: '#a5b4fc', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {currentSong?.movie ? `${currentSong.movie} • ${currentSong.year}` : 'Nostalgic Night Melodies'}
                 </span>
               </div>
             </div>
 
             {/* Playback Controls & Volume */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', flexShrink: 0 }}>
+            <div className="player-controls-container" style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', flexShrink: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <button
                   onClick={() => setIsShuffle(prev => !prev)}
@@ -552,7 +525,7 @@ export default function Thathayya() {
                   style={{
                     background: 'none',
                     border: 'none',
-                    color: isShuffle ? '#ffb74d' : 'rgba(255,255,255,0.4)',
+                    color: isShuffle ? '#818cf8' : 'rgba(255,255,255,0.4)',
                     cursor: 'pointer',
                     padding: '6px',
                     display: 'flex',
@@ -572,22 +545,22 @@ export default function Thathayya() {
                     width: '44px',
                     height: '44px',
                     borderRadius: '50%',
-                    background: '#ffb74d',
+                    background: '#818cf8',
                     border: 'none',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    boxShadow: '0 4px 16px rgba(255, 183, 77, 0.4)',
+                    boxShadow: '0 4px 16px rgba(129, 140, 248, 0.4)',
                     transition: 'transform 0.2s',
                   }}
                   onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
                   onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
                 >
                   {isPlaying ? (
-                    <Pause size={18} fill="#2e1c16" color="#2e1c16" />
+                    <Pause size={18} fill="#0f111a" color="#0f111a" />
                   ) : (
-                    <Play size={18} fill="#2e1c16" color="#2e1c16" style={{ transform: 'translateX(1px)' }} />
+                    <Play size={18} fill="#0f111a" color="#0f111a" style={{ transform: 'translateX(1px)' }} />
                   )}
                 </button>
 
@@ -605,7 +578,7 @@ export default function Thathayya() {
               >
                 <button
                   onClick={() => changeVolume(volume === 0 ? 50 : 0)}
-                  style={{ background: 'none', border: 'none', color: volume === 0 ? '#ef4444' : '#ffcc80', cursor: 'pointer', padding: 0 }}
+                  style={{ background: 'none', border: 'none', color: volume === 0 ? '#ef4444' : '#a5b4fc', cursor: 'pointer', padding: 0 }}
                 >
                   {volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
                 </button>
@@ -620,7 +593,7 @@ export default function Thathayya() {
                     height: volumeHovered ? '6px' : '4px',
                     borderRadius: '3px',
                     background: 'rgba(255,255,255,0.2)',
-                    accentColor: '#ffb74d',
+                    accentColor: '#818cf8',
                     cursor: 'pointer',
                     transition: 'height 0.15s ease',
                   }}
@@ -650,20 +623,18 @@ export default function Thathayya() {
                 style={{
                   height: '100%',
                   width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`,
-                  background: '#ffb74d',
+                  background: '#818cf8',
                   borderRadius: '4px',
-                  boxShadow: '0 0 10px rgba(255, 183, 77, 0.7)',
+                  boxShadow: '0 0 10px rgba(129, 140, 248, 0.7)',
                   transition: 'width 0.1s linear',
                 }}
               />
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#ffcc80', fontFamily: 'monospace' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#a5b4fc', fontFamily: 'monospace' }}>
               <span>{fmt(currentTime)}</span>
               <span>{duration > 0 ? fmt(duration) : '0:00'}</span>
             </div>
           </div>
-
-          {/* Quote Display Removed */}
 
         </div>
       </div>
@@ -678,16 +649,16 @@ export default function Thathayya() {
         gap: '8px',
         fontSize: '0.85rem',
         fontWeight: '600',
-        color: '#ffe0b2',
-        background: 'rgba(15, 17, 26, 0.7)',
-        border: '1px solid rgba(255, 204, 128, 0.25)',
+        color: '#c7d2fe',
+        background: 'rgba(10, 12, 26, 0.75)',
+        border: '1px solid rgba(129, 140, 248, 0.25)',
         backdropFilter: 'blur(12px)',
         padding: '8px 16px',
         borderRadius: '9999px',
         zIndex: 35,
         boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
       }} className="listeners-badge">
-        <Users size={14} style={{ color: '#ffb74d' }} />
+        <Users size={14} style={{ color: '#818cf8' }} />
         <span>{presenceCount} listeners</span>
       </div>
 
@@ -702,6 +673,21 @@ export default function Thathayya() {
           .listeners-badge { display: none !important; }
           .hud-time { display: none !important; }
           .btn-label { font-size: 0.7rem !important; }
+        }
+        @media (max-width: 520px) {
+          .player-main-row {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 12px !important;
+          }
+          .track-info-container {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+          .player-controls-container {
+            width: 100% !important;
+            justify-content: center !important;
+          }
         }
       `}</style>
     </div>
