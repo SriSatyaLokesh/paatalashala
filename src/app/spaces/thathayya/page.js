@@ -85,6 +85,7 @@ export default function Thathayya() {
     if (songs.length > 0) {
       const range = Math.min(songs.length, 5);
       const randomIndex = Math.floor(Math.random() * range);
+      console.log('RANDOM START SONG:', songs[randomIndex]?.title, 'INDEX:', randomIndex);
       setCurrentSongIndex(randomIndex);
     }
   }, []);
