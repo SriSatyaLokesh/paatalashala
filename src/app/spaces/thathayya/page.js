@@ -758,7 +758,7 @@ export default function Thathayya() {
           }
           .track-info-container {
             width: 100% !important;
-            justify-content: center !important;
+            justify-content: flex-start !important;
           }
           .player-controls-container {
             width: 100% !important;

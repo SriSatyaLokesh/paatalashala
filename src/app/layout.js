@@ -80,6 +80,7 @@ export const metadata = {
   description: "Explore the best handcrafted Telugu playlists and cultural ambient soundscapes. Relive memories with Amma radio playlist, Thathayya tape recorder, saloon TV classics, and city auto rides.",
   keywords: ["paatalashala", "telugu playlists", "amma radio playlist", "ammama radio", "thathayya tape recorder", "telugu old songs playlist", "retro telugu soundscapes", "nostalgic telugu music", "telugu ambient audio"],
   metadataBase: new URL(SITE_URL),
+  manifest: '/manifest.json',
   alternates: {
     canonical: "/",
   },
@@ -143,6 +144,19 @@ export default function RootLayout({ children }) {
           src="https://www.youtube.com/iframe_api"
           strategy="afterInteractive"
         />
+        <Script id="register-sw" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                  console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                  console.log('ServiceWorker registration failed: ', err);
+                });
+              });
+            }
+          `}
+        </Script>
       </body>
     </html>
   );
