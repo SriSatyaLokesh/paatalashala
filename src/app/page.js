@@ -125,6 +125,8 @@ const CARD_BG = {
 
 export default function Home() {
   const [counts, setCounts] = useState({});
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [isInstallable, setIsInstallable] = useState(false);
 
   useEffect(() => {
     const sim = () => {
@@ -142,6 +144,33 @@ export default function Home() {
     const iv = setInterval(sim, 4000);
     return () => clearInterval(iv);
   }, []);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setIsInstallable(true);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      setIsInstallable(false);
+    }
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`User response to the install prompt: ${outcome}`);
+    setDeferredPrompt(null);
+    setIsInstallable(false);
+  };
 
   const active = SPACES.filter(p => p.active);
   const coming = SPACES.filter(p => !p.active);
@@ -776,6 +805,44 @@ export default function Home() {
             );
           })}
         </div>
+
+        {isInstallable && (
+          <div className="fade-up d5" style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '32px', marginBottom: '8px' }}>
+            <button
+              onClick={handleInstallClick}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                background: 'rgba(196, 154, 90, 0.1)',
+                border: '1px solid rgba(196, 154, 90, 0.4)',
+                borderRadius: '9999px',
+                color: '#e6c8a0',
+                padding: '12px 28px',
+                fontSize: '0.85rem',
+                fontWeight: '600',
+                cursor: 'pointer',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = 'rgba(196, 154, 90, 0.2)';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = 'rgba(196, 154, 90, 0.1)';
+                e.currentTarget.style.transform = 'none';
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              <span>Install Paatalashala App</span>
+            </button>
+          </div>
+        )}
 
         {/* ── FAQ SECTION ── */}
         <section className="faq-section fade-up d5">
