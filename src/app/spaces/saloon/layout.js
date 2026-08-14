@@ -5,7 +5,7 @@ export const metadata = {
   openGraph: {
     title: "Royal Saloon | Retro Telugu TV Melodies | Paatalashala",
     description: "timeless Telugu classics playing inside a vintage barbershop TV frame.",
-    images: [{ url: "/images/saloon_background.jpg" }],
+    images: [{ url: "/images/saloon_background.webp" }],
   }
 };
 

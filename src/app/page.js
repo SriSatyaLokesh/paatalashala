@@ -116,7 +116,7 @@ const TELUGU_NAMES = {
 
 const CARD_BG = {
   'tractor-anna': '/images/sunset_farm_background.webp',
-  'saloon': '/images/saloon_background.jpg',
+  'saloon': '/images/saloon_background.webp',
   'auto': '/images/hyderabad_street_background.jpg',
   'thathayya': '/images/tape_recorder_background.webp',
   'ammama': '/images/grandma_1.webp',
