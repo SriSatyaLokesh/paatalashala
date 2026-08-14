@@ -1,0 +1,30 @@
+{
+  "name": "Paatalashala",
+  "short_name": "Paatalashala",
+  "description": "Themed, culturally immersive Telugu audio environments.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0e1a",
+  "theme_color": "#0d0e1a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
