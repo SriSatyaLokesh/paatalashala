@@ -28,6 +28,7 @@ export default function TractorAnna() {
   const [isShuffle, setIsShuffle]       = useState(false);
   const [seekHovered, setSeekHovered]   = useState(false);
   const [volumeHovered, setVolumeHovered] = useState(false);
+  const [showShuffleHint, setShowShuffleHint] = useState(false);
 
   const playerRef  = useRef(null);
   const ambientRef = useRef(null);
@@ -47,7 +48,9 @@ export default function TractorAnna() {
   // === Initial song/background ===
   useEffect(() => {
     if (songs.length > 0) {
-      setCurrentSongIndex(0);
+      const range = Math.min(songs.length, 5);
+      const randomIndex = Math.floor(Math.random() * range);
+      setCurrentSongIndex(randomIndex);
     }
   }, []);
 
@@ -59,6 +62,25 @@ export default function TractorAnna() {
     const t = setInterval(tick, 10000);
     return () => clearInterval(t);
   }, []);
+  
+  // === Shuffle Hint Timer ===
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!isShuffle) {
+        setShowShuffleHint(true);
+      }
+    }, 10000);
+    return () => clearTimeout(timer);
+  }, [isShuffle]);
+
+  useEffect(() => {
+    if (showShuffleHint) {
+      const timer = setTimeout(() => {
+        setShowShuffleHint(false);
+      }, 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [showShuffleHint]);
 
   // === Supabase Realtime Live Presence Counter ===
   useEffect(() => {
@@ -404,6 +426,7 @@ export default function TractorAnna() {
                 {/* Right */}
                 <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                   <button onClick={() => setAmbientOn(a => !a)}
+                    title="Toggle background ambient sounds"
                     style={{ display: 'flex', alignItems: 'center', gap: '6px', color: ambientOn ? '#fbbf24' : 'rgba(255,255,255,0.5)', fontSize: '0.78rem', fontWeight: '600', padding: '8px 12px', borderRadius: '9999px', background: ambientOn ? 'rgba(245,158,11,0.15)' : 'rgba(255,255,255,0.06)', border: ambientOn ? '1px solid rgba(245,158,11,0.35)' : '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(12px)', cursor: 'pointer', whiteSpace: 'nowrap', transition: 'all 0.2s' }} className="hud-button">
                     <Wind size={14} /><span className="btn-label">{ambientOn ? 'AMBIENCE' : 'OFF'}</span>
                   </button>
@@ -449,10 +472,10 @@ export default function TractorAnna() {
               }} className="capsule-hud">
 
                 {/* Top Row: Art + Info (Left) & Playback Controls + Volume (Right) */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '16px' }}>
+                <div className="player-main-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '16px' }}>
                   
                   {/* Left: Track Info & Album Art */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
+                  <div className="track-info-container" style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
                     {/* Spinning Vinyl Record Disc design */}
                     <div style={{
                       width: '46px',
@@ -508,7 +531,7 @@ export default function TractorAnna() {
                   </div>
 
                   {/* Right: Controls & Volume */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1.3rem', flexShrink: 0 }}>
+                  <div className="player-controls-container" style={{ display: 'flex', alignItems: 'center', gap: '1.3rem', flexShrink: 0 }}>
                     {/* Controls */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                       
@@ -516,7 +539,7 @@ export default function TractorAnna() {
 
                       <button 
                         onClick={() => setIsShuffle(prev => !prev)} 
-                        title={isShuffle ? "Disable Shuffle" : "Shuffle Tracks (🔀)"}
+                        title="Toggle shuffle mode (play songs in random order)"
                         style={{ 
                           background: 'none', 
                           border: 'none', 
@@ -525,17 +548,49 @@ export default function TractorAnna() {
                           padding: '6px',
                           display: 'flex',
                           alignItems: 'center',
-                          transition: 'color 0.2s, transform 0.2s'
+                          transition: 'color 0.2s, transform 0.2s',
+                          position: 'relative'
                         }} 
                         className="control-icon"
                       >
                         <Shuffle size={16} />
+                        {showShuffleHint && (
+                          <div style={{
+                            position: 'absolute',
+                            bottom: '100%',
+                            left: '50%',
+                            transform: 'translateX(-50%) translateY(-8px)',
+                            background: '#fbbf24',
+                            color: '#000',
+                            padding: '6px 10px',
+                            borderRadius: '6px',
+                            fontSize: '0.7rem',
+                            fontWeight: '700',
+                            whiteSpace: 'nowrap',
+                            boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+                            pointerEvents: 'none',
+                            zIndex: 10,
+                          }}>
+                            Shuffle to surprise with new songs!
+                            <div style={{
+                              position: 'absolute',
+                              top: '100%',
+                              left: '50%',
+                              transform: 'translateX(-50%)',
+                              width: 0,
+                              height: 0,
+                              borderLeft: '5px solid transparent',
+                              borderRight: '5px solid transparent',
+                              borderTop: '5px solid #fbbf24'
+                            }} />
+                          </div>
+                        )}
                       </button>
                       
-                      <button onClick={prev} title="Previous Song (⏮)" style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem', transition: 'transform 0.2s' }} className="control-icon">⏮</button>
+                      <button onClick={prev} title="Previous Song" style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem', transition: 'transform 0.2s' }} className="control-icon">⏮</button>
                       
                       <button onClick={togglePlay}
-                        title={isPlaying ? "Pause (⏸)" : "Play (▶)"}
+                        title={isPlaying ? "Pause" : "Play"}
                         style={{
                           width: '44px',
                           height: '44px',
@@ -560,7 +615,7 @@ export default function TractorAnna() {
                         </span>
                       </button>
                       
-                      <button onClick={next} title="Next Song (⏭)" style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem', transition: 'transform 0.2s' }} className="control-icon">⏭</button>
+                      <button onClick={next} title="Next Song" style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem', transition: 'transform 0.2s' }} className="control-icon">⏭</button>
 
                       {/* Horn — mobile only, lives inside capsule */}
                       <button
@@ -852,6 +907,21 @@ export default function TractorAnna() {
           .mobile-listeners-row { display: flex !important; }
           /* Compact nav button labels */
           .btn-label { font-size: 0.65rem !important; }
+        }
+        @media (max-width: 520px) {
+          .player-main-row {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 12px !important;
+          }
+          .track-info-container {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+          .player-controls-container {
+            width: 100% !important;
+            justify-content: center !important;
+          }
         }
       `}</style>
     </div>

@@ -61,6 +61,9 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
         
       - name: Build with Next.js
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://yxtslmupjghwaypqeuvw.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: sb_publishable_i1t8CS5lCP6cx4fovNEr1Q_n0e5l2mi
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
         
       - name: Upload artifact
