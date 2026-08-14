@@ -29,6 +29,7 @@ export default function Thathayya() {
   const [seekHovered, setSeekHovered]             = useState(false);
   const [volumeHovered, setVolumeHovered]         = useState(false);
   const [showQueue, setShowQueue]                 = useState(false);
+  const [showShuffleHint, setShowShuffleHint]     = useState(false);
 
   const playerRef = useRef(null);
   const ambientRef = useRef(null);
@@ -82,7 +83,9 @@ export default function Thathayya() {
   // === Initial song ===
   useEffect(() => {
     if (songs.length > 0) {
-      setCurrentSongIndex(0);
+      const range = Math.min(songs.length, 5);
+      const randomIndex = Math.floor(Math.random() * range);
+      setCurrentSongIndex(randomIndex);
     }
   }, []);
 
@@ -94,6 +97,25 @@ export default function Thathayya() {
     const t = setInterval(tick, 10000);
     return () => clearInterval(t);
   }, []);
+  
+  // === Shuffle Hint Timer ===
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!isShuffle) {
+        setShowShuffleHint(true);
+      }
+    }, 10000);
+    return () => clearTimeout(timer);
+  }, [isShuffle]);
+
+  useEffect(() => {
+    if (showShuffleHint) {
+      const timer = setTimeout(() => {
+        setShowShuffleHint(false);
+      }, 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [showShuffleHint]);
 
   // === Supabase Realtime Live Presence Counter ===
   useEffect(() => {
@@ -362,6 +384,7 @@ export default function Thathayya() {
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
           <button
             onClick={() => setAmbientOn(a => !a)}
+            title="Toggle background ambient sounds"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -479,10 +502,10 @@ export default function Thathayya() {
           boxShadow: '0 25px 60px -15px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.1)',
         }}>
           {/* Top Row: Track Info & Album Art (Left) | Controls & Volume (Right) */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '16px' }}>
+          <div className="player-main-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '16px' }}>
             
             {/* Track Info & Vinyl Art */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
+            <div className="track-info-container" style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
               <div style={{
                 width: '48px',
                 height: '48px',
@@ -536,11 +559,11 @@ export default function Thathayya() {
             </div>
 
             {/* Playback Controls & Volume */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', flexShrink: 0 }}>
+            <div className="player-controls-container" style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', flexShrink: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <button
                   onClick={() => setIsShuffle(prev => !prev)}
-                  title={isShuffle ? "Shuffle On" : "Shuffle Off"}
+                  title="Toggle shuffle mode (play songs in random order)"
                   style={{
                     background: 'none',
                     border: 'none',
@@ -550,9 +573,41 @@ export default function Thathayya() {
                     display: 'flex',
                     alignItems: 'center',
                     transition: 'color 0.2s',
+                    position: 'relative',
                   }}
                 >
                   <Shuffle size={16} />
+                  {showShuffleHint && (
+                    <div style={{
+                      position: 'absolute',
+                      bottom: '100%',
+                      left: '50%',
+                      transform: 'translateX(-50%) translateY(-8px)',
+                      background: '#fbbf24',
+                      color: '#000',
+                      padding: '6px 10px',
+                      borderRadius: '6px',
+                      fontSize: '0.7rem',
+                      fontWeight: '700',
+                      whiteSpace: 'nowrap',
+                      boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+                      pointerEvents: 'none',
+                      zIndex: 10,
+                    }}>
+                      Shuffle to surprise with new songs!
+                      <div style={{
+                        position: 'absolute',
+                        top: '100%',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: 0,
+                        height: 0,
+                        borderLeft: '5px solid transparent',
+                        borderRight: '5px solid transparent',
+                        borderTop: '5px solid #fbbf24'
+                      }} />
+                    </div>
+                  )}
                 </button>
 
                 <button onClick={prev} title="Previous Track" style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.8)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem' }}>⏮</button>
@@ -694,6 +749,21 @@ export default function Thathayya() {
           .listeners-badge { display: none !important; }
           .hud-time { display: none !important; }
           .btn-label { font-size: 0.7rem !important; }
+        }
+        @media (max-width: 520px) {
+          .player-main-row {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 12px !important;
+          }
+          .track-info-container {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+          .player-controls-container {
+            width: 100% !important;
+            justify-content: center !important;
+          }
         }
       `}</style>
     </div>

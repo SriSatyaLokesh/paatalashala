@@ -42,6 +42,7 @@ export default function AutoRaja() {
   const [isShuffle, setIsShuffle]       = useState(false);
   const [seekHovered, setSeekHovered]   = useState(false);
   const [volumeHovered, setVolumeHovered] = useState(false);
+  const [showShuffleHint, setShowShuffleHint] = useState(false);
 
   const playerRef  = useRef(null);
   const ambientRef = useRef(null);
@@ -73,7 +74,9 @@ export default function AutoRaja() {
   // === Initial song ===
   useEffect(() => {
     if (songs.length > 0) {
-      setCurrentSongIndex(0);
+      const range = Math.min(songs.length, 5);
+      const randomIndex = Math.floor(Math.random() * range);
+      setCurrentSongIndex(randomIndex);
     }
     // Mark as started (client-side only) after hydration
     setStarted(true);
@@ -87,6 +90,25 @@ export default function AutoRaja() {
     const t = setInterval(tick, 10000);
     return () => clearInterval(t);
   }, []);
+  
+  // === Shuffle Hint Timer ===
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!isShuffle) {
+        setShowShuffleHint(true);
+      }
+    }, 10000);
+    return () => clearTimeout(timer);
+  }, [isShuffle]);
+
+  useEffect(() => {
+    if (showShuffleHint) {
+      const timer = setTimeout(() => {
+        setShowShuffleHint(false);
+      }, 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [showShuffleHint]);
 
   // === Supabase Realtime Live Presence Counter ===
   useEffect(() => {
@@ -456,6 +478,7 @@ export default function AutoRaja() {
               <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                 <button
                   onClick={() => setAmbientOn(prev => !prev)}
+                  title="Toggle background ambient sounds"
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -548,10 +571,10 @@ export default function AutoRaja() {
             }} className="capsule-hud">
 
               {/* Top Row: Track info & Controls */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '16px' }}>
+              <div className="player-main-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '16px' }}>
                 
                 {/* Left: Album Art & Track details */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
+                <div className="track-info-container" style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
                   <div style={{
                     width: '46px',
                     height: '46px',
@@ -605,12 +628,12 @@ export default function AutoRaja() {
                 </div>
 
                 {/* Right: Controls & Volume */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1.3rem', flexShrink: 0 }}>
+                <div className="player-controls-container" style={{ display: 'flex', alignItems: 'center', gap: '1.3rem', flexShrink: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     
                     <button
                       onClick={() => setIsShuffle(prev => !prev)}
-                      title={isShuffle ? "Disable Shuffle" : "Shuffle Tracks"}
+                      title="Toggle shuffle mode (play songs in random order)"
                       style={{
                         background: 'none',
                         border: 'none',
@@ -619,11 +642,43 @@ export default function AutoRaja() {
                         padding: '6px',
                         display: 'flex',
                         alignItems: 'center',
-                        transition: 'color 0.2s, transform 0.2s'
+                        transition: 'color 0.2s, transform 0.2s',
+                        position: 'relative'
                       }}
                       className="control-icon"
                     >
                       <Shuffle size={16} />
+                      {showShuffleHint && (
+                        <div style={{
+                          position: 'absolute',
+                          bottom: '100%',
+                          left: '50%',
+                          transform: 'translateX(-50%) translateY(-8px)',
+                          background: '#fbbf24',
+                          color: '#000',
+                          padding: '6px 10px',
+                          borderRadius: '6px',
+                          fontSize: '0.7rem',
+                          fontWeight: '700',
+                          whiteSpace: 'nowrap',
+                          boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+                          pointerEvents: 'none',
+                          zIndex: 10,
+                        }}>
+                          Shuffle to surprise with new songs!
+                          <div style={{
+                            position: 'absolute',
+                            top: '100%',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            width: 0,
+                            height: 0,
+                            borderLeft: '5px solid transparent',
+                            borderRight: '5px solid transparent',
+                            borderTop: '5px solid #fbbf24'
+                          }} />
+                        </div>
+                      )}
                     </button>
                     
                     <button onClick={prev} title="Previous Song" style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem', transition: 'transform 0.2s' }} className="control-icon">⏮</button>
@@ -1006,6 +1061,21 @@ export default function AutoRaja() {
           .horn-btn-mobile { display: flex !important; }
           .mobile-listeners-row { display: flex !important; }
           .btn-label { font-size: 0.65rem !important; }
+        }
+        @media (max-width: 520px) {
+          .player-main-row {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 12px !important;
+          }
+          .track-info-container {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+          .player-controls-container {
+            width: 100% !important;
+            justify-content: center !important;
+          }
         }
       `}</style>
 
