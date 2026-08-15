@@ -177,24 +177,41 @@ export function useSpacePlayer(placeSongs, config) {
   // imperatively, so this avoids silently starting playback the UI doesn't
   // reflect); the other 5 spaces call playVideo() unconditionally whenever
   // the ref exists.
+  //
+  // This must attach exactly one { once: true } listener for the page's
+  // whole lifetime (mount-only deps) — isPlaying/ambientOn are read from
+  // refs kept in sync below, NOT from the effect's own dependency array.
+  // Including them there previously caused the listener to be removed and
+  // re-armed on every play/pause click, so the very next click after any
+  // state change (e.g. pausing) was mistaken for the "first click" and
+  // force-called playVideo() again, undoing the pause.
+  const isPlayingRef = useRef(isPlaying);
+  const ambientOnRef = useRef(ambientOn);
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+    ambientOnRef.current = ambientOn;
+  }, [isPlaying, ambientOn]);
+
   useEffect(() => {
     const unlock = () => {
       try {
         if (
           playerRef.current &&
           typeof playerRef.current.playVideo === 'function' &&
-          (!autoUnlockRequiresPlaying || isPlaying)
+          (!autoUnlockRequiresPlaying || isPlayingRef.current)
         ) {
           playerRef.current.playVideo();
         }
-        if (ambientRef.current && ambientOn) {
+        if (ambientRef.current && ambientOnRef.current) {
           ambientRef.current.play().catch(() => {});
         }
       } catch (_) {}
     };
     window.addEventListener('click', unlock, { once: true });
     return () => window.removeEventListener('click', unlock);
-  }, [ambientOn, isPlaying, autoUnlockRequiresPlaying]);
+    // Mount-only: see comment above for why isPlaying/ambientOn must not be deps.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // === Player callbacks ===
   const handlePlayerReady = (player) => {
