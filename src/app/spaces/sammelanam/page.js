@@ -176,7 +176,7 @@ export default function Sammelanam() {
 
       <div style={{ position: 'absolute', top: '10vh', left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px', pointerEvents: 'none', userSelect: 'none', padding: '0 24px', zIndex: 5 }} className="immersive-title-container">
         <h2 style={{ fontSize: '4.4rem', fontWeight: '900', letterSpacing: '0.03em', color: '#fff', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.85), 0 0 30px rgba(0,0,0,0.3)', fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif", textAlign: 'center' }} className="immersive-title">
-          🎲 సమ్మేళనం
+          సమ్మేళనం
         </h2>
         <div style={{ fontSize: '1.7rem', fontWeight: '700', letterSpacing: '0.03em', color: theme.capsuleTheme.accentText, margin: 0, textShadow: '0 2px 8px rgba(0,0,0,0.8)', fontFamily: theme.titleFontFamily, transition: 'color 0.3s ease, font-family 0.3s ease' }} className="sammelanam-badge">
           {theme.capsuleTheme.fallbackEmoji} {theme.titleText}
