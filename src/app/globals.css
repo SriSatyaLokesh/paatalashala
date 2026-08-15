@@ -188,3 +188,39 @@ html, body {
     animation: none !important;
   }
 }
+
+/* Shared space HUD styles — rules byte-identical (or, for .hud-button:hover,
+   unified) across all 6 space pages under src/app/spaces. Anything that
+   differs per space (title font-size, btn-label size, capsule-hud mobile
+   padding, etc.) stays local to that page's own style block instead. */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hud-button:hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .immersive-title-container { top: 76px !important; }
+  .volume-slider-container { display: none !important; }
+  .hud-time { display: none !important; }
+}
+
+@media (max-width: 520px) {
+  .player-main-row {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+  .track-info-container {
+    width: 100% !important;
+    justify-content: flex-start !important;
+  }
+  .player-controls-container {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
