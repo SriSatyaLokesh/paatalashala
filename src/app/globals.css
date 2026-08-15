@@ -203,6 +203,11 @@ html, body {
   transform: translateY(-1px);
 }
 
+.hud-top-header {
+  z-index: 10;
+  padding: 16px 20px !important;
+}
+
 @media (max-width: 768px) {
   .immersive-title-container { top: 76px !important; }
   .volume-slider-container { display: none !important; }
