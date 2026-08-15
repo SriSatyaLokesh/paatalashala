@@ -174,8 +174,8 @@ export default function Sammelanam() {
         className="hud-top-header"
       />
 
-      <div style={{ position: 'absolute', top: '10vh', left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', userSelect: 'none', padding: '0 24px', zIndex: 5 }} className="immersive-title-container">
-        <div style={{ fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.55)', marginBottom: '10px', textShadow: '0 2px 6px rgba(0,0,0,0.7)' }}>
+      <div style={{ position: 'absolute', top: '10vh', left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px', pointerEvents: 'none', userSelect: 'none', padding: '0 24px', zIndex: 5 }} className="immersive-title-container">
+        <div style={{ fontSize: '1.7rem', fontWeight: '700', letterSpacing: '0.06em', color: theme.capsuleTheme.accentText, margin: 0, textShadow: '0 2px 8px rgba(0,0,0,0.8)', transition: 'color 0.3s ease' }} className="sammelanam-badge">
           🔀 సమ్మేళనం
         </div>
         <h2 style={{ fontSize: '4.4rem', fontWeight: '900', letterSpacing: '0.03em', color: '#fff', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.85), 0 0 30px rgba(0,0,0,0.3)', fontFamily: theme.titleFontFamily, textAlign: 'center', transition: 'font-family 0.3s ease' }} className="immersive-title">
@@ -218,6 +218,7 @@ export default function Sammelanam() {
       <style jsx global>{`
         @media (max-width: 768px) {
           .immersive-title { font-size: 2.1rem !important; }
+          .sammelanam-badge { font-size: 1.1rem !important; }
           .btn-label { font-size: 0.7rem !important; }
         }
       `}</style>
