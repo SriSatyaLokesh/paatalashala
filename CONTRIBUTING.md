@@ -63,6 +63,17 @@ Paatalashala is built using **Next.js** (App Router), styled with **Vanilla CSS*
 
 ---
 
+## Editing Songs
+
+Song data lives in `src/data/songs.json` (edited directly or via `scripts/parse_playlist.py`). The app itself never reads that file — each space page imports its own pre-split file from `src/data/songs/<place>.json` so visitors only download the songs for the space they open, instead of the entire catalog.
+
+After changing `src/data/songs.json`, regenerate the per-space files and commit them:
+```bash
+npm run split-songs
+```
+
+---
+
 ## Development & Git Conventions
 
 ### Branch Naming

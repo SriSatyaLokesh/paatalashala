@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { getSongsForPlace } from '@/data/songs';
+import { getActiveSongs } from '@/data/songs';
+import placeSongs from '@/data/songs/auto.json';
 import { prefixPath } from '@/utils/paths';
 import YouTubePlayer from '@/components/YouTubePlayer';
 import AmbientWeather from '@/components/AmbientWeather';
@@ -24,7 +25,7 @@ const AUTO_BACKGROUNDS = [
 ];
 
 export default function AutoRaja() {
-  const songs = getSongsForPlace('auto');
+  const songs = getActiveSongs(placeSongs);
 
   // State variables
   const [started, setStarted]             = useState(false);

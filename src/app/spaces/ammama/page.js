@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import Link from 'next/link';
-import { getSongsForPlace } from '@/data/songs';
+import { getActiveSongs } from '@/data/songs';
+import placeSongs from '@/data/songs/ammama.json';
 import { prefixPath } from '@/utils/paths';
 import YouTubePlayer from '@/components/YouTubePlayer';
 import AmbientWeather from '@/components/AmbientWeather';
@@ -10,7 +11,7 @@ import { supabase } from '@/utils/supabase';
 import { ChevronLeft, Tv, Volume2, VolumeX, Wind, Shuffle, Play, Pause, Users } from 'lucide-react';
 
 export default function AmmamaRadio() {
-  const songs = useMemo(() => getSongsForPlace('ammama'), []);
+  const songs = useMemo(() => getActiveSongs(placeSongs), []);
 
   // State variables
   const [started, setStarted]                     = useState(true);
