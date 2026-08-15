@@ -1,6 +1,7 @@
 'use client';
 
 import { useSpacePlayer } from '@/hooks/useSpacePlayer';
+import { useSpaceKeyboardShortcuts } from '@/hooks/useSpaceKeyboardShortcuts';
 import placeSongs from '@/data/songs/thathayya.json';
 import { prefixPath } from '@/utils/paths';
 import SpaceHudHeader from '@/components/space/SpaceHudHeader';
@@ -76,6 +77,11 @@ export default function Thathayya() {
     handlePlayerReady, handlePlayerError, handleStateChange, handleTimeUpdate,
     togglePlay, next, prev, seek, changeVolume, fmt,
   } = player;
+
+  useSpaceKeyboardShortcuts({
+    onTogglePlay: togglePlay, onNext: next, onPrev: prev, onChangeVolume: changeVolume,
+    volume, restoreVolume: CAPSULE_THEME.restoreVolume,
+  });
 
   const currentLyric = currentSongIndex !== null ? VETURI_LYRICS[currentSongIndex % VETURI_LYRICS.length] : '';
 

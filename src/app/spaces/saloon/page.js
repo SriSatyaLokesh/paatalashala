@@ -1,6 +1,7 @@
 'use client';
 
 import { useSpacePlayer } from '@/hooks/useSpacePlayer';
+import { useSpaceKeyboardShortcuts } from '@/hooks/useSpaceKeyboardShortcuts';
 import placeSongs from '@/data/songs/saloon.json';
 import { prefixPath } from '@/utils/paths';
 import SpaceHudHeader from '@/components/space/SpaceHudHeader';
@@ -53,6 +54,11 @@ export default function RoyalSaloon() {
     handlePlayerReady, handlePlayerError, handleStateChange, handleTimeUpdate,
     togglePlay, next, prev, seek, changeVolume, fmt,
   } = player;
+
+  useSpaceKeyboardShortcuts({
+    onTogglePlay: togglePlay, onNext: next, onPrev: prev, onChangeVolume: changeVolume,
+    volume, restoreVolume: CAPSULE_THEME.restoreVolume,
+  });
 
   return (
     <div style={{ minHeight: '100dvh', width: '100vw', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', color: '#fff' }}>
