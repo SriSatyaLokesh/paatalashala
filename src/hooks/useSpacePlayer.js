@@ -16,6 +16,10 @@ import { supabase } from '@/utils/supabase';
 //   presence: { channel, base, sineAmp, cosAmp, syncPad, catchSpread, catchOffset }  - required
 //   backgroundImage: { url, position, transitionMs } | null   - null = page manages its own (auto)
 //   autoSkipOnError: { enabled, delayMs, codes } | null
+//   initialPickRange: number, default 5   - width of the random window for the
+//     first song pick (index 0..range-1 of the sorted song list). Sammelanam
+//     passes Infinity for a true whole-pool random start — see
+//     src/app/spaces/sammelanam/page.js.
 export function useSpacePlayer(placeSongs, config) {
   const {
     initialVolume = 60,
@@ -25,6 +29,7 @@ export function useSpacePlayer(placeSongs, config) {
     backgroundImage = null,
     autoSkipOnError = null,
     autoUnlockRequiresPlaying = false,
+    initialPickRange = 5,
   } = config;
 
   const songs = useMemo(() => getActiveSongs(placeSongs), [placeSongs]);
@@ -54,7 +59,7 @@ export function useSpacePlayer(placeSongs, config) {
   // === Initial song pick (+ flip started if the page starts unstarted, matching auto) ===
   useEffect(() => {
     if (songs.length > 0) {
-      const range = Math.min(songs.length, 5);
+      const range = Math.min(songs.length, initialPickRange);
       const randomIndex = Math.floor(Math.random() * range);
       console.log('RANDOM START SONG:', songs[randomIndex]?.title, 'INDEX:', randomIndex);
       setCurrentSongIndex(randomIndex);

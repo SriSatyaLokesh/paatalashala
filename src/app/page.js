@@ -92,6 +92,13 @@ const IconStars = () => (
     <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
   </svg>
 );
+const IconShuffle = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/>
+    <polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/>
+    <line x1="4" y1="4" x2="9" y2="9"/>
+  </svg>
+);
 
 const ICONS = {
   'tractor-anna': IconTractor,
@@ -101,6 +108,7 @@ const ICONS = {
   'ammama': IconRadio,
   'thathayya': IconTape,
   'vennallo': IconStars,
+  'sammelanam': IconShuffle,
   'palle-velugu': IconBusLocal,
   'trip-bus': IconVanTrip,
 };
@@ -112,6 +120,7 @@ const TELUGU_NAMES = {
   'thathayya': 'తాతయ్య టేప్ రికార్డర్',
   'ammama': 'అమ్మమ్మ రేడియో',
   'vennallo': 'మేడ మీద వెన్నెల్లో',
+  'sammelanam': 'సమ్మేళనం',
 };
 
 const CARD_BG = {
@@ -121,6 +130,7 @@ const CARD_BG = {
   'thathayya': '/images/tape_recorder_background.webp',
   'ammama': '/images/grandma_1.webp',
   'vennallo': '/images/vennela_1.webp',
+  'sammelanam': '/images/vennela_2.webp',
 };
 
 export default function Home() {
