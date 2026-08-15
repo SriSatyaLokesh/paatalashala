@@ -1,771 +1,165 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import Link from 'next/link';
-import { getActiveSongs } from '@/data/songs';
+import { useSpacePlayer } from '@/hooks/useSpacePlayer';
 import placeSongs from '@/data/songs/thathayya.json';
 import { prefixPath } from '@/utils/paths';
-import YouTubePlayer from '@/components/YouTubePlayer';
+import SpaceHudHeader from '@/components/space/SpaceHudHeader';
+import FloatingYouTubePlayer from '@/components/space/FloatingYouTubePlayer';
+import PlayerErrorBanner from '@/components/space/PlayerErrorBanner';
+import PlayerCapsule from '@/components/space/PlayerCapsule';
+import QuoteDisplay from '@/components/space/QuoteDisplay';
+import RadialVignette from '@/components/space/RadialVignette';
+import { ListenersBadgeSingle } from '@/components/space/ListenersBadge';
 import AmbientWeather from '@/components/AmbientWeather';
-import { supabase } from '@/utils/supabase';
-import { ChevronLeft, Tv, Volume2, VolumeX, Wind, Shuffle, Play, Pause, Users } from 'lucide-react';
+import { Tv } from 'lucide-react';
+
+const BG_IMAGES = ['/images/grandpa_1.webp', '/images/grandpa_2.webp', '/images/grandpa_3.webp'];
+
+const VETURI_LYRICS = [
+  "రాలిపోయే పువ్వా నీకు రాగాలెందుకే... వాడిపోయే నవ్వునకూ వీడ్కోలెందుకే...",
+  "కీరవాణి రాగంలో పిలిచింది కృష్ణవేణి... ఈ వేళ నాలోన రేగింది ఏదో కీరవాణి రాగం...",
+  "ఆమని పాడవే ప్రణయ గీతికా... మనసున రేగని మమతల తారక...",
+  "మళ్ళీ మళ్ళీ ఇది రాని రోజు... మళ్ళీ మళ్ళీ ఈ వెలుగుల పండగ రోజు...",
+  "ఓ ప్రియా ప్రియతమా... రాగాల పల్లకిలో కోయిలమ్మ పాడనీ...",
+  "వేదం అణువణువున నాదం... నాదం ప్రాణపదమైన వేదం...",
+  "మౌనమే నీ భాష ఓ మూగ మనసా... తలపులు ఎన్నెన్నో తపనలు ఎన్నెన్నో...",
+  "ఆకాశ దేశాన ఆషాఢ మాసాన... పడిలేచే కడలి తరంగాలనడుగు...",
+  "తకిట తదిమి తకిట తదిమి తందానా... హృదయలయల జతుల గతుల తందానా...",
+  "తెలిమంచు కరిగింది తూరుపు కనులలో... తొలికిరణమొచ్చింది నీ నయనాలలో...",
+  "గోదారి గట్టుంది గట్టు మీద చెట్టుంది... చెట్టు కొమ్మన పిట్ట పిట్ట మనసున ఏముంది...",
+  "జాబిలి కోసం ఆకాశమల్లే వేచి చూశాను నీ రాక కోసం...",
+  "చిలకమ్మ చిటికేయంగా చింతలన్నీ తీరిపోవా... రాగాలమ్మ రేగంగా గుండెల్లోన హాయి నిండదా...",
+  "బొటనీ పాఠముంది మేటనీ ఆటనుంది... చదువుకు వెలుతుంది సరదాకు టైముంది...",
+  "కమ్మని ఈ ప్రేమలేఖ రాసింది హృదయమే... ప్రియతమా నీవను రాగమే అనురాగమై..."
+];
+
+const AMBIENT_AUDIO = { src: '/audio/grandfather_ambient.mp3', volume: 0.15, gate: 'none' };
+const PRESENCE_CONFIG = { channel: 'presence-thathayya', base: 35, sineAmp: 3, cosAmp: 1, syncPad: 6, catchSpread: 10, catchOffset: 5 };
+const AUTO_SKIP = { enabled: true };
+
+const CAPSULE_THEME = {
+  accentText: '#ffb74d', accentRgb: '255, 183, 77',
+  glassBg: 'rgba(15, 17, 26, 0.65)', glassBorder: 'rgba(255, 204, 128, 0.2)',
+  glassShadow: '0 25px 60px -15px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.1)',
+  vinylSize: 48, vinylBorder: '3px solid #2e1c16',
+  vinylRingShadow: '0 0 0 2px rgba(255, 183, 77, 0.3), 0 8px 16px rgba(0,0,0,0.6)',
+  vinylBg: '#000', spindleBg: '#151515',
+  artAlt: 'Track Art', fallbackEmoji: '📼', fallbackTitle: 'తాతయ్య టేప్ రికార్డర్ గీతాలు',
+  titleFontSize: '1.05rem', secondaryColor: '#ffcc80',
+  subtitleFallback: 'Ilaiyaraaja & SPB Classics',
+  subtitleFormat: (movie, year) => `${movie} • ${year}`,
+  prevNextColor: 'rgba(255,255,255,0.8)', prevTitle: 'Previous Track', nextTitle: 'Next Track',
+  dividerColor: 'rgba(255,255,255,0.12)',
+  playIconColor: '#2e1c16', playShadow: '0 4px 16px rgba(255, 183, 77, 0.4)',
+  restoreVolume: 50, volumeTrackBg: 'rgba(255,255,255,0.2)', volumeWidth: 65,
+  seekTrackBg: 'rgba(255, 255, 255, 0.15)', seekFillShadow: '0 0 10px rgba(255, 183, 77, 0.7)',
+  showSeekThumb: false, showControlIconHoverClass: false,
+};
 
 export default function Thathayya() {
-  const songs = useMemo(() => getActiveSongs(placeSongs), []);
+  const player = useSpacePlayer(placeSongs, {
+    initialVolume: 50,
+    ambientAudio: AMBIENT_AUDIO,
+    presence: PRESENCE_CONFIG,
+    autoSkipOnError: AUTO_SKIP,
+    backgroundImage: (song, index) => ({
+      url: prefixPath(`url('${BG_IMAGES[index !== null ? index % BG_IMAGES.length : 0]}')`),
+      position: 'center 30%',
+      transitionMs: 1800,
+    }),
+  });
 
-  // State variables
-  const [started, setStarted]                     = useState(true);
-  const [currentSongIndex, setCurrentSongIndex]   = useState(null);
-  const [isPlaying, setIsPlaying]                 = useState(false);
-  const [ytReady, setYtReady]                     = useState(false);
-  const [volume, setVolume]                       = useState(50);
-  const [currentTime, setCurrentTime]             = useState(0);
-  const [duration, setDuration]                   = useState(0);
-  const [presenceCount, setPresenceCount]         = useState(43);
-  const [timeString, setTimeString]               = useState('');
-  const [videoVisible, setVideoVisible]           = useState(false);
-  const [ambientOn, setAmbientOn]                 = useState(true);
-  const [playerError, setPlayerError]             = useState(null);
-  const [isShuffle, setIsShuffle]                 = useState(false);
-  const [seekHovered, setSeekHovered]             = useState(false);
-  const [volumeHovered, setVolumeHovered]         = useState(false);
-  const [showQueue, setShowQueue]                 = useState(false);
-  const [showShuffleHint, setShowShuffleHint]     = useState(false);
+  const {
+    currentSong, currentSongIndex, isPlaying, volume, currentTime, duration, presenceCount, timeString,
+    ambientOn, setAmbientOn, playerError, isShuffle, setIsShuffle, seekHovered, setSeekHovered,
+    volumeHovered, setVolumeHovered, showShuffleHint, videoVisible, setVideoVisible,
+    handlePlayerReady, handlePlayerError, handleStateChange, handleTimeUpdate,
+    togglePlay, next, prev, seek, changeVolume, fmt,
+  } = player;
 
-  const playerRef = useRef(null);
-  const ambientRef = useRef(null);
-
-  const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
-  
-  const bgImages = [
-    '/images/grandpa_1.webp',
-    '/images/grandpa_2.webp',
-    '/images/grandpa_3.webp'
-  ];
-  const bgIndex = currentSongIndex !== null ? (currentSongIndex % bgImages.length) : 0;
-  const rawBackground = `url('${bgImages[bgIndex]}')`;
-  const bgUrl = prefixPath(rawBackground);
-
-  const VETURI_LYRICS = [
-    "రాలిపోయే పువ్వా నీకు రాగాలెందుకే... వాడిపోయే నవ్వునకూ వీడ్కోలెందుకే...",
-    "కీరవాణి రాగంలో పిలిచింది కృష్ణవేణి... ఈ వేళ నాలోన రేగింది ఏదో కీరవాణి రాగం...",
-    "ఆమని పాడవే ప్రణయ గీతికా... మనసున రేగని మమతల తారక...",
-    "మళ్ళీ మళ్ళీ ఇది రాని రోజు... మళ్ళీ మళ్ళీ ఈ వెలుగుల పండగ రోజు...",
-    "ఓ ప్రియా ప్రియతమా... రాగాల పల్లకిలో కోయిలమ్మ పాడనీ...",
-    "వేదం అణువణువున నాదం... నాదం ప్రాణపదమైన వేదం...",
-    "మౌనమే నీ భాష ఓ మూగ మనసా... తలపులు ఎన్నెన్నో తపనలు ఎన్నెన్నో...",
-    "ఆకాశ దేశాన ఆషాఢ మాసాన... పడిలేచే కడలి తరంగాలనడుగు...",
-    "తకిట తదిమి తకిట తదిమి తందానా... హృదయలయల జతుల గతుల తందానా...",
-    "తెలిమంచు కరిగింది తూరుపు కనులలో... తొలికిరణమొచ్చింది నీ నయనాలలో...",
-    "గోదారి గట్టుంది గట్టు మీద చెట్టుంది... చెట్టు కొమ్మన పిట్ట పిట్ట మనసున ఏముంది...",
-    "జాబిలి కోసం ఆకాశమల్లే వేచి చూశాను నీ రాక కోసం...",
-    "చిలకమ్మ చిటికేయంగా చింతలన్నీ తీరిపోవా... రాగాలమ్మ రేగంగా గుండెల్లోన హాయి నిండదా...",
-    "బొటనీ పాఠముంది మేటనీ ఆటనుంది... చదువుకు వెలుతుంది సరదాకు టైముంది...",
-    "కమ్మని ఈ ప్రేమలేఖ రాసింది హృదయమే... ప్రియతమా నీవను రాగమే అనురాగమై..."
-  ];
-  const currentLyric = currentSongIndex !== null ? VETURI_LYRICS[currentSongIndex % VETURI_LYRICS.length] : "";
-
-  // === Ambient Village audio ===
-  useEffect(() => {
-    if (!ambientRef.current) {
-      const a = new Audio(prefixPath('/audio/grandfather_ambient.mp3'));
-      a.loop = true;
-      a.volume = 0.15;
-      ambientRef.current = a;
-    }
-    if (isPlaying && ambientOn) {
-      ambientRef.current.play().catch(() => {});
-    } else {
-      ambientRef.current.pause();
-    }
-    return () => { ambientRef.current?.pause(); };
-  }, [isPlaying, ambientOn]);
-
-  // === Initial song ===
-  useEffect(() => {
-    if (songs.length > 0) {
-      const range = Math.min(songs.length, 5);
-      const randomIndex = Math.floor(Math.random() * range);
-      console.log('RANDOM START SONG:', songs[randomIndex]?.title, 'INDEX:', randomIndex);
-      setCurrentSongIndex(randomIndex);
-    }
-  }, []);
-
-  // === Clock ===
-  useEffect(() => {
-    const tick = () =>
-      setTimeString(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }).toLowerCase());
-    tick();
-    const t = setInterval(tick, 10000);
-    return () => clearInterval(t);
-  }, []);
-  
-  // === Shuffle Hint Timer ===
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!isShuffle) {
-        setShowShuffleHint(true);
-      }
-    }, 10000);
-    return () => clearTimeout(timer);
-  }, [isShuffle]);
-
-  useEffect(() => {
-    if (showShuffleHint) {
-      const timer = setTimeout(() => {
-        setShowShuffleHint(false);
-      }, 6000);
-      return () => clearTimeout(timer);
-    }
-  }, [showShuffleHint]);
-
-  // === Supabase Realtime Live Presence Counter ===
-  useEffect(() => {
-    if (!supabase) {
-      const sim = () => {
-        const s = Math.floor(Date.now() / 4000);
-        setPresenceCount(Math.max(1, Math.round(35 + Math.sin(s * 0.5) * 3 + Math.cos(s * 0.2) * 1)));
-      };
-      sim();
-      const t = setInterval(sim, 4000);
-      return () => clearInterval(t);
-    }
-
-    const channel = supabase.channel('presence-thathayya');
-
-    channel
-      .on('presence', { event: 'sync' }, () => {
-        try {
-          const state = channel.presenceState();
-          const userIds = Object.keys(state || {});
-          const count = Math.max(1, userIds.length + 6); // Add realistic base count
-          setPresenceCount(count);
-        } catch (e) {
-          console.error('Error reading presence state:', e);
-          setPresenceCount(Math.max(1, 35 + Math.floor(Math.random() * 10) - 5));
-        }
-      })
-      .subscribe(async (status) => {
-        if (status === 'SUBSCRIBED') {
-          await channel.track({ online_at: new Date().toISOString() });
-        }
-      });
-
-    return () => {
-      channel.unsubscribe();
-    };
-  }, []);
-
-  // === Background ===
-  useEffect(() => {
-    if (!started || !bgUrl) return;
-    document.body.style.transition = 'background 1.8s ease';
-    document.body.style.backgroundImage = bgUrl;
-    document.body.style.backgroundSize = 'cover';
-    document.body.style.backgroundPosition = 'center 30%';
-    document.body.style.backgroundRepeat = 'no-repeat';
-    document.body.style.backgroundAttachment = 'fixed';
-    return () => { document.body.style.background = ''; };
-  }, [currentSongIndex, started, bgUrl]);
-
-  // === Auto-unlock playback on first click ===
-  useEffect(() => {
-    const unlock = () => {
-      try {
-        if (playerRef.current && typeof playerRef.current.playVideo === 'function') {
-          playerRef.current.playVideo();
-        }
-        if (ambientRef.current && ambientOn) {
-          ambientRef.current.play().catch(() => {});
-        }
-      } catch (_) {}
-    };
-    window.addEventListener('click', unlock, { once: true });
-    return () => window.removeEventListener('click', unlock);
-  }, [ambientOn]);
-
-  // === Controls ===
-  const next = useCallback(() => {
-    if (songs.length === 0) return;
-    if (isShuffle) {
-      const randomIndex = Math.floor(Math.random() * songs.length);
-      setCurrentSongIndex(randomIndex);
-    } else {
-      setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songs.length);
-    }
-    setIsPlaying(true);
-    setCurrentTime(0);
-    setDuration(0);
-    setPlayerError(null);
-  }, [songs, isShuffle]);
-
-  const prev = useCallback(() => {
-    if (songs.length === 0) return;
-    if (isShuffle) {
-      const randomIndex = Math.floor(Math.random() * songs.length);
-      setCurrentSongIndex(randomIndex);
-    } else {
-      setCurrentSongIndex((prevIndex) => (prevIndex - 1 + songs.length) % songs.length);
-    }
-    setIsPlaying(true);
-    setCurrentTime(0);
-    setDuration(0);
-    setPlayerError(null);
-  }, [songs, isShuffle]);
-
-  const togglePlay = () => {
-    setIsPlaying(prev => !prev);
-  };
-
-  // === Player Callbacks ===
-  const handlePlayerReady = (player) => {
-    playerRef.current = player;
-    player.setVolume(volume);
-    if (isPlaying) {
-      player.playVideo();
-    }
-  };
-
-  const handlePlayerError = (code) => {
-    setPlayerError(code);
-    console.error('YouTube player error code:', code);
-  };
-
-  // === Auto-skip on unplayable video errors ===
-  useEffect(() => {
-    if (playerError === 2 || playerError === 100 || playerError === 101 || playerError === 150) {
-      const timer = setTimeout(() => {
-        next();
-      }, 2500);
-      return () => clearTimeout(timer);
-    }
-  }, [playerError, next]);
-
-  const handleStateChange = (code) => {
-    if (code === 0) { // ENDED - auto play next track
-      next();
-    } else if (code === 1) { // PLAYING
-      setIsPlaying(true);
-      setYtReady(true);
-      setPlayerError(null);
-    } else if (code === 2) { // PAUSED
-      setIsPlaying(false);
-    }
-  };
-
-  const handleTimeUpdate = (cur, dur) => {
-    setCurrentTime(cur);
-    setDuration(dur);
-  };
-
-  const changeVolume = (v) => {
-    setVolume(v);
-  };
-
-  const seek = (e) => {
-    if (!duration) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const t = ((e.clientX - rect.left) / rect.width) * duration;
-    setCurrentTime(t);
-    try {
-      if (playerRef.current && typeof playerRef.current.seekTo === 'function') {
-        playerRef.current.seekTo(t, true);
-      }
-    } catch (_) {}
-  };
-
-  const fmt = (s) => {
-    if (!s || isNaN(s)) return '0:00';
-    const m = Math.floor(s / 60);
-    const sec = Math.floor(s % 60);
-    return `${m}:${sec < 10 ? '0' : ''}${sec}`;
-  };
+  const currentLyric = currentSongIndex !== null ? VETURI_LYRICS[currentSongIndex % VETURI_LYRICS.length] : '';
 
   return (
-    <div style={{
-      minHeight: '100dvh',
-      width: '100vw',
-      position: 'relative',
-      overflow: 'hidden',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      color: '#fff',
-    }}>
-      {/* Dark Vignette Overlay to showcase background image nicely */}
-      <div style={{
-        position: 'fixed',
-        inset: 0,
-        background: 'radial-gradient(circle at center, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.65) 100%)',
-        pointerEvents: 'none',
-        zIndex: 1,
-      }} />
+    <div style={{ minHeight: '100dvh', width: '100vw', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', color: '#fff' }}>
+      <RadialVignette innerColor="rgba(15, 23, 42, 0.2)" outerColor="rgba(15, 23, 42, 0.65)" />
 
-      {/* Weather / Dust particles effect */}
       <AmbientWeather weather="fog" particles="dust" active={isPlaying && ambientOn} />
 
-      {/* YouTube player — visibility:hidden keeps proper dimensions for YT init */}
-      <div style={{
-        position: 'fixed',
-        bottom: '100px',
-        right: '30px',
-        width: '220px',
-        height: '124px',
-        borderRadius: '16px',
-        overflow: 'hidden',
-        boxShadow: videoVisible ? '0 12px 24px rgba(0,0,0,0.6)' : 'none',
-        border: videoVisible ? '1px solid rgba(255,255,255,0.15)' : 'none',
-        opacity: videoVisible ? 1 : 0,
-        visibility: videoVisible ? 'visible' : 'hidden',
-        transition: 'opacity 0.3s, visibility 0.3s',
-        zIndex: videoVisible ? 40 : -1,
-        background: '#000',
-        pointerEvents: videoVisible ? 'auto' : 'none',
-      }}>
-        {currentSong?.youtubeVideoId && (
-          <YouTubePlayer
-            videoId={currentSong.youtubeVideoId}
-            isPlaying={isPlaying}
-            volume={volume}
-            onStateChange={handleStateChange}
-            onPlayerReady={handlePlayerReady}
-            onTimeUpdate={handleTimeUpdate}
-            onError={handlePlayerError}
-            trackTitle={currentSong?.title}
-            trackArtist={currentSong?.artist}
-            trackAlbum={currentSong?.movie}
-            onPrev={prev}
-            onNext={next}
-            onPlayPause={togglePlay}
-          />
-        )}
-      </div>
+      <FloatingYouTubePlayer
+        videoVisible={videoVisible}
+        videoId={currentSong?.youtubeVideoId}
+        isPlaying={isPlaying}
+        volume={volume}
+        onStateChange={handleStateChange}
+        onPlayerReady={handlePlayerReady}
+        onTimeUpdate={handleTimeUpdate}
+        onError={handlePlayerError}
+        trackTitle={currentSong?.title}
+        trackArtist={currentSong?.artist}
+        trackAlbum={currentSong?.movie}
+        onPrev={prev}
+        onNext={next}
+        onPlayPause={togglePlay}
+      />
 
       {playerError && (
-        <div style={{ position: 'fixed', bottom: '170px', right: '30px', background: 'rgba(220,38,38,0.9)', color: '#fff', padding: '8px 14px', borderRadius: '10px', fontSize: '0.75rem', zIndex: 50 }}>
-          {playerError === 150 || playerError === 101 ? '⚠ Embedding restricted on localhost (Auto-skipping...)' : `⚠ Video Error: ${playerError}`}
-        </div>
+        <PlayerErrorBanner code={playerError} formatMessage={(code) => (
+          code === 150 || code === 101 ? '⚠ Embedding restricted on localhost (Auto-skipping...)' : `⚠ Video Error: ${code}`
+        )} />
       )}
 
-      {/* Top Header */}
-      <header style={{
-        zIndex: 10,
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '16px 20px',
-        width: '100%',
-      }} className="hud-top-header">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <Link href="/" style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            color: '#fff',
-            textDecoration: 'none',
-            fontSize: '0.85rem',
-            fontWeight: '600',
-            padding: '8px 14px',
-            borderRadius: '9999px',
-            background: 'rgba(255,255,255,0.08)',
-            border: '1px solid rgba(255,255,255,0.12)',
-            backdropFilter: 'blur(12px)',
-            whiteSpace: 'nowrap'
-          }} className="hud-button">
-            <ChevronLeft size={16} />
-            <span>SPACES</span>
-          </Link>
-          {timeString && (
-            <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em' }} className="hud-time">
-              {timeString}
-            </span>
-          )}
-        </div>
+      <SpaceHudHeader
+        timeString={timeString}
+        ambientOn={ambientOn}
+        onToggleAmbient={() => setAmbientOn(a => !a)}
+        videoVisible={videoVisible}
+        onToggleVideo={() => setVideoVisible(v => !v)}
+        accentText={CAPSULE_THEME.accentText}
+        accentRgb={CAPSULE_THEME.accentRgb}
+        VideoIcon={Tv}
+        className="hud-top-header"
+      />
 
-        {/* Right Controls */}
-        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-          <button
-            onClick={() => setAmbientOn(a => !a)}
-            title="Toggle background ambient sounds"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              color: ambientOn ? '#ffb74d' : 'rgba(255,255,255,0.5)',
-              fontSize: '0.78rem',
-              fontWeight: '600',
-              padding: '8px 12px',
-              borderRadius: '9999px',
-              background: ambientOn ? 'rgba(255, 183, 77, 0.15)' : 'rgba(255,255,255,0.06)',
-              border: ambientOn ? '1px solid rgba(255, 183, 77, 0.35)' : '1px solid rgba(255,255,255,0.1)',
-              backdropFilter: 'blur(12px)',
-              cursor: 'pointer',
-              whiteSpace: 'nowrap',
-              transition: 'all 0.2s',
-            }}
-            className="hud-button"
-          >
-            <Wind size={14} />
-            <span className="btn-label">{ambientOn ? 'AMBIENCE' : 'OFF'}</span>
-          </button>
-          
-          <button
-            onClick={() => setVideoVisible(v => !v)}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              color: videoVisible ? '#ffb74d' : '#fff',
-              fontSize: '0.78rem',
-              fontWeight: '600',
-              padding: '8px 12px',
-              borderRadius: '9999px',
-              background: videoVisible ? 'rgba(255, 183, 77, 0.2)' : 'rgba(255,255,255,0.08)',
-              border: videoVisible ? '1px solid rgba(255, 183, 77, 0.4)' : '1px solid rgba(255,255,255,0.12)',
-              backdropFilter: 'blur(12px)',
-              cursor: 'pointer',
-              whiteSpace: 'nowrap',
-            }}
-            className="hud-button"
-          >
-            <Tv size={14} />
-            <span className="btn-label">{videoVisible ? 'HIDE' : 'VIDEO'}</span>
-          </button>
-        </div>
-      </header>
-
-      <div style={{
-        position: 'absolute',
-        top: '12vh',
-        left: 0, right: 0,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        pointerEvents: 'none',
-        userSelect: 'none',
-        padding: '0 24px',
-        zIndex: 5,
-      }} className="immersive-title-container">
-        <h2 style={{
-          fontSize: '4.8rem',
-          fontWeight: '900',
-          letterSpacing: '0.04em',
-          color: '#fff',
-          margin: 0,
-          textShadow: '0 2px 8px rgba(0,0,0,0.75)',
-          fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif",
-          textAlign: 'center'
-        }} className="immersive-title">
+      <div style={{ position: 'absolute', top: '12vh', left: 0, right: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', userSelect: 'none', padding: '0 24px', zIndex: 5 }} className="immersive-title-container">
+        <h2 style={{ fontSize: '4.8rem', fontWeight: '900', letterSpacing: '0.04em', color: '#fff', margin: 0, textShadow: '0 2px 8px rgba(0,0,0,0.75)', fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif", textAlign: 'center' }} className="immersive-title">
           తాతయ్య టేప్ రికార్డర్
         </h2>
       </div>
 
-      {/* Bottom HUD Capsule Media Player */}
-      <div style={{
-        zIndex: 20,
-        width: '100%',
-        maxWidth: '680px',
-        margin: '0 auto 24px',
-        padding: '0 20px',
-        display: 'flex',
-        flexDirection: 'column',
-      }}>
-        {/* Veturi Lyric Display */}
-        {currentLyric && (
-          <div style={{
-            textAlign: 'center',
-            fontSize: '0.95rem',
-            fontWeight: '500',
-            color: '#ffcc80',
-            textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 0 10px rgba(255, 183, 77, 0.3)',
-            marginBottom: '14px',
-            padding: '8px 16px',
-            background: 'rgba(23, 14, 11, 0.7)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: '16px',
-            border: '1px solid rgba(255, 183, 77, 0.2)',
-            width: 'fit-content',
-            alignSelf: 'center',
-            fontFamily: "'Akaya Telivigala', 'Gurajada', serif",
-          }}>
-            "{currentLyric}"
-          </div>
-        )}
+      <div style={{ zIndex: 20, width: '100%', maxWidth: '680px', margin: '0 auto 24px', padding: '0 20px', display: 'flex', flexDirection: 'column' }}>
+        <QuoteDisplay
+          variant="box"
+          text={currentLyric}
+          textColor="#ffcc80"
+          textShadow="0 2px 4px rgba(0,0,0,0.9), 0 0 10px rgba(255, 183, 77, 0.3)"
+          borderColor="rgba(255, 183, 77, 0.2)"
+          fontFamily="'Akaya Telivigala', 'Gurajada', serif"
+        />
 
-        <div style={{
-          background: 'rgba(15, 17, 26, 0.65)',
-          backdropFilter: 'blur(30px) saturate(160%)',
-          border: '1px solid rgba(255, 204, 128, 0.2)',
-          borderRadius: '24px',
-          padding: '20px 24px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-          boxShadow: '0 25px 60px -15px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.1)',
-        }}>
-          {/* Top Row: Track Info & Album Art (Left) | Controls & Volume (Right) */}
-          <div className="player-main-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '16px' }}>
-            
-            {/* Track Info & Vinyl Art */}
-            <div className="track-info-container" style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
-              <div style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '50%',
-                overflow: 'hidden',
-                border: '3px solid #2e1c16',
-                boxShadow: '0 0 0 2px rgba(255, 183, 77, 0.3), 0 8px 16px rgba(0,0,0,0.6)',
-                flexShrink: 0,
-                position: 'relative',
-                background: '#000',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                animationName: 'spin',
-                animationDuration: '8s',
-                animationTimingFunction: 'linear',
-                animationIterationCount: 'infinite',
-                animationPlayState: isPlaying ? 'running' : 'paused'
-              }}>
-                {currentSong?.youtubeVideoId ? (
-                  <img
-                    src={`https://img.youtube.com/vi/${currentSong.youtubeVideoId}/hqdefault.jpg`}
-                    alt="Track Art"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                ) : (
-                  <span style={{ fontSize: '1.2rem' }}>📼</span>
-                )}
-                <div style={{
-                  position: 'absolute',
-                  width: '8px',
-                  height: '8px',
-                  borderRadius: '50%',
-                  background: '#151515',
-                  border: '1px solid rgba(255,255,255,0.2)',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  zIndex: 2
-                }} />
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
-                <span style={{ fontSize: '1.05rem', fontWeight: '800', color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {currentSong?.title || 'తాతయ్య టేప్ రికార్డర్ గీతాలు'}
-                </span>
-                <span style={{ fontSize: '0.78rem', color: '#ffcc80', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {currentSong?.movie ? `${currentSong.movie} • ${currentSong.year}` : 'Ilaiyaraaja & SPB Classics'}
-                </span>
-              </div>
-            </div>
-
-            {/* Playback Controls & Volume */}
-            <div className="player-controls-container" style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', flexShrink: 0 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <button
-                  onClick={() => setIsShuffle(prev => !prev)}
-                  title="Toggle shuffle mode (play songs in random order)"
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    color: isShuffle ? '#ffb74d' : 'rgba(255,255,255,0.4)',
-                    cursor: 'pointer',
-                    padding: '6px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    transition: 'color 0.2s',
-                    position: 'relative',
-                  }}
-                >
-                  <Shuffle size={16} />
-                  {showShuffleHint && (
-                    <div style={{
-                      position: 'absolute',
-                      bottom: '100%',
-                      left: '50%',
-                      transform: 'translateX(-50%) translateY(-8px)',
-                      background: '#fbbf24',
-                      color: '#000',
-                      padding: '6px 10px',
-                      borderRadius: '6px',
-                      fontSize: '0.7rem',
-                      fontWeight: '700',
-                      whiteSpace: 'nowrap',
-                      boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
-                      pointerEvents: 'none',
-                      zIndex: 10,
-                    }}>
-                      Shuffle to surprise with new songs!
-                      <div style={{
-                        position: 'absolute',
-                        top: '100%',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: 0,
-                        height: 0,
-                        borderLeft: '5px solid transparent',
-                        borderRight: '5px solid transparent',
-                        borderTop: '5px solid #fbbf24'
-                      }} />
-                    </div>
-                  )}
-                </button>
-
-                <button onClick={prev} title="Previous Track" style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.8)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem' }}>⏮</button>
-
-                <button
-                  onClick={togglePlay}
-                  title={isPlaying ? "Pause" : "Play"}
-                  style={{
-                    width: '44px',
-                    height: '44px',
-                    borderRadius: '50%',
-                    background: '#ffb74d',
-                    border: 'none',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    boxShadow: '0 4px 16px rgba(255, 183, 77, 0.4)',
-                    transition: 'transform 0.2s',
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
-                  onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                >
-                  {isPlaying ? (
-                    <Pause size={18} fill="#2e1c16" color="#2e1c16" />
-                  ) : (
-                    <Play size={18} fill="#2e1c16" color="#2e1c16" style={{ transform: 'translateX(1px)' }} />
-                  )}
-                </button>
-
-                <button onClick={next} title="Next Track" style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.8)', cursor: 'pointer', padding: '6px', fontSize: '1.2rem' }}>⏭</button>
-              </div>
-
-              <div style={{ width: '1px', height: '24px', backgroundColor: 'rgba(255,255,255,0.12)' }} />
-
-              {/* Volume Control */}
-              <div
-                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-                className="volume-slider-container"
-                onMouseEnter={() => setVolumeHovered(true)}
-                onMouseLeave={() => setVolumeHovered(false)}
-              >
-                <button
-                  onClick={() => changeVolume(volume === 0 ? 50 : 0)}
-                  style={{ background: 'none', border: 'none', color: volume === 0 ? '#ef4444' : '#ffcc80', cursor: 'pointer', padding: 0 }}
-                >
-                  {volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
-                </button>
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  value={volume}
-                  onChange={e => changeVolume(parseInt(e.target.value))}
-                  style={{
-                    width: '65px',
-                    height: volumeHovered ? '6px' : '4px',
-                    borderRadius: '3px',
-                    background: 'rgba(255,255,255,0.2)',
-                    accentColor: '#ffb74d',
-                    cursor: 'pointer',
-                    transition: 'height 0.15s ease',
-                  }}
-                />
-              </div>
-            </div>
-
-          </div>
-
-          {/* Bottom Row: Timeline Progress & Timestamps */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', width: '100%' }}>
-            <div
-              onClick={seek}
-              onMouseEnter={() => setSeekHovered(true)}
-              onMouseLeave={() => setSeekHovered(false)}
-              style={{
-                height: seekHovered ? '8px' : '6px',
-                width: '100%',
-                backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                borderRadius: '4px',
-                position: 'relative',
-                cursor: 'pointer',
-                transition: 'height 0.15s ease',
-              }}
-            >
-              <div
-                style={{
-                  height: '100%',
-                  width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`,
-                  background: '#ffb74d',
-                  borderRadius: '4px',
-                  boxShadow: '0 0 10px rgba(255, 183, 77, 0.7)',
-                  transition: 'width 0.1s linear',
-                }}
-              />
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#ffcc80', fontFamily: 'monospace' }}>
-              <span>{fmt(currentTime)}</span>
-              <span>{duration > 0 ? fmt(duration) : '0:00'}</span>
-            </div>
-          </div>
-
-          {/* Quote Display Removed */}
-
-        </div>
+        <PlayerCapsule
+          theme={CAPSULE_THEME}
+          currentSong={currentSong}
+          isPlaying={isPlaying} onTogglePlay={togglePlay}
+          isShuffle={isShuffle} onToggleShuffle={() => setIsShuffle(prev => !prev)} showShuffleHint={showShuffleHint}
+          onPrev={prev} onNext={next}
+          volume={volume} onChangeVolume={changeVolume} volumeHovered={volumeHovered} onVolumeHoverChange={setVolumeHovered}
+          currentTime={currentTime} duration={duration} onSeek={seek} seekHovered={seekHovered} onSeekHoverChange={setSeekHovered} fmt={fmt}
+        />
       </div>
 
-      {/* Floating Listeners Badge (Bottom Right) */}
-      <div style={{
-        position: 'fixed',
-        right: '24px',
-        bottom: '24px',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px',
-        fontSize: '0.85rem',
-        fontWeight: '600',
-        color: '#ffe0b2',
-        background: 'rgba(15, 17, 26, 0.7)',
-        border: '1px solid rgba(255, 204, 128, 0.25)',
-        backdropFilter: 'blur(12px)',
-        padding: '8px 16px',
-        borderRadius: '9999px',
-        zIndex: 35,
-        boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
-      }} className="listeners-badge">
-        <Users size={14} style={{ color: '#ffb74d' }} />
-        <span>{presenceCount} listeners</span>
-      </div>
+      <ListenersBadgeSingle
+        count={presenceCount}
+        label="listeners"
+        textColor="#ffe0b2"
+        background="rgba(15, 17, 26, 0.7)"
+        border="rgba(255, 204, 128, 0.25)"
+        iconColor="#ffb74d"
+      />
 
-      {/* CSS Animations & Mobile Responsiveness */}
       <style jsx global>{`
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .hud-button:hover { background: rgba(255,255,255,0.16) !important; transform: translateY(-1px); }
         @media (max-width: 768px) {
           .immersive-title { font-size: 2.2rem !important; }
-          .immersive-title-container { top: 76px !important; }
-          .volume-slider-container { display: none !important; }
-          .listeners-badge { display: none !important; }
-          .hud-time { display: none !important; }
           .btn-label { font-size: 0.7rem !important; }
-        }
-        @media (max-width: 520px) {
-          .player-main-row {
-            flex-direction: column !important;
-            align-items: center !important;
-            gap: 12px !important;
-          }
-          .track-info-container {
-            width: 100% !important;
-            justify-content: flex-start !important;
-          }
-          .player-controls-container {
-            width: 100% !important;
-            justify-content: center !important;
-          }
         }
       `}</style>
     </div>
