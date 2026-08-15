@@ -1,6 +1,7 @@
 'use client';
 
 import { useSpacePlayer } from '@/hooks/useSpacePlayer';
+import { useSpaceKeyboardShortcuts } from '@/hooks/useSpaceKeyboardShortcuts';
 import placeSongs from '@/data/songs/ammama.json';
 import { prefixPath } from '@/utils/paths';
 import SpaceHudHeader from '@/components/space/SpaceHudHeader';
@@ -68,8 +69,14 @@ export default function AmmamaRadio() {
     ambientOn, setAmbientOn, playerError, isShuffle, setIsShuffle, seekHovered, setSeekHovered,
     volumeHovered, setVolumeHovered, showShuffleHint, videoVisible, setVideoVisible,
     handlePlayerReady, handlePlayerError, handleStateChange, handleTimeUpdate,
-    togglePlay, next, prev, seek, changeVolume, fmt,
+    togglePlay, next, prev, seek, seekBy, changeVolume, fmt,
   } = player;
+
+  useSpaceKeyboardShortcuts({
+    onTogglePlay: togglePlay, onNext: next, onPrev: prev, onChangeVolume: changeVolume,
+    onSeekBy: seekBy,
+    volume, restoreVolume: CAPSULE_THEME.restoreVolume,
+  });
 
   const currentLyric = currentSongIndex !== null ? AMMAMA_LYRICS[currentSongIndex % AMMAMA_LYRICS.length] : '';
 

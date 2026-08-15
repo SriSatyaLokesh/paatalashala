@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useSpacePlayer } from '@/hooks/useSpacePlayer';
+import { useSpaceKeyboardShortcuts } from '@/hooks/useSpaceKeyboardShortcuts';
 import placeSongs from '@/data/songs/auto.json';
 import { prefixPath } from '@/utils/paths';
 import SpaceHudHeader from '@/components/space/SpaceHudHeader';
@@ -64,7 +65,7 @@ export default function AutoRaja() {
     presenceCount, timeString, ambientOn, setAmbientOn, playerError, isShuffle, setIsShuffle,
     seekHovered, setSeekHovered, volumeHovered, setVolumeHovered, showShuffleHint,
     videoVisible, setVideoVisible, setIsPlaying, setYtReady, setCurrentTime, setDuration,
-    setVolume, setPlayerError, setCurrentSongIndex, playerRef, fmt,
+    setVolume, setPlayerError, setCurrentSongIndex, playerRef, seekBy, fmt,
   } = player;
 
   // Background Transition States (crossfade — kept local, not shared with the hook)
@@ -166,6 +167,12 @@ export default function AutoRaja() {
       next();
     }
   };
+
+  useSpaceKeyboardShortcuts({
+    onTogglePlay: togglePlay, onNext: next, onPrev: prev, onChangeVolume: changeVolume,
+    onSeekBy: seekBy,
+    volume, restoreVolume: CAPSULE_THEME.restoreVolume,
+  });
 
   const rawQuote = currentSong?.quote || 'Andhamaina ammayini, finance lo theskuna auto ni maintain cheyandam kastam.';
   const cleanQuote = rawQuote.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim();
