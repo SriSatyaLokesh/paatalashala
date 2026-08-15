@@ -291,6 +291,24 @@ export function useSpacePlayer(placeSongs, config) {
     } catch (_) {}
   };
 
+  // seekBy: relative seek (±seconds), for hold-to-scrub keyboard shortcuts.
+  // Unlike seek(e) above (absolute position from a click event), this takes a
+  // plain delta. Uses the functional setState form so back-to-back calls
+  // fired rapidly (e.g. every 200ms while a key is held) always clamp against
+  // the latest currentTime even if a call fires before the previous one's
+  // re-render has committed.
+  const seekBy = (deltaSeconds) => {
+    setCurrentTime((prevTime) => {
+      const next = Math.max(0, Math.min(duration, prevTime + deltaSeconds));
+      try {
+        if (playerRef.current && typeof playerRef.current.seekTo === 'function') {
+          playerRef.current.seekTo(next, true);
+        }
+      } catch (_) {}
+      return next;
+    });
+  };
+
   const changeVolume = (v) => {
     setVolume(v);
   };
@@ -325,6 +343,6 @@ export function useSpacePlayer(placeSongs, config) {
     setIsPlaying, setYtReady, setCurrentTime, setDuration, setVolume, setPlayerError, setCurrentSongIndex,
     playerRef, ambientRef,
     handlePlayerReady, handlePlayerError, handleStateChange, handleTimeUpdate,
-    togglePlay, next, prev, seek, changeVolume, fmt,
+    togglePlay, next, prev, seek, seekBy, changeVolume, fmt,
   };
 }

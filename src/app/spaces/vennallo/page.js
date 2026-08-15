@@ -56,11 +56,12 @@ export default function Vennallo() {
     ambientOn, setAmbientOn, playerError, isShuffle, setIsShuffle, seekHovered, setSeekHovered,
     volumeHovered, setVolumeHovered, showShuffleHint, videoVisible, setVideoVisible,
     handlePlayerReady, handlePlayerError, handleStateChange, handleTimeUpdate,
-    togglePlay, next, prev, seek, changeVolume, fmt,
+    togglePlay, next, prev, seek, seekBy, changeVolume, fmt,
   } = player;
 
   useSpaceKeyboardShortcuts({
     onTogglePlay: togglePlay, onNext: next, onPrev: prev, onChangeVolume: changeVolume,
+    onSeekBy: seekBy,
     volume, restoreVolume: CAPSULE_THEME.restoreVolume,
   });
 

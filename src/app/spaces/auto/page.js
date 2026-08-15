@@ -65,7 +65,7 @@ export default function AutoRaja() {
     presenceCount, timeString, ambientOn, setAmbientOn, playerError, isShuffle, setIsShuffle,
     seekHovered, setSeekHovered, volumeHovered, setVolumeHovered, showShuffleHint,
     videoVisible, setVideoVisible, setIsPlaying, setYtReady, setCurrentTime, setDuration,
-    setVolume, setPlayerError, setCurrentSongIndex, playerRef, fmt,
+    setVolume, setPlayerError, setCurrentSongIndex, playerRef, seekBy, fmt,
   } = player;
 
   // Background Transition States (crossfade — kept local, not shared with the hook)
@@ -170,6 +170,7 @@ export default function AutoRaja() {
 
   useSpaceKeyboardShortcuts({
     onTogglePlay: togglePlay, onNext: next, onPrev: prev, onChangeVolume: changeVolume,
+    onSeekBy: seekBy,
     volume, restoreVolume: CAPSULE_THEME.restoreVolume,
   });
 
