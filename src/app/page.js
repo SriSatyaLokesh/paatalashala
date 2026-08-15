@@ -92,11 +92,14 @@ const IconStars = () => (
     <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
   </svg>
 );
-const IconShuffle = () => (
+const IconDice = () => (
   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/>
-    <polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/>
-    <line x1="4" y1="4" x2="9" y2="9"/>
+    <rect x="3" y="3" width="18" height="18" rx="3"/>
+    <circle cx="8" cy="8" r="1.1" fill="currentColor" stroke="none"/>
+    <circle cx="16" cy="8" r="1.1" fill="currentColor" stroke="none"/>
+    <circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none"/>
+    <circle cx="8" cy="16" r="1.1" fill="currentColor" stroke="none"/>
+    <circle cx="16" cy="16" r="1.1" fill="currentColor" stroke="none"/>
   </svg>
 );
 
@@ -108,7 +111,7 @@ const ICONS = {
   'ammama': IconRadio,
   'thathayya': IconTape,
   'vennallo': IconStars,
-  'sammelanam': IconShuffle,
+  'sammelanam': IconDice,
   'palle-velugu': IconBusLocal,
   'trip-bus': IconVanTrip,
 };
