@@ -175,12 +175,12 @@ export default function Sammelanam() {
       />
 
       <div style={{ position: 'absolute', top: '10vh', left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px', pointerEvents: 'none', userSelect: 'none', padding: '0 24px', zIndex: 5 }} className="immersive-title-container">
-        <div style={{ fontSize: '1.7rem', fontWeight: '700', letterSpacing: '0.06em', color: theme.capsuleTheme.accentText, margin: 0, textShadow: '0 2px 8px rgba(0,0,0,0.8)', transition: 'color 0.3s ease' }} className="sammelanam-badge">
+        <h2 style={{ fontSize: '4.4rem', fontWeight: '900', letterSpacing: '0.03em', color: '#fff', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.85), 0 0 30px rgba(0,0,0,0.3)', fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif", textAlign: 'center' }} className="immersive-title">
           🔀 సమ్మేళనం
-        </div>
-        <h2 style={{ fontSize: '4.4rem', fontWeight: '900', letterSpacing: '0.03em', color: '#fff', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.85), 0 0 30px rgba(0,0,0,0.3)', fontFamily: theme.titleFontFamily, textAlign: 'center', transition: 'font-family 0.3s ease' }} className="immersive-title">
-          {theme.capsuleTheme.fallbackEmoji} {theme.titleText}
         </h2>
+        <div style={{ fontSize: '1.7rem', fontWeight: '700', letterSpacing: '0.03em', color: theme.capsuleTheme.accentText, margin: 0, textShadow: '0 2px 8px rgba(0,0,0,0.8)', fontFamily: theme.titleFontFamily, transition: 'color 0.3s ease, font-family 0.3s ease' }} className="sammelanam-badge">
+          {theme.capsuleTheme.fallbackEmoji} {theme.titleText}
+        </div>
       </div>
 
       <div style={{ zIndex: 20, width: '100%', maxWidth: '680px', margin: '0 auto 24px', padding: '0 20px', display: 'flex', flexDirection: 'column' }}>
