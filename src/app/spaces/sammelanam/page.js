@@ -185,66 +185,27 @@ export default function Sammelanam() {
           padding: '10px 16px',
           display: 'flex',
           alignItems: 'center',
-          gap: '12px',
+          gap: '10px',
           boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
         }}>
-          <div style={{
-            width: '36px',
-            height: '36px',
-            borderRadius: '50%',
-            overflow: 'hidden',
-            border: '2px solid rgba(255,255,255,0.1)',
-            flexShrink: 0,
-            background: '#000',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            animationName: 'spin',
-            animationDuration: '8s',
-            animationTimingFunction: 'linear',
-            animationIterationCount: 'infinite',
-            animationPlayState: isPlaying ? 'running' : 'paused',
-          }}>
-            {currentSong?.youtubeVideoId ? (
-              <img
-                src={`https://img.youtube.com/vi/${currentSong.youtubeVideoId}/hqdefault.jpg`}
-                alt="Album Art"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-            ) : (
-              <span style={{ fontSize: '1rem', color: '#f59e0b' }}>⟳</span>
-            )}
-          </div>
-
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{
-              fontSize: '0.95rem',
-              fontWeight: '700',
-              color: '#fff',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-            }}>
-              {currentSong?.title || 'Surprise Me'}
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
             <button onClick={prev} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '4px', display: 'flex', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = '#fff'} onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}>⏮</button>
             <button onClick={togglePlay} style={{
-              width: '36px', height: '36px', borderRadius: '50%',
+              width: '32px', height: '32px', borderRadius: '50%',
               background: '#f59e0b', border: 'none', color: '#000',
               cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
               boxShadow: '0 2px 8px rgba(245, 158, 11, 0.3)',
               transition: 'transform 0.2s, background-color 0.2s',
             }} onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.08)'; e.currentTarget.style.backgroundColor = '#fbbf24'; }} onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.backgroundColor = '#f59e0b'; }}>
-              {isPlaying ? <Pause size={16} fill="#000" /> : <Play size={16} fill="#000" style={{ transform: 'translateX(1px)' }} />}
+              {isPlaying ? <Pause size={14} fill="#000" /> : <Play size={14} fill="#000" style={{ transform: 'translateX(1px)' }} />}
             </button>
             <button onClick={next} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '4px', display: 'flex', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = '#fff'} onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}>⏭</button>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0, width: '90px' }}>
-            <Volume2 size={14} style={{ color: 'rgba(255,255,255,0.6)' }} />
+          <div style={{ width: '1px', height: '18px', backgroundColor: 'rgba(255,255,255,0.1)' }} />
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0, width: '80px' }}>
+            <Volume2 size={13} style={{ color: 'rgba(255,255,255,0.6)' }} />
             <input
               type="range"
               min="0"
@@ -260,6 +221,14 @@ export default function Sammelanam() {
                 cursor: 'pointer',
               }}
             />
+          </div>
+
+          <div style={{ flex: 1, minWidth: 0 }} />
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', fontFamily: 'monospace', letterSpacing: '0.02em', flexShrink: 0 }}>
+            <span>{fmt(currentTime)}</span>
+            <span>/</span>
+            <span>{duration > 0 ? fmt(duration) : '0:00'}</span>
           </div>
         </div>
 
@@ -284,10 +253,6 @@ export default function Sammelanam() {
               borderRadius: '2px',
               transition: 'width 0.1s linear',
             }} />
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', fontFamily: 'monospace', letterSpacing: '0.02em' }}>
-            <span>{fmt(currentTime)}</span>
-            <span>{duration > 0 ? fmt(duration) : '0:00'}</span>
           </div>
         </div>
       </div>
