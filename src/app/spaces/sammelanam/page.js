@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { useSpacePlayer } from '@/hooks/useSpacePlayer';
 import { useSpaceKeyboardShortcuts } from '@/hooks/useSpaceKeyboardShortcuts';
 import { useCrossfadingAmbientAudio } from '@/hooks/useCrossfadingAmbientAudio';
@@ -178,23 +179,46 @@ export default function Sammelanam() {
         <h2 style={{ fontSize: '4.4rem', fontWeight: '900', letterSpacing: '0.03em', color: '#fff', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.85), 0 0 30px rgba(0,0,0,0.3)', fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif", textAlign: 'center' }} className="immersive-title">
           సమ్మేళనం
         </h2>
-        <div style={{ fontSize: '1.7rem', fontWeight: '700', letterSpacing: '0.03em', color: theme.capsuleTheme.accentText, margin: 0, textShadow: '0 2px 8px rgba(0,0,0,0.8)', fontFamily: theme.titleFontFamily, transition: 'color 0.3s ease, font-family 0.3s ease' }} className="sammelanam-badge">
-          {theme.capsuleTheme.fallbackEmoji} {theme.titleText}
-        </div>
       </div>
 
       <div style={{ zIndex: 20, width: '100%', maxWidth: '680px', margin: '0 auto 24px', padding: '0 20px', display: 'flex', flexDirection: 'column' }}>
-        {quoteText && (
-          <QuoteDisplay
-            variant="box"
-            text={quoteText}
-            textColor={theme.quoteTextColor}
-            textShadow={theme.quoteTextShadow}
-            borderColor={theme.quoteBorderColor}
-            fontFamily={theme.titleFontFamily}
-          />
+        {currentSong && currentSong.place && (
+          <Link
+            href={`/spaces/${currentSong.place}`}
+            style={{
+              alignSelf: 'center',
+              marginBottom: '12px',
+              padding: '6px 16px',
+              borderRadius: '9999px',
+              background: 'rgba(15, 17, 26, 0.45)',
+              border: `1px solid ${theme.capsuleTheme.glassBorder || 'rgba(255, 255, 255, 0.12)'}`,
+              backdropFilter: 'blur(8px)',
+              fontSize: '0.75rem',
+              fontWeight: '500',
+              color: 'rgba(255, 255, 255, 0.8)',
+              textDecoration: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.color = theme.capsuleTheme.accentText;
+              e.currentTarget.style.borderColor = theme.capsuleTheme.accentText;
+              e.currentTarget.style.transform = 'translateY(-1px)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
+              e.currentTarget.style.borderColor = theme.capsuleTheme.glassBorder || 'rgba(255, 255, 255, 0.12)';
+              e.currentTarget.style.transform = 'none';
+            }}
+          >
+            <span>Take me to this space</span>
+            <span style={{ fontSize: '0.9rem' }}>→</span>
+          </Link>
         )}
-
         <PlayerCapsule
           theme={theme.capsuleTheme}
           currentSong={currentSong}

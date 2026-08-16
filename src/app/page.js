@@ -92,14 +92,11 @@ const IconStars = () => (
     <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
   </svg>
 );
-const IconDice = () => (
+const IconSparkles = () => (
   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="3" width="18" height="18" rx="3"/>
-    <circle cx="8" cy="8" r="1.1" fill="currentColor" stroke="none"/>
-    <circle cx="16" cy="8" r="1.1" fill="currentColor" stroke="none"/>
-    <circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none"/>
-    <circle cx="8" cy="16" r="1.1" fill="currentColor" stroke="none"/>
-    <circle cx="16" cy="16" r="1.1" fill="currentColor" stroke="none"/>
+    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+    <path d="m5 3 1 2.5L8.5 6 6 7 5 9.5 4 7 1.5 6 4 5.5z" fill="currentColor" stroke="none" />
+    <path d="m19 17 1 2.5 2.5.5-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z" fill="currentColor" stroke="none" />
   </svg>
 );
 
@@ -111,7 +108,7 @@ const ICONS = {
   'ammama': IconRadio,
   'thathayya': IconTape,
   'vennallo': IconStars,
-  'sammelanam': IconDice,
+  'sammelanam': IconSparkles,
   'palle-velugu': IconBusLocal,
   'trip-bus': IconVanTrip,
 };
@@ -123,7 +120,7 @@ const TELUGU_NAMES = {
   'thathayya': 'తాతయ్య టేప్ రికార్డర్',
   'ammama': 'అమ్మమ్మ రేడియో',
   'vennallo': 'మేడ మీద వెన్నెల్లో',
-  'sammelanam': 'సమ్మేళనం',
+  'sammelanam': 'Surprise Me',
 };
 
 const CARD_BG = {
@@ -136,6 +133,16 @@ const CARD_BG = {
   'sammelanam': '/images/vennela_2.webp',
 };
 
+const PRESENCE_SIM_CONFIG = {
+  'tractor-anna': { base: 83, sineAmp: 5, cosAmp: 2 },
+  'saloon': { base: 43, sineAmp: 4, cosAmp: 2 },
+  'auto': { base: 98, sineAmp: 6, cosAmp: 3 },
+  'ammama': { base: 43, sineAmp: 4, cosAmp: 2 },
+  'thathayya': { base: 35, sineAmp: 3, cosAmp: 1 },
+  'vennallo': { base: 52, sineAmp: 5, cosAmp: 2 },
+  'sammelanam': { base: 60, sineAmp: 6, cosAmp: 3 },
+};
+
 export default function Home() {
   const [counts, setCounts] = useState({});
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -146,9 +153,9 @@ export default function Home() {
       const c = {};
       for (const p of SPACES) {
         if (p.active) {
-          const base = p.slug === 'tractor-anna' ? 83 : 41;
+          const cfg = PRESENCE_SIM_CONFIG[p.slug] || { base: 40, sineAmp: 4, cosAmp: 2 };
           const s = Math.floor(Date.now() / 4000);
-          c[p.slug] = Math.max(1, Math.round(base + Math.sin(s * 0.5 + p.id.length) * 5 + Math.cos(s * 0.2) * 2));
+          c[p.slug] = Math.max(1, Math.round(cfg.base + Math.sin(s * 0.5 + p.id.length) * cfg.sineAmp + Math.cos(s * 0.2) * cfg.cosAmp));
         }
       }
       setCounts(c);
@@ -185,7 +192,8 @@ export default function Home() {
     setIsInstallable(false);
   };
 
-  const active = SPACES.filter(p => p.active);
+  const active = SPACES.filter(p => p.active && p.slug !== 'sammelanam');
+  const sammelanamSpace = SPACES.find(p => p.slug === 'sammelanam');
   const coming = SPACES.filter(p => !p.active);
   const bgUrl = prefixPath('/images/landing_bg.avif');
 
@@ -351,7 +359,126 @@ export default function Home() {
           gap: 18px;
           width: 100%;
           max-width: 1020px;
+          margin-bottom: 18px;
+        }
+
+        .surprise-me-button {
+          position: relative;
+          border-radius: 22px;
+          overflow: hidden;
+          width: 100%;
+          max-width: 1020px;
+          height: 68px;
+          display: block;
+          text-decoration: none;
+          color: inherit;
+          cursor: pointer;
+          background: rgba(20, 14, 8, 0.45);
+          border: 1px solid rgba(220, 170, 90, 0.14);
+          backdrop-filter: blur(12px) saturate(120%);
+          -webkit-backdrop-filter: blur(12px) saturate(120%);
+          box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.5),
+            inset 0 1px 0 rgba(255, 255, 255, 0.06);
+          transition:
+            border-color 0.35s ease,
+            transform 0.38s cubic-bezier(0.23, 1, 0.32, 1),
+            box-shadow 0.38s ease;
           margin-bottom: 52px;
+        }
+        .surprise-me-button::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: inherit;
+          background: linear-gradient(160deg, rgba(255,255,255,0.05) 0%, transparent 55%);
+          pointer-events: none;
+          z-index: 2;
+        }
+        .surprise-me-button .surprise-me-bg {
+          position: absolute;
+          inset: 0;
+          background-size: cover;
+          background-position: center;
+          transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+          filter: brightness(0.25) saturate(0.6);
+          z-index: 0;
+        }
+        .surprise-me-button .surprise-me-vignette {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to right, rgba(10,6,2,0.85) 0%, transparent 100%);
+          z-index: 1;
+          pointer-events: none;
+        }
+        .surprise-me-button:hover {
+          border-color: rgba(220, 170, 90, 0.32);
+          transform: translateY(-2px);
+          box-shadow:
+            0 12px 40px rgba(0, 0, 0, 0.6),
+            0 0 0 1px rgba(220,170,90,0.18),
+            inset 0 1px 0 rgba(255,255,255,0.08);
+        }
+        .surprise-me-button:hover .surprise-me-bg {
+          transform: scale(1.02);
+          filter: brightness(0.3) saturate(0.75);
+        }
+        .surprise-me-content {
+          position: absolute;
+          inset: 0;
+          z-index: 3;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 24px;
+        }
+        .surprise-me-left {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          min-width: 0;
+        }
+        .surprise-me-icon {
+          width: 36px;
+          height: 36px;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255,255,255,0.07);
+          border: 1px solid rgba(255,255,255,0.1);
+          backdrop-filter: blur(8px);
+          color: #d4a96a;
+          flex-shrink: 0;
+        }
+        .surprise-me-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.25rem;
+          font-weight: 800;
+          color: #f7f0e5;
+          text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+        }
+        .surprise-me-desc {
+          font-size: 0.75rem;
+          color: rgba(218,188,148,0.7);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 480px;
+        }
+        .surprise-me-right {
+          display: flex;
+          align-items: center;
+          flex-shrink: 0;
+        }
+        .surprise-me-button:hover .card-enter {
+          gap: 10px;
+        }
+
+        @media (max-width: 680px) {
+          .surprise-me-desc { display: none; }
+          .surprise-me-button { height: 56px; }
+          .surprise-me-title { font-size: 1.05rem; }
         }
 
         .featured-card {
@@ -791,6 +918,44 @@ export default function Home() {
             );
           })}
         </div>
+
+        {sammelanamSpace && (
+          <Link href={`/spaces/${sammelanamSpace.slug}`} className="surprise-me-button fade-up d3">
+            {CARD_BG[sammelanamSpace.slug] && (
+              <div
+                className="surprise-me-bg"
+                style={{ backgroundImage: `url('${prefixPath(CARD_BG[sammelanamSpace.slug])}')` }}
+              />
+            )}
+            <div className="surprise-me-vignette" />
+
+            <div className="surprise-me-content">
+              <div className="surprise-me-left">
+                <div className="surprise-me-icon">
+                  <IconSparkles />
+                </div>
+                <div>
+                  <div className="surprise-me-title">Surprise Me</div>
+                  <p className="surprise-me-desc">{sammelanamSpace.description}</p>
+                </div>
+              </div>
+
+              <div className="surprise-me-right">
+                {counts[sammelanamSpace.slug] && (
+                  <div className="live-badge" style={{ marginRight: '16px' }}>
+                    <span className="live-dot" />
+                    <IconUsers />
+                    <span>{counts[sammelanamSpace.slug]}</span>
+                  </div>
+                )}
+                <div className="card-enter" style={{ marginTop: 0 }}>
+                  <span>Enter</span>
+                  <IconArrow />
+                </div>
+              </div>
+            </div>
+          </Link>
+        )}
 
         {/* ── COMING SOON ── */}
         <h2 className="section-label fade-up d4" style={{ fontSize: 'inherit', fontWeight: 'inherit', margin: '0 0 12px 0' }}>
