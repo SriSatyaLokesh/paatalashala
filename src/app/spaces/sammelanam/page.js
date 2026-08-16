@@ -8,12 +8,10 @@ import { ALL_SONGS, SPACE_THEMES } from '@/data/sammelanam';
 import SpaceHudHeader from '@/components/space/SpaceHudHeader';
 import FloatingYouTubePlayer from '@/components/space/FloatingYouTubePlayer';
 import PlayerErrorBanner from '@/components/space/PlayerErrorBanner';
-import PlayerCapsule from '@/components/space/PlayerCapsule';
-import QuoteDisplay from '@/components/space/QuoteDisplay';
 import RadialVignette from '@/components/space/RadialVignette';
 import { ListenersBadgeSingle } from '@/components/space/ListenersBadge';
 import AmbientWeather from '@/components/AmbientWeather';
-import { Tv } from 'lucide-react';
+import { Tv, Play, Pause, Volume2 } from 'lucide-react';
 
 const PRESENCE_CONFIG = { channel: 'presence-sammelanam', base: 60, sineAmp: 6, cosAmp: 3, syncPad: 14, catchSpread: 16, catchOffset: 8 };
 const ERROR_SKIP_DELAY_MS = 2500;
@@ -128,8 +126,6 @@ export default function Sammelanam() {
     volume, restoreVolume: theme.capsuleTheme.restoreVolume,
   });
 
-  const quoteText = currentSong ? theme.getQuote(currentSong) : null;
-
   return (
     <div style={{ minHeight: '100dvh', width: '100vw', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', color: '#fff' }}>
       {/* Always loaded (not conditional) since any song, including an auto-sourced one, can appear at any time. */}
@@ -176,34 +172,124 @@ export default function Sammelanam() {
 
       <div style={{ position: 'absolute', top: '10vh', left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px', pointerEvents: 'none', userSelect: 'none', padding: '0 24px', zIndex: 5 }} className="immersive-title-container">
         <h2 style={{ fontSize: '4.4rem', fontWeight: '900', letterSpacing: '0.03em', color: '#fff', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.85), 0 0 30px rgba(0,0,0,0.3)', fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif", textAlign: 'center' }} className="immersive-title">
-          సమ్మేళనం
+          Surprise Me
         </h2>
-        <div style={{ fontSize: '1.7rem', fontWeight: '700', letterSpacing: '0.03em', color: theme.capsuleTheme.accentText, margin: 0, textShadow: '0 2px 8px rgba(0,0,0,0.8)', fontFamily: theme.titleFontFamily, transition: 'color 0.3s ease, font-family 0.3s ease' }} className="sammelanam-badge">
-          {theme.capsuleTheme.fallbackEmoji} {theme.titleText}
-        </div>
       </div>
 
       <div style={{ zIndex: 20, width: '100%', maxWidth: '680px', margin: '0 auto 24px', padding: '0 20px', display: 'flex', flexDirection: 'column' }}>
-        {quoteText && (
-          <QuoteDisplay
-            variant="box"
-            text={quoteText}
-            textColor={theme.quoteTextColor}
-            textShadow={theme.quoteTextShadow}
-            borderColor={theme.quoteBorderColor}
-            fontFamily={theme.titleFontFamily}
-          />
-        )}
+        <div style={{
+          background: 'rgba(15, 17, 26, 0.65)',
+          backdropFilter: 'blur(16px)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          borderRadius: '16px',
+          padding: '10px 16px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+        }}>
+          <div style={{
+            width: '36px',
+            height: '36px',
+            borderRadius: '50%',
+            overflow: 'hidden',
+            border: '2px solid rgba(255,255,255,0.1)',
+            flexShrink: 0,
+            background: '#000',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            animationName: 'spin',
+            animationDuration: '8s',
+            animationTimingFunction: 'linear',
+            animationIterationCount: 'infinite',
+            animationPlayState: isPlaying ? 'running' : 'paused',
+          }}>
+            {currentSong?.youtubeVideoId ? (
+              <img
+                src={`https://img.youtube.com/vi/${currentSong.youtubeVideoId}/hqdefault.jpg`}
+                alt="Album Art"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            ) : (
+              <span style={{ fontSize: '1rem', color: '#f59e0b' }}>⟳</span>
+            )}
+          </div>
 
-        <PlayerCapsule
-          theme={theme.capsuleTheme}
-          currentSong={currentSong}
-          isPlaying={isPlaying} onTogglePlay={togglePlay}
-          isShuffle={isShuffle} onToggleShuffle={() => setIsShuffle(prev => !prev)} showShuffleHint={showShuffleHint}
-          onPrev={prev} onNext={next}
-          volume={volume} onChangeVolume={changeVolume} volumeHovered={volumeHovered} onVolumeHoverChange={setVolumeHovered}
-          currentTime={currentTime} duration={duration} onSeek={seek} seekHovered={seekHovered} onSeekHoverChange={setSeekHovered} fmt={fmt}
-        />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{
+              fontSize: '0.95rem',
+              fontWeight: '700',
+              color: '#fff',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}>
+              {currentSong?.title || 'Surprise Me'}
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+            <button onClick={prev} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '4px', display: 'flex', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = '#fff'} onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}>⏮</button>
+            <button onClick={togglePlay} style={{
+              width: '36px', height: '36px', borderRadius: '50%',
+              background: '#f59e0b', border: 'none', color: '#000',
+              cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: '0 2px 8px rgba(245, 158, 11, 0.3)',
+              transition: 'transform 0.2s, background-color 0.2s',
+            }} onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.08)'; e.currentTarget.style.backgroundColor = '#fbbf24'; }} onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.backgroundColor = '#f59e0b'; }}>
+              {isPlaying ? <Pause size={16} fill="#000" /> : <Play size={16} fill="#000" style={{ transform: 'translateX(1px)' }} />}
+            </button>
+            <button onClick={next} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', padding: '4px', display: 'flex', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = '#fff'} onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}>⏭</button>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0, width: '90px' }}>
+            <Volume2 size={14} style={{ color: 'rgba(255,255,255,0.6)' }} />
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={volume}
+              onChange={(e) => changeVolume(parseInt(e.target.value))}
+              style={{
+                flex: 1,
+                height: '3px',
+                backgroundColor: 'rgba(255,255,255,0.15)',
+                borderRadius: '2px',
+                accentColor: '#f59e0b',
+                cursor: 'pointer',
+              }}
+            />
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '8px' }}>
+          <div
+            onClick={seek}
+            onMouseEnter={() => setSeekHovered(true)}
+            onMouseLeave={() => setSeekHovered(false)}
+            style={{
+              height: '4px',
+              width: '100%',
+              backgroundColor: 'rgba(255, 255, 255, 0.12)',
+              borderRadius: '2px',
+              position: 'relative',
+              cursor: 'pointer',
+            }}
+          >
+            <div style={{
+              height: '100%',
+              width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`,
+              backgroundColor: '#f59e0b',
+              borderRadius: '2px',
+              transition: 'width 0.1s linear',
+            }} />
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', fontFamily: 'monospace', letterSpacing: '0.02em' }}>
+            <span>{fmt(currentTime)}</span>
+            <span>{duration > 0 ? fmt(duration) : '0:00'}</span>
+          </div>
+        </div>
       </div>
 
       <ListenersBadgeSingle
@@ -218,7 +304,6 @@ export default function Sammelanam() {
       <style jsx global>{`
         @media (max-width: 768px) {
           .immersive-title { font-size: 2.1rem !important; }
-          .sammelanam-badge { font-size: 1.1rem !important; }
           .btn-label { font-size: 0.7rem !important; }
         }
       `}</style>
