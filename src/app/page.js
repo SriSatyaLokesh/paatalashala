@@ -92,6 +92,16 @@ const IconStars = () => (
     <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
   </svg>
 );
+const IconDice = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="3"/>
+    <circle cx="8" cy="8" r="1.1" fill="currentColor" stroke="none"/>
+    <circle cx="16" cy="8" r="1.1" fill="currentColor" stroke="none"/>
+    <circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none"/>
+    <circle cx="8" cy="16" r="1.1" fill="currentColor" stroke="none"/>
+    <circle cx="16" cy="16" r="1.1" fill="currentColor" stroke="none"/>
+  </svg>
+);
 
 const ICONS = {
   'tractor-anna': IconTractor,
@@ -101,6 +111,7 @@ const ICONS = {
   'ammama': IconRadio,
   'thathayya': IconTape,
   'vennallo': IconStars,
+  'sammelanam': IconDice,
   'palle-velugu': IconBusLocal,
   'trip-bus': IconVanTrip,
 };
@@ -112,6 +123,7 @@ const TELUGU_NAMES = {
   'thathayya': 'తాతయ్య టేప్ రికార్డర్',
   'ammama': 'అమ్మమ్మ రేడియో',
   'vennallo': 'మేడ మీద వెన్నెల్లో',
+  'sammelanam': 'సమ్మేళనం',
 };
 
 const CARD_BG = {
@@ -121,6 +133,7 @@ const CARD_BG = {
   'thathayya': '/images/tape_recorder_background.webp',
   'ammama': '/images/grandma_1.webp',
   'vennallo': '/images/vennela_1.webp',
+  'sammelanam': '/images/vennela_2.webp',
 };
 
 export default function Home() {

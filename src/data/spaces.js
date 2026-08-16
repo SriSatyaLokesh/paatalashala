@@ -70,6 +70,16 @@ export const SPACES = [
     description: "Soothing breeze on the terrace, kids looking at the starry sky with the moon, and cozy Telugu melodies in a calm village setup.",
   },
   {
+    id: "sammelanam",
+    slug: "sammelanam",
+    name: "సమ్మేళనం",
+    tagline: "ప్రతి పాటకూ ఓ కొత్త ప్రపంచం",
+    emoji: "🔀",
+    active: true,
+    theme: "violet",
+    description: "Every song arrives from a different space — the tractor field, the saloon chair, the night terrace — each one bringing its own colors and mood along with it.",
+  },
+  {
     id: "palle-velugu",
     slug: "palle-velugu",
     name: "Palle Velugu Bus",
