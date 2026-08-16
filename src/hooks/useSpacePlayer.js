@@ -167,14 +167,81 @@ export function useSpacePlayer(placeSongs, config) {
   const bgTransitionMs = resolvedBackground?.transitionMs ?? 1800;
   useEffect(() => {
     if (!bgUrl || !started) return;
-    document.body.style.transition = `background ${bgTransitionMs / 1000}s ease`;
-    document.body.style.backgroundImage = bgUrl;
-    document.body.style.backgroundSize = 'cover';
-    document.body.style.backgroundPosition = bgPosition;
-    document.body.style.backgroundRepeat = 'no-repeat';
-    document.body.style.backgroundAttachment = 'fixed';
-    return () => { document.body.style.background = ''; };
+
+    // Create or retrieve the container for background layers
+    let container = document.getElementById('space-bg-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'space-bg-container';
+      container.style.position = 'fixed';
+      container.style.inset = '0';
+      container.style.zIndex = '-1';
+      container.style.overflow = 'hidden';
+      container.style.pointerEvents = 'none';
+      container.style.backgroundColor = '#000';
+      document.body.appendChild(container);
+    }
+    
+    // Clear body background color to ensure container is visible
+    document.body.style.backgroundColor = 'transparent';
+
+    // Get or create the two layers
+    let layer1 = document.getElementById('space-bg-layer-1');
+    let layer2 = document.getElementById('space-bg-layer-2');
+
+    if (!layer1) {
+      layer1 = document.createElement('div');
+      layer1.id = 'space-bg-layer-1';
+      layer1.style.position = 'absolute';
+      layer1.style.inset = '0';
+      layer1.style.backgroundSize = 'cover';
+      layer1.style.backgroundRepeat = 'no-repeat';
+      layer1.style.transition = 'opacity 0.8s ease-in-out';
+      layer1.style.opacity = '0';
+      container.appendChild(layer1);
+    }
+
+    if (!layer2) {
+      layer2 = document.createElement('div');
+      layer2.id = 'space-bg-layer-2';
+      layer2.style.position = 'absolute';
+      layer2.style.inset = '0';
+      layer2.style.backgroundSize = 'cover';
+      layer2.style.backgroundRepeat = 'no-repeat';
+      layer2.style.transition = 'opacity 0.8s ease-in-out';
+      layer2.style.opacity = '0';
+      container.appendChild(layer2);
+    }
+
+    // Determine active and next layers
+    const isLayer1Active = layer1.style.opacity === '1';
+    const activeLayer = isLayer1Active ? layer1 : layer2;
+    const nextLayer = isLayer1Active ? layer2 : layer1;
+
+    // Setup transition durations
+    const duration = `${bgTransitionMs / 1000}s`;
+    nextLayer.style.transition = `opacity ${duration} ease-in-out`;
+    activeLayer.style.transition = `opacity ${duration} ease-in-out`;
+
+    // Apply background properties to next layer
+    nextLayer.style.backgroundImage = bgUrl;
+    nextLayer.style.backgroundPosition = bgPosition;
+
+    // Trigger crossfade
+    nextLayer.style.opacity = '1';
+    activeLayer.style.opacity = '0';
   }, [currentSongIndex, started, bgUrl, bgPosition, bgTransitionMs]);
+
+  // Clean up background container on unmount
+  useEffect(() => {
+    return () => {
+      const container = document.getElementById('space-bg-container');
+      if (container) {
+        container.remove();
+      }
+      document.body.style.backgroundColor = '';
+    };
+  }, []);
 
   // === Auto-unlock playback on first click anywhere ===
   // autoUnlockRequiresPlaying: auto's original unlock only calls playVideo()

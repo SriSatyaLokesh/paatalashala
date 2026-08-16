@@ -72,7 +72,7 @@ export const SPACES = [
   {
     id: "sammelanam",
     slug: "sammelanam",
-    name: "సమ్మేళనం",
+    name: "Surprise Me",
     tagline: "ప్రతి పాటకూ ఓ కొత్త ప్రపంచం",
     emoji: "🔀",
     active: true,
