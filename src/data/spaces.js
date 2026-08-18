@@ -80,8 +80,8 @@ export const SPACES = [
     description: "Every song arrives from a different space — the tractor field, the saloon chair, the night terrace — each one bringing its own colors and mood along with it.",
   },
   {
-    id: "camp-fire",
-    slug: "camp-fire",
+    id: "campfire-jamming",
+    slug: "campfire-jamming",
     name: "Campfire Jamming",
     tagline: "క్యాంప్ ఫైర్ వెలుగులో మధురమైన రాత్రి గీతాలు",
     emoji: "🔥",

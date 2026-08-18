@@ -115,7 +115,7 @@ const ICONS = {
   'thathayya': IconTape,
   'vennallo': IconStars,
   'sammelanam': IconSparkles,
-  'camp-fire': IconFlame,
+  'campfire-jamming': IconFlame,
   'palle-velugu': IconBusLocal,
   'trip-bus': IconVanTrip,
 };
@@ -128,7 +128,7 @@ const TELUGU_NAMES = {
   'ammama': 'అమ్మమ్మ రేడియో',
   'vennallo': 'మేడ మీద వెన్నెల్లో',
   'sammelanam': 'Surprise Me',
-  'camp-fire': 'క్యాంప్ ఫైర్ జామ్మింగ్',
+  'campfire-jamming': 'క్యాంప్ ఫైర్ జామ్మింగ్',
 };
 
 const CARD_BG = {
@@ -139,7 +139,7 @@ const CARD_BG = {
   'ammama': '/images/grandma_1.webp',
   'vennallo': '/images/vennela_1.webp',
   'sammelanam': '/images/vennela_2.webp',
-  'camp-fire': '/images/campfire.png',
+  'campfire-jamming': '/images/campfire.png',
 };
 
 const PRESENCE_SIM_CONFIG = {
@@ -150,7 +150,7 @@ const PRESENCE_SIM_CONFIG = {
   'thathayya': { base: 35, sineAmp: 3, cosAmp: 1 },
   'vennallo': { base: 52, sineAmp: 5, cosAmp: 2 },
   'sammelanam': { base: 60, sineAmp: 6, cosAmp: 3 },
-  'camp-fire': { base: 48, sineAmp: 6, cosAmp: 3 },
+  'campfire-jamming': { base: 48, sineAmp: 6, cosAmp: 3 },
 };
 
 export default function Home() {
