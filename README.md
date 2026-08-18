@@ -34,19 +34,64 @@ Paatalashala is an immersive, interactive audio web application designed to trig
 * **Vibe:** Traditional village kitchen cooking vibes.
 * **Atmosphere:** Gentle morning birds, warm kitchen mist fog + dust particle effects, and classic maternal lullaby lyrics displayed above the player.
 * **Music:** Beautiful vintage tracks and maternal melodies by S. Janaki, Susheela, and Koti.
-* **Dynamic Visuals:** Cycles through three custom village kitchen background pictures on song changes.
+* **Dynamic Visuals:** Cycles through custom village kitchen background pictures on song changes.
+
+### 6. 🌙 Meda Meeda Vennallo (మేడ మీద వెన్నెల్లో)
+* **Vibe:** Soothing terrace night breeze and stargazing under the moonlit sky.
+* **Atmosphere:** Deep cosmic night sky, shooting stars, warm terrace lighting, and serene ambient breeze.
+* **Music:** Gentle, nocturnal Telugu melodies and soul-soothing acoustics.
+
+### 7. 🔀 Sammelanam / Surprise Me (సమ్మేళనం)
+* **Vibe:** Dynamic cross-space journey and infinite surprise discoveries.
+* **Atmosphere:** Adaptive ambiance that transitions fluidly across farms, retro verandas, night terraces, and city roads.
+* **Music:** Curated cross-genre Telugu songs pulling live from all unique spaces.
+
+---
+
+## 🎶 Song Catalog & Modular Splitting
+
+To ensure optimal web performance and minimal bundle sizes, song catalogs are code-split per space:
+
+* **Source of Truth (`src/data/songs.json`):** Master catalog containing metadata for all songs.
+* **Split Catalogs (`src/data/songs/<space>.json`):** Individual per-space JSON files imported directly by each space page component to prevent shipping unnecessary catalog weight to visitors.
+
+### Song Entry Schema
+```json
+{
+  "id": "saloon-1",
+  "place": "saloon",
+  "title": "Chinnadhana",
+  "artist": "Haricharan",
+  "movie": "Ishq",
+  "year": "2012",
+  "genre": "Melody",
+  "mood": "Romantic",
+  "active": true,
+  "sequence": 1,
+  "youtubeVideoId": "dQw4w9WgXcQ",
+  "ambience": {
+    "background": "/images/saloon_background.webp"
+  }
+}
+```
+
+### Regenerating Per-Space Catalogs
+After modifying `src/data/songs.json`, run the split script to synchronize the per-space song files:
+```bash
+npm run split-songs
+```
 
 ---
 
 ## 🚀 Key Features
 
 * **🎛️ Multi-Channel Ambient Mixer:** Adjust the volume of the ambient soundscapes (e.g. tractor hum, street traffic, wind) independently of the main music track.
-* **👥 Optional Real-Time Listener Counter:** Displays the exact count of active, concurrent listeners on each page using **Supabase Presence**. If no database configuration keys are provided, the system automatically falls back to clean, realistic simulated counters.
-* **🩹 Self-Healing Playlist Loop:** When the client player catches a blocked/restricted embedding error (YouTube Error `150` or `101`), it calls the Next.js API route `/api/delete-song` to automatically and permanently purge the unplayable track from `songs.json` in real-time, then seamlessly skips to the next track.
-* **🌪️ Concurrent Weather Particle Systems:** The upgraded Canvas weather engine in `AmbientWeather` supports displaying multiple particle systems at once, rendering both glowing upward-drifting dust motes and soft kitchen mist/fog concurrently.
-* **⚡ Smooth Cross-Fade Transitions:** Implements the Double Background Layer Pattern to fade viewports seamlessly when changing songs, eliminating abrupt image resizing.
-* **🎛️ Rich Page-Level SEO:** Each space utilizes static Server Component layouts to inject tailored, highly descriptive metadata, titles, canonical tags, and OpenGraph schemas for optimal search engine indexing.
-* **📱 Responsive HUD Canopy:** Designed to resemble actual vehicle windshield sticker frames and dashboard audio decks. Full mobile optimization with specialized swipe/tap HUD actions.
+* **👥 Real-Time & Simulated Listener Counter:** Displays active concurrent listener counts using **Supabase Presence** or authentic simulated sinusoidal traffic generators.
+* **🩹 Self-Healing Playlist Loop:** When the client player catches a blocked/restricted embedding error (YouTube Error `150` or `101`), it calls the Next.js API route `/api/delete-song` to automatically purge the unplayable track from `songs.json` in real-time, then seamlessly skips to the next track.
+* **🌪️ Concurrent Weather Particle Systems:** Upgraded Canvas weather engine in `AmbientWeather` supporting glowing upward-drifting dust motes and soft kitchen mist/fog concurrently.
+* **⚡ Smooth Cross-Fade Transitions:** Double Background Layer Pattern to fade viewports seamlessly when changing songs, eliminating abrupt image resizing.
+* **🎛️ Rich Page-Level SEO:** Static Server Component layouts injecting tailored metadata, titles, canonical tags, and OpenGraph/FAQ schemas.
+* **📱 Responsive HUD Canopy:** Designed to resemble actual vehicle windshield sticker frames and dashboard audio decks with full mobile optimization.
 
 ---
 
@@ -94,20 +139,27 @@ paatalashala/
 ├── public/                 # Static assets
 │   ├── audio/              # Ambient loops and custom horns
 │   └── images/             # Sprite components and city/farm backdrops
+├── scripts/
+│   └── split-songs.js      # Utility to split songs.json into per-space JSON files
 ├── src/
 │   ├── app/                # Next.js App Router pages
 │   │   ├── api/            # API endpoints (Self-healing playlist route)
 │   │   │   └── delete-song/
-│   │   ├── spaces/         # Location page components
-│   │   │   ├── ammama/     # Ammama Radio space
-│   │   │   ├── auto/       # Auto Janie space
-│   │   │   ├── saloon/     # Royal Saloon space
-│   │   │   ├── thathayya/  # Thathayya Tape Recorder space
-│   │   │   └── tractor-anna/
+│   │   ├── spaces/         # Individual location space components
+│   │   │   ├── ammama/     # Ammama Radio
+│   │   │   ├── auto/       # Auto Janie
+│   │   │   ├── saloon/     # Royal Saloon
+│   │   │   ├── sammelanam/ # Sammelanam (Surprise Me)
+│   │   │   ├── thathayya/  # Thathayya Tape Recorder
+│   │   │   ├── tractor-anna/
+│   │   │   └── vennallo/   # Meda Meeda Vennallo
 │   │   ├── page.js         # Main landing dashboard
 │   │   └── layout.js       # Root layout with WebApp and FAQ schemas
-│   ├── components/         # Shared modules (YouTube Player, AmbientWeather)
-│   ├── data/               # Static spaces and song metadata
+│   ├── components/         # Shared modules (PlayerCapsule, YouTube Player, AmbientWeather)
+│   ├── data/
+│   │   ├── songs/          # Code-split per-space songs JSON files
+│   │   ├── songs.json      # Master song catalog
+│   │   └── spaces.js       # Space definitions and metadata
 │   └── utils/              # Path helpers & Supabase client wrapper
 └── .env.local              # Local environment credentials (git-ignored)
 ```
