@@ -261,7 +261,7 @@ export const SPACE_THEMES = {
   },
 
   'gundamma-gramophone': {
-    titleText: 'గుండమ్మ గ్రామ్‌ఫోన్',
+    titleText: 'గుండమ్మ గారి గ్రామ్‌ఫోన్',
     titleFontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif",
     weather: 'fog', particles: 'dust',
     capsuleTheme: {
@@ -271,7 +271,7 @@ export const SPACE_THEMES = {
       vinylSize: 48, vinylBorder: '3px solid #451a03',
       vinylRingShadow: '0 0 0 2px rgba(245, 158, 11, 0.3), 0 8px 16px rgba(0,0,0,0.7)',
       vinylBg: '#000', spindleBg: '#1c1917',
-      artAlt: 'Track Art', fallbackEmoji: '🎷', fallbackTitle: 'గుండమ్మ గ్రామ్‌ఫోన్ గీతాలు',
+      artAlt: 'Track Art', fallbackEmoji: '🎷', fallbackTitle: 'గుండమ్మ గారి గ్రామ్‌ఫోన్ గీతాలు',
       titleFontSize: '1.05rem', secondaryColor: '#fde68a',
       subtitleFallback: '70s & 80s Golden Telugu Classics',
       subtitleFormat: (movie, year) => `${movie} • ${year}`,

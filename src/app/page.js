@@ -136,7 +136,7 @@ const TELUGU_NAMES = {
   'thathayya': 'తాతయ్య టేప్ రికార్డర్',
   'ammama': 'అమ్మమ్మ రేడియో',
   'vennallo': 'మేడ మీద వెన్నెల్లో',
-  'gundamma-gramophone': 'గుండమ్మ గ్రామ్‌ఫోన్',
+  'gundamma-gramophone': 'గుండమ్మ గారి గ్రామ్‌ఫోన్',
   'sammelanam': 'Surprise Me',
   'campfire-jamming': 'క్యాంప్ ఫైర్ జామ్మింగ్',
 };

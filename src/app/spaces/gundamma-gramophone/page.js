@@ -60,7 +60,7 @@ const CAPSULE_THEME = {
   vinylSize: 48, vinylBorder: '3px solid #451a03',
   vinylRingShadow: '0 0 0 2px rgba(245, 158, 11, 0.3), 0 8px 16px rgba(0,0,0,0.7)',
   vinylBg: '#000', spindleBg: '#1c1917',
-  artAlt: 'Track Art', fallbackEmoji: '🎷', fallbackTitle: 'గుండమ్మ గ్రామ్‌ఫోన్ గీతాలు',
+  artAlt: 'Track Art', fallbackEmoji: '🎷', fallbackTitle: 'గుండమ్మ గారి గ్రామ్‌ఫోన్ గీతాలు',
   titleFontSize: '1.05rem', secondaryColor: '#fde68a',
   subtitleFallback: '70s & 80s Golden Telugu Classics',
   subtitleFormat: (movie, year) => `${movie} • ${year}`,
@@ -145,7 +145,7 @@ export default function GundammaGramophone() {
 
       <div style={{ position: 'absolute', top: '12vh', left: 0, right: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', userSelect: 'none', padding: '0 24px', zIndex: 5 }} className="immersive-title-container">
         <h2 style={{ fontSize: '4.8rem', fontWeight: '900', letterSpacing: '0.04em', color: '#fff', margin: 0, textShadow: '0 2px 8px rgba(0,0,0,0.75)', fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif", textAlign: 'center' }} className="immersive-title">
-          గుండమ్మ గ్రామ్‌ఫోన్
+          గుండమ్మ గారి గ్రామ్‌ఫోన్
         </h2>
       </div>
 

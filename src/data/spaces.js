@@ -72,7 +72,7 @@ export const SPACES = [
   {
     id: "gundamma-gramophone",
     slug: "gundamma-gramophone",
-    name: "Gundamma Gramophone",
+    name: "Gundamma Gari Gramophone",
     tagline: "70ల మరియు 80ల మధురమైన పాత తరాల క్లాసిక్స్",
     emoji: "🎷",
     active: true,
