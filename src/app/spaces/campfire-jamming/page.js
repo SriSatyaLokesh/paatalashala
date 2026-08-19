@@ -66,19 +66,19 @@ export default function CampFireMelodies() {
         <ParallaxStars />
         <ThreeCampfireBackground isPlaying={isPlaying} />
         
-        {/* Camping Tent Layered next to Campfire */}
+        {/* Camping Tent Layered on Right Side of Campfire */}
         <div
           className="campfire-tent-container"
           style={{
             position: 'absolute',
             bottom: '12vh',
-            left: 'calc(50% - 460px)',
+            right: 'calc(50% - 480px)',
             width: '380px',
             pointerEvents: 'none',
             zIndex: 1,
             transition: 'transform 0.5s ease, filter 0.5s ease',
             filter: isPlaying
-              ? 'drop-shadow(0 10px 25px rgba(0,0,0,0.85)) drop-shadow(15px -5px 35px rgba(255, 152, 0, 0.35)) brightness(0.92)'
+              ? 'drop-shadow(0 10px 25px rgba(0,0,0,0.85)) drop-shadow(-15px -5px 35px rgba(255, 152, 0, 0.35)) brightness(0.92)'
               : 'drop-shadow(0 10px 25px rgba(0,0,0,0.9)) brightness(0.65)',
           }}
         >
@@ -91,6 +91,7 @@ export default function CampFireMelodies() {
               display: 'block',
               objectFit: 'contain',
               userSelect: 'none',
+              transform: 'scaleX(-1)', // Mirrored to face inward towards campfire
             }}
           />
         </div>
@@ -187,16 +188,18 @@ export default function CampFireMelodies() {
       <style jsx global>{`
         @media (max-width: 1024px) {
           .campfire-tent-container {
-            width: 280px !important;
-            left: 20px !important;
-            bottom: 15vh !important;
+            width: 270px !important;
+            right: 15px !important;
+            left: auto !important;
+            bottom: 14vh !important;
           }
         }
         @media (max-width: 768px) {
           .campfire-title { font-size: 2.2rem !important; }
           .campfire-tent-container {
             width: 180px !important;
-            left: 10px !important;
+            right: 10px !important;
+            left: auto !important;
             bottom: 18vh !important;
             opacity: 0.85 !important;
           }
