@@ -13,6 +13,7 @@ import saloonSongs from '@/data/songs/saloon.json';
 import ammamaSongs from '@/data/songs/ammama.json';
 import thathayyaSongs from '@/data/songs/thathayya.json';
 import vennalloSongs from '@/data/songs/vennallo.json';
+import campfireSongs from '@/data/songs/campfire-jamming.json';
 
 // __localIndex = this song's index within its own space's active+sorted list
 // (i.e. exactly what currentSongIndex would be on that song's home page).
@@ -29,6 +30,7 @@ export const ALL_SONGS = [
   ...withLocalIndex(ammamaSongs),
   ...withLocalIndex(thathayyaSongs),
   ...withLocalIndex(vennalloSongs),
+  ...withLocalIndex(campfireSongs),
 ];
 
 const stripEmoji = (s) => s.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim();
@@ -255,6 +257,35 @@ export const SPACE_THEMES = {
     getBackground: (song) => ({
       url: prefixPath(`url('${VENNELA_BG_IMAGES[song.__localIndex % VENNELA_BG_IMAGES.length]}')`),
       position: 'center 40%', transitionMs: 2000,
+    }),
+    getQuote: () => null,
+  },
+  'campfire-jamming': {
+    titleText: 'క్యాంప్ ఫైర్ జామ్మింగ్',
+    titleFontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif",
+    weather: 'clear', particles: 'stars',
+    capsuleTheme: {
+      accentText: '#ff9800', accentRgb: '255, 152, 0',
+      glassBg: 'rgba(15, 12, 10, 0.85)', glassBorder: 'rgba(255, 152, 0, 0.3)',
+      glassShadow: '0 25px 60px -15px rgba(0,0,0,0.95), inset 0 1px 1px rgba(255,255,255,0.15)',
+      vinylSize: 48, vinylBorder: '3px solid #3e1b00',
+      vinylRingShadow: '0 0 0 2px rgba(255, 152, 0, 0.4), 0 8px 16px rgba(0,0,0,0.8)',
+      vinylBg: '#000', spindleBg: '#1a0c00',
+      artAlt: 'Track Art', fallbackEmoji: '🔥', fallbackTitle: 'క్యాంప్ ఫైర్ జామ్మింగ్',
+      titleFontSize: '1.05rem', secondaryColor: '#ffcc80',
+      subtitleFallback: 'Campfire Jamming Hits',
+      subtitleFormat: (movie, year) => `${movie} • ${year}`,
+      prevNextColor: 'rgba(255,255,255,0.9)', prevTitle: 'Previous Track', nextTitle: 'Next Track',
+      dividerColor: 'rgba(255,255,255,0.15)',
+      playIconColor: '#2b1000', playShadow: '0 4px 18px rgba(255, 152, 0, 0.6)',
+      restoreVolume: 50, volumeTrackBg: 'rgba(255,255,255,0.2)', volumeWidth: 65,
+      seekTrackBg: 'rgba(255, 255, 255, 0.2)', seekFillShadow: '0 0 12px rgba(255, 152, 0, 0.9)',
+      showSeekThumb: false, showControlIconHoverClass: false,
+    },
+    ambientAudio: { src: '/audio/night_sky_ambience.mp3', volume: 0.10, gate: 'none' },
+    getBackground: () => ({
+      url: prefixPath("url('/images/vennela_1.webp')"),
+      position: 'center', transitionMs: 2000,
     }),
     getQuote: () => null,
   },

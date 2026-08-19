@@ -100,6 +100,12 @@ const IconSparkles = () => (
   </svg>
 );
 
+const IconFlame = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"/>
+  </svg>
+);
+
 const ICONS = {
   'tractor-anna': IconTractor,
   'saloon': IconScissors,
@@ -109,6 +115,7 @@ const ICONS = {
   'thathayya': IconTape,
   'vennallo': IconStars,
   'sammelanam': IconSparkles,
+  'campfire-jamming': IconFlame,
   'palle-velugu': IconBusLocal,
   'trip-bus': IconVanTrip,
 };
@@ -121,6 +128,7 @@ const TELUGU_NAMES = {
   'ammama': 'అమ్మమ్మ రేడియో',
   'vennallo': 'మేడ మీద వెన్నెల్లో',
   'sammelanam': 'Surprise Me',
+  'campfire-jamming': 'క్యాంప్ ఫైర్ జామ్మింగ్',
 };
 
 const CARD_BG = {
@@ -131,6 +139,7 @@ const CARD_BG = {
   'ammama': '/images/grandma_1.webp',
   'vennallo': '/images/vennela_1.webp',
   'sammelanam': '/images/vennela_2.webp',
+  'campfire-jamming': '/images/campfire.png',
 };
 
 const PRESENCE_SIM_CONFIG = {
@@ -141,6 +150,7 @@ const PRESENCE_SIM_CONFIG = {
   'thathayya': { base: 35, sineAmp: 3, cosAmp: 1 },
   'vennallo': { base: 52, sineAmp: 5, cosAmp: 2 },
   'sammelanam': { base: 60, sineAmp: 6, cosAmp: 3 },
+  'campfire-jamming': { base: 48, sineAmp: 6, cosAmp: 3 },
 };
 
 export default function Home() {

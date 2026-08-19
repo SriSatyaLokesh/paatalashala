@@ -80,6 +80,16 @@ export const SPACES = [
     description: "Every song arrives from a different space — the tractor field, the saloon chair, the night terrace — each one bringing its own colors and mood along with it.",
   },
   {
+    id: "campfire-jamming",
+    slug: "campfire-jamming",
+    name: "Campfire Jamming",
+    tagline: "క్యాంప్ ఫైర్ వెలుగులో మధురమైన రాత్రి గీతాలు",
+    emoji: "🔥",
+    active: true,
+    theme: "amber",
+    description: "Crackling campfire visualizer, starry wilderness sky, and cozy acoustic Telugu melodies.",
+  },
+  {
     id: "palle-velugu",
     slug: "palle-velugu",
     name: "Palle Velugu Bus",
