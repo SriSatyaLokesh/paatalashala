@@ -115,7 +115,22 @@ export default function CampFireMelodies() {
       </div>
 
       {/* Immersive Space Title */}
-      <div style={{ position: 'fixed', top: '9vh', left: 0, right: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', userSelect: 'none', padding: '0 24px', zIndex: 10 }}>
+      <div
+        className="campfire-title-container"
+        style={{
+          position: 'fixed',
+          top: '9vh',
+          left: 0,
+          right: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          pointerEvents: 'none',
+          userSelect: 'none',
+          padding: '0 24px',
+          zIndex: 10,
+        }}
+      >
         <h2 style={{ fontSize: '4.2rem', fontWeight: '900', letterSpacing: '0.04em', color: '#fff', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.9), 0 0 35px rgba(245, 158, 11, 0.45)', fontFamily: "'Akaya Telivigala', 'Gurajada', serif", textAlign: 'center' }} className="campfire-title">
           క్యాంప్ ఫైర్ జామ్మింగ్
         </h2>
@@ -187,6 +202,9 @@ export default function CampFireMelodies() {
 
       <style jsx global>{`
         @media (max-width: 1024px) {
+          .campfire-title-container {
+            top: 11vh !important;
+          }
           .campfire-tent-container {
             width: 270px !important;
             right: 15px !important;
@@ -195,10 +213,17 @@ export default function CampFireMelodies() {
           }
         }
         @media (max-width: 768px) {
-          .campfire-title { font-size: 2.2rem !important; }
+          .campfire-title-container {
+            top: 76px !important;
+            padding: 0 16px !important;
+          }
+          .campfire-title {
+            font-size: 2.1rem !important;
+            line-height: 1.2 !important;
+          }
           .campfire-tent-container {
-            width: 180px !important;
-            right: 10px !important;
+            width: 170px !important;
+            right: 8px !important;
             left: auto !important;
             bottom: 24vh !important;
             opacity: 0.85 !important;

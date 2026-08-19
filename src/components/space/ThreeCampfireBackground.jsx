@@ -78,16 +78,16 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       torchTarget.position.set(0, -2.85, 4);
       scene.add(torchTarget);
 
-      // Flashlight spotlight originating from camera and aimed at mouse cursor position
-      torchSpotLight = new THREE.SpotLight(0xffecd0, 16, 45, Math.PI / 7, 0.5, 1);
+      // Flashlight spotlight with broad lantern spread cone aimed at cursor ground position
+      torchSpotLight = new THREE.SpotLight(0xffecd0, 22, 60, Math.PI / 3.8, 0.7, 1);
       torchSpotLight.castShadow = true;
       torchSpotLight.shadow.mapSize.width = 1024;
       torchSpotLight.shadow.mapSize.height = 1024;
       torchSpotLight.target = torchTarget;
       scene.add(torchSpotLight);
 
-      // Soft ambient point light following cursor position
-      torchPointLight = new THREE.PointLight(0xffa555, 3.0, 9, 2);
+      // Wide ambient point light following cursor position with larger surface spread
+      torchPointLight = new THREE.PointLight(0xffa555, 5.0, 18, 1.6);
       scene.add(torchPointLight);
     }
 
