@@ -135,11 +135,10 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       ground.receiveShadow = true;
       campfireGroup.add(ground);
 
-      // Natural angular mountain peaks with sharp rocky slopes and softly rounded tips
+      // Authentic angular alpine mountain peaks tapering to natural sharp rocky summits
       function createSharpMountainWithRoundedTip(baseRadius, height, color) {
-        // Truncated cone / faceted cylinder with small top radius (0.8 - 1.2) for a rounded apex
-        const topRadius = baseRadius * 0.14;
-        const geo = new THREE.CylinderGeometry(topRadius, baseRadius, height, 7, 3);
+        // Natural 7-sided faceted alpine cone with sharp pointed peak
+        const geo = new THREE.ConeGeometry(baseRadius, height, 7, 2);
         const mat = new THREE.MeshStandardMaterial({
           color: color,
           roughness: 0.88,
