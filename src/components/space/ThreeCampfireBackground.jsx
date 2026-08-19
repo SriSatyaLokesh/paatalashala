@@ -135,18 +135,32 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       ground.receiveShadow = true;
       campfireGroup.add(ground);
 
-      // Authentic angular alpine mountain peaks tapering to natural sharp rocky summits
-      function createSharpMountainWithRoundedTip(baseRadius, height, color) {
-        // Natural 7-sided faceted alpine cone with sharp pointed peak
-        const geo = new THREE.ConeGeometry(baseRadius, height, 7, 2);
+      // Natural faceted mountains with steep triangular slopes and soft, randomly rounded summit apex caps
+      function createSharpMountainWithRoundedTip(baseRadius, height, color, roundness = 0.08) {
+        const group = new THREE.Group();
+
+        // 1. Angular faceted triangular mountain cone body
+        const coneHeight = height * (1 - roundness * 0.5);
+        const coneGeo = new THREE.ConeGeometry(baseRadius, coneHeight, 7, 2);
         const mat = new THREE.MeshStandardMaterial({
           color: color,
           roughness: 0.88,
           flatShading: true,
         });
-        const mesh = new THREE.Mesh(geo, mat);
-        mesh.position.y = -2.8 + height / 2;
-        return mesh;
+        const coneMesh = new THREE.Mesh(coneGeo, mat);
+        coneMesh.position.y = coneHeight / 2;
+        group.add(coneMesh);
+
+        // 2. Soft, randomly-curved dome cap at the very apex of the triangle
+        const domeRadius = baseRadius * roundness;
+        const domeGeo = new THREE.SphereGeometry(domeRadius, 12, 8, 0, Math.PI * 2, 0, Math.PI / 2);
+        const domeMesh = new THREE.Mesh(domeGeo, mat);
+        domeMesh.position.y = coneHeight - (domeRadius * 0.25);
+        domeMesh.scale.set(1.1, 0.8, 1.1);
+        group.add(domeMesh);
+
+        group.position.y = -2.8;
+        return group;
       }
 
       // Full 360-degree mountain perimeter ring around campsite with varied sizes & star visibility valleys
@@ -163,7 +177,9 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         const baseRadius = isFar ? (9.5 + Math.sin(i * 1.5) * 2.0) : (7.5 + Math.cos(i * 2.1) * 1.5);
         const color = isFar ? 0x152236 : 0x0f1826;
 
-        const mesh = createSharpMountainWithRoundedTip(baseRadius, height, color);
+        const roundness = 0.05 + Math.abs(Math.sin(i * 3.7)) * 0.07; // Natural random subtle curve on peak tip
+
+        const mesh = createSharpMountainWithRoundedTip(baseRadius, height, color, roundness);
         mesh.position.x = Math.cos(angle) * radius;
         mesh.position.z = Math.sin(angle) * radius;
         mesh.rotation.y = (i * 1.3) % (Math.PI * 2);
