@@ -60,16 +60,6 @@ export const SPACES = [
     description: "Veranda chair, hot cup of tea, and old Telugu melodies drifting from the tape recorder cassette player.",
   },
   {
-    id: "vennallo",
-    slug: "vennallo",
-    name: "మేడ మీద వెన్నెల్లో",
-    tagline: "Terrace midnight breeze & stars",
-    emoji: "🌌",
-    active: true,
-    theme: "indigo",
-    description: "Soothing breeze on the terrace, kids looking at the starry sky with the moon, and cozy Telugu melodies in a calm village setup.",
-  },
-  {
     id: "gundamma-gramophone",
     slug: "gundamma-gramophone",
     name: "Gundamma Gari Gramophone",
@@ -78,6 +68,16 @@ export const SPACES = [
     active: true,
     theme: "amber",
     description: "Golden 70s and 80s Telugu evergreen golden melodies spinning on a vintage brass gramophone horn in a classic retro courtyard.",
+  },
+  {
+    id: "vennallo",
+    slug: "vennallo",
+    name: "మేడ మీద వెన్నెల్లో",
+    tagline: "Terrace midnight breeze & stars",
+    emoji: "🌌",
+    active: true,
+    theme: "indigo",
+    description: "Soothing breeze on the terrace, kids looking at the starry sky with the moon, and cozy Telugu melodies in a calm village setup.",
   },
   {
     id: "sammelanam",
