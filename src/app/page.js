@@ -500,7 +500,15 @@ export default function Home() {
         @media (max-width: 680px) {
           .surprise-me-desc { display: none; }
           .surprise-me-button { height: 56px; }
-          .surprise-me-title { font-size: 1.05rem; }
+          .surprise-me-content { padding: 0 16px; }
+          .surprise-me-left { gap: 12px; }
+          .surprise-me-title {
+            font-size: 1.1rem;
+            white-space: nowrap;
+          }
+          .surprise-enter-text { display: none; }
+          .surprise-me-right .card-enter { gap: 0; }
+          .surprise-me-right .live-badge { margin-right: 10px !important; }
         }
 
         .featured-card {
@@ -971,7 +979,7 @@ export default function Home() {
                   </div>
                 )}
                 <div className="card-enter" style={{ marginTop: 0 }}>
-                  <span>Enter</span>
+                  <span className="surprise-enter-text">Enter</span>
                   <IconArrow />
                 </div>
               </div>
