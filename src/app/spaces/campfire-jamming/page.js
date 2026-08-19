@@ -222,11 +222,7 @@ export default function CampFireMelodies() {
             line-height: 1.2 !important;
           }
           .campfire-tent-container {
-            width: 210px !important;
-            right: 8px !important;
-            left: auto !important;
-            bottom: 27vh !important;
-            opacity: 0.88 !important;
+            display: none !important;
           }
         }
       `}</style>
