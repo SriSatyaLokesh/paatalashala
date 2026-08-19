@@ -65,7 +65,37 @@ export default function CampFireMelodies() {
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
         <ParallaxStars />
         <ThreeCampfireBackground isPlaying={isPlaying} />
-        <RadialVignette innerColor="rgba(15, 23, 42, 0.10)" outerColor="rgba(5, 7, 12, 0.65)" />
+        
+        {/* Camping Tent Layered next to Campfire */}
+        <div
+          className="campfire-tent-container"
+          style={{
+            position: 'absolute',
+            bottom: '12vh',
+            left: 'calc(50% - 460px)',
+            width: '380px',
+            pointerEvents: 'none',
+            zIndex: 1,
+            transition: 'transform 0.5s ease, filter 0.5s ease',
+            filter: isPlaying
+              ? 'drop-shadow(0 10px 25px rgba(0,0,0,0.85)) drop-shadow(15px -5px 35px rgba(255, 152, 0, 0.35)) brightness(0.92)'
+              : 'drop-shadow(0 10px 25px rgba(0,0,0,0.9)) brightness(0.65)',
+          }}
+        >
+          <img
+            src="/images/camping_tent.png"
+            alt="Camping Tent"
+            style={{
+              width: '100%',
+              height: 'auto',
+              display: 'block',
+              objectFit: 'contain',
+              userSelect: 'none',
+            }}
+          />
+        </div>
+
+        <RadialVignette innerColor="rgba(15, 23, 42, 0.08)" outerColor="rgba(5, 7, 12, 0.65)" />
       </div>
 
       {/* Top Header HUD */}
@@ -155,8 +185,21 @@ export default function CampFireMelodies() {
       </div>
 
       <style jsx global>{`
+        @media (max-width: 1024px) {
+          .campfire-tent-container {
+            width: 280px !important;
+            left: 20px !important;
+            bottom: 15vh !important;
+          }
+        }
         @media (max-width: 768px) {
           .campfire-title { font-size: 2.2rem !important; }
+          .campfire-tent-container {
+            width: 180px !important;
+            left: 10px !important;
+            bottom: 18vh !important;
+            opacity: 0.85 !important;
+          }
         }
       `}</style>
     </div>
