@@ -91,7 +91,6 @@ export default function CampFireMelodies() {
               display: 'block',
               objectFit: 'contain',
               userSelect: 'none',
-              transform: 'scaleX(-1)', // Mirrored to face inward towards campfire
             }}
           />
         </div>
