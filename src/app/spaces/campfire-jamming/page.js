@@ -66,19 +66,20 @@ export default function CampFireMelodies() {
         <ParallaxStars />
         <ThreeCampfireBackground isPlaying={isPlaying} />
         
-        {/* Camping Tent Layered on Right Side of Campfire */}
+        {/* Camping Tent Layered on Right-most Side of Campfire */}
         <div
           className="campfire-tent-container"
           style={{
             position: 'absolute',
-            bottom: '12vh',
-            right: 'calc(50% - 480px)',
-            width: '380px',
+            bottom: '8vh',
+            right: '2vw',
+            width: '420px',
+            maxWidth: '32vw',
             pointerEvents: 'none',
             zIndex: 1,
             transition: 'transform 0.5s ease, filter 0.5s ease',
             filter: isPlaying
-              ? 'drop-shadow(0 10px 25px rgba(0,0,0,0.85)) drop-shadow(-15px -5px 35px rgba(255, 152, 0, 0.35)) brightness(0.92)'
+              ? 'drop-shadow(0 10px 25px rgba(0,0,0,0.85)) drop-shadow(-20px -5px 40px rgba(255, 152, 0, 0.4)) brightness(0.95)'
               : 'drop-shadow(0 10px 25px rgba(0,0,0,0.9)) brightness(0.65)',
           }}
         >
