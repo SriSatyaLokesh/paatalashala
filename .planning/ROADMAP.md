@@ -12,6 +12,7 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
 - [ ] **Phase 4: Meda Midha Vennallo** - Implement the terrace midnight space, clean and parse playlists, add starry village backgrounds, and configure page navigation.
 - [ ] **Phase 5: Deluxe Saloon & Accessibility** - Integrate the retro barber shop theme and add keyboard and animation pausing controls.
 - [ ] **Phase 6: Playlist Sync (V2 Integration)** - Build Spotify and YouTube OAuth integrations for playlist cloning.
+- [x] **Phase 7: Camp Fire Melodies** - Implement the Camp Fire Melodies environment with 3D WebGL campfire visualizer, starry night backdrop, glowing tent component, and curated campfire hits. (completed 2026-08-18)
 - [x] **Phase 8: Gundamma Gramophone** - Create 70s & 80s Telugu classics space environment, process vintage playlists, and integrate space route. (completed 2026-08-19)
 
 ---
@@ -25,11 +26,13 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
 **Mode**: mvp
 **Requirements**: PLAY-01, PLAY-02, PLAY-03, PLAY-04, PLAY-05, PLAY-06, ENV-01, ENV-02, ENV-03 (Tractor Anna), ENV-04, DATA-01, DATA-02, SOCL-01
 **Success Criteria**:
+
   1. User can enter `/places/tractor-anna`, click START, and start high-energy playback with active progress tracking.
   2. The farmland container elements transition smoothly.
   3. Interactive elements scale gracefully on mobile.
 
 **Plans**: 1 plan
+
 - [x] 01-01: Adapt static data, build cartoonish farm and animated road visuals, and configure mobile card layouts. (completed)
 
 ### Phase 2: Thathayya Tape Recorder
@@ -39,11 +42,13 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
 **Mode**: mvp
 **Requirements**: ENV-03 (Tape Recorder), DATA-01, DATA-02
 **Success Criteria**:
+
   1. User can enter `/places/tape-recorder`, watch a beautiful responsive veranda background, and play classic Telugu melodies.
   2. The media player functions (play, pause, seek, volume, shuffle, queue, next/prev) work perfectly.
   3. Active listener counting is simulated or connected to Supabase Presence.
 
 **Plans**: 1 plan
+
 - [x] 02-01: Create parser, populate songs database, set up tape-recorder page layout, and integrate home page routing. (completed)
 
 ### Phase 3: Ammama Radio
@@ -53,11 +58,13 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
 **Mode**: mvp
 **Requirements**: ENV-03 (Ammama Radio), DATA-01, DATA-02
 **Success Criteria**:
+
   1. User can enter `/places/radio`, see a beautiful responsive village kitchen background, and play nostalgic radio tracks.
   2. The background cycles dynamically on song change.
   3. Lyrics of Veturi and popular lullabies are displayed in a clean container above the media player.
  
 **Plans**: 1 plan
+
 - [x] 03-01: Create parse script, save top 150 non-Tamil songs, set up radio page, implement background cycling, lyrics container, and home page routing. (completed 2026-08-13)
 
 ### Phase 4: Meda Midha Vennallo
@@ -67,11 +74,13 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
 **Mode**: mvp
 **Requirements**: ENV-03 (Terrace), DATA-01, DATA-02
 **Success Criteria**:
+
   1. User can enter `/spaces/vennallo`, see a beautiful starry night village terrace background, and play cozy midnight melodies.
   2. The background images cycle dynamically on song change.
   3. Cozy midnight lyrics are displayed on the media player.
 
 **Plans**: 1 plan
+
 - [ ] 04-01: Parse playlists, filter rhymes, add custom telugu songs, generate background illustrations, and build the space page.
  
 ### Phase 5: Deluxe Saloon & Accessibility
@@ -81,10 +90,12 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
 **Mode**: mvp
 **Requirements**: ENV-03 (Saloon), ENV-05, ACC-01, ACC-02
 **Success Criteria**:
+
   1. User can enter Deluxe Saloon, watching the YouTube video inside a retro TV frame.
   2. User can play/pause, seek, and control volume using standard keyboard shortcuts.
  
 **Plans**: 2 plans
+
 - [ ] 05-01: Polish Saloon page markup, TV glare reflections, ceiling fan animations, and tube light triggers.
 - [ ] 05-02: Build keyboard listeners and particle freeze controls.
  
@@ -94,12 +105,26 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
 **Depends on**: Phase 5
 **Requirements**: SYNC-01, SYNC-02
 **Success Criteria**:
+
   1. User can trigger the OAuth login flows.
   2. The system successfully calls platform API endpoints to generate playlists.
  
 **Plans**: 2 plans
+
 - [ ] 06-01: Set up Next.js API endpoints for Spotify/Google OAuth.
 - [ ] 06-02: Integrate Spotify and YouTube Data API endpoints.
+
+### Phase 7: Camp Fire Melodies
+
+**Goal**: Implement the Camp Fire Melodies environment based on CodePen visual effects (https://codepen.io/editor/Gioda34/pen/019fb253-8909-75b0-b731-bc746078bba6), featuring an illuminated camping tent, campfire visualizers/particles, starry night sky, and custom playlist support.
+**Depends on**: Phase 6
+**Requirements**: ENV-03 (Camp Fire)
+**Success Criteria**:
+  1. User can enter Camp Fire Melodies space, featuring realistic campfire visual effects, illuminated tent, and a starry night backdrop.
+  2. Integrated media player plays selected campfire melodies.
+
+**Plans**: 1 plan
+- [x] 07-01: Build campfire environment UI, starry night backdrop, glowing tent component, media player integration, and routing. (completed 2026-08-18)
 
 ### Phase 8: Gundamma Gramophone
 
@@ -117,7 +142,7 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
  
 ## Progress
  
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 8
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
  
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -127,4 +152,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 8
 | 4. Meda Midha Vennallo | 0/1 | Planning    | - |
 | 5. Deluxe Saloon & Accessibility | 0/2 | Not started | - |
 | 6. Playlist Sync (V2 Integration) | 0/2 | Not started | - |
+| 7. Camp Fire Melodies | 1/1 | Complete    | 2026-08-18 |
 | 8. Gundamma Gramophone | 1/1 | Complete    | 2026-08-19 |
