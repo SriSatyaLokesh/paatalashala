@@ -13,3 +13,4 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 1. **Always Pull Main First**: Before creating any new branch for a feature, bugfix, or phase, always checkout `main` and run `git pull origin main` to ensure the branch starts from the latest upstream state.
 2. **Issue-Driven Development**: Every new branch must have a corresponding GitHub issue created first (e.g. using `gh issue create`).
 3. **PR & Issue Linking**: When raising a Pull Request for a branch, always link and reference the corresponding GitHub issue in the PR description (e.g., `Closes #<issue_number>` or `Resolves #<issue_number>`).
+4. **Keep README.md Synchronized**: Always update `README.md` with new spaces, architecture changes, features, and key enhancements before submitting any Pull Request.
