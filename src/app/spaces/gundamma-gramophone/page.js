@@ -143,8 +143,8 @@ export default function GundammaGramophone() {
         className="hud-top-header"
       />
 
-      <div style={{ position: 'absolute', top: '12vh', left: 0, right: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', userSelect: 'none', padding: '0 24px', zIndex: 5 }} className="immersive-title-container">
-        <h2 style={{ fontSize: '4.8rem', fontWeight: '900', letterSpacing: '0.04em', color: '#fff', margin: 0, textShadow: '0 2px 8px rgba(0,0,0,0.75)', fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif", textAlign: 'center' }} className="immersive-title">
+      <div style={{ position: 'absolute', top: '10vh', left: 0, right: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', userSelect: 'none', padding: '0 24px', zIndex: 5 }} className="immersive-title-container">
+        <h2 style={{ fontSize: '4.6rem', fontWeight: '900', letterSpacing: '0.04em', color: '#fff', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.85), 0 0 30px rgba(245, 158, 11, 0.45)', fontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif", textAlign: 'center' }} className="immersive-title">
           గుండమ్మ గారి గ్రామ్‌ఫోన్
         </h2>
       </div>
@@ -154,8 +154,8 @@ export default function GundammaGramophone() {
           variant="box"
           text={currentLyric}
           textColor="#fde68a"
-          textShadow="0 2px 4px rgba(0,0,0,0.9), 0 0 10px rgba(245, 158, 11, 0.4)"
-          borderColor="rgba(245, 158, 11, 0.3)"
+          textShadow="0 2px 4px rgba(0,0,0,0.9), 0 0 12px rgba(245, 158, 11, 0.5)"
+          borderColor="rgba(245, 158, 11, 0.35)"
           fontFamily="'Akaya Telivigala', 'Gurajada', serif"
         />
 
@@ -173,11 +173,19 @@ export default function GundammaGramophone() {
       <ListenersBadgeSingle
         count={presenceCount}
         label="listeners"
-        textColor="#ffe0b2"
-        background="rgba(24, 18, 12, 0.7)"
-        border="rgba(245, 158, 11, 0.25)"
+        textColor="#fde68a"
+        background="rgba(24, 18, 12, 0.75)"
+        border="rgba(245, 158, 11, 0.3)"
         iconColor="#f59e0b"
       />
+
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .immersive-title { font-size: 2.3rem !important; }
+          .btn-label { font-size: 0.7rem !important; }
+          .immersive-title-container { top: 9vh !important; }
+        }
+      `}</style>
     </div>
   );
 }
