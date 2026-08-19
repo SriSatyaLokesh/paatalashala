@@ -78,26 +78,26 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       torchTarget.position.set(0, -2.85, 4);
       scene.add(torchTarget);
 
-      // Flashlight spotlight with broad lantern spread cone aimed at cursor ground position
-      torchSpotLight = new THREE.SpotLight(0xffecd0, 22, 60, Math.PI / 3.8, 0.7, 1);
+      // Flashlight spotlight originating from camera and aimed at mouse cursor position
+      torchSpotLight = new THREE.SpotLight(0xffecd0, 16, 45, Math.PI / 7, 0.5, 1);
       torchSpotLight.castShadow = true;
       torchSpotLight.shadow.mapSize.width = 1024;
       torchSpotLight.shadow.mapSize.height = 1024;
       torchSpotLight.target = torchTarget;
       scene.add(torchSpotLight);
 
-      // Wide ambient point light following cursor position with larger surface spread
-      torchPointLight = new THREE.PointLight(0xffa555, 5.0, 18, 1.6);
+      // Soft ambient point light following cursor position
+      torchPointLight = new THREE.PointLight(0xffa555, 3.0, 9, 2);
       scene.add(torchPointLight);
     }
 
     function buildStars() {
-      const count = 2000;
+      const count = 1500;
       const positions = new Float32Array(count * 3);
 
       for (let i = 0; i < count; i++) {
         const theta = Math.random() * Math.PI * 2;
-        const elevation = (2 + Math.random() * 85) * (Math.PI / 180); // Elevated above horizon
+        const elevation = (-8 + Math.random() * 82) * (Math.PI / 180);
         const r = 45 + Math.random() * 55;
         const horizR = Math.cos(elevation) * r;
         positions[i * 3] = horizR * Math.cos(theta);
@@ -110,9 +110,9 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
 
       const mat = new THREE.PointsMaterial({
         color: 0xffffff,
-        size: 0.36,
+        size: 0.32,
         transparent: true,
-        opacity: 0.98,
+        opacity: 0.95,
         depthWrite: false,
       });
 
@@ -125,22 +125,48 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       campfireGroup.position.set(0, -2.8, 0);
       scene.add(campfireGroup);
 
-      // Local natural ground beneath campfire (compact 14m clearing radius so horizon mountains remain fully visible)
+      // Dark, natural ground beneath campfire that receives torch and fire shadows
       const ground = new THREE.Mesh(
-        new THREE.CircleGeometry(14, 64),
-        new THREE.MeshStandardMaterial({ color: 0x221b14, roughness: 0.88, transparent: true, opacity: 0.96 })
+        new THREE.CircleGeometry(42, 64),
+        new THREE.MeshStandardMaterial({ color: 0x16120e, roughness: 0.92 })
       );
       ground.rotation.x = -Math.PI / 2;
       ground.position.y = -0.05;
       ground.receiveShadow = true;
       campfireGroup.add(ground);
 
-      // Boosted hemisphere ambient light for a softer, visible night ambiance
-      scene.add(new THREE.HemisphereLight(0x2a384c, 0x0c0f14, 0.40));
-      scene.add(new THREE.AmbientLight(0xfff5e6, 0.12));
+      // Distinct 3D mountain silhouettes positioned in the 3D world behind the campfire
+      const mountainMatFar = new THREE.MeshStandardMaterial({
+        color: 0x162235,
+        roughness: 0.9,
+        flatShading: true,
+      });
+      const mountainMatMid = new THREE.MeshStandardMaterial({
+        color: 0x101724,
+        roughness: 0.92,
+        flatShading: true,
+      });
 
-      // Natural campfire glow with increased radius and light casting
-      fireLight = new THREE.PointLight(0xff8818, 7.0, 26, 1.7);
+      // Majestic mountain peaks behind campfire (elevated so peaks rise clearly into starfield)
+      const peaks = [
+        { x: -26, y: 1.5, z: -28, rx: 9, ry: 9, rz: 7, mat: mountainMatFar },
+        { x: -14, y: 2.2, z: -24, rx: 11, ry: 10.5, rz: 8, mat: mountainMatMid },
+        { x: -2,  y: 3.2, z: -26, rx: 14, ry: 12.5, rz: 9, mat: mountainMatFar },
+        { x: 12,  y: 2.5, z: -23, rx: 12, ry: 11, rz: 8, mat: mountainMatMid },
+        { x: 25,  y: 1.8, z: -27, rx: 10, ry: 9.5, rz: 7, mat: mountainMatFar },
+      ];
+
+      peaks.forEach(p => {
+        const cone = new THREE.Mesh(new THREE.ConeGeometry(p.rx, p.ry, 7), p.mat);
+        cone.position.set(p.x, p.y, p.z);
+        cone.rotation.y = Math.random() * Math.PI;
+        scene.add(cone);
+      });
+
+      scene.add(new THREE.HemisphereLight(0x223046, 0x06080c, 0.35));
+
+      // Natural campfire glow
+      fireLight = new THREE.PointLight(0xff8010, 6.0, 22, 1.8);
       fireLight.position.set(0, 1.2, 0);
       fireLight.castShadow = true;
       campfireGroup.add(fireLight);

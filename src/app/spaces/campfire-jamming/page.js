@@ -10,7 +10,6 @@ import PlayerCapsule from '@/components/space/PlayerCapsule';
 import RadialVignette from '@/components/space/RadialVignette';
 import { ListenersBadgeSingle } from '@/components/space/ListenersBadge';
 import ParallaxStars from '@/components/space/ParallaxStars';
-import ParallaxMountainHorizon from '@/components/space/ParallaxMountainHorizon';
 import ThreeCampfireBackground from '@/components/space/ThreeCampfireBackground';
 import { Tv } from 'lucide-react';
 
@@ -62,10 +61,9 @@ export default function CampFireMelodies() {
 
   return (
     <div style={{ position: 'fixed', inset: 0, width: '100vw', height: '100vh', overflow: 'hidden', color: '#fff', background: '#0d0f17' }}>
-      {/* ── Background Sky, Pure Vector Parallax Mountains & 3D Campfire ── */}
+      {/* ── Background Sky & 3D Campfire ── */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
         <ParallaxStars />
-        <ParallaxMountainHorizon isPlaying={isPlaying} />
         <ThreeCampfireBackground isPlaying={isPlaying} />
         
         {/* Camping Tent Layered on Right-most Side of Campfire */}
