@@ -135,6 +135,41 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       ground.receiveShadow = true;
       campfireGroup.add(ground);
 
+      // Distant dark mountain silhouettes & ridgeline along the background horizon
+      const mountainGeo = new THREE.ConeGeometry(8, 12, 5);
+      const mountainMatFar = new THREE.MeshStandardMaterial({ color: 0x0e131d, roughness: 0.98 });
+      const mountainMatMid = new THREE.MeshStandardMaterial({ color: 0x141a26, roughness: 0.95 });
+
+      const mountainPositions = [
+        { x: -28, y: 3.2, z: -32, s: 2.2, mat: mountainMatFar },
+        { x: -16, y: 3.8, z: -28, s: 1.9, mat: mountainMatMid },
+        { x: -5,  y: 2.9, z: -30, s: 1.6, mat: mountainMatFar },
+        { x: 7,   y: 4.2, z: -33, s: 2.4, mat: mountainMatFar },
+        { x: 19,  y: 3.5, z: -27, s: 2.0, mat: mountainMatMid },
+        { x: 30,  y: 3.0, z: -31, s: 2.1, mat: mountainMatFar },
+      ];
+
+      mountainPositions.forEach((m) => {
+        const peak = new THREE.Mesh(mountainGeo, m.mat);
+        peak.position.set(m.x, m.y, m.z);
+        peak.scale.set(m.s, m.s, m.s);
+        peak.rotation.y = Math.random() * Math.PI;
+        scene.add(peak);
+      });
+
+      // Distant pine tree line silhouettes along campsite horizon boundary
+      const treeGeo = new THREE.ConeGeometry(0.85, 3.2, 5);
+      const treeMat = new THREE.MeshStandardMaterial({ color: 0x090d14, roughness: 0.96 });
+      for (let i = 0; i < 45; i++) {
+        const theta = (i / 45) * Math.PI * 2;
+        const r = 24 + (i % 3) * 2.5;
+        const tree = new THREE.Mesh(treeGeo, treeMat);
+        const s = 1.0 + (i % 5) * 0.25;
+        tree.position.set(Math.cos(theta) * r, -2.8 + (3.2 * s) / 2, Math.sin(theta) * r);
+        tree.scale.set(s, s, s);
+        scene.add(tree);
+      }
+
       // Boosted hemisphere ambient light for a softer, visible night ambiance
       scene.add(new THREE.HemisphereLight(0x2a384c, 0x0c0f14, 0.40));
       scene.add(new THREE.AmbientLight(0xfff5e6, 0.12));

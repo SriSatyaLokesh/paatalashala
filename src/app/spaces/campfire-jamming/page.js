@@ -71,10 +71,10 @@ export default function CampFireMelodies() {
           className="campfire-tent-container"
           style={{
             position: 'absolute',
-            bottom: '28vh',
+            bottom: '32vh',
             right: '2vw',
-            width: '420px',
-            maxWidth: '32vw',
+            width: '480px',
+            maxWidth: '36vw',
             pointerEvents: 'none',
             zIndex: 1,
             transition: 'transform 0.5s ease, filter 0.5s ease',
@@ -206,10 +206,10 @@ export default function CampFireMelodies() {
             top: 11vh !important;
           }
           .campfire-tent-container {
-            width: 270px !important;
+            width: 320px !important;
             right: 15px !important;
             left: auto !important;
-            bottom: 26vh !important;
+            bottom: 30vh !important;
           }
         }
         @media (max-width: 768px) {
@@ -222,11 +222,11 @@ export default function CampFireMelodies() {
             line-height: 1.2 !important;
           }
           .campfire-tent-container {
-            width: 170px !important;
+            width: 210px !important;
             right: 8px !important;
             left: auto !important;
-            bottom: 24vh !important;
-            opacity: 0.85 !important;
+            bottom: 27vh !important;
+            opacity: 0.88 !important;
           }
         }
       `}</style>
