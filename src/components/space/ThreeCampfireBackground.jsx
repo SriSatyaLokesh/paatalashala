@@ -135,39 +135,43 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       ground.receiveShadow = true;
       campfireGroup.add(ground);
 
-      // Organic rounded mountain domes and rolling hills with varied heights and soft rounded tops
-      function createRoundedMountain(radius, height, color) {
-        // Upper hemisphere scaled to form a rounded mountain dome
-        const geo = new THREE.SphereGeometry(radius, 24, 16, 0, Math.PI * 2, 0, Math.PI / 2);
-        geo.scale(1.3, height / radius, 1.0);
+      // Natural angular mountain peaks with sharp rocky slopes and softly rounded tips
+      function createSharpMountainWithRoundedTip(baseRadius, height, color) {
+        // Truncated cone / faceted cylinder with small top radius (0.8 - 1.2) for a rounded apex
+        const topRadius = baseRadius * 0.14;
+        const geo = new THREE.CylinderGeometry(topRadius, baseRadius, height, 7, 3);
         const mat = new THREE.MeshStandardMaterial({
           color: color,
-          roughness: 0.94,
+          roughness: 0.88,
           flatShading: true,
         });
-        return new THREE.Mesh(geo, mat);
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.y = -2.8 + height / 2;
+        return mesh;
       }
 
-      // Shorter, varied-size mountain ranges positioned comfortably along the horizon
-      const mountainDomes = [
-        // Distant range (dark slate navy)
-        { x: -30, y: -2.8, z: -32, r: 12, h: 5.2, color: 0x141f30 },
-        { x: -18, y: -2.8, z: -35, r: 14, h: 6.0, color: 0x162438 },
-        { x: -4,  y: -2.8, z: -33, r: 11, h: 4.8, color: 0x121b29 },
-        { x: 10,  y: -2.8, z: -36, r: 15, h: 6.4, color: 0x152234 },
-        { x: 24,  y: -2.8, z: -31, r: 13, h: 5.5, color: 0x131d2b },
-        { x: 36,  y: -2.8, z: -34, r: 11, h: 4.6, color: 0x152132 },
+      // Layered sharp mountain ridges with random sizing and rounded tips
+      const mountainPeaks = [
+        // Distant majestic alpine range (deep night slate blue)
+        { x: -32, z: -35, r: 11, h: 7.2, color: 0x142032 },
+        { x: -19, z: -38, r: 13, h: 8.5, color: 0x17253a },
+        { x: -5,  z: -34, r: 10.5, h: 6.8, color: 0x121b2a },
+        { x: 9,   z: -39, r: 14, h: 9.0, color: 0x162438 },
+        { x: 23,  z: -33, r: 12, h: 7.5, color: 0x131e2f },
+        { x: 37,  z: -36, r: 11, h: 6.5, color: 0x152235 },
 
-        // Midground foothills & rounded knolls
-        { x: -22, y: -2.8, z: -25, r: 8.5, h: 3.6, color: 0x0f1722 },
-        { x: -10, y: -2.8, z: -27, r: 9.5, h: 4.2, color: 0x111926 },
-        { x: 4,   y: -2.8, z: -24, r: 8.0, h: 3.4, color: 0x0d141e },
-        { x: 18,  y: -2.8, z: -26, r: 9.0, h: 3.8, color: 0x101824 },
+        // Midground jagged ridges and foothills
+        { x: -25, z: -26, r: 8, h: 5.0, color: 0x0e1622 },
+        { x: -12, z: -28, r: 9.5, h: 5.8, color: 0x101a28 },
+        { x: 2,   z: -25, r: 7.5, h: 4.6, color: 0x0c131d },
+        { x: 16,  z: -27, r: 9, h: 5.4, color: 0x0f1826 },
+        { x: 29,  z: -26, r: 8, h: 4.8, color: 0x0d1521 },
       ];
 
-      mountainDomes.forEach(m => {
-        const mesh = createRoundedMountain(m.r, m.h, m.color);
-        mesh.position.set(m.x, m.y, m.z);
+      mountainPeaks.forEach(m => {
+        const mesh = createSharpMountainWithRoundedTip(m.r, m.h, m.color);
+        mesh.position.x = m.x;
+        mesh.position.z = m.z;
         mesh.rotation.y = Math.random() * Math.PI;
         scene.add(mesh);
       });
