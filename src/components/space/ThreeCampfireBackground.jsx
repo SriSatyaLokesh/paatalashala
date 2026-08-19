@@ -125,20 +125,22 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       campfireGroup.position.set(0, -2.8, 0);
       scene.add(campfireGroup);
 
-      // Dark, natural ground beneath campfire that receives torch and fire shadows
+      // Slightly brighter natural ground beneath campfire that receives torch and fire shadows
       const ground = new THREE.Mesh(
         new THREE.CircleGeometry(42, 64),
-        new THREE.MeshStandardMaterial({ color: 0x16120e, roughness: 0.92 })
+        new THREE.MeshStandardMaterial({ color: 0x221b14, roughness: 0.88 })
       );
       ground.rotation.x = -Math.PI / 2;
       ground.position.y = -0.05;
       ground.receiveShadow = true;
       campfireGroup.add(ground);
 
-      scene.add(new THREE.HemisphereLight(0x1a2333, 0x050608, 0.25));
+      // Boosted hemisphere ambient light for a softer, visible night ambiance
+      scene.add(new THREE.HemisphereLight(0x2a384c, 0x0c0f14, 0.40));
+      scene.add(new THREE.AmbientLight(0xfff5e6, 0.12));
 
-      // Natural campfire glow
-      fireLight = new THREE.PointLight(0xff8010, 6.0, 22, 1.8);
+      // Natural campfire glow with increased radius and light casting
+      fireLight = new THREE.PointLight(0xff8818, 7.0, 26, 1.7);
       fireLight.position.set(0, 1.2, 0);
       fireLight.castShadow = true;
       campfireGroup.add(fireLight);

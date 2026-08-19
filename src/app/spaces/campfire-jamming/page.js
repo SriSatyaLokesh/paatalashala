@@ -60,7 +60,7 @@ export default function CampFireMelodies() {
   });
 
   return (
-    <div style={{ position: 'fixed', inset: 0, width: '100vw', height: '100vh', overflow: 'hidden', color: '#fff', background: '#090A0F' }}>
+    <div style={{ position: 'fixed', inset: 0, width: '100vw', height: '100vh', overflow: 'hidden', color: '#fff', background: '#0d0f17' }}>
       {/* ── Background Sky & 3D Campfire ── */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
         <ParallaxStars />
@@ -79,8 +79,8 @@ export default function CampFireMelodies() {
             zIndex: 1,
             transition: 'transform 0.5s ease, filter 0.5s ease',
             filter: isPlaying
-              ? 'drop-shadow(0 10px 25px rgba(0,0,0,0.85)) drop-shadow(-20px -5px 40px rgba(255, 152, 0, 0.4)) brightness(0.95)'
-              : 'drop-shadow(0 10px 25px rgba(0,0,0,0.9)) brightness(0.65)',
+              ? 'drop-shadow(0 10px 25px rgba(0,0,0,0.85)) drop-shadow(-20px -5px 40px rgba(255, 152, 0, 0.4)) brightness(0.98)'
+              : 'drop-shadow(0 10px 25px rgba(0,0,0,0.9)) brightness(0.72)',
           }}
         >
           <img
@@ -96,7 +96,7 @@ export default function CampFireMelodies() {
           />
         </div>
 
-        <RadialVignette innerColor="rgba(15, 23, 42, 0.08)" outerColor="rgba(5, 7, 12, 0.65)" />
+        <RadialVignette innerColor="rgba(15, 23, 42, 0.05)" outerColor="rgba(5, 7, 12, 0.52)" />
       </div>
 
       {/* Top Header HUD */}
