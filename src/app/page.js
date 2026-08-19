@@ -106,6 +106,14 @@ const IconFlame = () => (
   </svg>
 );
 
+const IconGramophone = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 18h12a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2z"/>
+    <circle cx="12" cy="14" r="2"/>
+    <path d="M12 10V5l7-3v8"/>
+  </svg>
+);
+
 const ICONS = {
   'tractor-anna': IconTractor,
   'saloon': IconScissors,
@@ -114,6 +122,7 @@ const ICONS = {
   'ammama': IconRadio,
   'thathayya': IconTape,
   'vennallo': IconStars,
+  'gundamma-gramophone': IconGramophone,
   'sammelanam': IconSparkles,
   'campfire-jamming': IconFlame,
   'palle-velugu': IconBusLocal,
@@ -127,6 +136,7 @@ const TELUGU_NAMES = {
   'thathayya': 'తాతయ్య టేప్ రికార్డర్',
   'ammama': 'అమ్మమ్మ రేడియో',
   'vennallo': 'మేడ మీద వెన్నెల్లో',
+  'gundamma-gramophone': 'గుండమ్మ గ్రామ్‌ఫోన్',
   'sammelanam': 'Surprise Me',
   'campfire-jamming': 'క్యాంప్ ఫైర్ జామ్మింగ్',
 };
@@ -138,6 +148,7 @@ const CARD_BG = {
   'thathayya': '/images/tape_recorder_background.webp',
   'ammama': '/images/grandma_1.webp',
   'vennallo': '/images/vennela_1.webp',
+  'gundamma-gramophone': '/images/gundamma_1.webp',
   'sammelanam': '/images/vennela_2.webp',
   'campfire-jamming': '/images/campfire.png',
 };
@@ -149,6 +160,7 @@ const PRESENCE_SIM_CONFIG = {
   'ammama': { base: 43, sineAmp: 4, cosAmp: 2 },
   'thathayya': { base: 35, sineAmp: 3, cosAmp: 1 },
   'vennallo': { base: 52, sineAmp: 5, cosAmp: 2 },
+  'gundamma-gramophone': { base: 45, sineAmp: 4, cosAmp: 2 },
   'sammelanam': { base: 60, sineAmp: 6, cosAmp: 3 },
   'campfire-jamming': { base: 48, sineAmp: 6, cosAmp: 3 },
 };
