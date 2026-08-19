@@ -177,6 +177,7 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         const radius = isFar ? (34 + Math.sin(i * 3.1) * 4) : (26 + Math.cos(i * 2.5) * 3);
         const height = isFar ? (6.8 + Math.sin(i * 2.2) * 1.8) : (4.6 + Math.cos(i * 1.9) * 1.2);
         const baseRadius = isFar ? (9.5 + Math.sin(i * 1.5) * 2.0) : (7.5 + Math.cos(i * 2.1) * 1.5);
+        const color = isFar ? 0x152236 : 0x0f1826;
         const mesh = createSharpMountainWithRoundedTip(baseRadius, height, color);
         mesh.position.x = Math.cos(angle) * radius;
         mesh.position.z = Math.sin(angle) * radius;
