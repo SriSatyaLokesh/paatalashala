@@ -71,7 +71,7 @@ export default function CampFireMelodies() {
           className="campfire-tent-container"
           style={{
             position: 'absolute',
-            bottom: '8vh',
+            bottom: '28vh',
             right: '2vw',
             width: '420px',
             maxWidth: '32vw',
@@ -191,7 +191,7 @@ export default function CampFireMelodies() {
             width: 270px !important;
             right: 15px !important;
             left: auto !important;
-            bottom: 14vh !important;
+            bottom: 26vh !important;
           }
         }
         @media (max-width: 768px) {
@@ -200,7 +200,7 @@ export default function CampFireMelodies() {
             width: 180px !important;
             right: 10px !important;
             left: auto !important;
-            bottom: 18vh !important;
+            bottom: 24vh !important;
             opacity: 0.85 !important;
           }
         }
