@@ -92,12 +92,12 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
     }
 
     function buildStars() {
-      const count = 1500;
+      const count = 2000;
       const positions = new Float32Array(count * 3);
 
       for (let i = 0; i < count; i++) {
         const theta = Math.random() * Math.PI * 2;
-        const elevation = (-8 + Math.random() * 82) * (Math.PI / 180);
+        const elevation = (2 + Math.random() * 85) * (Math.PI / 180); // Elevated above horizon
         const r = 45 + Math.random() * 55;
         const horizR = Math.cos(elevation) * r;
         positions[i * 3] = horizR * Math.cos(theta);
@@ -110,9 +110,9 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
 
       const mat = new THREE.PointsMaterial({
         color: 0xffffff,
-        size: 0.32,
+        size: 0.36,
         transparent: true,
-        opacity: 0.95,
+        opacity: 0.98,
         depthWrite: false,
       });
 
@@ -135,40 +135,47 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       ground.receiveShadow = true;
       campfireGroup.add(ground);
 
-      // Distant dark mountain silhouettes & ridgeline along the background horizon
-      const mountainGeo = new THREE.ConeGeometry(8, 12, 5);
-      const mountainMatFar = new THREE.MeshStandardMaterial({ color: 0x0e131d, roughness: 0.98 });
-      const mountainMatMid = new THREE.MeshStandardMaterial({ color: 0x141a26, roughness: 0.95 });
+      // Elegant, smooth curved mountain ridges on the horizon (low elevation to keep night sky & stars clearly visible)
+      function createCurvedMountain(radius, height, color, opacity = 1.0) {
+        // Half-sphere paraboloid / curved dome geometry
+        const geo = new THREE.SphereGeometry(radius, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2);
+        geo.scale(1.8, height / radius, 0.9);
+        const mat = new THREE.MeshStandardMaterial({
+          color: color,
+          roughness: 0.92,
+          metalness: 0.08,
+          transparent: opacity < 1.0,
+          opacity: opacity,
+        });
+        return new THREE.Mesh(geo, mat);
+      }
 
-      const mountainPositions = [
-        { x: -28, y: 3.2, z: -32, s: 2.2, mat: mountainMatFar },
-        { x: -16, y: 3.8, z: -28, s: 1.9, mat: mountainMatMid },
-        { x: -5,  y: 2.9, z: -30, s: 1.6, mat: mountainMatFar },
-        { x: 7,   y: 4.2, z: -33, s: 2.4, mat: mountainMatFar },
-        { x: 19,  y: 3.5, z: -27, s: 2.0, mat: mountainMatMid },
-        { x: 30,  y: 3.0, z: -31, s: 2.1, mat: mountainMatFar },
+      // Layer 1: Distant soft misty mountain range (lower horizon, deep night blue)
+      const farMountains = [
+        { x: -32, z: -38, r: 18, h: 6.5, color: 0x111722 },
+        { x: -14, z: -42, r: 22, h: 7.2, color: 0x131a27 },
+        { x: 8,   z: -40, r: 20, h: 6.8, color: 0x101623 },
+        { x: 28,  z: -36, r: 19, h: 6.0, color: 0x121926 },
       ];
 
-      mountainPositions.forEach((m) => {
-        const peak = new THREE.Mesh(mountainGeo, m.mat);
-        peak.position.set(m.x, m.y, m.z);
-        peak.scale.set(m.s, m.s, m.s);
-        peak.rotation.y = Math.random() * Math.PI;
-        scene.add(peak);
+      farMountains.forEach(m => {
+        const mesh = createCurvedMountain(m.r, m.h, m.color, 0.95);
+        mesh.position.set(m.x, -3.2, m.z);
+        scene.add(mesh);
       });
 
-      // Distant pine tree line silhouettes along campsite horizon boundary
-      const treeGeo = new THREE.ConeGeometry(0.85, 3.2, 5);
-      const treeMat = new THREE.MeshStandardMaterial({ color: 0x090d14, roughness: 0.96 });
-      for (let i = 0; i < 45; i++) {
-        const theta = (i / 45) * Math.PI * 2;
-        const r = 24 + (i % 3) * 2.5;
-        const tree = new THREE.Mesh(treeGeo, treeMat);
-        const s = 1.0 + (i % 5) * 0.25;
-        tree.position.set(Math.cos(theta) * r, -2.8 + (3.2 * s) / 2, Math.sin(theta) * r);
-        tree.scale.set(s, s, s);
-        scene.add(tree);
-      }
+      // Layer 2: Midground rolling hills and smooth ridgeline with gentle moonlight bounce
+      const midHills = [
+        { x: -22, z: -28, r: 14, h: 4.8, color: 0x151f2e },
+        { x: -4,  z: -30, r: 15, h: 4.2, color: 0x182333 },
+        { x: 16,  z: -26, r: 14, h: 4.5, color: 0x162030 },
+      ];
+
+      midHills.forEach(m => {
+        const mesh = createCurvedMountain(m.r, m.h, m.color, 1.0);
+        mesh.position.set(m.x, -3.0, m.z);
+        scene.add(mesh);
+      });
 
       // Boosted hemisphere ambient light for a softer, visible night ambiance
       scene.add(new THREE.HemisphereLight(0x2a384c, 0x0c0f14, 0.40));
