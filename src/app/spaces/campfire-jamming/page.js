@@ -84,7 +84,7 @@ export default function CampFireMelodies() {
           }}
         >
           <img
-            src="/images/camping_tent.png"
+            src="/images/camping_tent.webp"
             alt="Camping Tent"
             style={{
               width: '100%',
