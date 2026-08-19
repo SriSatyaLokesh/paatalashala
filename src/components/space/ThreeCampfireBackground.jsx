@@ -125,10 +125,10 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       campfireGroup.position.set(0, -2.8, 0);
       scene.add(campfireGroup);
 
-      // Slightly brighter natural ground beneath campfire that receives torch and fire shadows
+      // Local natural ground beneath campfire (compact 14m clearing radius so horizon mountains remain fully visible)
       const ground = new THREE.Mesh(
-        new THREE.CircleGeometry(42, 64),
-        new THREE.MeshStandardMaterial({ color: 0x221b14, roughness: 0.88 })
+        new THREE.CircleGeometry(14, 64),
+        new THREE.MeshStandardMaterial({ color: 0x221b14, roughness: 0.88, transparent: true, opacity: 0.96 })
       );
       ground.rotation.x = -Math.PI / 2;
       ground.position.y = -0.05;

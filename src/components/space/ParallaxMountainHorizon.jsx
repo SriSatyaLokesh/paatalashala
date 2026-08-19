@@ -32,84 +32,85 @@ export default function ParallaxMountainHorizon({ isPlaying = true }) {
         alignItems: 'flex-end',
       }}
     >
-      {/* ── Layer 1: Distant Majestic Peaks (Deepest Night Sky Blue) ── */}
+      {/* ── Layer 1: Distant Massive Alpine Mountain Range (Deep Slate Navy) ── */}
       <div
-        className="absolute bottom-0 left-[-5%] w-[110%] h-[55vh] pointer-events-none transition-transform duration-700 ease-out"
+        className="absolute bottom-[16vh] left-[-4%] w-[108%] h-[48vh] pointer-events-none transition-transform duration-700 ease-out"
         style={{
-          transform: `translate3d(${dx * -8}px, ${dy * -4}px, 0)`,
-          opacity: 0.90,
+          transform: `translate3d(${dx * -10}px, ${dy * -4}px, 0)`,
           zIndex: 1,
         }}
       >
         <svg
-          viewBox="0 0 1440 400"
+          viewBox="0 0 1440 450"
           preserveAspectRatio="none"
           className="w-full h-full block"
+          style={{ filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.8))' }}
         >
           <defs>
-            <linearGradient id="farPeakGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#1a2436" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#0d131f" stopOpacity="1" />
+            <linearGradient id="farAlpineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#25354e" />
+              <stop offset="35%" stopColor="#182333" />
+              <stop offset="100%" stopColor="#0c111a" />
             </linearGradient>
           </defs>
           <path
-            fill="url(#farPeakGrad)"
-            d="M0,400 L0,220 Q120,130 240,190 T480,110 Q600,40 720,130 T960,80 Q1120,30 1260,140 Q1360,190 1440,160 L1440,400 Z"
+            fill="url(#farAlpineGrad)"
+            d="M0,450 L0,220 L70,160 L140,205 L230,120 L310,185 L420,95 L510,165 L620,70 L730,150 L840,110 L940,175 L1060,85 L1160,155 L1260,105 L1350,180 L1440,135 L1440,450 Z"
           />
         </svg>
       </div>
 
-      {/* ── Layer 2: Mid-Distant Curved Mountain Ridges ── */}
+      {/* ── Layer 2: Midground Sculpted Curved Ridges & Slopes (Atmospheric Charcoal) ── */}
       <div
-        className="absolute bottom-0 left-[-5%] w-[110%] h-[46vh] pointer-events-none transition-transform duration-500 ease-out"
+        className="absolute bottom-[12vh] left-[-4%] w-[108%] h-[38vh] pointer-events-none transition-transform duration-500 ease-out"
         style={{
-          transform: `translate3d(${dx * -16}px, ${dy * -7}px, 0)`,
-          opacity: 0.94,
+          transform: `translate3d(${dx * -18}px, ${dy * -7}px, 0)`,
           zIndex: 2,
         }}
       >
         <svg
-          viewBox="0 0 1440 360"
+          viewBox="0 0 1440 380"
           preserveAspectRatio="none"
           className="w-full h-full block"
+          style={{ filter: 'drop-shadow(0 -2px 10px rgba(0,0,0,0.5))' }}
         >
           <defs>
-            <linearGradient id="midRidgeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#141c2a" stopOpacity="0.92" />
-              <stop offset="100%" stopColor="#0a0e17" stopOpacity="1" />
+            <linearGradient id="midAlpineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#1e2a3c" />
+              <stop offset="50%" stopColor="#111822" />
+              <stop offset="100%" stopColor="#070a0f" />
             </linearGradient>
           </defs>
           <path
-            fill="url(#midRidgeGrad)"
-            d="M0,360 L0,200 C160,140 280,240 440,170 C600,100 680,180 840,140 C1000,100 1140,210 1300,160 C1380,135 1420,160 1440,175 L1440,360 Z"
+            fill="url(#midAlpineGrad)"
+            d="M0,380 L0,210 Q90,140 190,175 T390,115 Q490,75 590,145 T810,105 Q920,65 1030,135 T1250,95 Q1350,150 1440,125 L1440,380 Z"
           />
         </svg>
       </div>
 
-      {/* ── Layer 3: Foreground Foothills & Pine Tree Ridges ── */}
+      {/* ── Layer 3: Foreground Pine Forest Horizon Silhouettes ── */}
       <div
-        className="absolute bottom-0 left-[-5%] w-[110%] h-[36vh] pointer-events-none transition-transform duration-300 ease-out"
+        className="absolute bottom-[8vh] left-[-4%] w-[108%] h-[26vh] pointer-events-none transition-transform duration-300 ease-out"
         style={{
-          transform: `translate3d(${dx * -24}px, ${dy * -10}px, 0)`,
-          opacity: 0.98,
+          transform: `translate3d(${dx * -26}px, ${dy * -10}px, 0)`,
           zIndex: 3,
         }}
       >
         <svg
-          viewBox="0 0 1440 300"
+          viewBox="0 0 1440 260"
           preserveAspectRatio="none"
           className="w-full h-full block"
         >
           <defs>
-            <linearGradient id="foreRidgeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#0e141e" stopOpacity="0.98" />
-              <stop offset="60%" stopColor="#070a0f" stopOpacity="1" />
-              <stop offset="100%" stopColor="#040608" stopOpacity="1" />
+            <linearGradient id="foreAlpineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#131b26" />
+              <stop offset="60%" stopColor="#090d13" />
+              <stop offset="100%" stopColor="#05070a" />
             </linearGradient>
           </defs>
           <path
-            fill="url(#foreRidgeGrad)"
-            d="M0,300 L0,180 Q100,120 200,150 T420,130 Q540,80 660,130 T900,110 Q1050,70 1200,125 Q1340,170 1440,140 L1440,300 Z"
+            fill="url(#foreAlpineGrad)"
+            d="M0,260 L0,140 Q80,110 160,130 T340,95 Q420,65 520,110 T720,85 Q810,60 900,105 T1110,80 Q1210,120 1310,95 Q1380,120 1440,105 L1440,260 Z"
           />
         </svg>
       </div>
