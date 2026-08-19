@@ -135,48 +135,6 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       ground.receiveShadow = true;
       campfireGroup.add(ground);
 
-      // Elegant, smooth curved mountain ridges on the horizon (low elevation to keep night sky & stars clearly visible)
-      function createCurvedMountain(radius, height, color, opacity = 1.0) {
-        // Half-sphere paraboloid / curved dome geometry
-        const geo = new THREE.SphereGeometry(radius, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2);
-        geo.scale(1.8, height / radius, 0.9);
-        const mat = new THREE.MeshStandardMaterial({
-          color: color,
-          roughness: 0.92,
-          metalness: 0.08,
-          transparent: opacity < 1.0,
-          opacity: opacity,
-        });
-        return new THREE.Mesh(geo, mat);
-      }
-
-      // Layer 1: Distant soft misty mountain range (lower horizon, deep night blue)
-      const farMountains = [
-        { x: -32, z: -38, r: 18, h: 6.5, color: 0x111722 },
-        { x: -14, z: -42, r: 22, h: 7.2, color: 0x131a27 },
-        { x: 8,   z: -40, r: 20, h: 6.8, color: 0x101623 },
-        { x: 28,  z: -36, r: 19, h: 6.0, color: 0x121926 },
-      ];
-
-      farMountains.forEach(m => {
-        const mesh = createCurvedMountain(m.r, m.h, m.color, 0.95);
-        mesh.position.set(m.x, -3.2, m.z);
-        scene.add(mesh);
-      });
-
-      // Layer 2: Midground rolling hills and smooth ridgeline with gentle moonlight bounce
-      const midHills = [
-        { x: -22, z: -28, r: 14, h: 4.8, color: 0x151f2e },
-        { x: -4,  z: -30, r: 15, h: 4.2, color: 0x182333 },
-        { x: 16,  z: -26, r: 14, h: 4.5, color: 0x162030 },
-      ];
-
-      midHills.forEach(m => {
-        const mesh = createCurvedMountain(m.r, m.h, m.color, 1.0);
-        mesh.position.set(m.x, -3.0, m.z);
-        scene.add(mesh);
-      });
-
       // Boosted hemisphere ambient light for a softer, visible night ambiance
       scene.add(new THREE.HemisphereLight(0x2a384c, 0x0c0f14, 0.40));
       scene.add(new THREE.AmbientLight(0xfff5e6, 0.12));

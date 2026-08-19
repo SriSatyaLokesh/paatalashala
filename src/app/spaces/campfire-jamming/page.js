@@ -61,9 +61,40 @@ export default function CampFireMelodies() {
 
   return (
     <div style={{ position: 'fixed', inset: 0, width: '100vw', height: '100vh', overflow: 'hidden', color: '#fff', background: '#0d0f17' }}>
-      {/* ── Background Sky & 3D Campfire ── */}
+      {/* ── Background Sky, Mountains & 3D Campfire ── */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
         <ParallaxStars />
+
+        {/* Realistic Curved Mountain Panorama Silhouette */}
+        <div
+          className="campfire-mountain-horizon"
+          style={{
+            position: 'absolute',
+            bottom: '22vh',
+            left: '-5vw',
+            width: '110vw',
+            height: '42vh',
+            pointerEvents: 'none',
+            zIndex: 0,
+            opacity: 0.88,
+            filter: 'drop-shadow(0 -10px 30px rgba(5, 8, 14, 0.95)) brightness(0.65)',
+            display: 'flex',
+            alignItems: 'flex-end',
+          }}
+        >
+          <img
+            src="/images/mountain_silhouette.png"
+            alt="Mountain Silhouette"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'bottom center',
+              userSelect: 'none',
+            }}
+          />
+        </div>
+
         <ThreeCampfireBackground isPlaying={isPlaying} />
         
         {/* Camping Tent Layered on Right-most Side of Campfire */}
@@ -205,6 +236,10 @@ export default function CampFireMelodies() {
           .campfire-title-container {
             top: 11vh !important;
           }
+          .campfire-mountain-horizon {
+            height: 36vh !important;
+            bottom: 20vh !important;
+          }
           .campfire-tent-container {
             width: 320px !important;
             right: 15px !important;
@@ -220,6 +255,10 @@ export default function CampFireMelodies() {
           .campfire-title {
             font-size: 2.1rem !important;
             line-height: 1.2 !important;
+          }
+          .campfire-mountain-horizon {
+            height: 30vh !important;
+            bottom: 18vh !important;
           }
           .campfire-tent-container {
             width: 210px !important;
