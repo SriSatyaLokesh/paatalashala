@@ -70,6 +70,16 @@ export const SPACES = [
     description: "Soothing breeze on the terrace, kids looking at the starry sky with the moon, and cozy Telugu melodies in a calm village setup.",
   },
   {
+    id: "gundamma-gramophone",
+    slug: "gundamma-gramophone",
+    name: "Gundamma Gramophone",
+    tagline: "70ల మరియు 80ల మధురమైన పాత తరాల క్లాసిక్స్",
+    emoji: "🎷",
+    active: true,
+    theme: "amber",
+    description: "Golden 70s and 80s Telugu evergreen golden melodies spinning on a vintage brass gramophone horn in a classic retro courtyard.",
+  },
+  {
     id: "sammelanam",
     slug: "sammelanam",
     name: "Surprise Me",

@@ -13,6 +13,7 @@ import saloonSongs from '@/data/songs/saloon.json';
 import ammamaSongs from '@/data/songs/ammama.json';
 import thathayyaSongs from '@/data/songs/thathayya.json';
 import vennalloSongs from '@/data/songs/vennallo.json';
+import gundammaSongs from '@/data/songs/gundamma-gramophone.json';
 
 // __localIndex = this song's index within its own space's active+sorted list
 // (i.e. exactly what currentSongIndex would be on that song's home page).
@@ -29,6 +30,7 @@ export const ALL_SONGS = [
   ...withLocalIndex(ammamaSongs),
   ...withLocalIndex(thathayyaSongs),
   ...withLocalIndex(vennalloSongs),
+  ...withLocalIndex(gundammaSongs),
 ];
 
 const stripEmoji = (s) => s.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim();
@@ -43,6 +45,7 @@ const AUTO_BACKGROUNDS = [
 const GRANDMA_BG_IMAGES = ['/images/grandma_1.webp', '/images/grandma_2.webp', '/images/grandma_3.webp'];
 const GRANDPA_BG_IMAGES = ['/images/grandpa_1.webp', '/images/grandpa_2.webp', '/images/grandpa_3.webp'];
 const VENNELA_BG_IMAGES = ['/images/vennela_1.webp', '/images/vennela_2.webp', '/images/vennela_3.webp'];
+const GUNDAMMA_BG_IMAGES = ['/images/gundamma_1.webp', '/images/gundamma_2.webp', '/images/gundamma_3.webp'];
 
 const VETURI_LYRICS = [
   "రాలిపోయే పువ్వా నీకు రాగాలెందుకే... వాడిపోయే నవ్వునకూ వీడ్కోలెందుకే...",
@@ -257,5 +260,36 @@ export const SPACE_THEMES = {
       position: 'center 40%', transitionMs: 2000,
     }),
     getQuote: () => null,
+  },
+  'gundamma-gramophone': {
+    titleText: 'గుండమ్మ గ్రామ్‌ఫోన్',
+    titleFontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif",
+    weather: 'fog', particles: 'dust',
+    capsuleTheme: {
+      accentText: '#f59e0b', accentRgb: '245, 158, 11',
+      glassBg: 'rgba(24, 18, 12, 0.85)', glassBorder: 'rgba(245, 158, 11, 0.3)',
+      glassShadow: '0 25px 60px -15px rgba(0,0,0,0.9), inset 0 1px 1px rgba(255,255,255,0.12)',
+      vinylSize: 48, vinylBorder: '3px solid #451a03',
+      vinylRingShadow: '0 0 0 2px rgba(245, 158, 11, 0.3), 0 8px 16px rgba(0,0,0,0.7)',
+      vinylBg: '#000', spindleBg: '#1c1917',
+      artAlt: 'Track Art', fallbackEmoji: '🎷', fallbackTitle: 'గుండమ్మ గ్రామ్‌ఫోన్ గీతాలు',
+      titleFontSize: '1.05rem', secondaryColor: '#fde68a',
+      subtitleFallback: '70s & 80s Golden Telugu Classics',
+      subtitleFormat: (movie, year) => `${movie} • ${year}`,
+      prevNextColor: 'rgba(255,255,255,0.85)', prevTitle: 'Previous Track', nextTitle: 'Next Track',
+      dividerColor: 'rgba(255,255,255,0.15)',
+      playIconColor: '#451a03', playShadow: '0 4px 16px rgba(245, 158, 11, 0.5)',
+      restoreVolume: 50, volumeTrackBg: 'rgba(255,255,255,0.2)', volumeWidth: 65,
+      seekTrackBg: 'rgba(255, 255, 255, 0.15)', seekFillShadow: '0 0 10px rgba(245, 158, 11, 0.8)',
+      showSeekThumb: false, showControlIconHoverClass: false,
+    },
+    ambientAudio: { src: '/audio/grandfather_ambient.mp3', volume: 0.15, gate: 'none' },
+    getBackground: (song) => ({
+      url: prefixPath(`url('${GUNDAMMA_BG_IMAGES[song.__localIndex % GUNDAMMA_BG_IMAGES.length]}')`),
+      position: 'center 30%', transitionMs: 1800,
+    }),
+    getQuote: () => null,
+    quoteTextColor: '#fde68a', quoteTextShadow: '0 2px 4px rgba(0,0,0,0.9), 0 0 10px rgba(245, 158, 11, 0.4)',
+    quoteBorderColor: 'rgba(245, 158, 11, 0.3)',
   },
 };
