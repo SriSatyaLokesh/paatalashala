@@ -78,7 +78,24 @@ const faqSchema = {
 export const metadata = {
   title: "Paatalashala | Handcrafted Nostalgic Telugu Playlists & Ambience",
   description: "Explore the best handcrafted Telugu playlists and cultural ambient soundscapes. Relive memories with Amma radio playlist, Thathayya tape recorder, saloon TV classics, and city auto rides.",
-  keywords: ["paatalashala", "telugu playlists", "amma radio playlist", "ammama radio", "thathayya tape recorder", "telugu old songs playlist", "retro telugu soundscapes", "nostalgic telugu music", "telugu ambient audio"],
+  keywords: [
+    "paatalashala",
+    "telugu playlists",
+    "gundamma gari gramophone",
+    "best 60s telugu songs",
+    "best 70s telugu songs",
+    "best 80s telugu songs",
+    "best telugu black and white songs",
+    "best old telugu melodies",
+    "telugu campfire songs",
+    "amma radio playlist",
+    "ammama radio",
+    "thathayya tape recorder",
+    "telugu old songs playlist",
+    "retro telugu soundscapes",
+    "nostalgic telugu music",
+    "telugu ambient audio"
+  ],
   metadataBase: new URL(SITE_URL),
   manifest: '/manifest.json',
   alternates: {
