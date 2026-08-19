@@ -150,31 +150,26 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         return mesh;
       }
 
-      // Layered sharp mountain ridges with random sizing and rounded tips
-      const mountainPeaks = [
-        // Distant majestic alpine range (deep night slate blue)
-        { x: -32, z: -35, r: 11, h: 7.2, color: 0x142032 },
-        { x: -19, z: -38, r: 13, h: 8.5, color: 0x17253a },
-        { x: -5,  z: -34, r: 10.5, h: 6.8, color: 0x121b2a },
-        { x: 9,   z: -39, r: 14, h: 9.0, color: 0x162438 },
-        { x: 23,  z: -33, r: 12, h: 7.5, color: 0x131e2f },
-        { x: 37,  z: -36, r: 11, h: 6.5, color: 0x152235 },
+      // Full 360-degree mountain perimeter ring around campsite with varied sizes & star visibility valleys
+      const mountainCount = 20;
+      for (let i = 0; i < mountainCount; i++) {
+        // Create natural mountain clusters with deliberate gaps/valleys for star visibility
+        const isStarGap = (i % 5 === 0);
+        if (isStarGap) continue; // Gap for clear view of twinkling stars
 
-        // Midground jagged ridges and foothills
-        { x: -25, z: -26, r: 8, h: 5.0, color: 0x0e1622 },
-        { x: -12, z: -28, r: 9.5, h: 5.8, color: 0x101a28 },
-        { x: 2,   z: -25, r: 7.5, h: 4.6, color: 0x0c131d },
-        { x: 16,  z: -27, r: 9, h: 5.4, color: 0x0f1826 },
-        { x: 29,  z: -26, r: 8, h: 4.8, color: 0x0d1521 },
-      ];
+        const angle = (i / mountainCount) * Math.PI * 2 + (Math.sin(i * 1.7) * 0.08);
+        const isFar = (i % 2 === 0);
+        const radius = isFar ? (34 + Math.sin(i * 3.1) * 4) : (26 + Math.cos(i * 2.5) * 3);
+        const height = isFar ? (6.8 + Math.sin(i * 2.2) * 1.8) : (4.6 + Math.cos(i * 1.9) * 1.2);
+        const baseRadius = isFar ? (9.5 + Math.sin(i * 1.5) * 2.0) : (7.5 + Math.cos(i * 2.1) * 1.5);
+        const color = isFar ? 0x152236 : 0x0f1826;
 
-      mountainPeaks.forEach(m => {
-        const mesh = createSharpMountainWithRoundedTip(m.r, m.h, m.color);
-        mesh.position.x = m.x;
-        mesh.position.z = m.z;
-        mesh.rotation.y = Math.random() * Math.PI;
+        const mesh = createSharpMountainWithRoundedTip(baseRadius, height, color);
+        mesh.position.x = Math.cos(angle) * radius;
+        mesh.position.z = Math.sin(angle) * radius;
+        mesh.rotation.y = (i * 1.3) % (Math.PI * 2);
         scene.add(mesh);
-      });
+      }
 
       scene.add(new THREE.HemisphereLight(0x223046, 0x06080c, 0.35));
 
