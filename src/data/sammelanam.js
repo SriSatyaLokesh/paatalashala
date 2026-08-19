@@ -288,7 +288,7 @@ export const SPACE_THEMES = {
       url: prefixPath(`url('${GUNDAMMA_BG_IMAGES[song.__localIndex % GUNDAMMA_BG_IMAGES.length]}')`),
       position: 'center 30%', transitionMs: 1800,
     }),
-    getQuote: () => null,
+    getQuote: (song) => song.quote,
     quoteTextColor: '#fde68a', quoteTextShadow: '0 2px 4px rgba(0,0,0,0.9), 0 0 10px rgba(245, 158, 11, 0.4)',
     quoteBorderColor: 'rgba(245, 158, 11, 0.3)',
   },
