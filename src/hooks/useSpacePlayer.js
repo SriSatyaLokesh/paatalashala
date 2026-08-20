@@ -41,7 +41,9 @@ export function useSpacePlayer(placeSongs, config) {
   const [volume, setVolume] = useState(initialVolume);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [presenceCount, setPresenceCount] = useState(presence.base);
+  // Stable random base pad (3 to 15) chosen once for this session
+  const [syncPad] = useState(() => Math.floor(Math.random() * 13) + 3);
+  const [presenceCount, setPresenceCount] = useState(() => 1 + (Math.floor(Math.random() * 13) + 3));
   const [timeString, setTimeString] = useState('');
   const [videoVisible, setVideoVisible] = useState(false);
   const [ambientOn, setAmbientOn] = useState(true);
@@ -93,12 +95,12 @@ export function useSpacePlayer(placeSongs, config) {
   }, [showShuffleHint]);
 
   // === Supabase Realtime Live Presence Counter ===
-  const { channel: presenceChannel, base: presenceBase, sineAmp, cosAmp, syncPad, catchSpread, catchOffset } = presence;
+  const presenceChannel = presence?.channel || 'presence-space';
   useEffect(() => {
     if (!supabase) {
       const sim = () => {
         const s = Math.floor(Date.now() / 4000);
-        setPresenceCount(Math.max(1, Math.round(presenceBase + Math.sin(s * 0.5) * sineAmp + Math.cos(s * 0.2) * cosAmp)));
+        setPresenceCount(Math.max(1, Math.round(1 + syncPad + Math.sin(s * 0.5) * 1.5)));
       };
       sim();
       const t = setInterval(sim, 4000);
@@ -112,13 +114,13 @@ export function useSpacePlayer(placeSongs, config) {
         try {
           const state = channel.presenceState();
           // Count unique users in presence state
-          // Each key is a user ID, value is an array of presence objects
           const userIds = Object.keys(state || {});
-          const count = Math.max(1, userIds.length + syncPad); // Add realistic base count
+          const realCount = Math.max(1, userIds.length);
+          const count = realCount + syncPad; // Real active users + random syncPad between 3 and 15
           setPresenceCount(count);
         } catch (e) {
           console.error('Error reading presence state:', e);
-          setPresenceCount(Math.max(1, presenceBase + Math.floor(Math.random() * catchSpread) - catchOffset));
+          setPresenceCount(1 + syncPad);
         }
       })
       .subscribe(async (status) => {
@@ -130,8 +132,7 @@ export function useSpacePlayer(placeSongs, config) {
     return () => {
       channel.unsubscribe();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [presenceChannel, presenceBase, sineAmp, cosAmp, syncPad, catchSpread, catchOffset]);
+  }, [presenceChannel, syncPad]);
 
   // === Ambient audio ===
   const ambientSrc = ambientAudio?.src;
