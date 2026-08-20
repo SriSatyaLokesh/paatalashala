@@ -166,21 +166,18 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         return mesh;
       }
 
-      // Mountain horizon perimeter ring in background backdrop (r: 28m to 38m)
-      // Leaving the front 60-degree viewpoint completely clear so mountains never obstruct the campfire
-      const mountainCount = 18;
+      // Mountain horizon perimeter ring in far backdrop (r: 36m to 48m)
+      const mountainCount = 20;
       for (let i = 0; i < mountainCount; i++) {
-        // Create natural mountain clusters in background arc
         const isStarGap = (i % 4 === 0);
-        if (isStarGap) continue; // Gap for clear view of twinkling stars
+        if (isStarGap) continue; // Gap for star visibility
 
-        // Angle distributed across sides and back (0.45 rad to 5.8 rad)
-        const angle = 0.45 + (i / mountainCount) * (Math.PI * 2 - 0.9) + (Math.sin(i * 1.7) * 0.06);
+        const angle = (i / mountainCount) * Math.PI * 2 + (Math.sin(i * 1.7) * 0.08);
         const isFar = (i % 2 === 0);
-        const radius = isFar ? (35 + Math.sin(i * 3.1) * 3) : (28 + Math.cos(i * 2.5) * 3);
-        const height = isFar ? (6.8 + Math.sin(i * 2.2) * 1.6) : (4.6 + Math.cos(i * 1.9) * 1.2);
-        const baseRadius = isFar ? (9.0 + Math.sin(i * 1.5) * 1.8) : (7.2 + Math.cos(i * 2.1) * 1.2);
-        const color = isFar ? 0x152236 : 0x0f1826;
+        const radius = isFar ? (44 + Math.sin(i * 3.1) * 4) : (36 + Math.cos(i * 2.5) * 3);
+        const height = isFar ? (8.5 + Math.sin(i * 2.2) * 2.0) : (6.0 + Math.cos(i * 1.9) * 1.5);
+        const baseRadius = isFar ? (11.0 + Math.sin(i * 1.5) * 2.0) : (8.5 + Math.cos(i * 2.1) * 1.5);
+        const color = isFar ? 0x141f2e : 0x0e1722;
         const mesh = createSharpMountainWithRoundedTip(baseRadius, height, color);
         mesh.position.x = Math.cos(angle) * radius;
         mesh.position.z = Math.sin(angle) * radius;
@@ -196,9 +193,9 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         
         // Brown/dark wood trunk
         const trunkMat = new THREE.MeshStandardMaterial({ color: 0x1c130d, roughness: 0.95 });
-        const trunkGeo = new THREE.CylinderGeometry(0.12 * scale, 0.18 * scale, 1.8 * scale, 6);
+        const trunkGeo = new THREE.CylinderGeometry(0.10 * scale, 0.15 * scale, 1.4 * scale, 6);
         const trunk = new THREE.Mesh(trunkGeo, trunkMat);
-        trunk.position.y = 0.9 * scale;
+        trunk.position.y = 0.7 * scale;
         trunk.castShadow = true;
         trunk.receiveShadow = true;
         treeGroup.add(trunk);
@@ -211,9 +208,9 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         });
 
         const tiers = [
-          { r: 1.15 * scale, h: 1.5 * scale, y: 1.6 * scale },
-          { r: 0.90 * scale, h: 1.3 * scale, y: 2.3 * scale },
-          { r: 0.65 * scale, h: 1.1 * scale, y: 2.9 * scale }
+          { r: 0.95 * scale, h: 1.2 * scale, y: 1.3 * scale },
+          { r: 0.75 * scale, h: 1.0 * scale, y: 1.9 * scale },
+          { r: 0.50 * scale, h: 0.8 * scale, y: 2.4 * scale }
         ];
 
         tiers.forEach((t) => {
@@ -229,15 +226,14 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         return treeGroup;
       }
 
-      // Distribute alpine pine trees along background perimeter & mountain foothills (r: 22m to 32m)
-      // Leaving a wide front clearing angle so trees NEVER pass in front of the campfire or camera
-      const treeCount = 20;
+      // Distribute alpine pine trees in middle-ground tree-line (r: 13.5m to 18m)
+      // Safely separated from the mountains (r > 36m) with zero geometry collision
+      const treeCount = 22;
       const treeColors = [0x15221b, 0x111b15, 0x18261e, 0x0f1813];
       for (let i = 0; i < treeCount; i++) {
-        // Distribute trees around the sides and back (angles 0.4 to 5.8 rad), keeping front (around Math.PI/2 / z > 0) open
-        const angle = 0.5 + (i / treeCount) * (Math.PI * 2 - 1.0) + (Math.sin(i * 1.7) * 0.1);
-        const radius = 22 + (i % 2 === 0 ? 4 : 8) + (Math.sin(i * 2.1) * 2.5);
-        const treeScale = 1.0 + Math.sin(i * 3.4) * 0.35;
+        const angle = (i / treeCount) * Math.PI * 2 + (Math.sin(i * 2.1) * 0.12);
+        const radius = (i % 2 === 0 ? 14.5 : 17.5) + (Math.sin(i * 1.8) * 1.5);
+        const treeScale = 0.85 + Math.sin(i * 3.4) * 0.25;
         const color = treeColors[i % treeColors.length];
         
         const tree = createPineTree(treeScale, color);
@@ -509,10 +505,11 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       lastTime = currentTime;
       elapsedTime += dt;
 
-      // Gentle front atmospheric sway (stays strictly in front of the campfire)
-      camera.position.x = Math.sin(elapsedTime * 0.12) * 1.2;
-      camera.position.z = 11.8 + Math.cos(elapsedTime * 0.08) * 0.4;
-      camera.position.y = 0.6 + Math.sin(elapsedTime * 0.05) * 0.12;
+      // Smooth cinematic camera orbit around campsite (elevated so camera looks down over tree-tops)
+      const orbitR = 10.5;
+      camera.position.x = Math.sin(elapsedTime * 0.045) * orbitR;
+      camera.position.z = Math.cos(elapsedTime * 0.045) * orbitR;
+      camera.position.y = 1.9 + Math.sin(elapsedTime * 0.07) * 0.25;
       camera.lookAt(0, -1.8, 0);
 
       // Rotate stars slowly
