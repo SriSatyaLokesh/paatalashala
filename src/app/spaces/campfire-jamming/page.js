@@ -80,24 +80,15 @@ export default function CampFireMelodies() {
 
   return (
     <div className="campfire-page-root" style={{ position: 'fixed', inset: 0, width: '100vw', height: '100vh', overflow: 'hidden', color: '#fff', background: '#0d0f17' }}>
-      {/* ── Custom Glowing Warm Torch Cursor ── */}
+      {/* ── Subtle Glowing Amber Pointer Dot ── */}
       {pointerPos.visible && (
-        <>
-          <div
-            className="campfire-torch-halo"
-            style={{
-              left: `${pointerPos.x}px`,
-              top: `${pointerPos.y}px`,
-            }}
-          />
-          <div
-            className="campfire-torch-cursor"
-            style={{
-              left: `${pointerPos.x}px`,
-              top: `${pointerPos.y}px`,
-            }}
-          />
-        </>
+        <div
+          className="campfire-torch-cursor"
+          style={{
+            left: `${pointerPos.x}px`,
+            top: `${pointerPos.y}px`,
+          }}
+        />
       )}
 
       {/* ── Background Sky & 3D Campfire ── */}
@@ -254,33 +245,17 @@ export default function CampFireMelodies() {
           position: fixed;
           top: 0;
           left: 0;
-          width: 22px;
-          height: 22px;
+          width: 8px;
+          height: 8px;
           border-radius: 50%;
           pointer-events: none;
           z-index: 9999;
           transform: translate(-50%, -50%);
-          background: radial-gradient(circle, #fff7ed 0%, #fbbf24 35%, #f97316 70%, rgba(234, 88, 12, 0.2) 100%);
+          background: #fbbf24;
           box-shadow: 
-            0 0 12px 3px rgba(251, 191, 36, 0.9),
-            0 0 28px 8px rgba(249, 115, 22, 0.65),
-            0 0 50px 18px rgba(234, 88, 12, 0.35);
-          transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
-          mix-blend-mode: screen;
-        }
-
-        .campfire-torch-halo {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 80px;
-          height: 80px;
-          border-radius: 50%;
-          pointer-events: none;
-          z-index: 9998;
-          transform: translate(-50%, -50%);
-          background: radial-gradient(circle, rgba(251, 191, 36, 0.25) 0%, rgba(249, 115, 22, 0.12) 50%, rgba(234, 88, 12, 0) 100%);
-          mix-blend-mode: screen;
+            0 0 6px 2px rgba(251, 191, 36, 0.8),
+            0 0 14px 4px rgba(249, 115, 22, 0.5);
+          transition: transform 0.08s ease-out, opacity 0.2s ease;
         }
 
         @media (max-width: 1024px) {
