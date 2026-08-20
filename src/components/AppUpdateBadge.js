@@ -11,8 +11,8 @@ export default function AppUpdateBadge() {
   const [updateAvailable, setUpdateAvailable] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  // Fixed to an older version for manual testing
-  const currentCommit = 'old-commit-v1';
+  // Real build commit baked at compile time
+  const currentCommit = versionInfo?.commit || process.env.NEXT_PUBLIC_APP_COMMIT || 'local-dev';
 
   useEffect(() => {
     let isMounted = true;
