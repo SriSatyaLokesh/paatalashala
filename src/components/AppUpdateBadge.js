@@ -12,8 +12,8 @@ export default function AppUpdateBadge() {
   const [isUpdating, setIsUpdating] = useState(false);
   const [latestTag, setLatestTag] = useState('');
 
-  const currentCommit = versionInfo?.commit || 'local-dev';
-  const currentTag = versionInfo?.tag || 'v0.1.0';
+  const currentCommit = versionInfo?.commit || process.env.NEXT_PUBLIC_APP_COMMIT || 'local-dev';
+  const currentTag = versionInfo?.tag || process.env.NEXT_PUBLIC_APP_TAG || 'v0.1.0';
 
   useEffect(() => {
     let isMounted = true;
