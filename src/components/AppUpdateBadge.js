@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { RefreshCw, Sparkles, Check } from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 import { checkForAppUpdate, purgeAppCacheAndReload } from '@/utils/cacheManager';
 
 // Build version data generated at compile-time by scripts/generate-version.js
@@ -10,11 +10,9 @@ import versionInfo from '../../public/version.json';
 export default function AppUpdateBadge() {
   const [updateAvailable, setUpdateAvailable] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
-  const [latestTag, setLatestTag] = useState('');
 
   // Fixed to an older version for manual testing
   const currentCommit = 'old-commit-v1';
-  const currentTag = 'v0.1.0-old-commit-v1';
 
   useEffect(() => {
     let isMounted = true;
@@ -23,7 +21,6 @@ export default function AppUpdateBadge() {
       const result = await checkForAppUpdate(currentCommit);
       if (isMounted && result.hasUpdate) {
         setUpdateAvailable(true);
-        setLatestTag(result.tag);
       }
     }
 
