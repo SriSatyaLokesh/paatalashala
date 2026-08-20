@@ -3,8 +3,16 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-export default function ThreeCampfireBackground({ isPlaying = true }) {
+export default function ThreeCampfireBackground({ isPlaying = true, fuelBurst = 0 }) {
   const containerRef = useRef(null);
+  const fuelRef = useRef({ level: 0, lastBurst: 0 });
+
+  useEffect(() => {
+    if (fuelBurst > 0 && fuelBurst !== fuelRef.current.lastBurst) {
+      fuelRef.current.lastBurst = fuelBurst;
+      fuelRef.current.level = 1.0; // Trigger instant full petrol burst
+    }
+  }, [fuelBurst]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -13,7 +21,7 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
     // Clean up any stale canvas elements
     container.innerHTML = '';
 
-    const MAX_PARTICLES = 320;
+    const MAX_PARTICLES = 480;
     const EMIT_PER_FRAME = 3;
     const WIND_MAX = 2.0;
     const BUOYANCY = 1.4;
@@ -335,18 +343,20 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
     }
 
     function spawnParticle(p) {
+      const fuel = fuelRef.current ? fuelRef.current.level : 0;
       const a = Math.random() * Math.PI * 2;
-      const r = Math.random() * 0.30;
+      const r = Math.random() * (0.30 + fuel * 0.45);
       p.pos.set(Math.cos(a) * r, 0.25 + Math.random() * 0.16, Math.sin(a) * r);
       
+      const upVel = (1.3 + Math.random() * 0.9) * (1.0 + fuel * 1.8);
       p.vel.set(
-        (Math.random() - 0.5) * 0.20 + windVector.x * 0.25,
-        1.3 + Math.random() * 0.9,
-        (Math.random() - 0.5) * 0.20 + windVector.z * 0.25
+        (Math.random() - 0.5) * (0.20 + fuel * 0.6) + windVector.x * 0.25,
+        upVel,
+        (Math.random() - 0.5) * (0.20 + fuel * 0.6) + windVector.z * 0.25
       );
       p.age = 0;
-      p.life = 0.70 + Math.random() * 0.40;
-      p.size = BASE_RADIUS * (0.8 + Math.random() * 0.55);
+      p.life = (0.70 + Math.random() * 0.40) * (1.0 + fuel * 0.5);
+      p.size = BASE_RADIUS * (0.8 + Math.random() * 0.55) * (1.0 + fuel * 1.4);
       p.alive = true;
     }
 
@@ -403,7 +413,18 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
     function updateFire(dt, time) {
       updateCursor3D();
 
-      for (let n = 0; n < EMIT_PER_FRAME; n++) {
+      // Decay fuel level smoothly over ~1.8 seconds back to normal
+      let fuel = 0;
+      if (fuelRef.current) {
+        if (fuelRef.current.level > 0) {
+          fuelRef.current.level = Math.max(0, fuelRef.current.level - dt * 0.58);
+        }
+        fuel = fuelRef.current.level;
+      }
+
+      // During fuel flare, emit up to 4x more particles per frame
+      const currentEmitCount = Math.floor(EMIT_PER_FRAME + fuel * 9);
+      for (let n = 0; n < currentEmitCount; n++) {
         const dead = particles.find((p) => !p.alive);
         if (dead) spawnParticle(dead);
       }
@@ -414,7 +435,7 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
 
         p.vel.x += windVector.x * dt * 2.0;
         p.vel.z += windVector.z * dt * 2.0;
-        p.vel.y += BUOYANCY * dt;
+        p.vel.y += BUOYANCY * dt * (1.0 + fuel * 0.8);
 
         p.pos.addScaledVector(p.vel, dt);
         p.age += dt;
@@ -447,7 +468,9 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       if (fireMesh.instanceColor) fireMesh.instanceColor.needsUpdate = true;
 
       if (fireLight) {
-        fireLight.intensity = 5.5 + Math.sin(time * 9 + flickerSeed) * 1.2 + Math.sin(time * 23.7) * 0.5 + (Math.random() - 0.5) * 0.5;
+        const baseIntensity = 5.5 + Math.sin(time * 9 + flickerSeed) * 1.2 + Math.sin(time * 23.7) * 0.5 + (Math.random() - 0.5) * 0.5;
+        fireLight.intensity = baseIntensity + fuel * 28.0; // Huge surge in campsite radiance
+        fireLight.distance = 28 + fuel * 32.0;
         fireLight.position.x = Math.sin(time * 1.7) * 0.08;
         fireLight.position.z = Math.cos(time * 1.3) * 0.08;
       }

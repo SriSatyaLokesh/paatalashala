@@ -12,7 +12,7 @@ import RadialVignette from '@/components/space/RadialVignette';
 import { ListenersBadgeSingle } from '@/components/space/ListenersBadge';
 import ParallaxStars from '@/components/space/ParallaxStars';
 import ThreeCampfireBackground from '@/components/space/ThreeCampfireBackground';
-import { Tv, Sparkles, Wind, Info, X } from 'lucide-react';
+import { Tv, Sparkles, Wind, Info, X, Flame } from 'lucide-react';
 
 const AMBIENT_AUDIO = { src: '/audio/night_sky_ambience.mp3', volume: 0.10, gate: 'none' };
 const PRESENCE_CONFIG = { channel: 'presence-campfire-jamming', base: 36, sineAmp: 4, cosAmp: 2, syncPad: 12, catchSpread: 10, catchOffset: 5 };
@@ -62,6 +62,11 @@ export default function CampFireMelodies() {
 
   const [showTooltip, setShowTooltip] = useState(true);
   const [pointerPos, setPointerPos] = useState({ x: -100, y: -100, visible: false });
+  const [fuelBurst, setFuelBurst] = useState(0);
+
+  const triggerFuelBurst = () => {
+    setFuelBurst(Date.now());
+  };
 
   // Auto-dismiss tooltip after 9 seconds, but allow user to reopen at any time via small trigger button
   useEffect(() => {
@@ -103,7 +108,7 @@ export default function CampFireMelodies() {
       {/* ── Background Sky & 3D Campfire ── */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
         <ParallaxStars />
-        <ThreeCampfireBackground isPlaying={isPlaying} />
+        <ThreeCampfireBackground isPlaying={isPlaying} fuelBurst={fuelBurst} />
         
         {/* Camping Tent Layered on Right-most Side of Campfire */}
         <div
@@ -297,10 +302,59 @@ export default function CampFireMelodies() {
             e.currentTarget.style.transform = 'scale(1)';
           }}
         >
-          <Sparkles size={11} />
-          <span>Wind Guide</span>
+            <Sparkles size={11} />
+            <span>Wind Guide</span>
+          </button>
+        )}
+
+        {/* ── Instant Fuel / Petrol Flare Action Button ── */}
+        <button
+          onClick={triggerFuelBurst}
+          title="Add Fuel / Petrol to Campfire (Instant Flame Surge)"
+          style={{
+            position: 'fixed',
+            bottom: '165px',
+            left: '24px',
+            zIndex: 45,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            padding: '6px 14px',
+            background: 'linear-gradient(135deg, rgba(234, 88, 12, 0.35), rgba(180, 83, 9, 0.25))',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid rgba(249, 115, 22, 0.45)',
+            borderRadius: '9999px',
+            color: '#fdba74',
+            fontSize: '0.78rem',
+            fontWeight: '700',
+            cursor: 'pointer',
+            boxShadow: '0 4px 20px rgba(234, 88, 12, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.2)',
+            transition: 'all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
+            userSelect: 'none',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(234, 88, 12, 0.55), rgba(217, 119, 6, 0.45))';
+            e.currentTarget.style.borderColor = 'rgba(251, 146, 60, 0.8)';
+            e.currentTarget.style.transform = 'scale(1.06) translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 6px 25px rgba(249, 115, 22, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.3)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(234, 88, 12, 0.35), rgba(180, 83, 9, 0.25))';
+            e.currentTarget.style.borderColor = 'rgba(249, 115, 22, 0.45)';
+            e.currentTarget.style.transform = 'scale(1) translateY(0)';
+            e.currentTarget.style.boxShadow = '0 4px 20px rgba(234, 88, 12, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.2)';
+          }}
+          onMouseDown={(e) => {
+            e.currentTarget.style.transform = 'scale(0.94)';
+          }}
+          onMouseUp={(e) => {
+            e.currentTarget.style.transform = 'scale(1.06) translateY(-2px)';
+          }}
+        >
+          <Flame size={13} color="#ffedd5" style={{ filter: 'drop-shadow(0 0 4px #ea580c)' }} />
+          <span>Add Fuel</span>
         </button>
-      )}
 
       {/* Bottom Floating Player Capsule */}
       <div style={{ position: 'fixed', bottom: '24px', left: '50%', transform: 'translateX(-50%)', width: '92%', maxWidth: '680px', zIndex: 40, pointerEvents: 'auto' }}>
