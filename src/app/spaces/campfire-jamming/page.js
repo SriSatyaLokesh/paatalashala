@@ -12,7 +12,7 @@ import RadialVignette from '@/components/space/RadialVignette';
 import { ListenersBadgeSingle } from '@/components/space/ListenersBadge';
 import ParallaxStars from '@/components/space/ParallaxStars';
 import ThreeCampfireBackground from '@/components/space/ThreeCampfireBackground';
-import { Tv, Sparkles, Wind } from 'lucide-react';
+import { Tv, Sparkles, Wind, Info, X } from 'lucide-react';
 
 const AMBIENT_AUDIO = { src: '/audio/night_sky_ambience.mp3', volume: 0.10, gate: 'none' };
 const PRESENCE_CONFIG = { channel: 'presence-campfire-jamming', base: 48, sineAmp: 6, cosAmp: 3, syncPad: 12, catchSpread: 10, catchOffset: 5 };
@@ -60,7 +60,16 @@ export default function CampFireMelodies() {
     toggleShuffle: () => setIsShuffle(prev => !prev),
   });
 
+  const [showTooltip, setShowTooltip] = useState(true);
   const [pointerPos, setPointerPos] = useState({ x: -100, y: -100, visible: false });
+
+  // Auto-dismiss tooltip after 9 seconds, but allow user to reopen at any time via small trigger button
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowTooltip(false);
+    }, 9000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handlePointerMove = (e) => {
@@ -144,7 +153,7 @@ export default function CampFireMelodies() {
         />
       </div>
 
-      {/* Immersive Space Title & Interactive Fire/Wind Tooltip */}
+      {/* Immersive Space Title */}
       <div
         className="campfire-title-container"
         style={{
@@ -153,46 +162,125 @@ export default function CampFireMelodies() {
           left: 0,
           right: 0,
           display: 'flex',
-          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           pointerEvents: 'none',
           userSelect: 'none',
           padding: '0 24px',
           zIndex: 10,
-          gap: '10px',
         }}
       >
         <h2 style={{ fontSize: '4.2rem', fontWeight: '900', letterSpacing: '0.04em', color: '#fff', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.9), 0 0 35px rgba(245, 158, 11, 0.45)', fontFamily: "'Akaya Telivigala', 'Gurajada', serif", textAlign: 'center' }} className="campfire-title">
           క్యాంప్ ఫైర్ జామ్మింగ్
         </h2>
+      </div>
 
-        {/* Interactive Experience Badge */}
+      {/* Interactive Experience Floating Toast / Tooltip */}
+      <div
+        className="campfire-interactive-toast"
+        style={{
+          position: 'fixed',
+          top: '19vh',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 45,
+          pointerEvents: 'auto',
+          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+          opacity: showTooltip ? 1 : 0,
+          pointerEvents: showTooltip ? 'auto' : 'none',
+          transform: showTooltip ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(-10px)',
+        }}
+      >
         <div
-          className="campfire-hint-pill"
           style={{
-            display: 'inline-flex',
+            display: 'flex',
             alignItems: 'center',
-            gap: '8px',
-            padding: '6px 14px',
-            background: 'rgba(26, 18, 12, 0.65)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-            border: '1px solid rgba(251, 191, 36, 0.28)',
+            gap: '10px',
+            padding: '8px 16px 8px 14px',
+            background: 'rgba(20, 14, 10, 0.82)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            border: '1px solid rgba(251, 191, 36, 0.35)',
             borderRadius: '9999px',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.1)',
+            boxShadow: '0 10px 30px -5px rgba(0,0,0,0.8), 0 0 20px rgba(245, 158, 11, 0.15)',
             color: '#fef3c7',
-            fontSize: '0.82rem',
+            fontSize: '0.86rem',
             fontWeight: '500',
-            letterSpacing: '0.02em',
-            textShadow: '0 1px 4px rgba(0,0,0,0.8)',
+            letterSpacing: '0.01em',
+            whiteSpace: 'nowrap',
           }}
         >
-          <Wind size={13} className="text-amber-400 animate-pulse" />
-          <span>Move your mouse to guide the breeze & cast lantern light across the campsite</span>
-          <Sparkles size={12} className="text-amber-400" />
+          <span style={{ display: 'inline-flex', padding: '4px', background: 'rgba(245, 158, 11, 0.15)', borderRadius: '50%' }}>
+            <Wind size={14} className="text-amber-400 animate-pulse" />
+          </span>
+          <span>Move mouse to direct the wind & cast lantern light</span>
+          <button
+            onClick={() => setShowTooltip(false)}
+            aria-label="Dismiss hint"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '20px',
+              height: '20px',
+              borderRadius: '50%',
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: 'none',
+              color: '#d4d4d8',
+              cursor: 'pointer',
+              marginLeft: '4px',
+              transition: 'background 0.2s ease, color 0.2s ease',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(245, 158, 11, 0.4)'; e.currentTarget.style.color = '#fff'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'; e.currentTarget.style.color = '#d4d4d8'; }}
+          >
+            <X size={12} />
+          </button>
         </div>
       </div>
+
+      {/* Compact Re-open Pill Button on Top-Right Corner */}
+      {!showTooltip && (
+        <button
+          onClick={() => setShowTooltip(true)}
+          title="Interactive campfire tips"
+          className="campfire-hint-reopen-btn"
+          style={{
+            position: 'fixed',
+            top: '72px',
+            right: '24px',
+            zIndex: 45,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            padding: '6px 12px',
+            background: 'rgba(20, 14, 10, 0.72)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid rgba(251, 191, 36, 0.25)',
+            borderRadius: '9999px',
+            color: '#fbbf24',
+            fontSize: '0.78rem',
+            fontWeight: '600',
+            cursor: 'pointer',
+            boxShadow: '0 4px 15px rgba(0,0,0,0.5)',
+            transition: 'all 0.25s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(30, 20, 12, 0.9)';
+            e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.5)';
+            e.currentTarget.style.transform = 'scale(1.04)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(20, 14, 10, 0.72)';
+            e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.25)';
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
+        >
+          <Sparkles size={12} />
+          <span>Interactive Wind</span>
+        </button>
+      )}
 
       {/* Floating Picture-in-Picture YouTube Player */}
       <FloatingYouTubePlayer
