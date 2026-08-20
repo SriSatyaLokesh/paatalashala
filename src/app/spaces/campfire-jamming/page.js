@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useSpacePlayer } from '@/hooks/useSpacePlayer';
 import { useSpaceKeyboardShortcuts } from '@/hooks/useSpaceKeyboardShortcuts';
 import placeSongs from '@/data/songs/campfire-jamming.json';
@@ -59,8 +60,46 @@ export default function CampFireMelodies() {
     toggleShuffle: () => setIsShuffle(prev => !prev),
   });
 
+  const [pointerPos, setPointerPos] = useState({ x: -100, y: -100, visible: false });
+
+  useEffect(() => {
+    const handlePointerMove = (e) => {
+      setPointerPos({ x: e.clientX, y: e.clientY, visible: true });
+    };
+    const handleMouseLeave = () => {
+      setPointerPos(prev => ({ ...prev, visible: false }));
+    };
+
+    window.addEventListener('pointermove', handlePointerMove);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
   return (
-    <div style={{ position: 'fixed', inset: 0, width: '100vw', height: '100vh', overflow: 'hidden', color: '#fff', background: '#0d0f17' }}>
+    <div className="campfire-page-root" style={{ position: 'fixed', inset: 0, width: '100vw', height: '100vh', overflow: 'hidden', color: '#fff', background: '#0d0f17' }}>
+      {/* ── Custom Glowing Warm Torch Cursor ── */}
+      {pointerPos.visible && (
+        <>
+          <div
+            className="campfire-torch-halo"
+            style={{
+              left: `${pointerPos.x}px`,
+              top: `${pointerPos.y}px`,
+            }}
+          />
+          <div
+            className="campfire-torch-cursor"
+            style={{
+              left: `${pointerPos.x}px`,
+              top: `${pointerPos.y}px`,
+            }}
+          />
+        </>
+      )}
+
       {/* ── Background Sky & 3D Campfire ── */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
         <ParallaxStars />
@@ -201,6 +240,49 @@ export default function CampFireMelodies() {
       </div>
 
       <style jsx global>{`
+        .campfire-page-root {
+          cursor: none;
+        }
+        .campfire-page-root a,
+        .campfire-page-root button,
+        .campfire-page-root input,
+        .campfire-page-root [role="button"] {
+          cursor: pointer;
+        }
+
+        .campfire-torch-cursor {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 9999;
+          transform: translate(-50%, -50%);
+          background: radial-gradient(circle, #fff7ed 0%, #fbbf24 35%, #f97316 70%, rgba(234, 88, 12, 0.2) 100%);
+          box-shadow: 
+            0 0 12px 3px rgba(251, 191, 36, 0.9),
+            0 0 28px 8px rgba(249, 115, 22, 0.65),
+            0 0 50px 18px rgba(234, 88, 12, 0.35);
+          transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+          mix-blend-mode: screen;
+        }
+
+        .campfire-torch-halo {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 9998;
+          transform: translate(-50%, -50%);
+          background: radial-gradient(circle, rgba(251, 191, 36, 0.25) 0%, rgba(249, 115, 22, 0.12) 50%, rgba(234, 88, 12, 0) 100%);
+          mix-blend-mode: screen;
+        }
+
         @media (max-width: 1024px) {
           .campfire-title-container {
             top: 11vh !important;
@@ -213,6 +295,13 @@ export default function CampFireMelodies() {
           }
         }
         @media (max-width: 768px) {
+          .campfire-page-root {
+            cursor: auto !important;
+          }
+          .campfire-torch-cursor,
+          .campfire-torch-halo {
+            display: none !important;
+          }
           .campfire-title-container {
             top: 76px !important;
             padding: 0 16px !important;
