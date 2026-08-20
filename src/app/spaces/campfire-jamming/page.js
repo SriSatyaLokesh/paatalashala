@@ -126,7 +126,7 @@ export default function CampFireMelodies() {
           />
         </div>
 
-        <RadialVignette innerColor="rgba(15, 23, 42, 0.05)" outerColor="rgba(5, 7, 12, 0.52)" />
+        <RadialVignette innerColor="rgba(15, 23, 42, 0.02)" outerColor="rgba(5, 7, 12, 0.36)" />
       </div>
 
       {/* Top Header HUD */}
