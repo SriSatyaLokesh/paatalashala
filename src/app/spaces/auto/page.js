@@ -29,7 +29,7 @@ const AUTO_BACKGROUNDS = [
 ];
 
 const AMBIENT_AUDIO = { src: '/audio/city_ambient.mp3', volume: 0.15, gate: 'ytReady' };
-const PRESENCE_CONFIG = { channel: 'presence-auto', base: 98, sineAmp: 6, cosAmp: 3, syncPad: 15, catchSpread: 20, catchOffset: 10 };
+const PRESENCE_CONFIG = { channel: 'presence-auto', base: 45, sineAmp: 5, cosAmp: 3, syncPad: 15, catchSpread: 10, catchOffset: 5 };
 
 const CAPSULE_THEME = {
   accentText: '#fbbf24', accentRgb: '245, 158, 11',

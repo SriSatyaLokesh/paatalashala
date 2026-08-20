@@ -29,7 +29,7 @@ const AMMAMA_LYRICS = [
 ];
 
 const AMBIENT_AUDIO = { src: '/audio/grandfather_ambient.mp3', volume: 0.15, gate: 'none' };
-const PRESENCE_CONFIG = { channel: 'presence-ammama', base: 43, sineAmp: 4, cosAmp: 2, syncPad: 9, catchSpread: 8, catchOffset: 4 };
+const PRESENCE_CONFIG = { channel: 'presence-ammama', base: 28, sineAmp: 3, cosAmp: 1, syncPad: 9, catchSpread: 8, catchOffset: 4 };
 const AUTO_SKIP = { enabled: true };
 
 const CAPSULE_THEME = {

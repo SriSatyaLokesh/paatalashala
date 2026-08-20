@@ -14,7 +14,7 @@ import AmbientWeather from '@/components/AmbientWeather';
 import { Tv } from 'lucide-react';
 
 const AMBIENT_AUDIO = { src: '/audio/village_ambience.mp3', volume: 0.15, gate: 'none' };
-const PRESENCE_CONFIG = { channel: 'presence-saloon', base: 43, sineAmp: 4, cosAmp: 2, syncPad: 8, catchSpread: 15, catchOffset: 7 };
+const PRESENCE_CONFIG = { channel: 'presence-saloon', base: 26, sineAmp: 3, cosAmp: 1, syncPad: 8, catchSpread: 8, catchOffset: 4 };
 
 const CAPSULE_THEME = {
   accentText: '#ffb74d', accentRgb: '255, 183, 77',

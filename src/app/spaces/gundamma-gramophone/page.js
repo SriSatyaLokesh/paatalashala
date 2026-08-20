@@ -50,7 +50,7 @@ const VINTAGE_TELUGU_LYRICS = [
 ];
 
 const AMBIENT_AUDIO = { src: '/audio/grandfather_ambient.mp3', volume: 0.15, gate: 'none' };
-const PRESENCE_CONFIG = { channel: 'presence-gundamma-gramophone', base: 42, sineAmp: 4, cosAmp: 2, syncPad: 8, catchSpread: 10, catchOffset: 5 };
+const PRESENCE_CONFIG = { channel: 'presence-gundamma-gramophone', base: 32, sineAmp: 3, cosAmp: 2, syncPad: 8, catchSpread: 10, catchOffset: 5 };
 const AUTO_SKIP = { enabled: true };
 
 const CAPSULE_THEME = {

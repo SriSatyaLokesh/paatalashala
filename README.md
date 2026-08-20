@@ -103,6 +103,7 @@ npm run split-songs
 * **⚡ Smooth Cross-Fade Transitions:** Double Background Layer Pattern to fade viewports seamlessly when changing songs, eliminating abrupt image resizing.
 * **🎛️ Rich Page-Level SEO:** Static Server Component layouts injecting tailored metadata, titles, canonical tags, and OpenGraph/FAQ schemas.
 * **📱 Responsive HUD Canopy:** Designed to resemble actual vehicle windshield sticker frames and dashboard audio decks with full mobile optimization.
+* **🔗 Native Space Sharing:** Instant native Android/mobile share sheet integration (`navigator.share`) directly in the media player capsule with tailored Telugu invite text and automatic clipboard copy fallback.
 
 ---
 

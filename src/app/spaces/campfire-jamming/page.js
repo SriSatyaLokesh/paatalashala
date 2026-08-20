@@ -12,10 +12,10 @@ import RadialVignette from '@/components/space/RadialVignette';
 import { ListenersBadgeSingle } from '@/components/space/ListenersBadge';
 import ParallaxStars from '@/components/space/ParallaxStars';
 import ThreeCampfireBackground from '@/components/space/ThreeCampfireBackground';
-import { Tv, Sparkles, Wind, Info, X } from 'lucide-react';
+import { Tv, Sparkles, Wind, Info, X, Flame } from 'lucide-react';
 
 const AMBIENT_AUDIO = { src: '/audio/night_sky_ambience.mp3', volume: 0.10, gate: 'none' };
-const PRESENCE_CONFIG = { channel: 'presence-campfire-jamming', base: 48, sineAmp: 6, cosAmp: 3, syncPad: 12, catchSpread: 10, catchOffset: 5 };
+const PRESENCE_CONFIG = { channel: 'presence-campfire-jamming', base: 36, sineAmp: 4, cosAmp: 2, syncPad: 12, catchSpread: 10, catchOffset: 5 };
 const AUTO_SKIP = { enabled: true, delayMs: 1500, codes: [101, 150] };
 
 const CAPSULE_THEME = {
@@ -62,6 +62,80 @@ export default function CampFireMelodies() {
 
   const [showTooltip, setShowTooltip] = useState(true);
   const [pointerPos, setPointerPos] = useState({ x: -100, y: -100, visible: false });
+  const [fuelBurst, setFuelBurst] = useState(0);
+
+  // Procedural Web Audio API sound for realistic fire whoosh, rising roar & crackle bursts
+  const playFireSurgeSound = () => {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const now = ctx.currentTime;
+      const duration = 2.2;
+
+      // 1. White noise buffer for fire roar & rushing flame wind
+      const bufferSize = ctx.sampleRate * duration;
+      const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        output[i] = Math.random() * 2 - 1;
+      }
+
+      const noiseNode = ctx.createBufferSource();
+      noiseNode.buffer = noiseBuffer;
+
+      // 2. Resonant bandpass filter sweeping upward to simulate flame whoosh ignition
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.Q.setValueAtTime(3.5, now);
+      filter.frequency.setValueAtTime(140, now);
+      filter.frequency.exponentialRampToValueAtTime(750, now + 0.35); // Rising flame surge
+      filter.frequency.exponentialRampToValueAtTime(280, now + 1.2);
+      filter.frequency.exponentialRampToValueAtTime(120, now + duration);
+
+      // 3. Lowpass filter for deep combustive warmth
+      const lowpass = ctx.createBiquadFilter();
+      lowpass.type = 'lowpass';
+      lowpass.frequency.setValueAtTime(900, now);
+
+      // 4. Volume Envelope with sharp attack and soft crackle decay
+      const gainNode = ctx.createGain();
+      gainNode.gain.setValueAtTime(0.001, now);
+      gainNode.gain.linearRampToValueAtTime(0.45, now + 0.12); // Instant ignition punch
+      gainNode.gain.exponentialRampToValueAtTime(0.18, now + 0.9);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+      // Connect nodes
+      noiseNode.connect(filter);
+      filter.connect(lowpass);
+      lowpass.connect(gainNode);
+      gainNode.connect(ctx.destination);
+
+      noiseNode.start(now);
+      noiseNode.stop(now + duration);
+
+      // 5. Short pop/crackle bursts
+      [0.08, 0.22, 0.45, 0.72].forEach((offset) => {
+        const popOsc = ctx.createOscillator();
+        const popGain = ctx.createGain();
+        popOsc.type = 'triangle';
+        popOsc.frequency.setValueAtTime(220 + Math.random() * 180, now + offset);
+        popOsc.frequency.exponentialRampToValueAtTime(40, now + offset + 0.06);
+        popGain.gain.setValueAtTime(0.25, now + offset);
+        popGain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.06);
+
+        popOsc.connect(popGain);
+        popGain.connect(ctx.destination);
+        popOsc.start(now + offset);
+        popOsc.stop(now + offset + 0.06);
+      });
+    } catch (_) {}
+  };
+
+  const triggerFuelBurst = () => {
+    setFuelBurst(Date.now());
+    playFireSurgeSound();
+  };
 
   // Auto-dismiss tooltip after 9 seconds, but allow user to reopen at any time via small trigger button
   useEffect(() => {
@@ -103,7 +177,7 @@ export default function CampFireMelodies() {
       {/* ── Background Sky & 3D Campfire ── */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
         <ParallaxStars />
-        <ThreeCampfireBackground isPlaying={isPlaying} />
+        <ThreeCampfireBackground isPlaying={isPlaying} fuelBurst={fuelBurst} />
         
         {/* Camping Tent Layered on Right-most Side of Campfire */}
         <div
@@ -139,19 +213,17 @@ export default function CampFireMelodies() {
       </div>
 
       {/* Top Header HUD */}
-      <div style={{ position: 'fixed', top: '16px', left: '20px', right: '20px', zIndex: 50, pointerEvents: 'auto' }}>
-        <SpaceHudHeader
-          timeString={timeString}
-          ambientOn={ambientOn}
-          onToggleAmbient={() => setAmbientOn(a => !a)}
-          videoVisible={videoVisible}
-          onToggleVideo={() => setVideoVisible(v => !v)}
-          accentText={CAPSULE_THEME.accentText}
-          accentRgb={CAPSULE_THEME.accentRgb}
-          VideoIcon={Tv}
-          className="hud-top-header"
-        />
-      </div>
+      <SpaceHudHeader
+        timeString={timeString}
+        ambientOn={ambientOn}
+        onToggleAmbient={() => setAmbientOn(a => !a)}
+        videoVisible={videoVisible}
+        onToggleVideo={() => setVideoVisible(v => !v)}
+        accentText={CAPSULE_THEME.accentText}
+        accentRgb={CAPSULE_THEME.accentRgb}
+        VideoIcon={Tv}
+        className="hud-top-header"
+      />
 
       {/* Immersive Space Title */}
       <div
@@ -261,48 +333,40 @@ export default function CampFireMelodies() {
         </div>
       </div>
 
-      {/* Compact Re-open Button Positioned Discreetly Above Player on Right */}
-      {!showTooltip && (
+        {/* ── Fixed Desktop Left Fuel Button (Identical placement to Horn in Tractor Anna & Auto Janie) ── */}
         <button
-          onClick={() => setShowTooltip(true)}
-          title="Interactive campfire tips"
-          className="campfire-hint-reopen-btn"
+          onClick={triggerFuelBurst}
+          title="Add Fuel / Petrol to Campfire (Instant Flame Surge)"
           style={{
             position: 'fixed',
-            bottom: '165px',
-            right: '24px',
-            zIndex: 45,
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            padding: '5px 12px',
-            background: 'rgba(18, 12, 8, 0.82)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-            border: '1px solid rgba(251, 191, 36, 0.25)',
-            borderRadius: '9999px',
-            color: '#fbbf24',
-            fontSize: '0.76rem',
-            fontWeight: '600',
+            left: '32px',
+            bottom: '24px',
+            width: '48px',
+            height: '48px',
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #f97316, #ea580c)',
+            color: '#fff',
+            border: 'none',
             cursor: 'pointer',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.6)',
-            transition: 'all 0.25s ease',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 8px 24px rgba(234, 88, 12, 0.55)',
+            zIndex: 45,
+            transition: 'transform 0.2s, background-color 0.2s, box-shadow 0.2s',
           }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'rgba(28, 18, 10, 0.95)';
-            e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.5)';
-            e.currentTarget.style.transform = 'scale(1.04)';
+          className="fuel-btn-desktop"
+          onMouseEnter={e => {
+            e.currentTarget.style.transform = 'scale(1.1)';
+            e.currentTarget.style.boxShadow = '0 10px 28px rgba(249, 115, 22, 0.75)';
           }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'rgba(18, 12, 8, 0.82)';
-            e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.25)';
+          onMouseLeave={e => {
             e.currentTarget.style.transform = 'scale(1)';
+            e.currentTarget.style.boxShadow = '0 8px 24px rgba(234, 88, 12, 0.55)';
           }}
         >
-          <Sparkles size={11} />
-          <span>Wind Guide</span>
+          <Flame size={22} fill="#fff" color="#fff" />
         </button>
-      )}
 
       {/* Bottom Floating Player Capsule */}
       <div style={{ position: 'fixed', bottom: '24px', left: '50%', transform: 'translateX(-50%)', width: '92%', maxWidth: '680px', zIndex: 40, pointerEvents: 'auto' }}>
@@ -326,6 +390,33 @@ export default function CampFireMelodies() {
           seekHovered={seekHovered}
           onSeekHoverChange={setSeekHovered}
           fmt={fmt}
+          hornSlot={(
+            <button
+              onClick={triggerFuelBurst}
+              title="Add Fuel / Petrol to Campfire"
+              style={{
+                background: 'linear-gradient(135deg, #f97316, #ea580c)',
+                border: 'none',
+                color: '#fff',
+                cursor: 'pointer',
+                padding: '6px 10px',
+                borderRadius: '9999px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                fontSize: '0.75rem',
+                fontWeight: '700',
+                boxShadow: '0 4px 12px rgba(234, 88, 12, 0.5)',
+                transition: 'transform 0.15s',
+              }}
+              className="fuel-btn-capsule"
+              onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.06)'}
+              onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+            >
+              <Flame size={14} fill="#fff" color="#fff" />
+              <span>FUEL</span>
+            </button>
+          )}
         />
       </div>
 
@@ -390,8 +481,19 @@ export default function CampFireMelodies() {
           .campfire-hint-reopen-btn {
             display: none !important;
           }
+          .hud-top-header {
+            padding: 12px 14px !important;
+          }
+          .hud-top-header .hud-button {
+            padding: 6px 10px !important;
+            font-size: 0.72rem !important;
+            gap: 4px !important;
+          }
+          .btn-label {
+            font-size: 0.68rem !important;
+          }
           .campfire-title-container {
-            top: 76px !important;
+            top: 72px !important;
             padding: 0 16px !important;
           }
           .campfire-title {
@@ -399,6 +501,14 @@ export default function CampFireMelodies() {
             line-height: 1.2 !important;
           }
           .campfire-tent-container {
+            display: none !important;
+          }
+          .fuel-btn-desktop {
+            display: none !important;
+          }
+        }
+        @media (min-width: 769px) {
+          .fuel-btn-capsule {
             display: none !important;
           }
         }
