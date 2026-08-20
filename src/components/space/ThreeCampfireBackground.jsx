@@ -167,18 +167,20 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         return mesh;
       }
 
-      // Distant low-profile mountain horizon in far backdrop (r: 35m to 46m, height: 3.2m to 5.2m)
-      // Low ridge lines leave over 75% of the sky wide open for twinkling stars
-      const mountainCount = 20;
+      // Distant low-profile mountain horizon in far backdrop (r: 36m to 48m)
+      // +20% scale boost with rhythmic star valleys for an expansive ridge silhouette
+      const mountainCount = 28;
       for (let i = 0; i < mountainCount; i++) {
-        const isStarGap = (i % 3 === 0);
-        if (isStarGap) continue; // Frequent valleys for maximum star visibility
+        // Natural star gap valleys between peaks
+        const isStarGap = (i % 5 === 0 || i === 14 || i === 23);
+        if (isStarGap) continue;
 
         const angle = (i / mountainCount) * Math.PI * 2 + (Math.sin(i * 1.7) * 0.08);
         const isFar = (i % 2 === 0);
-        const radius = isFar ? (42 + Math.sin(i * 3.1) * 3) : (35 + Math.cos(i * 2.5) * 3);
-        const height = isFar ? (4.8 + Math.sin(i * 2.2) * 1.2) : (3.4 + Math.cos(i * 1.9) * 0.9);
-        const baseRadius = isFar ? (9.0 + Math.sin(i * 1.5) * 1.5) : (7.0 + Math.cos(i * 2.1) * 1.2);
+        const radius = isFar ? (44 + Math.sin(i * 3.1) * 3) : (36 + Math.cos(i * 2.5) * 3);
+        // +20% scale boost: height 4.1m - 5.8m, baseRadius 8.4m - 10.8m
+        const height = isFar ? (5.8 + Math.sin(i * 2.2) * 1.4) : (4.1 + Math.cos(i * 1.9) * 1.1);
+        const baseRadius = isFar ? (10.8 + Math.sin(i * 1.5) * 1.8) : (8.4 + Math.cos(i * 2.1) * 1.4);
         const color = isFar ? 0x121b27 : 0x0c131d;
         const mesh = createSharpMountainWithRoundedTip(baseRadius, height, color);
         mesh.position.x = Math.cos(angle) * radius;
