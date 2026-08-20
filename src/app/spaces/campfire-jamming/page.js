@@ -175,113 +175,6 @@ export default function CampFireMelodies() {
         </h2>
       </div>
 
-      {/* Interactive Experience Floating Toast / Tooltip */}
-      <div
-        className="campfire-interactive-toast"
-        style={{
-          position: 'fixed',
-          top: '19vh',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 45,
-          pointerEvents: 'auto',
-          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-          opacity: showTooltip ? 1 : 0,
-          pointerEvents: showTooltip ? 'auto' : 'none',
-          transform: showTooltip ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(-10px)',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
-            padding: '8px 16px 8px 14px',
-            background: 'rgba(20, 14, 10, 0.82)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            border: '1px solid rgba(251, 191, 36, 0.35)',
-            borderRadius: '9999px',
-            boxShadow: '0 10px 30px -5px rgba(0,0,0,0.8), 0 0 20px rgba(245, 158, 11, 0.15)',
-            color: '#fef3c7',
-            fontSize: '0.86rem',
-            fontWeight: '500',
-            letterSpacing: '0.01em',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          <span style={{ display: 'inline-flex', padding: '4px', background: 'rgba(245, 158, 11, 0.15)', borderRadius: '50%' }}>
-            <Wind size={14} className="text-amber-400 animate-pulse" />
-          </span>
-          <span>Move mouse to direct the wind & cast lantern light</span>
-          <button
-            onClick={() => setShowTooltip(false)}
-            aria-label="Dismiss hint"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '20px',
-              height: '20px',
-              borderRadius: '50%',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: 'none',
-              color: '#d4d4d8',
-              cursor: 'pointer',
-              marginLeft: '4px',
-              transition: 'background 0.2s ease, color 0.2s ease',
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(245, 158, 11, 0.4)'; e.currentTarget.style.color = '#fff'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'; e.currentTarget.style.color = '#d4d4d8'; }}
-          >
-            <X size={12} />
-          </button>
-        </div>
-      </div>
-
-      {/* Compact Re-open Pill Button on Top-Right Corner */}
-      {!showTooltip && (
-        <button
-          onClick={() => setShowTooltip(true)}
-          title="Interactive campfire tips"
-          className="campfire-hint-reopen-btn"
-          style={{
-            position: 'fixed',
-            top: '72px',
-            right: '24px',
-            zIndex: 45,
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            padding: '6px 12px',
-            background: 'rgba(20, 14, 10, 0.72)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-            border: '1px solid rgba(251, 191, 36, 0.25)',
-            borderRadius: '9999px',
-            color: '#fbbf24',
-            fontSize: '0.78rem',
-            fontWeight: '600',
-            cursor: 'pointer',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.5)',
-            transition: 'all 0.25s ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'rgba(30, 20, 12, 0.9)';
-            e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.5)';
-            e.currentTarget.style.transform = 'scale(1.04)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'rgba(20, 14, 10, 0.72)';
-            e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.25)';
-            e.currentTarget.style.transform = 'scale(1)';
-          }}
-        >
-          <Sparkles size={12} />
-          <span>Interactive Wind</span>
-        </button>
-      )}
-
       {/* Floating Picture-in-Picture YouTube Player */}
       <FloatingYouTubePlayer
         videoVisible={videoVisible}
@@ -307,6 +200,111 @@ export default function CampFireMelodies() {
         <PlayerErrorBanner code={playerError} formatMessage={(code) => (
           code === 150 || code === 101 ? '⚠ Video embedding restricted (Auto-skipping...)' : `⚠ Video Error: ${code}`
         )} />
+      )}
+
+      {/* Interactive Experience Tooltip Floating Directly Above Bottom Player Capsule */}
+      <div
+        className="campfire-interactive-toast"
+        style={{
+          position: 'fixed',
+          bottom: '96px',
+          left: '50%',
+          transform: showTooltip ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(12px)',
+          zIndex: 45,
+          pointerEvents: showTooltip ? 'auto' : 'none',
+          opacity: showTooltip ? 1 : 0,
+          transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            padding: '7px 16px 7px 14px',
+            background: 'rgba(18, 12, 8, 0.88)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            border: '1px solid rgba(251, 191, 36, 0.35)',
+            borderRadius: '9999px',
+            boxShadow: '0 8px 30px rgba(0,0,0,0.85), 0 0 16px rgba(245, 158, 11, 0.15)',
+            color: '#fef3c7',
+            fontSize: '0.84rem',
+            fontWeight: '500',
+            letterSpacing: '0.01em',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          <span style={{ display: 'inline-flex', padding: '3px', background: 'rgba(245, 158, 11, 0.2)', borderRadius: '50%' }}>
+            <Wind size={13} className="text-amber-400 animate-pulse" />
+          </span>
+          <span>Move mouse to direct wind & cast lantern light</span>
+          <button
+            onClick={() => setShowTooltip(false)}
+            aria-label="Dismiss hint"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '18px',
+              height: '18px',
+              borderRadius: '50%',
+              background: 'rgba(255, 255, 255, 0.12)',
+              border: 'none',
+              color: '#d4d4d8',
+              cursor: 'pointer',
+              marginLeft: '4px',
+              transition: 'background 0.2s ease, color 0.2s ease',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(245, 158, 11, 0.45)'; e.currentTarget.style.color = '#fff'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)'; e.currentTarget.style.color = '#d4d4d8'; }}
+          >
+            <X size={11} />
+          </button>
+        </div>
+      </div>
+
+      {/* Compact Re-open Pill Button Positioned Discreetly Above Player on Right */}
+      {!showTooltip && (
+        <button
+          onClick={() => setShowTooltip(true)}
+          title="Interactive campfire tips"
+          className="campfire-hint-reopen-btn"
+          style={{
+            position: 'fixed',
+            bottom: '96px',
+            right: '24px',
+            zIndex: 45,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            padding: '5px 12px',
+            background: 'rgba(18, 12, 8, 0.82)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid rgba(251, 191, 36, 0.25)',
+            borderRadius: '9999px',
+            color: '#fbbf24',
+            fontSize: '0.76rem',
+            fontWeight: '600',
+            cursor: 'pointer',
+            boxShadow: '0 4px 15px rgba(0,0,0,0.6)',
+            transition: 'all 0.25s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(28, 18, 10, 0.95)';
+            e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.5)';
+            e.currentTarget.style.transform = 'scale(1.04)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(18, 12, 8, 0.82)';
+            e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.25)';
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
+        >
+          <Sparkles size={11} />
+          <span>Wind Guide</span>
+        </button>
       )}
 
       {/* Bottom Floating Player Capsule */}
