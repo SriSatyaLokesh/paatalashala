@@ -139,19 +139,17 @@ export default function CampFireMelodies() {
       </div>
 
       {/* Top Header HUD */}
-      <div style={{ position: 'fixed', top: '16px', left: '20px', right: '20px', zIndex: 50, pointerEvents: 'auto' }}>
-        <SpaceHudHeader
-          timeString={timeString}
-          ambientOn={ambientOn}
-          onToggleAmbient={() => setAmbientOn(a => !a)}
-          videoVisible={videoVisible}
-          onToggleVideo={() => setVideoVisible(v => !v)}
-          accentText={CAPSULE_THEME.accentText}
-          accentRgb={CAPSULE_THEME.accentRgb}
-          VideoIcon={Tv}
-          className="hud-top-header"
-        />
-      </div>
+      <SpaceHudHeader
+        timeString={timeString}
+        ambientOn={ambientOn}
+        onToggleAmbient={() => setAmbientOn(a => !a)}
+        videoVisible={videoVisible}
+        onToggleVideo={() => setVideoVisible(v => !v)}
+        accentText={CAPSULE_THEME.accentText}
+        accentRgb={CAPSULE_THEME.accentRgb}
+        VideoIcon={Tv}
+        className="hud-top-header"
+      />
 
       {/* Immersive Space Title */}
       <div
@@ -390,8 +388,19 @@ export default function CampFireMelodies() {
           .campfire-hint-reopen-btn {
             display: none !important;
           }
+          .hud-top-header {
+            padding: 12px 14px !important;
+          }
+          .hud-top-header .hud-button {
+            padding: 6px 10px !important;
+            font-size: 0.72rem !important;
+            gap: 4px !important;
+          }
+          .btn-label {
+            font-size: 0.68rem !important;
+          }
           .campfire-title-container {
-            top: 76px !important;
+            top: 72px !important;
             padding: 0 16px !important;
           }
           .campfire-title {
