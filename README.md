@@ -24,26 +24,37 @@ Paatalashala is an immersive, interactive audio web application designed to trig
 * **Atmosphere:** Revving 3-wheeler engine hums, dynamic rain/dust city weather particle lines, street noise, and loud pneumatic air-horn triggers.
 * **Music:** High-octane Telugu mass beats and commercial chart-busters.
 
-### 4. 📼 Thathayya Tape Recorder (తాతయ్య టేప్ రికార్డర్)
-* **Vibe:** Nostalgic village veranda music.
-* **Atmosphere:** Rhythmic hums of birds, gentle nature, and classic Telugu lyrics display banner. Shifted camera view to make the tape recorder and grandfather's face clearly visible.
-* **Music:** Legendary classic melodies by Ghantasala, SPB, and Ilaiyaraaja.
-* **Dynamic Visuals:** Cycles through three custom veranda background pictures on song changes.
-
-### 5. 📻 Ammama Radio (అమ్మమ్మ రేడియో)
+### 4. 📻 Ammama Radio (అమ్మమ్మ రేడియో)
 * **Vibe:** Traditional village kitchen cooking vibes.
 * **Atmosphere:** Gentle morning birds, warm kitchen mist fog + dust particle effects, and classic maternal lullaby lyrics displayed above the player.
-* **Music:** Beautiful vintage tracks and maternal melodies by S. Janaki, Susheela, and Koti.
+* **Music:** Beautiful vintage tracks and maternal melodies by S. Janaki, P. Susheela, and Koti.
 * **Dynamic Visuals:** Cycles through custom village kitchen background pictures on song changes.
 
-### 6. 🌙 Meda Meeda Vennallo (మేడ మీద వెన్నెల్లో)
+### 5. 📼 Thathayya Tape Recorder (తాతయ్య టేప్ రికార్డర్)
+* **Vibe:** Nostalgic village veranda music.
+* **Atmosphere:** Rhythmic hums of birds, gentle nature, and classic Telugu lyrics display banner with grandfather veranda aesthetics.
+* **Music:** Legendary classic melodies by Ghantasala, SPB, and Ilaiyaraaja with Veturi lyric quotes.
+* **Dynamic Visuals:** Cycles through custom veranda background pictures on song changes.
+
+### 6. 🎷 Gundamma Gari Gramophone (గుండమ్మ గారి గ్రామఫోన్)
+* **Vibe:** 50s, 60s, 70s, and 80s Telugu evergreen golden classics & Black and White masterpieces.
+* **Atmosphere:** Heritage retro courtyard with radiant golden brass horn gramophone, spinning vinyl discs, amber warmth, and 30 iconic vintage lyric quotes.
+* **Music:** 400+ timeless classics by Ghantasala, P. Susheela, S. Janaki, S.P. Balasubrahmanyam, and P.B. Sreenivas.
+* **Dynamic Visuals:** High-definition selective-color landscapes featuring legendary Tollywood actress **Suryakantham garu**.
+
+### 7. 🌙 Meda Meeda Vennallo (మేడ మీద వెన్నెల్లో)
 * **Vibe:** Soothing terrace night breeze and stargazing under the moonlit sky.
 * **Atmosphere:** Deep cosmic night sky, shooting stars, warm terrace lighting, and serene ambient breeze.
 * **Music:** Gentle, nocturnal Telugu melodies and soul-soothing acoustics.
 
-### 7. 🔀 Sammelanam / Surprise Me (సమ్మేళనం)
+### 8. 🔥 Campfire Jamming (క్యాంప్ ఫైర్ జామ్మింగ్)
+* **Vibe:** Crackling late-night campfire, wilderness mountain horizon, and acoustic travel melodies.
+* **Atmosphere:** Real-time 3D Three.js crackling flame particles, ember dynamics, interactive cursor flashlight, faceted mountain ring, and cozy camping tent.
+* **Music:** Late-night acoustic Telugu guitar tracks, campfire anthems, and unplugged melodies.
+
+### 9. 🔀 Sammelanam / Surprise Me (సమ్మేళనం)
 * **Vibe:** Dynamic cross-space journey and infinite surprise discoveries.
-* **Atmosphere:** Adaptive ambiance that transitions fluidly across farms, retro verandas, night terraces, and city roads.
+* **Atmosphere:** Adaptive ambiance that transitions fluidly across all cultural soundscapes.
 * **Music:** Curated cross-genre Telugu songs pulling live from all unique spaces.
 
 ---

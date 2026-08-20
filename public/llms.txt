@@ -1,0 +1,46 @@
+# Paatalashala (పాఠశాల)
+
+> Handcrafted Nostalgic Telugu Playlists & Immersive Cultural Ambient Soundscapes.
+
+## Overview
+Paatalashala is an interactive web experience connecting music lovers to vintage and cultural Telugu settings. It blends curated, high-quality Telugu playlists with realistic 3D and spatial ambient soundscapes.
+
+## Key Telugu Music Spaces
+
+### 1. Gundamma Gari Gramophone (`/spaces/gundamma-gramophone`)
+- **Theme**: Golden Era 1950s, 1960s, 1970s, and 1980s Telugu Evergreen Classics & Black and White Masterpieces.
+- **Featured Artists & Legends**: Ghantasala, P. Susheela, S. Janaki, S.P. Balasubrahmanyam, P.B. Sreenivas, K.V. Mahadevan, Pendyala Nageswara Rao, Saluri Rajeswara Rao.
+- **Atmosphere**: Vintage brass horn gramophone spinning classic vinyl records in a heritage courtyard with legendary actress Suryakantham garu aesthetics.
+- **Top Search Queries**: Best 60s Telugu songs, best 70s Telugu melodies, 80s Telugu evergreen hits, Telugu black and white songs, old Telugu retro music, vintage Telugu gramophone classics.
+
+### 2. Campfire Jamming (`/spaces/campfire-jamming`)
+- **Theme**: Late-Night Acoustic Campfire & Youth Travel Melodies.
+- **Atmosphere**: Real-time 3D Three.js crackling campfire flame visualizer, glowing mountain horizon, starry wilderness sky, and camping tent under the night breeze.
+- **Top Search Queries**: Best Telugu campfire songs, late night acoustic Telugu melodies, Telugu guitar travel songs, midnight Telugu stargazing music.
+
+### 3. Ammama Radio (`/spaces/ammama`)
+- **Theme**: Grandma's kitchen aroma & 80s-90s vintage transistor radio melodies (SPB, Chitra, Ilaiyaraaja).
+
+### 4. Thathayya Tape Recorder (`/spaces/thathayya`)
+- **Theme**: Veranda tea cup & cassette recorder classics with golden Veturi lyric quotes.
+
+### 5. Royal Saloon (`/spaces/saloon`)
+- **Theme**: 90s-2000s Telugu TV hits drifting across local barber shop chairs.
+
+### 6. Auto Janie (`/spaces/auto`)
+- **Theme**: High-energy Hyderabad street auto mass beats with bass vibrations.
+
+### 7. Tractor Anna (`/spaces/tractor-anna`)
+- **Theme**: Rustic Godavari farmland steering & Telugu rural folk tunes.
+
+### 8. Meda Meeda Vennallo (`/spaces/vennallo`)
+- **Theme**: Village rooftop terrace night breeze, moonlit sky, and gentle lullabies.
+
+### 9. Surprise Me / Sammelanam (`/spaces/sammelanam`)
+- **Theme**: Multi-universe randomized shuffle blending all cultural situations.
+
+## Technical Architecture
+- **Framework**: Next.js (App Router), React, Tailwind CSS, Three.js WebGL.
+- **Audio Delivery**: YouTube IFrame Embed API (Zero hosted copyright audio, completely legal streaming).
+- **Presence**: Real-time listener counters via WebSocket channels.
+- **URL**: https://srisatyalokesh.is-a.dev/paatalashala

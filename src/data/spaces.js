@@ -60,6 +60,16 @@ export const SPACES = [
     description: "Veranda chair, hot cup of tea, and old Telugu melodies drifting from the tape recorder cassette player.",
   },
   {
+    id: "gundamma-gramophone",
+    slug: "gundamma-gramophone",
+    name: "Gundamma Gari Gramophone",
+    tagline: "70ల మరియు 80ల మధురమైన పాత తరాల క్లాసిక్స్",
+    emoji: "🎷",
+    active: true,
+    theme: "amber",
+    description: "Golden 70s and 80s Telugu evergreen golden melodies spinning on a vintage brass gramophone horn in a classic retro courtyard.",
+  },
+  {
     id: "vennallo",
     slug: "vennallo",
     name: "మేడ మీద వెన్నెల్లో",

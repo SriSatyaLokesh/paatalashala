@@ -78,16 +78,16 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       torchTarget.position.set(0, -2.85, 4);
       scene.add(torchTarget);
 
-      // Flashlight spotlight originating from camera and aimed at mouse cursor position
-      torchSpotLight = new THREE.SpotLight(0xffecd0, 16, 45, Math.PI / 7, 0.5, 1);
+      // Wide ambient lantern spotlight originating from camera and illuminating cursor area with wide throw
+      torchSpotLight = new THREE.SpotLight(0xffbe55, 20, 60, Math.PI / 4.2, 0.75, 1.1);
       torchSpotLight.castShadow = true;
       torchSpotLight.shadow.mapSize.width = 1024;
       torchSpotLight.shadow.mapSize.height = 1024;
       torchSpotLight.target = torchTarget;
       scene.add(torchSpotLight);
 
-      // Soft ambient point light following cursor position
-      torchPointLight = new THREE.PointLight(0xffa555, 3.0, 9, 2);
+      // Wide ambient orange lantern glow spreading across the ground, logs, stones, and surrounding terrain
+      torchPointLight = new THREE.PointLight(0xff8c1a, 6.5, 22, 1.5);
       scene.add(torchPointLight);
     }
 
@@ -125,20 +125,72 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       campfireGroup.position.set(0, -2.8, 0);
       scene.add(campfireGroup);
 
-      // Dark, natural ground beneath campfire that receives torch and fire shadows
+      // Natural campsite ground beneath campfire that catches warm moonlight, firelight, and torch glow
       const ground = new THREE.Mesh(
         new THREE.CircleGeometry(42, 64),
-        new THREE.MeshStandardMaterial({ color: 0x16120e, roughness: 0.92 })
+        new THREE.MeshStandardMaterial({ color: 0x2a231b, roughness: 0.86 })
       );
       ground.rotation.x = -Math.PI / 2;
       ground.position.y = -0.05;
       ground.receiveShadow = true;
       campfireGroup.add(ground);
 
-      scene.add(new THREE.HemisphereLight(0x1a2333, 0x050608, 0.25));
+      // Single seamless rocky mountain mesh with steep slopes and smooth rounded peak (no mushroom or floating seams)
+      function createSharpMountainWithRoundedTip(baseRadius, height, color) {
+        // High quality single-mesh cone with 5 height subdivisions
+        const radialSegments = 7;
+        const heightSegments = 5;
+        const geo = new THREE.ConeGeometry(baseRadius, height, radialSegments, heightSegments);
+        
+        // Procedurally round the top vertex layers smoothly
+        const pos = geo.attributes.position;
+        for (let i = 0; i < pos.count; i++) {
+          const y = pos.getY(i);
+          const ratio = (y + height / 2) / height; // 0 (bottom) to 1 (peak)
+          if (ratio > 0.82) {
+            // Soften apex curvature on highest vertices
+            const pullDown = (ratio - 0.82) * 0.35;
+            pos.setY(i, y - pullDown);
+          }
+        }
+        geo.computeVertexNormals();
 
-      // Natural campfire glow
-      fireLight = new THREE.PointLight(0xff8010, 6.0, 22, 1.8);
+        const mat = new THREE.MeshStandardMaterial({
+          color: color,
+          roughness: 0.88,
+          flatShading: true,
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.y = -2.8 + height / 2;
+        return mesh;
+      }
+
+      // Full 360-degree mountain perimeter ring around campsite with varied sizes & star visibility valleys
+      const mountainCount = 20;
+      for (let i = 0; i < mountainCount; i++) {
+        // Create natural mountain clusters with deliberate gaps/valleys for star visibility
+        const isStarGap = (i % 5 === 0);
+        if (isStarGap) continue; // Gap for clear view of twinkling stars
+
+        const angle = (i / mountainCount) * Math.PI * 2 + (Math.sin(i * 1.7) * 0.08);
+        const isFar = (i % 2 === 0);
+        const radius = isFar ? (34 + Math.sin(i * 3.1) * 4) : (26 + Math.cos(i * 2.5) * 3);
+        const height = isFar ? (6.8 + Math.sin(i * 2.2) * 1.8) : (4.6 + Math.cos(i * 1.9) * 1.2);
+        const baseRadius = isFar ? (9.5 + Math.sin(i * 1.5) * 2.0) : (7.5 + Math.cos(i * 2.1) * 1.5);
+        const color = isFar ? 0x152236 : 0x0f1826;
+        const mesh = createSharpMountainWithRoundedTip(baseRadius, height, color);
+        mesh.position.x = Math.cos(angle) * radius;
+        mesh.position.z = Math.sin(angle) * radius;
+        mesh.rotation.y = (i * 1.3) % (Math.PI * 2);
+        scene.add(mesh);
+      }
+
+      // Ambient sky & ground illumination so the campsite surface is naturally visible
+      scene.add(new THREE.HemisphereLight(0x334460, 0x1c1712, 0.52));
+      scene.add(new THREE.AmbientLight(0xffa844, 0.28));
+
+      // Natural campfire glow casting warm radiance across the ground
+      fireLight = new THREE.PointLight(0xff8515, 7.0, 28, 1.6);
       fireLight.position.set(0, 1.2, 0);
       fireLight.castShadow = true;
       campfireGroup.add(fireLight);

@@ -12,6 +12,8 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
 - [ ] **Phase 4: Meda Midha Vennallo** - Implement the terrace midnight space, clean and parse playlists, add starry village backgrounds, and configure page navigation.
 - [ ] **Phase 5: Deluxe Saloon & Accessibility** - Integrate the retro barber shop theme and add keyboard and animation pausing controls.
 - [ ] **Phase 6: Playlist Sync (V2 Integration)** - Build Spotify and YouTube OAuth integrations for playlist cloning.
+- [x] **Phase 7: Camp Fire Melodies** - Implement the Camp Fire Melodies environment with 3D WebGL campfire visualizer, starry night backdrop, glowing tent component, and curated campfire hits. (completed 2026-08-18)
+- [x] **Phase 8: Gundamma Gramophone** - Create 70s & 80s Telugu classics space environment, process vintage playlists, and integrate space route. (completed 2026-08-19)
 
 ---
 
@@ -111,7 +113,7 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
 
 - [ ] 06-01: Set up Next.js API endpoints for Spotify/Google OAuth.
 - [ ] 06-02: Integrate Spotify and YouTube Data API endpoints.
- 
+
 ### Phase 7: Camp Fire Melodies
 
 **Goal**: Implement the Camp Fire Melodies environment based on CodePen visual effects (https://codepen.io/editor/Gioda34/pen/019fb253-8909-75b0-b731-bc746078bba6), featuring an illuminated camping tent, campfire visualizers/particles, starry night sky, and custom playlist support.
@@ -124,11 +126,23 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
 **Plans**: 1 plan
 - [x] 07-01: Build campfire environment UI, starry night backdrop, glowing tent component, media player integration, and routing. (completed 2026-08-18)
 
+### Phase 8: Gundamma Gramophone
+
+**Goal**: Create the 70s and 80s Telugu classics space environment (Gundamma Gramophone), process playlists/song lists, and integrate space routing.
+**Depends on**: Phase 3
+**Requirements**: ENV-03 (Gramophone), DATA-01, DATA-02
+**Success Criteria**:
+  1. User can navigate to `/spaces/gundamma-gramophone` and play classic 70s/80s Telugu melodies.
+  2. Songs dataset is generated and validated.
+
+**Plans**: 1 plan
+- [x] 08-01: Create 70s/80s Telugu song dataset, set up gundamma-gramophone route page, and register space in SPACES & Sammelanam. (completed 2026-08-19)
+
 ---
  
 ## Progress
  
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
  
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -139,3 +153,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 5. Deluxe Saloon & Accessibility | 0/2 | Not started | - |
 | 6. Playlist Sync (V2 Integration) | 0/2 | Not started | - |
 | 7. Camp Fire Melodies | 1/1 | Complete    | 2026-08-18 |
+| 8. Gundamma Gramophone | 1/1 | Complete    | 2026-08-19 |
