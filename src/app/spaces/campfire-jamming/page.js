@@ -388,7 +388,9 @@ export default function CampFireMelodies() {
             cursor: auto !important;
           }
           .campfire-torch-cursor,
-          .campfire-torch-halo {
+          .campfire-torch-halo,
+          .campfire-interactive-toast,
+          .campfire-hint-reopen-btn {
             display: none !important;
           }
           .campfire-title-container {
@@ -398,11 +400,6 @@ export default function CampFireMelodies() {
           .campfire-title {
             font-size: 2.1rem !important;
             line-height: 1.2 !important;
-          }
-          .campfire-hint-pill {
-            font-size: 0.72rem !important;
-            padding: 4px 10px !important;
-            text-align: center !important;
           }
           .campfire-tent-container {
             display: none !important;

@@ -1,5 +1,18 @@
 [
   {
+    "id": "campfire-jamming-1",
+    "title": "The Life of Ram",
+    "artist": "Pradeep Kumar, Govind Vasantha",
+    "movie": "Jaanu",
+    "year": "2020",
+    "genre": "Acoustic / Soul",
+    "mood": "Peaceful / Wanderer",
+    "active": true,
+    "sequence": 1,
+    "youtubeVideoId": "89-XKZEnfxU",
+    "place": "campfire-jamming"
+  },
+  {
     "id": "campfire-jamming-2",
     "title": "Baitikochi Chuste",
     "artist": "Anirudh Ravichander",
@@ -8,7 +21,7 @@
     "genre": "Acoustic / Melodic",
     "mood": "Breezy / Joyful",
     "active": true,
-    "sequence": 1,
+    "sequence": 2,
     "youtubeVideoId": "1tHsJBQ4fHo",
     "place": "campfire-jamming"
   },
@@ -21,7 +34,7 @@
     "genre": "Acoustic / Folk",
     "mood": "Nostalgic / Melodious",
     "active": true,
-    "sequence": 2,
+    "sequence": 3,
     "youtubeVideoId": "AImD1AjhgnQ",
     "place": "campfire-jamming"
   },
@@ -34,7 +47,7 @@
     "genre": "Soulful / Folk",
     "mood": "Deep / Reflective",
     "active": true,
-    "sequence": 3,
+    "sequence": 4,
     "youtubeVideoId": "mJPEf7vWb6Q",
     "place": "campfire-jamming"
   },
@@ -47,7 +60,7 @@
     "genre": "Fun Acoustic",
     "mood": "Playful / Upbeat",
     "active": true,
-    "sequence": 4,
+    "sequence": 5,
     "youtubeVideoId": "QXr4udrkafU",
     "place": "campfire-jamming"
   },
@@ -60,7 +73,7 @@
     "genre": "Youthful Melody",
     "mood": "Upbeat / Fun",
     "active": true,
-    "sequence": 5,
+    "sequence": 6,
     "youtubeVideoId": "QlEvCxEnDTY",
     "place": "campfire-jamming"
   },
@@ -73,7 +86,7 @@
     "genre": "Romantic Melody",
     "mood": "Dreamy / Gentle",
     "active": true,
-    "sequence": 6,
+    "sequence": 7,
     "youtubeVideoId": "yzb41I5Pihk",
     "place": "campfire-jamming"
   },
@@ -86,7 +99,7 @@
     "genre": "Mass Folk",
     "mood": "Lively / Fun",
     "active": true,
-    "sequence": 7,
+    "sequence": 8,
     "youtubeVideoId": "5yPO5lFeAIE",
     "place": "campfire-jamming"
   },
@@ -99,21 +112,8 @@
     "genre": "Acoustic Pop",
     "mood": "Youthful / Sweet",
     "active": true,
-    "sequence": 8,
-    "youtubeVideoId": "0AxW73jYkyg",
-    "place": "campfire-jamming"
-  },
-  {
-    "id": "campfire-jamming-1",
-    "title": "The Life of Ram",
-    "artist": "Pradeep Kumar, Govind Vasantha",
-    "movie": "Jaanu",
-    "year": "2020",
-    "genre": "Acoustic / Soul",
-    "mood": "Peaceful / Wanderer",
-    "active": true,
     "sequence": 9,
-    "youtubeVideoId": "89-XKZEnfxU",
+    "youtubeVideoId": "0AxW73jYkyg",
     "place": "campfire-jamming"
   },
   {
