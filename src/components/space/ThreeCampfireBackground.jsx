@@ -36,8 +36,9 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
     let particles = [];
     let starPoints;
     let animationFrameId;
+    let mountainMeshes = [];
 
-    // 3D Raycasting & Cursor Tracking (aligned with campfire ground plane at y = -2.85)
+    // 3D Raycasting & Cursor Tracking (aligned with campfire ground plane and mountain geometries)
     const mouse = new THREE.Vector2(0, 0);
     const raycaster = new THREE.Raycaster();
     const groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 2.85);
@@ -78,16 +79,16 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       torchTarget.position.set(0, -2.85, 4);
       scene.add(torchTarget);
 
-      // Wide ambient lantern spotlight originating from camera and illuminating cursor area with wide throw
-      torchSpotLight = new THREE.SpotLight(0xffbe55, 20, 60, Math.PI / 4.2, 0.75, 1.1);
+      // Long-throw flashlight beam originating from camera that vividly illuminates the ground and distant mountains
+      torchSpotLight = new THREE.SpotLight(0xffbe55, 38, 140, Math.PI / 3.8, 0.72, 0.85);
       torchSpotLight.castShadow = true;
       torchSpotLight.shadow.mapSize.width = 1024;
       torchSpotLight.shadow.mapSize.height = 1024;
       torchSpotLight.target = torchTarget;
       scene.add(torchSpotLight);
 
-      // Wide ambient orange lantern glow spreading across the ground, logs, stones, and surrounding terrain
-      torchPointLight = new THREE.PointLight(0xff8c1a, 6.5, 22, 1.5);
+      // Wide warm lantern point light that follows cursor contact point in 3D space
+      torchPointLight = new THREE.PointLight(0xff9922, 10.0, 35, 1.3);
       scene.add(torchPointLight);
     }
 
@@ -182,7 +183,9 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         mesh.position.x = Math.cos(angle) * radius;
         mesh.position.z = Math.sin(angle) * radius;
         mesh.rotation.y = (i * 1.3) % (Math.PI * 2);
+        mesh.receiveShadow = true;
         scene.add(mesh);
+        mountainMeshes.push(mesh);
       }
 
       // Ambient sky & ground illumination so the campsite surface is naturally visible
@@ -291,17 +294,39 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
 
     function updateCursor3D() {
       raycaster.setFromCamera(mouse, camera);
-      const hit = raycaster.ray.intersectPlane(groundPlane, cursor3D);
 
-      if (!hit) {
-        cursor3D.set(0, -2.85, 4);
-      }
+      // Check if cursor intersects any mountain mesh first
+      const mountainIntersects = mountainMeshes.length > 0 ? raycaster.intersectObjects(mountainMeshes, false) : [];
 
-      // Flashlight spotlight and point light follow cursor
-      if (torchSpotLight && torchTarget && torchPointLight) {
-        torchSpotLight.position.copy(camera.position);
-        torchTarget.position.copy(cursor3D);
-        torchPointLight.position.copy(cursor3D).add(new THREE.Vector3(0, 0.4, 0));
+      if (mountainIntersects.length > 0) {
+        const hit = mountainIntersects[0];
+        cursor3D.copy(hit.point);
+        
+        if (torchSpotLight && torchTarget && torchPointLight) {
+          torchSpotLight.position.copy(camera.position);
+          torchTarget.position.copy(hit.point);
+          // Position warm point light slightly outward along the surface normal
+          const normalOffset = hit.face ? hit.face.normal.clone().multiplyScalar(0.8) : new THREE.Vector3(0, 0.5, 0);
+          torchPointLight.position.copy(hit.point).add(normalOffset);
+          torchPointLight.intensity = 16.0; // Boost local brightness when shining on mountain slopes
+          torchPointLight.distance = 45;
+        }
+      } else {
+        const hitGround = raycaster.ray.intersectPlane(groundPlane, cursor3D);
+        if (!hitGround) {
+          // If aiming upward at sky, cast flashlight beam far into the distance
+          const farTarget = raycaster.ray.origin.clone().add(raycaster.ray.direction.clone().multiplyScalar(50));
+          cursor3D.copy(farTarget);
+        }
+
+        // Flashlight spotlight and point light follow ground cursor
+        if (torchSpotLight && torchTarget && torchPointLight) {
+          torchSpotLight.position.copy(camera.position);
+          torchTarget.position.copy(cursor3D);
+          torchPointLight.position.copy(cursor3D).add(new THREE.Vector3(0, 0.5, 0));
+          torchPointLight.intensity = 10.0;
+          torchPointLight.distance = 35;
+        }
       }
 
       windVector.subVectors(cursor3D, fireOrigin);
