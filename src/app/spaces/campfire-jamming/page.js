@@ -64,8 +64,77 @@ export default function CampFireMelodies() {
   const [pointerPos, setPointerPos] = useState({ x: -100, y: -100, visible: false });
   const [fuelBurst, setFuelBurst] = useState(0);
 
+  // Procedural Web Audio API sound for realistic fire whoosh, rising roar & crackle bursts
+  const playFireSurgeSound = () => {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const now = ctx.currentTime;
+      const duration = 2.2;
+
+      // 1. White noise buffer for fire roar & rushing flame wind
+      const bufferSize = ctx.sampleRate * duration;
+      const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        output[i] = Math.random() * 2 - 1;
+      }
+
+      const noiseNode = ctx.createBufferSource();
+      noiseNode.buffer = noiseBuffer;
+
+      // 2. Resonant bandpass filter sweeping upward to simulate flame whoosh ignition
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.Q.setValueAtTime(3.5, now);
+      filter.frequency.setValueAtTime(140, now);
+      filter.frequency.exponentialRampToValueAtTime(750, now + 0.35); // Rising flame surge
+      filter.frequency.exponentialRampToValueAtTime(280, now + 1.2);
+      filter.frequency.exponentialRampToValueAtTime(120, now + duration);
+
+      // 3. Lowpass filter for deep combustive warmth
+      const lowpass = ctx.createBiquadFilter();
+      lowpass.type = 'lowpass';
+      lowpass.frequency.setValueAtTime(900, now);
+
+      // 4. Volume Envelope with sharp attack and soft crackle decay
+      const gainNode = ctx.createGain();
+      gainNode.gain.setValueAtTime(0.001, now);
+      gainNode.gain.linearRampToValueAtTime(0.45, now + 0.12); // Instant ignition punch
+      gainNode.gain.exponentialRampToValueAtTime(0.18, now + 0.9);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+      // Connect nodes
+      noiseNode.connect(filter);
+      filter.connect(lowpass);
+      lowpass.connect(gainNode);
+      gainNode.connect(ctx.destination);
+
+      noiseNode.start(now);
+      noiseNode.stop(now + duration);
+
+      // 5. Short pop/crackle bursts
+      [0.08, 0.22, 0.45, 0.72].forEach((offset) => {
+        const popOsc = ctx.createOscillator();
+        const popGain = ctx.createGain();
+        popOsc.type = 'triangle';
+        popOsc.frequency.setValueAtTime(220 + Math.random() * 180, now + offset);
+        popOsc.frequency.exponentialRampToValueAtTime(40, now + offset + 0.06);
+        popGain.gain.setValueAtTime(0.25, now + offset);
+        popGain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.06);
+
+        popOsc.connect(popGain);
+        popGain.connect(ctx.destination);
+        popOsc.start(now + offset);
+        popOsc.stop(now + offset + 0.06);
+      });
+    } catch (_) {}
+  };
+
   const triggerFuelBurst = () => {
     setFuelBurst(Date.now());
+    playFireSurgeSound();
   };
 
   // Auto-dismiss tooltip after 9 seconds, but allow user to reopen at any time via small trigger button
