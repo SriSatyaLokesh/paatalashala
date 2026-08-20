@@ -43,6 +43,9 @@ export default function ThreeCampfireBackground({ isPlaying = true, fuelBurst = 
     let torchSpotLight, torchPointLight, torchTarget;
     let particles = [];
     let starPoints;
+    let shootingStarMesh, shootingStarHead;
+    let shootingStar = null;
+    let nextShootingStarTime = 3.5 + Math.random() * 4.0;
     let animationFrameId;
     let mountainMeshes = [];
 
@@ -128,6 +131,35 @@ export default function ThreeCampfireBackground({ isPlaying = true, fuelBurst = 
 
       starPoints = new THREE.Points(geo, mat);
       scene.add(starPoints);
+
+      // Luminous shooting star / comet trail (gradient fading line)
+      const lineGeo = new THREE.BufferGeometry();
+      const trailPositions = new Float32Array(6); // 2 vertices (head to tail)
+      lineGeo.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3));
+      
+      const lineMat = new THREE.LineBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0,
+        blending: THREE.AdditiveBlending,
+        linewidth: 2,
+        depthWrite: false,
+      });
+      shootingStarMesh = new THREE.Line(lineGeo, lineMat);
+      shootingStarMesh.frustumCulled = false;
+      scene.add(shootingStarMesh);
+
+      // Glowing comet head
+      const headGeo = new THREE.SphereGeometry(0.28, 8, 8);
+      const headMat = new THREE.MeshBasicMaterial({
+        color: 0xfffae0,
+        transparent: true,
+        opacity: 0,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      });
+      shootingStarHead = new THREE.Mesh(headGeo, headMat);
+      scene.add(shootingStarHead);
     }
 
     function buildEnvironment() {
@@ -525,6 +557,75 @@ export default function ThreeCampfireBackground({ isPlaying = true, fuelBurst = 
     window.addEventListener('mousemove', onPointerMove);
     window.addEventListener('touchmove', onTouchMove, { passive: true });
 
+    function updateShootingStars(dt, time) {
+      if (!shootingStarMesh || !shootingStarHead) return;
+
+      // Spawn a new shooting star / comet when timer expires
+      if (!shootingStar && time >= nextShootingStarTime) {
+        // Pick a random sky origin high in the atmosphere
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 38 + Math.random() * 25;
+        const startY = 18 + Math.random() * 16;
+        const startX = Math.cos(angle) * dist;
+        const startZ = Math.sin(angle) * dist;
+
+        // Trajectory: diagonal swift streak across sky with downward slope
+        const dirAngle = angle + Math.PI * 0.75 + (Math.random() - 0.5) * 0.5;
+        const speed = 42 + Math.random() * 24; // Fast shooting star speed
+        const vel = new THREE.Vector3(
+          Math.cos(dirAngle) * speed,
+          -(8 + Math.random() * 12),
+          Math.sin(dirAngle) * speed
+        );
+
+        shootingStar = {
+          pos: new THREE.Vector3(startX, startY, startZ),
+          vel: vel,
+          tailLength: 7.5 + Math.random() * 4.5,
+          age: 0,
+          life: 0.65 + Math.random() * 0.45, // Lasts 0.65 - 1.1 seconds
+        };
+      }
+
+      if (shootingStar) {
+        shootingStar.age += dt;
+        const progress = shootingStar.age / shootingStar.life;
+
+        if (progress >= 1.0) {
+          // Reset shooting star and schedule next one (every 5 to 11 seconds)
+          shootingStar = null;
+          nextShootingStarTime = time + 5.0 + Math.random() * 6.5;
+          shootingStarMesh.material.opacity = 0;
+          shootingStarHead.material.opacity = 0;
+          shootingStarHead.position.set(0, -100, 0);
+          return;
+        }
+
+        // Advance head position
+        shootingStar.pos.addScaledVector(shootingStar.vel, dt);
+
+        // Calculate tail position trailing behind
+        const velNorm = shootingStar.vel.clone().normalize();
+        const tailPos = shootingStar.pos.clone().sub(velNorm.multiplyScalar(shootingStar.tailLength));
+
+        // Update line geometry buffer (head to tail)
+        const posAttr = shootingStarMesh.geometry.attributes.position;
+        posAttr.setXYZ(0, shootingStar.pos.x, shootingStar.pos.y, shootingStar.pos.z);
+        posAttr.setXYZ(1, tailPos.x, tailPos.y, tailPos.z);
+        posAttr.needsUpdate = true;
+
+        // Fade in rapidly and fade out smoothly
+        const fadeIn = Math.min(progress / 0.15, 1.0);
+        const fadeOut = 1.0 - Math.max((progress - 0.6) / 0.4, 0);
+        const alpha = fadeIn * fadeOut * 0.92;
+
+        shootingStarMesh.material.opacity = alpha;
+        shootingStarHead.material.opacity = alpha;
+        shootingStarHead.position.copy(shootingStar.pos);
+        shootingStarHead.scale.setScalar(0.7 + fadeIn * 0.6);
+      }
+    }
+
     function animate(currentTime = performance.now()) {
       animationFrameId = requestAnimationFrame(animate);
       const dt = Math.min((currentTime - lastTime) / 1000, 0.05);
@@ -544,6 +645,7 @@ export default function ThreeCampfireBackground({ isPlaying = true, fuelBurst = 
       }
 
       updateFire(dt, elapsedTime);
+      updateShootingStars(dt, elapsedTime);
 
       renderer.render(scene, camera);
     }
