@@ -207,7 +207,7 @@ export default function CampFireMelodies() {
         className="campfire-interactive-toast"
         style={{
           position: 'fixed',
-          bottom: '120px',
+          bottom: '165px',
           left: '50%',
           transform: showTooltip ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(12px)',
           zIndex: 45,
@@ -269,7 +269,7 @@ export default function CampFireMelodies() {
           className="campfire-hint-reopen-btn"
           style={{
             position: 'fixed',
-            bottom: '120px',
+            bottom: '165px',
             right: '24px',
             zIndex: 45,
             display: 'inline-flex',
