@@ -333,49 +333,6 @@ export default function CampFireMelodies() {
         </div>
       </div>
 
-      {/* Compact Re-open Button Positioned Discreetly Above Player on Right */}
-      {!showTooltip && (
-        <button
-          onClick={() => setShowTooltip(true)}
-          title="Interactive campfire tips"
-          className="campfire-hint-reopen-btn"
-          style={{
-            position: 'fixed',
-            bottom: '165px',
-            right: '24px',
-            zIndex: 45,
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            padding: '5px 12px',
-            background: 'rgba(18, 12, 8, 0.82)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-            border: '1px solid rgba(251, 191, 36, 0.25)',
-            borderRadius: '9999px',
-            color: '#fbbf24',
-            fontSize: '0.76rem',
-            fontWeight: '600',
-            cursor: 'pointer',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.6)',
-            transition: 'all 0.25s ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'rgba(28, 18, 10, 0.95)';
-            e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.5)';
-            e.currentTarget.style.transform = 'scale(1.04)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'rgba(18, 12, 8, 0.82)';
-            e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.25)';
-            e.currentTarget.style.transform = 'scale(1)';
-          }}
-        >
-            <Sparkles size={11} />
-            <span>Wind Guide</span>
-          </button>
-        )}
-
         {/* ── Fixed Desktop Left Fuel Button (Identical placement to Horn in Tractor Anna & Auto Janie) ── */}
         <button
           onClick={triggerFuelBurst}
