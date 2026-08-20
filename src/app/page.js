@@ -302,14 +302,14 @@ export default function Home() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 64px 24px 80px;
+          padding: 38px 24px 64px;
           color: #f0e8dc;
         }
 
         /* ── Header ── */
         .site-header {
           text-align: center;
-          margin-bottom: 24px;
+          margin-bottom: 18px;
           max-width: 560px;
           width: 100%;
         }
@@ -319,12 +319,12 @@ export default function Home() {
           letter-spacing: 0.24em;
           text-transform: uppercase;
           color: #c49a5a;
-          margin-bottom: 18px;
+          margin-bottom: 8px;
         }
         .title-divider {
-          width: 48px; height: 1.5px;
+          width: 42px; height: 1.5px;
           background: linear-gradient(90deg, transparent, #b45309, transparent);
-          margin: 0 auto 20px;
+          margin: 0 auto 10px;
         }
         .site-title {
           font-family: 'Playfair Display', serif;
@@ -342,14 +342,14 @@ export default function Home() {
           color: #b08050;
           font-weight: 400;
           letter-spacing: 0.05em;
-          margin-top: 8px;
+          margin-top: 4px;
         }
         .site-tagline {
-          margin-top: 18px;
+          margin-top: 10px;
           font-size: 0.97rem;
           font-weight: 300;
           color: rgba(230,200,160,0.65);
-          line-height: 1.65;
+          line-height: 1.6;
           letter-spacing: 0.01em;
         }
 
@@ -795,8 +795,8 @@ export default function Home() {
           .landing-bg {
             background-position: left top !important;
           }
-          .page { padding: 44px 16px 60px; }
-          .site-header { margin-bottom: 48px; }
+          .page { padding: 24px 16px 48px; }
+          .site-header { margin-bottom: 20px; }
           .featured-grid {
             grid-template-columns: 1fr;
             gap: 14px;
@@ -885,9 +885,7 @@ export default function Home() {
 
         {/* HEADER */}
         <header className="site-header fade-up d1">
-          <div style={{ marginBottom: '14px', display: 'flex', justifyContent: 'center' }}>
-            <AppUpdateBadge />
-          </div>
+          <AppUpdateBadge />
           <p className="kicker">Telugu Ambient Audio Spaces</p>
           <div className="title-divider" />
           <h1 className="site-title">

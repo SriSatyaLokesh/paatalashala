@@ -54,48 +54,35 @@ export default function AppUpdateBadge() {
     }, 400);
   };
 
+  // Only render when a new update is actually available
+  if (!updateAvailable) {
+    return null;
+  }
+
   return (
     <div className="update-badge-wrapper">
-      {/* 
-        Per requirement: If user is already on latest version, we do NOT show intrusive banners.
-        When an update IS available, we render a glowing "Update App" pill.
-        When on latest, we render a subtle version indicator with on-demand cache refresh.
-      */}
-      {updateAvailable ? (
-        <button
-          onClick={handleUpdate}
-          disabled={isUpdating}
-          className="update-action-btn update-pulse"
-          title="A newer version of Paatalashala is available! Click to update."
-          aria-label="Update app to latest version"
-        >
-          <span className="update-icon-glow">
-            <Sparkles size={14} className="sparkle-icon" />
-          </span>
-          <span className="update-text">
-            {isUpdating ? 'Updating Paatalashala...' : 'New Update Available'}
-          </span>
-          <RefreshCw size={13} className={`refresh-icon ${isUpdating ? 'spin-fast' : ''}`} />
-        </button>
-      ) : (
-        <button
-          onClick={handleUpdate}
-          disabled={isUpdating}
-          className="version-subtle-btn"
-          title="Click to clear cache and reload fresh data"
-          aria-label="App version and fresh cache reload"
-        >
-          <span className="version-dot" />
-          <span className="version-label">{currentTag}</span>
-          <RefreshCw size={11} className={`refresh-subtle ${isUpdating ? 'spin-fast' : ''}`} />
-        </button>
-      )}
+      <button
+        onClick={handleUpdate}
+        disabled={isUpdating}
+        className="update-action-btn update-pulse"
+        title="A newer version of Paatalashala is available! Click to update."
+        aria-label="Update app to latest version"
+      >
+        <span className="update-icon-glow">
+          <Sparkles size={14} className="sparkle-icon" />
+        </span>
+        <span className="update-text">
+          {isUpdating ? 'Updating Paatalashala...' : 'New Update Available'}
+        </span>
+        <RefreshCw size={13} className={`refresh-icon ${isUpdating ? 'spin-fast' : ''}`} />
+      </button>
 
       <style jsx>{`
         .update-badge-wrapper {
           display: inline-flex;
           align-items: center;
           justify-content: center;
+          margin-bottom: 12px;
         }
 
         /* ── Prominent Glow Button (Only when new version exists) ── */
