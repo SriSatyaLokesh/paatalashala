@@ -12,7 +12,7 @@ import RadialVignette from '@/components/space/RadialVignette';
 import { ListenersBadgeSingle } from '@/components/space/ListenersBadge';
 import ParallaxStars from '@/components/space/ParallaxStars';
 import ThreeCampfireBackground from '@/components/space/ThreeCampfireBackground';
-import { Tv } from 'lucide-react';
+import { Tv, Sparkles, Wind } from 'lucide-react';
 
 const AMBIENT_AUDIO = { src: '/audio/night_sky_ambience.mp3', volume: 0.10, gate: 'none' };
 const PRESENCE_CONFIG = { channel: 'presence-campfire-jamming', base: 48, sineAmp: 6, cosAmp: 3, syncPad: 12, catchSpread: 10, catchOffset: 5 };
@@ -144,7 +144,7 @@ export default function CampFireMelodies() {
         />
       </div>
 
-      {/* Immersive Space Title */}
+      {/* Immersive Space Title & Interactive Fire/Wind Tooltip */}
       <div
         className="campfire-title-container"
         style={{
@@ -153,17 +153,45 @@ export default function CampFireMelodies() {
           left: 0,
           right: 0,
           display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           pointerEvents: 'none',
           userSelect: 'none',
           padding: '0 24px',
           zIndex: 10,
+          gap: '10px',
         }}
       >
         <h2 style={{ fontSize: '4.2rem', fontWeight: '900', letterSpacing: '0.04em', color: '#fff', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.9), 0 0 35px rgba(245, 158, 11, 0.45)', fontFamily: "'Akaya Telivigala', 'Gurajada', serif", textAlign: 'center' }} className="campfire-title">
           క్యాంప్ ఫైర్ జామ్మింగ్
         </h2>
+
+        {/* Interactive Experience Badge */}
+        <div
+          className="campfire-hint-pill"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '6px 14px',
+            background: 'rgba(26, 18, 12, 0.65)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid rgba(251, 191, 36, 0.28)',
+            borderRadius: '9999px',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.1)',
+            color: '#fef3c7',
+            fontSize: '0.82rem',
+            fontWeight: '500',
+            letterSpacing: '0.02em',
+            textShadow: '0 1px 4px rgba(0,0,0,0.8)',
+          }}
+        >
+          <Wind size={13} className="text-amber-400 animate-pulse" />
+          <span>Move your mouse to guide the breeze & cast lantern light across the campsite</span>
+          <Sparkles size={12} className="text-amber-400" />
+        </div>
       </div>
 
       {/* Floating Picture-in-Picture YouTube Player */}
@@ -284,6 +312,11 @@ export default function CampFireMelodies() {
           .campfire-title {
             font-size: 2.1rem !important;
             line-height: 1.2 !important;
+          }
+          .campfire-hint-pill {
+            font-size: 0.72rem !important;
+            padding: 4px 10px !important;
+            text-align: center !important;
           }
           .campfire-tent-container {
             display: none !important;
