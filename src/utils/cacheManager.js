@@ -63,13 +63,12 @@ export async function purgeAppCacheAndReload() {
       await Promise.all(keys.map((key) => caches.delete(key)));
     }
 
-    // 2. Unregister or update Service Workers
+    // 2. Unregister Service Workers
     if ('serviceWorker' in navigator) {
       const registrations = await navigator.serviceWorker.getRegistrations();
       await Promise.all(
         registrations.map(async (registration) => {
           try {
-            await registration.update();
             await registration.unregister();
           } catch (_) {}
         })
@@ -80,14 +79,10 @@ export async function purgeAppCacheAndReload() {
     try {
       sessionStorage.clear();
     } catch (_) {}
-
-    // 4. Force a clean cache-busting hard reload
-    const targetUrl = new URL(window.location.href);
-    targetUrl.searchParams.set('fresh', Date.now().toString());
-    window.location.replace(targetUrl.toString());
   } catch (error) {
     console.error('[CacheManager] Error purging cache:', error);
-    // Fallback hard reload
-    window.location.reload(true);
+  } finally {
+    // 4. Clean browser native reload
+    window.location.reload();
   }
 }
