@@ -16,7 +16,7 @@ import { ListenersBadgeSingle } from '@/components/space/ListenersBadge';
 import AmbientWeather from '@/components/AmbientWeather';
 import { Tv } from 'lucide-react';
 
-const PRESENCE_CONFIG = { channel: 'presence-sammelanam', base: 60, sineAmp: 6, cosAmp: 3, syncPad: 14, catchSpread: 16, catchOffset: 8 };
+const PRESENCE_CONFIG = { channel: 'presence-sammelanam', base: 38, sineAmp: 4, cosAmp: 2, syncPad: 14, catchSpread: 10, catchOffset: 5 };
 const ERROR_SKIP_DELAY_MS = 2500;
 const ERROR_SKIP_CODES = [2, 100, 101, 150];
 const MAX_HISTORY = 50;

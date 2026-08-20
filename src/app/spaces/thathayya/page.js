@@ -35,7 +35,7 @@ const VETURI_LYRICS = [
 ];
 
 const AMBIENT_AUDIO = { src: '/audio/grandfather_ambient.mp3', volume: 0.15, gate: 'none' };
-const PRESENCE_CONFIG = { channel: 'presence-thathayya', base: 35, sineAmp: 3, cosAmp: 1, syncPad: 6, catchSpread: 10, catchOffset: 5 };
+const PRESENCE_CONFIG = { channel: 'presence-thathayya', base: 22, sineAmp: 2, cosAmp: 1, syncPad: 6, catchSpread: 6, catchOffset: 3 };
 const AUTO_SKIP = { enabled: true };
 
 const CAPSULE_THEME = {

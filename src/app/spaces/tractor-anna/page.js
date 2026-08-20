@@ -15,7 +15,7 @@ import AmbientWeather from '@/components/AmbientWeather';
 import { Tv } from 'lucide-react';
 
 const AMBIENT_AUDIO = { src: '/audio/tractor_ambient.mp3', volume: 0.03, gate: 'started+ytReady' };
-const PRESENCE_CONFIG = { channel: 'presence-tractor', base: 83, sineAmp: 5, cosAmp: 2, syncPad: 12, catchSpread: 18, catchOffset: 9 };
+const PRESENCE_CONFIG = { channel: 'presence-tractor', base: 42, sineAmp: 4, cosAmp: 2, syncPad: 12, catchSpread: 10, catchOffset: 5 };
 
 function getAmbience(currentSong) {
   const raw = currentSong?.ambience || {

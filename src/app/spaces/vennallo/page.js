@@ -16,7 +16,7 @@ import { Tv } from 'lucide-react';
 const BG_IMAGES = ['/images/vennela_1.webp', '/images/vennela_2.webp', '/images/vennela_3.webp'];
 
 const AMBIENT_AUDIO = { src: '/audio/night_sky_ambience.mp3', volume: 0.12, gate: 'none' };
-const PRESENCE_CONFIG = { channel: 'presence-vennela', base: 52, sineAmp: 5, cosAmp: 2, syncPad: 18, catchSpread: 8, catchOffset: 4 };
+const PRESENCE_CONFIG = { channel: 'presence-vennela', base: 34, sineAmp: 3, cosAmp: 2, syncPad: 18, catchSpread: 8, catchOffset: 4 };
 const AUTO_SKIP = { enabled: true };
 
 const CAPSULE_THEME = {

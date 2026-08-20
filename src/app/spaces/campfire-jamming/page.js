@@ -15,7 +15,7 @@ import ThreeCampfireBackground from '@/components/space/ThreeCampfireBackground'
 import { Tv, Sparkles, Wind, Info, X } from 'lucide-react';
 
 const AMBIENT_AUDIO = { src: '/audio/night_sky_ambience.mp3', volume: 0.10, gate: 'none' };
-const PRESENCE_CONFIG = { channel: 'presence-campfire-jamming', base: 48, sineAmp: 6, cosAmp: 3, syncPad: 12, catchSpread: 10, catchOffset: 5 };
+const PRESENCE_CONFIG = { channel: 'presence-campfire-jamming', base: 36, sineAmp: 4, cosAmp: 2, syncPad: 12, catchSpread: 10, catchOffset: 5 };
 const AUTO_SKIP = { enabled: true, delayMs: 1500, codes: [101, 150] };
 
 const CAPSULE_THEME = {

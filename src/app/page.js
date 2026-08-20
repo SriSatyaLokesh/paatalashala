@@ -154,15 +154,15 @@ const CARD_BG = {
 };
 
 const PRESENCE_SIM_CONFIG = {
-  'tractor-anna': { base: 83, sineAmp: 5, cosAmp: 2 },
-  'saloon': { base: 43, sineAmp: 4, cosAmp: 2 },
-  'auto': { base: 98, sineAmp: 6, cosAmp: 3 },
-  'ammama': { base: 43, sineAmp: 4, cosAmp: 2 },
-  'thathayya': { base: 35, sineAmp: 3, cosAmp: 1 },
-  'vennallo': { base: 52, sineAmp: 5, cosAmp: 2 },
-  'gundamma-gramophone': { base: 45, sineAmp: 4, cosAmp: 2 },
-  'sammelanam': { base: 60, sineAmp: 6, cosAmp: 3 },
-  'campfire-jamming': { base: 48, sineAmp: 6, cosAmp: 3 },
+  'auto': { base: 45, sineAmp: 5, cosAmp: 3 },
+  'tractor-anna': { base: 42, sineAmp: 4, cosAmp: 2 },
+  'sammelanam': { base: 38, sineAmp: 4, cosAmp: 2 },
+  'campfire-jamming': { base: 36, sineAmp: 4, cosAmp: 2 },
+  'vennallo': { base: 34, sineAmp: 3, cosAmp: 2 },
+  'gundamma-gramophone': { base: 32, sineAmp: 3, cosAmp: 2 },
+  'ammama': { base: 28, sineAmp: 3, cosAmp: 1 },
+  'saloon': { base: 26, sineAmp: 3, cosAmp: 1 },
+  'thathayya': { base: 22, sineAmp: 2, cosAmp: 1 },
 };
 
 export default function Home() {
@@ -175,9 +175,10 @@ export default function Home() {
       const c = {};
       for (const p of SPACES) {
         if (p.active) {
-          const cfg = PRESENCE_SIM_CONFIG[p.slug] || { base: 40, sineAmp: 4, cosAmp: 2 };
+          const cfg = PRESENCE_SIM_CONFIG[p.slug] || { base: 30, sineAmp: 3, cosAmp: 1 };
           const s = Math.floor(Date.now() / 4000);
-          c[p.slug] = Math.max(1, Math.round(cfg.base + Math.sin(s * 0.5 + p.id.length) * cfg.sineAmp + Math.cos(s * 0.2) * cfg.cosAmp));
+          const raw = Math.round(cfg.base + Math.sin(s * 0.5 + p.id.length) * cfg.sineAmp + Math.cos(s * 0.2) * cfg.cosAmp);
+          c[p.slug] = Math.min(80, Math.max(1, raw));
         }
       }
       setCounts(c);
