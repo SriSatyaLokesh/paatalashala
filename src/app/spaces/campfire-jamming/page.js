@@ -202,12 +202,12 @@ export default function CampFireMelodies() {
         )} />
       )}
 
-      {/* Interactive Experience Tooltip Floating Directly Above Bottom Player Capsule */}
+      {/* Interactive Experience Tooltip Floating Cleanly Above Bottom Player Capsule */}
       <div
         className="campfire-interactive-toast"
         style={{
           position: 'fixed',
-          bottom: '96px',
+          bottom: '120px',
           left: '50%',
           transform: showTooltip ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(12px)',
           zIndex: 45,
@@ -220,8 +220,8 @@ export default function CampFireMelodies() {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '10px',
-            padding: '7px 16px 7px 14px',
+            gap: '8px',
+            padding: '6px 14px',
             background: 'rgba(18, 12, 8, 0.88)',
             backdropFilter: 'blur(16px)',
             WebkitBackdropFilter: 'blur(16px)',
@@ -229,16 +229,13 @@ export default function CampFireMelodies() {
             borderRadius: '9999px',
             boxShadow: '0 8px 30px rgba(0,0,0,0.85), 0 0 16px rgba(245, 158, 11, 0.15)',
             color: '#fef3c7',
-            fontSize: '0.84rem',
+            fontSize: '0.82rem',
             fontWeight: '500',
             letterSpacing: '0.01em',
             whiteSpace: 'nowrap',
           }}
         >
-          <span style={{ display: 'inline-flex', padding: '3px', background: 'rgba(245, 158, 11, 0.2)', borderRadius: '50%' }}>
-            <Wind size={13} className="text-amber-400 animate-pulse" />
-          </span>
-          <span>Move mouse to direct wind & cast lantern light</span>
+          <span>Move mouse to direct wind and lantern light</span>
           <button
             onClick={() => setShowTooltip(false)}
             aria-label="Dismiss hint"
@@ -264,7 +261,7 @@ export default function CampFireMelodies() {
         </div>
       </div>
 
-      {/* Compact Re-open Pill Button Positioned Discreetly Above Player on Right */}
+      {/* Compact Re-open Button Positioned Discreetly Above Player on Right */}
       {!showTooltip && (
         <button
           onClick={() => setShowTooltip(true)}
@@ -272,7 +269,7 @@ export default function CampFireMelodies() {
           className="campfire-hint-reopen-btn"
           style={{
             position: 'fixed',
-            bottom: '96px',
+            bottom: '120px',
             right: '24px',
             zIndex: 45,
             display: 'inline-flex',
