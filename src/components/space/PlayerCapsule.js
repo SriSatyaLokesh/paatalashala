@@ -1,6 +1,7 @@
 'use client';
 
-import { Volume2, VolumeX, Shuffle, Play, Pause } from 'lucide-react';
+import { useState } from 'react';
+import { Volume2, VolumeX, Shuffle, Play, Pause, Share2, Check } from 'lucide-react';
 
 // The bottom glass "capsule" player card shared by all 6 spaces: vinyl art,
 // track info, shuffle/prev/play/next, volume, seek bar + timestamps.
@@ -18,10 +19,41 @@ export default function PlayerCapsule({
   currentTime, duration, onSeek, seekHovered, onSeekHoverChange, fmt,
   hornSlot = null,
   mobileListenersSlot = null,
+  spaceName,
 }) {
+  const [copied, setCopied] = useState(false);
   const t = theme;
   const iconClass = t.showControlIconHoverClass ? 'control-icon' : undefined;
   const progressPct = duration > 0 ? (currentTime / duration) * 100 : 0;
+
+  const handleShare = async () => {
+    const url = typeof window !== 'undefined' ? window.location.href : 'https://paatalashala.com';
+    const title = spaceName || (typeof document !== 'undefined' ? document.title : 'Paatalashala');
+    const shareText = `hey mowa, paatalshala lo ee space vini chudu, super unnayi songs. ${url}`;
+
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      try {
+        await navigator.share({
+          title: title,
+          text: shareText,
+          url: url,
+        });
+        return;
+      } catch (err) {
+        // If user cancelled share sheet, do nothing
+        if (err.name === 'AbortError') return;
+      }
+    }
+
+    // Fallback: Copy share message to clipboard
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(shareText);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      } catch (_) {}
+    }
+  };
 
   return (
     <div style={{
@@ -119,6 +151,65 @@ export default function PlayerCapsule({
             </button>
 
             <button onClick={onNext} title={t.nextTitle} style={{ background: 'none', border: 'none', color: t.prevNextColor, cursor: 'pointer', padding: '6px', fontSize: '1.2rem', transition: 'transform 0.2s' }} className={iconClass}>⏭</button>
+
+            <button
+              onClick={handleShare}
+              title="Share this space"
+              style={{
+                background: 'none',
+                border: 'none',
+                color: copied ? t.accentText : 'rgba(255,255,255,0.6)',
+                cursor: 'pointer',
+                padding: '6px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'color 0.2s, transform 0.2s',
+                position: 'relative',
+              }}
+              className={iconClass}
+              onMouseEnter={e => {
+                e.currentTarget.style.color = t.accentText;
+                e.currentTarget.style.transform = 'scale(1.1)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.color = copied ? t.accentText : 'rgba(255,255,255,0.6)';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+            >
+              {copied ? <Check size={16} /> : <Share2 size={16} />}
+              {copied && (
+                <div style={{
+                  position: 'absolute',
+                  bottom: '100%',
+                  left: '50%',
+                  transform: 'translateX(-50%) translateY(-8px)',
+                  background: t.accentText,
+                  color: t.playIconColor || '#000',
+                  padding: '4px 8px',
+                  borderRadius: '6px',
+                  fontSize: '0.68rem',
+                  fontWeight: '700',
+                  whiteSpace: 'nowrap',
+                  boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+                  pointerEvents: 'none',
+                  zIndex: 10,
+                }}>
+                  Link Copied!
+                  <div style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    width: 0,
+                    height: 0,
+                    borderLeft: '4px solid transparent',
+                    borderRight: '4px solid transparent',
+                    borderTop: `4px solid ${t.accentText}`,
+                  }} />
+                </div>
+              )}
+            </button>
 
             {hornSlot}
           </div>
