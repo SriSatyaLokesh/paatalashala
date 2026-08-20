@@ -307,53 +307,39 @@ export default function CampFireMelodies() {
           </button>
         )}
 
-        {/* ── Instant Fuel / Petrol Flare Action Button ── */}
+        {/* ── Fixed Desktop Left Fuel Button (Identical placement to Horn in Tractor Anna & Auto Janie) ── */}
         <button
           onClick={triggerFuelBurst}
           title="Add Fuel / Petrol to Campfire (Instant Flame Surge)"
           style={{
             position: 'fixed',
-            bottom: '165px',
-            left: '24px',
-            zIndex: 45,
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            padding: '6px 14px',
-            background: 'linear-gradient(135deg, rgba(234, 88, 12, 0.35), rgba(180, 83, 9, 0.25))',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-            border: '1px solid rgba(249, 115, 22, 0.45)',
-            borderRadius: '9999px',
-            color: '#fdba74',
-            fontSize: '0.78rem',
-            fontWeight: '700',
+            left: '32px',
+            bottom: '24px',
+            width: '48px',
+            height: '48px',
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #f97316, #ea580c)',
+            color: '#fff',
+            border: 'none',
             cursor: 'pointer',
-            boxShadow: '0 4px 20px rgba(234, 88, 12, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.2)',
-            transition: 'all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
-            userSelect: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 8px 24px rgba(234, 88, 12, 0.55)',
+            zIndex: 45,
+            transition: 'transform 0.2s, background-color 0.2s, box-shadow 0.2s',
           }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(234, 88, 12, 0.55), rgba(217, 119, 6, 0.45))';
-            e.currentTarget.style.borderColor = 'rgba(251, 146, 60, 0.8)';
-            e.currentTarget.style.transform = 'scale(1.06) translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 6px 25px rgba(249, 115, 22, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.3)';
+          className="fuel-btn-desktop"
+          onMouseEnter={e => {
+            e.currentTarget.style.transform = 'scale(1.1)';
+            e.currentTarget.style.boxShadow = '0 10px 28px rgba(249, 115, 22, 0.75)';
           }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(234, 88, 12, 0.35), rgba(180, 83, 9, 0.25))';
-            e.currentTarget.style.borderColor = 'rgba(249, 115, 22, 0.45)';
-            e.currentTarget.style.transform = 'scale(1) translateY(0)';
-            e.currentTarget.style.boxShadow = '0 4px 20px rgba(234, 88, 12, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.2)';
-          }}
-          onMouseDown={(e) => {
-            e.currentTarget.style.transform = 'scale(0.94)';
-          }}
-          onMouseUp={(e) => {
-            e.currentTarget.style.transform = 'scale(1.06) translateY(-2px)';
+          onMouseLeave={e => {
+            e.currentTarget.style.transform = 'scale(1)';
+            e.currentTarget.style.boxShadow = '0 8px 24px rgba(234, 88, 12, 0.55)';
           }}
         >
-          <Flame size={13} color="#ffedd5" style={{ filter: 'drop-shadow(0 0 4px #ea580c)' }} />
-          <span>Add Fuel</span>
+          <Flame size={22} fill="#fff" color="#fff" />
         </button>
 
       {/* Bottom Floating Player Capsule */}
@@ -378,6 +364,33 @@ export default function CampFireMelodies() {
           seekHovered={seekHovered}
           onSeekHoverChange={setSeekHovered}
           fmt={fmt}
+          hornSlot={(
+            <button
+              onClick={triggerFuelBurst}
+              title="Add Fuel / Petrol to Campfire"
+              style={{
+                background: 'linear-gradient(135deg, #f97316, #ea580c)',
+                border: 'none',
+                color: '#fff',
+                cursor: 'pointer',
+                padding: '6px 10px',
+                borderRadius: '9999px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                fontSize: '0.75rem',
+                fontWeight: '700',
+                boxShadow: '0 4px 12px rgba(234, 88, 12, 0.5)',
+                transition: 'transform 0.15s',
+              }}
+              className="fuel-btn-capsule"
+              onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.06)'}
+              onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+            >
+              <Flame size={14} fill="#fff" color="#fff" />
+              <span>FUEL</span>
+            </button>
+          )}
         />
       </div>
 
@@ -462,6 +475,14 @@ export default function CampFireMelodies() {
             line-height: 1.2 !important;
           }
           .campfire-tent-container {
+            display: none !important;
+          }
+          .fuel-btn-desktop {
+            display: none !important;
+          }
+        }
+        @media (min-width: 769px) {
+          .fuel-btn-capsule {
             display: none !important;
           }
         }
