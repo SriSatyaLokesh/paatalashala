@@ -166,18 +166,20 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         return mesh;
       }
 
-      // Full 360-degree mountain perimeter ring around campsite with varied sizes & star visibility valleys
-      const mountainCount = 20;
+      // Mountain horizon perimeter ring in background backdrop (r: 28m to 38m)
+      // Leaving the front 60-degree viewpoint completely clear so mountains never obstruct the campfire
+      const mountainCount = 18;
       for (let i = 0; i < mountainCount; i++) {
-        // Create natural mountain clusters with deliberate gaps/valleys for star visibility
-        const isStarGap = (i % 5 === 0);
+        // Create natural mountain clusters in background arc
+        const isStarGap = (i % 4 === 0);
         if (isStarGap) continue; // Gap for clear view of twinkling stars
 
-        const angle = (i / mountainCount) * Math.PI * 2 + (Math.sin(i * 1.7) * 0.08);
+        // Angle distributed across sides and back (0.45 rad to 5.8 rad)
+        const angle = 0.45 + (i / mountainCount) * (Math.PI * 2 - 0.9) + (Math.sin(i * 1.7) * 0.06);
         const isFar = (i % 2 === 0);
-        const radius = isFar ? (34 + Math.sin(i * 3.1) * 4) : (26 + Math.cos(i * 2.5) * 3);
-        const height = isFar ? (6.8 + Math.sin(i * 2.2) * 1.8) : (4.6 + Math.cos(i * 1.9) * 1.2);
-        const baseRadius = isFar ? (9.5 + Math.sin(i * 1.5) * 2.0) : (7.5 + Math.cos(i * 2.1) * 1.5);
+        const radius = isFar ? (35 + Math.sin(i * 3.1) * 3) : (28 + Math.cos(i * 2.5) * 3);
+        const height = isFar ? (6.8 + Math.sin(i * 2.2) * 1.6) : (4.6 + Math.cos(i * 1.9) * 1.2);
+        const baseRadius = isFar ? (9.0 + Math.sin(i * 1.5) * 1.8) : (7.2 + Math.cos(i * 2.1) * 1.2);
         const color = isFar ? 0x152236 : 0x0f1826;
         const mesh = createSharpMountainWithRoundedTip(baseRadius, height, color);
         mesh.position.x = Math.cos(angle) * radius;
@@ -227,15 +229,15 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         return treeGroup;
       }
 
-      // Distribute alpine pine trees along perimeter and mountain foothills (24 trees)
-      const treeCount = 26;
+      // Distribute alpine pine trees along background perimeter & mountain foothills (r: 22m to 32m)
+      // Leaving a wide front clearing angle so trees NEVER pass in front of the campfire or camera
+      const treeCount = 20;
       const treeColors = [0x15221b, 0x111b15, 0x18261e, 0x0f1813];
       for (let i = 0; i < treeCount; i++) {
-        const angle = (i / treeCount) * Math.PI * 2 + (Math.sin(i * 2.3) * 0.15);
-        // Place trees in concentric forest rings (r: 12m to 24m)
-        const isInner = (i % 3 === 0);
-        const radius = isInner ? (13.5 + Math.sin(i * 1.7) * 2.5) : (18.5 + Math.cos(i * 2.1) * 4.0);
-        const treeScale = 0.9 + Math.sin(i * 3.4) * 0.35;
+        // Distribute trees around the sides and back (angles 0.4 to 5.8 rad), keeping front (around Math.PI/2 / z > 0) open
+        const angle = 0.5 + (i / treeCount) * (Math.PI * 2 - 1.0) + (Math.sin(i * 1.7) * 0.1);
+        const radius = 22 + (i % 2 === 0 ? 4 : 8) + (Math.sin(i * 2.1) * 2.5);
+        const treeScale = 1.0 + Math.sin(i * 3.4) * 0.35;
         const color = treeColors[i % treeColors.length];
         
         const tree = createPineTree(treeScale, color);
@@ -244,43 +246,6 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         tree.rotation.y = Math.sin(i * 1.5) * Math.PI * 2;
         scene.add(tree);
       }
-
-      // Procedural Instanced Grass Clumps across the campsite (dark muted grey-green)
-      const grassCount = 120;
-      const bladeGeo = new THREE.PlaneGeometry(0.18, 0.45);
-      const grassMat = new THREE.MeshStandardMaterial({
-        color: 0x19271e,
-        roughness: 0.88,
-        side: THREE.DoubleSide,
-        flatShading: true,
-      });
-      const grassMesh = new THREE.InstancedMesh(bladeGeo, grassMat, grassCount * 3);
-      const grassDummy = new THREE.Object3D();
-      let grassIdx = 0;
-
-      for (let i = 0; i < grassCount; i++) {
-        const a = Math.random() * Math.PI * 2;
-        const dist = 3.2 + Math.random() * 16.0; // Scatter from near campfire outward
-        const gx = Math.cos(a) * dist;
-        const gz = Math.sin(a) * dist;
-        const clumpScale = 0.6 + Math.random() * 0.5;
-
-        // 3 criss-crossed blades per tuft
-        [0, Math.PI / 3, (Math.PI * 2) / 3].forEach((rotY) => {
-          grassDummy.position.set(gx, -2.8 + (0.22 * clumpScale), gz);
-          grassDummy.rotation.set(
-            (Math.random() - 0.5) * 0.2,
-            rotY + Math.random() * 0.4,
-            (Math.random() - 0.5) * 0.2
-          );
-          grassDummy.scale.set(clumpScale, clumpScale, clumpScale);
-          grassDummy.updateMatrix();
-          grassMesh.setMatrixAt(grassIdx++, grassDummy.matrix);
-        });
-      }
-      grassMesh.instanceMatrix.needsUpdate = true;
-      grassMesh.receiveShadow = true;
-      scene.add(grassMesh);
 
       // Ambient sky & ground illumination so the campsite surface is naturally visible
       scene.add(new THREE.HemisphereLight(0x334460, 0x1c1712, 0.52));
@@ -544,10 +509,9 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       lastTime = currentTime;
       elapsedTime += dt;
 
-      // Orbit camera gently
-      const orbitR = 12;
-      camera.position.x = Math.sin(elapsedTime * 0.03) * orbitR;
-      camera.position.z = Math.cos(elapsedTime * 0.03) * orbitR;
+      // Gentle front atmospheric sway (stays strictly in front of the campfire)
+      camera.position.x = Math.sin(elapsedTime * 0.12) * 1.2;
+      camera.position.z = 11.8 + Math.cos(elapsedTime * 0.08) * 0.4;
       camera.position.y = 0.6 + Math.sin(elapsedTime * 0.05) * 0.12;
       camera.lookAt(0, -1.8, 0);
 
