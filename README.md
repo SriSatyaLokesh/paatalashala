@@ -102,7 +102,8 @@ npm run split-songs
 * **🌪️ Concurrent Weather Particle Systems:** Upgraded Canvas weather engine in `AmbientWeather` supporting glowing upward-drifting dust motes and soft kitchen mist/fog concurrently.
 * **⚡ Smooth Cross-Fade Transitions:** Double Background Layer Pattern to fade viewports seamlessly when changing songs, eliminating abrupt image resizing.
 * **🎛️ Rich Page-Level SEO:** Static Server Component layouts injecting tailored metadata, titles, canonical tags, and OpenGraph/FAQ schemas.
-* **📱 Responsive HUD Canopy:** Designed to resemble actual vehicle windshield sticker frames and dashboard audio decks with full mobile optimization.
+* **🔄 Git Version Stamping & Cache-Purge Updates**: Automated build-time commit hash and version tagging (`/version.json`) with an interactive Home page update badge. Cleans CacheStorage and active service workers on demand to ensure users always load the newest features and music updates.
+* **📱 Progressive Web App (PWA) Ready**: Fully installable as a standalone app with customized homescreen icons, splash background, and media notification card integration.
 * **🔗 Native Space Sharing:** Instant native Android/mobile share sheet integration (`navigator.share`) directly in the media player capsule with tailored Telugu invite text and automatic clipboard copy fallback.
 
 ---

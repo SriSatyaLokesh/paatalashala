@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { SPACES } from '@/data/spaces';
 import { prefixPath } from '@/utils/paths';
+import AppUpdateBadge from '@/components/AppUpdateBadge';
 
 // ── SVG Icons (no emoji) ──────────────────────────────────────────────────────
 const IconTractor = () => (
@@ -884,6 +885,9 @@ export default function Home() {
 
         {/* HEADER */}
         <header className="site-header fade-up d1">
+          <div style={{ marginBottom: '14px', display: 'flex', justifyContent: 'center' }}>
+            <AppUpdateBadge />
+          </div>
           <p className="kicker">Telugu Ambient Audio Spaces</p>
           <div className="title-divider" />
           <h1 className="site-title">
