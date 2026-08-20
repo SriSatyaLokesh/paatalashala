@@ -310,7 +310,7 @@ export default function Home() {
         .site-header {
           text-align: center;
           margin-bottom: 18px;
-          max-width: 560px;
+          max-width: 760px;
           width: 100%;
         }
         .kicker {
@@ -893,8 +893,7 @@ export default function Home() {
             <span className="telugu-title">పాటలశాల</span>
           </h1>
           <p className="site-tagline">
-            Handcrafted soundscapes from the spaces that shaped us.<br />
-            Pick a space. Let it play.
+            Handcrafted soundscapes from the spaces that shaped us. Pick a space. Let it play.
           </p>
         </header>
 
