@@ -188,6 +188,100 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         mountainMeshes.push(mesh);
       }
 
+      // Procedural alpine pine tree (layered conic foliage + slim trunk)
+      function createPineTree(scale = 1.0, foliageColor = 0x16231c) {
+        const treeGroup = new THREE.Group();
+        
+        // Brown/dark wood trunk
+        const trunkMat = new THREE.MeshStandardMaterial({ color: 0x1c130d, roughness: 0.95 });
+        const trunkGeo = new THREE.CylinderGeometry(0.12 * scale, 0.18 * scale, 1.8 * scale, 6);
+        const trunk = new THREE.Mesh(trunkGeo, trunkMat);
+        trunk.position.y = 0.9 * scale;
+        trunk.castShadow = true;
+        trunk.receiveShadow = true;
+        treeGroup.add(trunk);
+
+        // 3-tiered dark grey-green coniferous foliage
+        const foliageMat = new THREE.MeshStandardMaterial({
+          color: foliageColor,
+          roughness: 0.85,
+          flatShading: true,
+        });
+
+        const tiers = [
+          { r: 1.15 * scale, h: 1.5 * scale, y: 1.6 * scale },
+          { r: 0.90 * scale, h: 1.3 * scale, y: 2.3 * scale },
+          { r: 0.65 * scale, h: 1.1 * scale, y: 2.9 * scale }
+        ];
+
+        tiers.forEach((t) => {
+          const coneGeo = new THREE.ConeGeometry(t.r, t.h, 6, 2);
+          const cone = new THREE.Mesh(coneGeo, foliageMat);
+          cone.position.y = t.y;
+          cone.castShadow = true;
+          cone.receiveShadow = true;
+          treeGroup.add(cone);
+        });
+
+        treeGroup.position.y = -2.8;
+        return treeGroup;
+      }
+
+      // Distribute alpine pine trees along perimeter and mountain foothills (24 trees)
+      const treeCount = 26;
+      const treeColors = [0x15221b, 0x111b15, 0x18261e, 0x0f1813];
+      for (let i = 0; i < treeCount; i++) {
+        const angle = (i / treeCount) * Math.PI * 2 + (Math.sin(i * 2.3) * 0.15);
+        // Place trees in concentric forest rings (r: 12m to 24m)
+        const isInner = (i % 3 === 0);
+        const radius = isInner ? (13.5 + Math.sin(i * 1.7) * 2.5) : (18.5 + Math.cos(i * 2.1) * 4.0);
+        const treeScale = 0.9 + Math.sin(i * 3.4) * 0.35;
+        const color = treeColors[i % treeColors.length];
+        
+        const tree = createPineTree(treeScale, color);
+        tree.position.x = Math.cos(angle) * radius;
+        tree.position.z = Math.sin(angle) * radius;
+        tree.rotation.y = Math.sin(i * 1.5) * Math.PI * 2;
+        scene.add(tree);
+      }
+
+      // Procedural Instanced Grass Clumps across the campsite (dark muted grey-green)
+      const grassCount = 120;
+      const bladeGeo = new THREE.PlaneGeometry(0.18, 0.45);
+      const grassMat = new THREE.MeshStandardMaterial({
+        color: 0x19271e,
+        roughness: 0.88,
+        side: THREE.DoubleSide,
+        flatShading: true,
+      });
+      const grassMesh = new THREE.InstancedMesh(bladeGeo, grassMat, grassCount * 3);
+      const grassDummy = new THREE.Object3D();
+      let grassIdx = 0;
+
+      for (let i = 0; i < grassCount; i++) {
+        const a = Math.random() * Math.PI * 2;
+        const dist = 3.2 + Math.random() * 16.0; // Scatter from near campfire outward
+        const gx = Math.cos(a) * dist;
+        const gz = Math.sin(a) * dist;
+        const clumpScale = 0.6 + Math.random() * 0.5;
+
+        // 3 criss-crossed blades per tuft
+        [0, Math.PI / 3, (Math.PI * 2) / 3].forEach((rotY) => {
+          grassDummy.position.set(gx, -2.8 + (0.22 * clumpScale), gz);
+          grassDummy.rotation.set(
+            (Math.random() - 0.5) * 0.2,
+            rotY + Math.random() * 0.4,
+            (Math.random() - 0.5) * 0.2
+          );
+          grassDummy.scale.set(clumpScale, clumpScale, clumpScale);
+          grassDummy.updateMatrix();
+          grassMesh.setMatrixAt(grassIdx++, grassDummy.matrix);
+        });
+      }
+      grassMesh.instanceMatrix.needsUpdate = true;
+      grassMesh.receiveShadow = true;
+      scene.add(grassMesh);
+
       // Ambient sky & ground illumination so the campsite surface is naturally visible
       scene.add(new THREE.HemisphereLight(0x334460, 0x1c1712, 0.52));
       scene.add(new THREE.AmbientLight(0xffa844, 0.28));
