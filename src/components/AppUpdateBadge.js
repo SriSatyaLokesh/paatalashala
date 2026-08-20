@@ -12,8 +12,9 @@ export default function AppUpdateBadge() {
   const [isUpdating, setIsUpdating] = useState(false);
   const [latestTag, setLatestTag] = useState('');
 
-  const currentCommit = versionInfo?.commit || process.env.NEXT_PUBLIC_APP_COMMIT || 'local-dev';
-  const currentTag = versionInfo?.tag || process.env.NEXT_PUBLIC_APP_TAG || 'v0.1.0';
+  // Fixed to an older version for manual testing
+  const currentCommit = 'old-commit-v1';
+  const currentTag = 'v0.1.0-old-commit-v1';
 
   useEffect(() => {
     let isMounted = true;
@@ -65,16 +66,14 @@ export default function AppUpdateBadge() {
         onClick={handleUpdate}
         disabled={isUpdating}
         className="update-action-btn update-pulse"
-        title="A newer version of Paatalashala is available! Click to update."
+        title="A newer version of Paatalashala is available. Click to update."
         aria-label="Update app to latest version"
       >
-        <span className="update-icon-glow">
-          <Sparkles size={14} className="sparkle-icon" />
-        </span>
+        <span className="pulse-dot" />
         <span className="update-text">
-          {isUpdating ? 'Updating Paatalashala...' : 'New Update Available'}
+          {isUpdating ? 'Updating...' : 'New update available'}
         </span>
-        <RefreshCw size={13} className={`refresh-icon ${isUpdating ? 'spin-fast' : ''}`} />
+        <RefreshCw size={12} className={`refresh-icon ${isUpdating ? 'spin-fast' : ''}`} />
       </button>
 
       <style jsx>{`
@@ -85,96 +84,93 @@ export default function AppUpdateBadge() {
           margin-bottom: 12px;
         }
 
-        /* ── Prominent Glow Button (Only when new version exists) ── */
+        /* ── Simple, Attentive & Refined Update Pill ── */
         .update-action-btn {
           display: inline-flex;
           align-items: center;
-          gap: 7px;
+          gap: 8px;
           padding: 6px 14px;
           border-radius: 9999px;
-          background: linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(217, 119, 6, 0.35) 100%);
-          border: 1px solid rgba(251, 191, 36, 0.45);
+          background: rgba(24, 18, 12, 0.85);
+          border: 1px solid rgba(245, 158, 11, 0.45);
           color: #fef08a;
           font-size: 0.76rem;
-          font-weight: 600;
-          letter-spacing: 0.02em;
+          font-weight: 550;
+          letter-spacing: 0.03em;
           cursor: pointer;
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
-          box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-          transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+          transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
+
         .update-action-btn:hover {
-          background: linear-gradient(135deg, rgba(245, 158, 11, 0.32) 0%, rgba(217, 119, 6, 0.48) 100%);
-          border-color: rgba(251, 191, 36, 0.7);
+          background: rgba(36, 24, 14, 0.95);
+          border-color: rgba(251, 191, 36, 0.75);
+          color: #ffffff;
           transform: translateY(-1px);
-          box-shadow: 0 6px 20px rgba(245, 158, 11, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+          box-shadow: 0 4px 18px rgba(245, 158, 11, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
+
         .update-action-btn:active {
           transform: translateY(1px);
         }
 
-        .update-pulse {
-          animation: pulseGlow 2.4s infinite ease-in-out;
+        /* ── Subtle Status Pulse Dot ── */
+        .pulse-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #fbbf24;
+          box-shadow: 0 0 6px #fbbf24;
+          animation: dotBreathe 1.8s infinite ease-in-out;
         }
 
-        @keyframes pulseGlow {
+        @keyframes dotBreathe {
           0%, 100% {
-            box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4), 0 4px 16px rgba(245, 158, 11, 0.2);
+            opacity: 0.8;
+            transform: scale(0.9);
           }
           50% {
-            box-shadow: 0 0 0 6px rgba(245, 158, 11, 0), 0 4px 20px rgba(245, 158, 11, 0.4);
+            opacity: 1;
+            transform: scale(1.25);
+            box-shadow: 0 0 9px #fbbf24;
           }
         }
 
-        .update-icon-glow {
-          display: flex;
-          align-items: center;
+        /* ── Subtle Border/Shadow Pulse ── */
+        .update-pulse {
+          animation: pillGlow 2.8s infinite ease-in-out;
+        }
+
+        @keyframes pillGlow {
+          0%, 100% {
+            border-color: rgba(245, 158, 11, 0.4);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35), 0 0 0 0 rgba(245, 158, 11, 0.3);
+          }
+          50% {
+            border-color: rgba(251, 191, 36, 0.7);
+            box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4), 0 0 0 4px rgba(245, 158, 11, 0);
+          }
+        }
+
+        .update-text {
+          line-height: 1;
+        }
+
+        .refresh-icon {
           color: #fbbf24;
+          opacity: 0.85;
+          transition: transform 0.3s ease, opacity 0.2s ease;
         }
 
-        /* ── Subtle Badge (When already on latest version) ── */
-        .version-subtle-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          padding: 4px 10px;
-          border-radius: 9999px;
-          background: rgba(255, 255, 255, 0.04);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          color: rgba(243, 222, 194, 0.65);
-          font-size: 0.72rem;
-          font-weight: 500;
-          letter-spacing: 0.02em;
-          cursor: pointer;
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
-          transition: all 0.2s ease;
-        }
-        .version-subtle-btn:hover {
-          background: rgba(255, 255, 255, 0.08);
-          border-color: rgba(220, 170, 90, 0.3);
-          color: rgba(243, 222, 194, 0.95);
-        }
-
-        .version-dot {
-          width: 5px;
-          height: 5px;
-          border-radius: 50%;
-          background: #10b981;
-          box-shadow: 0 0 5px rgba(16, 185, 129, 0.6);
-        }
-
-        .refresh-subtle {
-          opacity: 0.5;
-          transition: opacity 0.2s ease;
-        }
-        .version-subtle-btn:hover .refresh-subtle {
-          opacity: 0.9;
+        .update-action-btn:hover .refresh-icon {
+          opacity: 1;
+          transform: rotate(45deg);
         }
 
         .spin-fast {
-          animation: spin 0.6s linear infinite;
+          animation: spin 0.6s linear infinite !important;
         }
 
         @keyframes spin {
