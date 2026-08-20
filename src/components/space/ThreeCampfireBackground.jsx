@@ -93,13 +93,14 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
     }
 
     function buildStars() {
-      const count = 1500;
+      const count = 2200;
       const positions = new Float32Array(count * 3);
 
       for (let i = 0; i < count; i++) {
         const theta = Math.random() * Math.PI * 2;
-        const elevation = (-8 + Math.random() * 82) * (Math.PI / 180);
-        const r = 45 + Math.random() * 55;
+        // High elevation celestial sphere angle (-2 deg up to 88 deg) for maximum night sky density
+        const elevation = (-2 + Math.random() * 90) * (Math.PI / 180);
+        const r = 50 + Math.random() * 60;
         const horizR = Math.cos(elevation) * r;
         positions[i * 3] = horizR * Math.cos(theta);
         positions[i * 3 + 1] = Math.sin(elevation) * r;
@@ -111,7 +112,7 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
 
       const mat = new THREE.PointsMaterial({
         color: 0xffffff,
-        size: 0.32,
+        size: 0.38,
         transparent: true,
         opacity: 0.95,
         depthWrite: false,
@@ -166,18 +167,19 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         return mesh;
       }
 
-      // Mountain horizon perimeter ring in far backdrop (r: 36m to 48m)
+      // Distant low-profile mountain horizon in far backdrop (r: 35m to 46m, height: 3.2m to 5.2m)
+      // Low ridge lines leave over 75% of the sky wide open for twinkling stars
       const mountainCount = 20;
       for (let i = 0; i < mountainCount; i++) {
-        const isStarGap = (i % 4 === 0);
-        if (isStarGap) continue; // Gap for star visibility
+        const isStarGap = (i % 3 === 0);
+        if (isStarGap) continue; // Frequent valleys for maximum star visibility
 
         const angle = (i / mountainCount) * Math.PI * 2 + (Math.sin(i * 1.7) * 0.08);
         const isFar = (i % 2 === 0);
-        const radius = isFar ? (44 + Math.sin(i * 3.1) * 4) : (36 + Math.cos(i * 2.5) * 3);
-        const height = isFar ? (8.5 + Math.sin(i * 2.2) * 2.0) : (6.0 + Math.cos(i * 1.9) * 1.5);
-        const baseRadius = isFar ? (11.0 + Math.sin(i * 1.5) * 2.0) : (8.5 + Math.cos(i * 2.1) * 1.5);
-        const color = isFar ? 0x141f2e : 0x0e1722;
+        const radius = isFar ? (42 + Math.sin(i * 3.1) * 3) : (35 + Math.cos(i * 2.5) * 3);
+        const height = isFar ? (4.8 + Math.sin(i * 2.2) * 1.2) : (3.4 + Math.cos(i * 1.9) * 0.9);
+        const baseRadius = isFar ? (9.0 + Math.sin(i * 1.5) * 1.5) : (7.0 + Math.cos(i * 2.1) * 1.2);
+        const color = isFar ? 0x121b27 : 0x0c131d;
         const mesh = createSharpMountainWithRoundedTip(baseRadius, height, color);
         mesh.position.x = Math.cos(angle) * radius;
         mesh.position.z = Math.sin(angle) * radius;
@@ -187,15 +189,15 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         mountainMeshes.push(mesh);
       }
 
-      // Procedural alpine pine tree (layered conic foliage + slim trunk)
+      // Compact alpine pine tree (layered conic foliage + slim trunk)
       function createPineTree(scale = 1.0, foliageColor = 0x16231c) {
         const treeGroup = new THREE.Group();
         
         // Brown/dark wood trunk
         const trunkMat = new THREE.MeshStandardMaterial({ color: 0x1c130d, roughness: 0.95 });
-        const trunkGeo = new THREE.CylinderGeometry(0.10 * scale, 0.15 * scale, 1.4 * scale, 6);
+        const trunkGeo = new THREE.CylinderGeometry(0.08 * scale, 0.12 * scale, 1.0 * scale, 6);
         const trunk = new THREE.Mesh(trunkGeo, trunkMat);
-        trunk.position.y = 0.7 * scale;
+        trunk.position.y = 0.5 * scale;
         trunk.castShadow = true;
         trunk.receiveShadow = true;
         treeGroup.add(trunk);
@@ -208,9 +210,9 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         });
 
         const tiers = [
-          { r: 0.95 * scale, h: 1.2 * scale, y: 1.3 * scale },
-          { r: 0.75 * scale, h: 1.0 * scale, y: 1.9 * scale },
-          { r: 0.50 * scale, h: 0.8 * scale, y: 2.4 * scale }
+          { r: 0.75 * scale, h: 0.9 * scale, y: 0.9 * scale },
+          { r: 0.58 * scale, h: 0.75 * scale, y: 1.4 * scale },
+          { r: 0.38 * scale, h: 0.6 * scale, y: 1.8 * scale }
         ];
 
         tiers.forEach((t) => {
@@ -226,14 +228,13 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
         return treeGroup;
       }
 
-      // Distribute alpine pine trees in middle-ground tree-line (r: 13.5m to 18m)
-      // Safely separated from the mountains (r > 36m) with zero geometry collision
-      const treeCount = 22;
+      // Distribute compact pine trees in low middle-ground tree-line (r: 15m to 20m)
+      const treeCount = 20;
       const treeColors = [0x15221b, 0x111b15, 0x18261e, 0x0f1813];
       for (let i = 0; i < treeCount; i++) {
         const angle = (i / treeCount) * Math.PI * 2 + (Math.sin(i * 2.1) * 0.12);
-        const radius = (i % 2 === 0 ? 14.5 : 17.5) + (Math.sin(i * 1.8) * 1.5);
-        const treeScale = 0.85 + Math.sin(i * 3.4) * 0.25;
+        const radius = (i % 2 === 0 ? 15.5 : 19.0) + (Math.sin(i * 1.8) * 1.5);
+        const treeScale = 0.75 + Math.sin(i * 3.4) * 0.2;
         const color = treeColors[i % treeColors.length];
         
         const tree = createPineTree(treeScale, color);
@@ -505,12 +506,12 @@ export default function ThreeCampfireBackground({ isPlaying = true }) {
       lastTime = currentTime;
       elapsedTime += dt;
 
-      // Smooth cinematic camera orbit around campsite (elevated so camera looks down over tree-tops)
+      // Smooth cinematic camera orbit around campsite (low camera height y: 0.85m framed to look across the fire into the starry sky)
       const orbitR = 10.5;
       camera.position.x = Math.sin(elapsedTime * 0.045) * orbitR;
       camera.position.z = Math.cos(elapsedTime * 0.045) * orbitR;
-      camera.position.y = 1.9 + Math.sin(elapsedTime * 0.07) * 0.25;
-      camera.lookAt(0, -1.8, 0);
+      camera.position.y = 0.85 + Math.sin(elapsedTime * 0.06) * 0.15;
+      camera.lookAt(0, -1.4, 0);
 
       // Rotate stars slowly
       if (starPoints) {
