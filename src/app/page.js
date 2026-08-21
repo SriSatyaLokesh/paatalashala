@@ -100,6 +100,11 @@ const IconSparkles = () => (
     <path d="m19 17 1 2.5 2.5.5-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z" fill="currentColor" stroke="none" />
   </svg>
 );
+const IconMiniSpark = () => (
+  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <path d="m12 1 2.4 7.6L22 11l-7.6 2.4L12 21l-2.4-7.6L2 11l7.6-2.4z" />
+  </svg>
+);
 
 const IconFlame = () => (
   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -620,30 +625,60 @@ export default function Home() {
           animation: blink 2.2s ease-in-out infinite;
         }
 
-        /* New Space Badge */
+        /* ── Radiant Shimmer NEW Badge ── */
         .new-space-badge {
+          position: relative;
+          overflow: hidden;
           display: inline-flex;
           align-items: center;
-          gap: 4.5px;
-          padding: 4px 9px;
-          border-radius: 20px;
-          background: linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(217, 119, 6, 0.35) 100%);
-          border: 1px solid rgba(251, 191, 36, 0.5);
-          font-size: 0.65rem;
-          font-weight: 700;
-          color: #fef08a;
-          letter-spacing: 0.08em;
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
-          box-shadow: 0 2px 10px rgba(245, 158, 11, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+          gap: 4px;
+          padding: 4px 10px;
+          border-radius: 9999px;
+          background: linear-gradient(135deg, rgba(245, 158, 11, 0.28) 0%, rgba(217, 119, 6, 0.42) 100%);
+          border: 1px solid rgba(251, 191, 36, 0.6);
+          font-size: 0.64rem;
+          font-weight: 750;
+          color: #fffbeb;
+          letter-spacing: 0.1em;
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          box-shadow: 0 2px 12px rgba(245, 158, 11, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+          animation: badgePulse 3s infinite ease-in-out;
         }
-        .new-badge-dot {
-          width: 5px;
-          height: 5px;
-          border-radius: 50%;
-          background: #fbbf24;
-          box-shadow: 0 0 6px #fbbf24;
-          animation: blink 1.8s ease-in-out infinite;
+
+        /* Continuous light shimmer sweep */
+        .new-space-badge::after {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -60%;
+          width: 40%;
+          height: 200%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.45),
+            transparent
+          );
+          transform: rotate(25deg);
+          animation: shimmerSweep 3.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes shimmerSweep {
+          0% { left: -60%; }
+          30% { left: 140%; }
+          100% { left: 140%; }
+        }
+
+        @keyframes badgePulse {
+          0%, 100% {
+            box-shadow: 0 2px 10px rgba(245, 158, 11, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(251, 191, 36, 0.5);
+          }
+          50% {
+            box-shadow: 0 4px 18px rgba(245, 158, 11, 0.45), 0 0 0 2px rgba(245, 158, 11, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+            border-color: rgba(253, 224, 71, 0.85);
+          }
         }
         @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.35; } }
 
@@ -950,8 +985,8 @@ export default function Home() {
                     <div className="card-icon"><Icon /></div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       {place.isNew && (
-                        <div className="new-space-badge">
-                          <span className="new-badge-dot" />
+                        <div className="new-space-badge" title="Newly launched space">
+                          <IconMiniSpark />
                           <span>NEW</span>
                         </div>
                       )}
