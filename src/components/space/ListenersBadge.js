@@ -20,7 +20,7 @@ export function ListenersBadgeDesktop({ count, label }) {
       zIndex: 35, boxShadow: '0 8px 24px rgba(0,0,0,0.5)', whiteSpace: 'nowrap',
     }} className="listeners-badge-desktop">
       <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', display: 'inline-block', boxShadow: '0 0 8px #10b981' }} />
-      <span>{count} {label}</span>
+      <span suppressHydrationWarning>{count} {label}</span>
     </div>
   );
 }
@@ -32,7 +32,7 @@ export function ListenersBadgeMobileRow({ count, label }) {
       fontSize: '0.75rem', fontWeight: '600', color: '#a7f3d0', justifyContent: 'center',
     }} className="mobile-listeners-row">
       <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#10b981', display: 'inline-block', boxShadow: '0 0 6px #10b981' }} />
-      <span>{count} {label}</span>
+      <span suppressHydrationWarning>{count} {label}</span>
     </div>
   );
 }
@@ -48,7 +48,7 @@ export function ListenersBadgeSingle({ count, label, textColor, background, bord
       zIndex: 35, boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
     }} className="listeners-badge">
       <Users size={14} style={{ color: iconColor }} />
-      <span>{count} {label}</span>
+      <span suppressHydrationWarning>{count} {label}</span>
     </div>
   );
 }

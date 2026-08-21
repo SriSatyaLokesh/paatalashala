@@ -120,10 +120,12 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
 **Depends on**: Phase 6
 **Requirements**: ENV-03 (Camp Fire)
 **Success Criteria**:
+
   1. User can enter Camp Fire Melodies space, featuring realistic campfire visual effects, illuminated tent, and a starry night backdrop.
   2. Integrated media player plays selected campfire melodies.
 
 **Plans**: 1 plan
+
 - [x] 07-01: Build campfire environment UI, starry night backdrop, glowing tent component, media player integration, and routing. (completed 2026-08-18)
 
 ### Phase 8: Gundamma Gramophone
@@ -132,17 +134,33 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
 **Depends on**: Phase 3
 **Requirements**: ENV-03 (Gramophone), DATA-01, DATA-02
 **Success Criteria**:
+
   1. User can navigate to `/spaces/gundamma-gramophone` and play classic 70s/80s Telugu melodies.
   2. Songs dataset is generated and validated.
 
 **Plans**: 1 plan
+
 - [x] 08-01: Create 70s/80s Telugu song dataset, set up gundamma-gramophone route page, and register space in SPACES & Sammelanam. (completed 2026-08-19)
+
+### Phase 9: Mobile Cache Clear & Versioned App Update (PWA Fresh Build)
+
+**Goal**: Implement an intuitive "Update App / Clear Cache" mechanism on the home page (especially optimized for mobile/PWA users) that checks for new git commit / build versions, purges service worker & browser caches, and performs a clean reload so users immediately get the latest features and song updates.
+**Depends on**: Phase 8
+**Requirements**: PWA-01, PWA-02, CACHE-01
+**Success Criteria**:
+  1. Automated build-time commit hash / version stamping is available in the client app.
+  2. Mobile & desktop users can click an "Update App / Refresh" button to purge all stale cache storage, unregister/update service workers, and reload fresh assets.
+  3. Installed PWA users receive a non-intrusive update prompt when a new commit version is deployed to `main`.
+
+**Plans**: 1 plan
+
+- [x] 09-01: Build version stamping system, Cache-Bust/PWA reload helper, and Home Page mobile Update button. (completed 2026-08-20)
 
 ---
  
 ## Progress
  
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9
  
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -154,3 +172,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 6. Playlist Sync (V2 Integration) | 0/2 | Not started | - |
 | 7. Camp Fire Melodies | 1/1 | Complete    | 2026-08-18 |
 | 8. Gundamma Gramophone | 1/1 | Complete    | 2026-08-19 |
+| 9. Mobile Cache Clear & Versioned App Update | 1/1 | Complete    | 2026-08-20 |
