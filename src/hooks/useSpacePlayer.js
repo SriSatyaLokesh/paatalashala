@@ -41,9 +41,9 @@ export function useSpacePlayer(placeSongs, config) {
   const [volume, setVolume] = useState(initialVolume);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  // Stable random base pad (3 to 15) chosen once for this session
-  const [syncPad] = useState(() => Math.floor(Math.random() * 13) + 3);
-  const [presenceCount, setPresenceCount] = useState(() => 1 + (Math.floor(Math.random() * 13) + 3));
+  // Stable deterministic baseline for SSR; randomized on client mount to prevent hydration mismatch
+  const [syncPad, setSyncPad] = useState(8);
+  const [presenceCount, setPresenceCount] = useState(9);
   const [timeString, setTimeString] = useState('');
   const [videoVisible, setVideoVisible] = useState(false);
   const [ambientOn, setAmbientOn] = useState(true);
@@ -57,6 +57,13 @@ export function useSpacePlayer(placeSongs, config) {
   const ambientRef = useRef(null);
 
   const currentSong = currentSongIndex !== null ? (songs[currentSongIndex] || {}) : null;
+
+  // Initialize client-side random session padding (3 to 15)
+  useEffect(() => {
+    const pad = Math.floor(Math.random() * 13) + 3;
+    setSyncPad(pad);
+    setPresenceCount(1 + pad);
+  }, []);
 
   // === Initial song pick (+ flip started if the page starts unstarted, matching auto) ===
   useEffect(() => {
