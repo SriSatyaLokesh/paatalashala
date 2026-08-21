@@ -72,7 +72,7 @@ export const SPACES = [
   {
     id: "vennallo",
     slug: "vennallo",
-    name: "మేడ మీద వెన్నెల్లో",
+    name: "Meda Meeda Vennallo",
     tagline: "Terrace midnight breeze & stars",
     emoji: "🌌",
     active: true,
