@@ -57,6 +57,14 @@ export default function ThreeCampfireBackground({ isPlaying = true, fuelBurst = 
     const windVector = new THREE.Vector3(0, 0, 0);
     const fireOrigin = new THREE.Vector3(0, -2.85, 0);
 
+    // Mouse velocity, wind gust detection & oxygen surge rebound state
+    let lastMousePos = { x: 0, y: 0 };
+    let lastMouseTime = performance.now();
+    let mouseVelocity = 0;
+    let smoothVelocity = 0;
+    let gustSuppression = 0; // 0 = normal fire, 1 = suppressed/bent down by strong wind gust
+    let gustPendingRebound = 0; // Accumulated oxygen energy to ignite flare on rebound
+
     let flickerSeed = Math.random() * 1000;
     const dummy = new THREE.Object3D();
     const tmpColor = new THREE.Color();
@@ -445,6 +453,26 @@ export default function ThreeCampfireBackground({ isPlaying = true, fuelBurst = 
     function updateFire(dt, time) {
       updateCursor3D();
 
+      // Track mouse velocity and detect rapid wind gusts
+      smoothVelocity += (mouseVelocity - smoothVelocity) * Math.min(dt * 7.5, 1.0);
+      mouseVelocity *= Math.max(0, 1.0 - dt * 4.0); // Natural velocity decay
+
+      // Threshold: fast mouse flicks (> 2.4 normalized units/sec) trigger wind gust suppression
+      if (smoothVelocity > 2.4) {
+        const gustStrength = Math.min((smoothVelocity - 2.4) * 0.45, 1.0);
+        gustSuppression = Math.min(1.0, gustSuppression + dt * 4.2 * (1.0 + gustStrength));
+        gustPendingRebound = Math.min(1.0, gustPendingRebound + dt * 3.2);
+      } else {
+        // As soon as gust subsides, sudden oxygen rush triggers a surge back to full/flaring fuel level
+        if (gustPendingRebound > 0.12) {
+          if (fuelRef.current) {
+            fuelRef.current.level = Math.max(fuelRef.current.level, Math.min(gustPendingRebound * 1.1, 1.0));
+          }
+          gustPendingRebound = 0;
+        }
+        gustSuppression = Math.max(0, gustSuppression - dt * 2.4);
+      }
+
       // Decay fuel level smoothly over ~1.8 seconds back to normal
       let fuel = 0;
       if (fuelRef.current) {
@@ -454,8 +482,9 @@ export default function ThreeCampfireBackground({ isPlaying = true, fuelBurst = 
         fuel = fuelRef.current.level;
       }
 
-      // During fuel flare, emit up to 4x more particles per frame
-      const currentEmitCount = Math.floor(EMIT_PER_FRAME + fuel * 9);
+      // During gust suppression, fire height and spawn count contract; during fuel flare, emit up to 4x more particles
+      const flameScaleFactor = Math.max(0.32, 1.0 - gustSuppression * 0.68) * (1.0 + fuel * 0.35);
+      const currentEmitCount = Math.floor(Math.max(1, EMIT_PER_FRAME * (1.0 - gustSuppression * 0.5) + fuel * 9));
       for (let n = 0; n < currentEmitCount; n++) {
         const dead = particles.find((p) => !p.alive);
         if (dead) spawnParticle(dead);
@@ -465,9 +494,11 @@ export default function ThreeCampfireBackground({ isPlaying = true, fuelBurst = 
         const p = particles[i];
         if (!p.alive) continue;
 
-        p.vel.x += windVector.x * dt * 2.0;
-        p.vel.z += windVector.z * dt * 2.0;
-        p.vel.y += BUOYANCY * dt * (1.0 + fuel * 0.8);
+        // Apply enhanced horizontal gust deflection
+        const windBoost = 1.0 + gustSuppression * 2.8;
+        p.vel.x += windVector.x * dt * 2.0 * windBoost;
+        p.vel.z += windVector.z * dt * 2.0 * windBoost;
+        p.vel.y += BUOYANCY * dt * (1.0 + fuel * 0.8) * flameScaleFactor;
 
         p.pos.addScaledVector(p.vel, dt);
         p.age += dt;
@@ -485,7 +516,7 @@ export default function ThreeCampfireBackground({ isPlaying = true, fuelBurst = 
 
         const growIn = Math.min(t / 0.15, 1);
         const shrinkOut = 1 - Math.max((t - 0.5) / 0.5, 0);
-        const scale = p.size * growIn * shrinkOut * (1 + t * 0.4);
+        const scale = p.size * growIn * shrinkOut * (1 + t * 0.4) * flameScaleFactor;
 
         dummy.position.copy(p.pos);
         dummy.quaternion.copy(camera.quaternion);
@@ -501,10 +532,11 @@ export default function ThreeCampfireBackground({ isPlaying = true, fuelBurst = 
 
       if (fireLight) {
         const baseIntensity = 5.5 + Math.sin(time * 9 + flickerSeed) * 1.2 + Math.sin(time * 23.7) * 0.5 + (Math.random() - 0.5) * 0.5;
-        fireLight.intensity = baseIntensity + fuel * 28.0; // Huge surge in campsite radiance
-        fireLight.distance = 28 + fuel * 32.0;
-        fireLight.position.x = Math.sin(time * 1.7) * 0.08;
-        fireLight.position.z = Math.cos(time * 1.3) * 0.08;
+        const gustDimming = 1.0 - gustSuppression * 0.6;
+        fireLight.intensity = (baseIntensity * gustDimming) + fuel * 28.0; // Huge surge in campsite radiance on rebound
+        fireLight.distance = (28 * (0.6 + gustDimming * 0.4)) + fuel * 32.0;
+        fireLight.position.x = Math.sin(time * 1.7) * 0.08 + windVector.x * gustSuppression * 0.25;
+        fireLight.position.z = Math.cos(time * 1.3) * 0.08 + windVector.z * gustSuppression * 0.25;
       }
     }
 
@@ -516,8 +548,25 @@ export default function ThreeCampfireBackground({ isPlaying = true, fuelBurst = 
     }
 
     function onPointerMove(e) {
-      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      const now = performance.now();
+      const dt = Math.max((now - lastMouseTime) / 1000, 0.005);
+      const newX = (e.clientX / window.innerWidth) * 2 - 1;
+      const newY = -(e.clientY / window.innerHeight) * 2 + 1;
+
+      const dx = newX - lastMousePos.x;
+      const dy = newY - lastMousePos.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const instantVelocity = dist / dt;
+
+      // Track peak speed
+      mouseVelocity = Math.max(mouseVelocity * 0.65, instantVelocity);
+
+      lastMousePos.x = newX;
+      lastMousePos.y = newY;
+      lastMouseTime = now;
+
+      mouse.x = newX;
+      mouse.y = newY;
     }
 
     function onTouchMove(e) {
