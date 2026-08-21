@@ -442,7 +442,7 @@ export default function Home() {
             transparent
           );
           transform: rotate(25deg);
-          animation: surpriseSheen 5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+          animation: surpriseSheen 8.5s infinite cubic-bezier(0.25, 1, 0.5, 1);
           z-index: 2;
           pointer-events: none;
         }
@@ -553,7 +553,7 @@ export default function Home() {
 
         @keyframes surpriseSheen {
           0% { left: -60%; }
-          25% { left: 140%; }
+          40% { left: 140%; }
           100% { left: 140%; }
         }
 
