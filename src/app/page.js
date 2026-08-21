@@ -397,60 +397,83 @@ export default function Home() {
           overflow: hidden;
           width: 100%;
           max-width: 1020px;
-          height: 68px;
+          height: 72px;
           display: block;
           text-decoration: none;
           color: inherit;
           cursor: pointer;
-          background: rgba(20, 14, 8, 0.45);
-          border: 1px solid rgba(220, 170, 90, 0.14);
-          backdrop-filter: blur(12px) saturate(120%);
-          -webkit-backdrop-filter: blur(12px) saturate(120%);
+          background: rgba(22, 14, 10, 0.55);
+          border: 1px solid rgba(220, 170, 90, 0.25);
+          backdrop-filter: blur(16px) saturate(130%);
+          -webkit-backdrop-filter: blur(16px) saturate(130%);
           box-shadow:
-            0 8px 32px rgba(0, 0, 0, 0.5),
-            inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            0 8px 32px rgba(0, 0, 0, 0.55),
+            0 0 20px rgba(212, 169, 106, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.12);
           transition:
-            border-color 0.35s ease,
-            transform 0.38s cubic-bezier(0.23, 1, 0.32, 1),
-            box-shadow 0.38s ease;
+            border-color 0.4s ease,
+            transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+            box-shadow 0.4s ease;
           margin-bottom: 52px;
+          animation: surpriseAuroraIdle 6s ease-in-out infinite alternate;
         }
         .surprise-me-button::before {
           content: '';
           position: absolute;
           inset: 0;
           border-radius: inherit;
-          background: linear-gradient(160deg, rgba(255,255,255,0.05) 0%, transparent 55%);
+          background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(168, 85, 247, 0.06) 50%, rgba(245, 158, 11, 0.08) 100%);
           pointer-events: none;
           z-index: 2;
+        }
+        /* Continuous sweeping light sheen */
+        .surprise-me-button::after {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -60%;
+          width: 35%;
+          height: 200%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.14),
+            rgba(251, 191, 36, 0.18),
+            transparent
+          );
+          transform: rotate(25deg);
+          animation: surpriseSheen 5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 2;
+          pointer-events: none;
         }
         .surprise-me-button .surprise-me-bg {
           position: absolute;
           inset: 0;
           background-size: cover;
           background-position: center;
-          transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-          filter: brightness(0.25) saturate(0.6);
+          transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1), filter 0.7s ease;
+          filter: brightness(0.28) saturate(0.7);
           z-index: 0;
         }
         .surprise-me-button .surprise-me-vignette {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to right, rgba(10,6,2,0.85) 0%, transparent 100%);
+          background: linear-gradient(to right, rgba(14, 8, 4, 0.92) 0%, rgba(14, 8, 4, 0.65) 60%, rgba(14, 8, 4, 0.85) 100%);
           z-index: 1;
           pointer-events: none;
         }
         .surprise-me-button:hover {
-          border-color: rgba(220, 170, 90, 0.32);
-          transform: translateY(-2px);
+          border-color: rgba(251, 191, 36, 0.55);
+          transform: translateY(-3px) scale(1.006);
           box-shadow:
-            0 12px 40px rgba(0, 0, 0, 0.6),
-            0 0 0 1px rgba(220,170,90,0.18),
-            inset 0 1px 0 rgba(255,255,255,0.08);
+            0 16px 48px rgba(0, 0, 0, 0.7),
+            0 0 35px rgba(245, 158, 11, 0.28),
+            0 0 0 1px rgba(251, 191, 36, 0.35),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
         .surprise-me-button:hover .surprise-me-bg {
-          transform: scale(1.02);
-          filter: brightness(0.3) saturate(0.75);
+          transform: scale(1.04);
+          filter: brightness(0.36) saturate(0.9);
         }
         .surprise-me-content {
           position: absolute;
@@ -468,32 +491,40 @@ export default function Home() {
           min-width: 0;
         }
         .surprise-me-icon {
-          width: 36px;
-          height: 36px;
-          border-radius: 10px;
+          width: 40px;
+          height: 40px;
+          border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(255,255,255,0.07);
-          border: 1px solid rgba(255,255,255,0.1);
+          background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(245,158,11,0.15) 100%);
+          border: 1px solid rgba(251,191,36,0.3);
           backdrop-filter: blur(8px);
-          color: #d4a96a;
+          color: #fbbf24;
           flex-shrink: 0;
+          box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
+          animation: iconSparklePulse 3.5s ease-in-out infinite;
         }
         .surprise-me-title {
           font-family: 'Playfair Display', serif;
-          font-size: 1.25rem;
+          font-size: 1.3rem;
           font-weight: 800;
-          color: #f7f0e5;
-          text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+          background: linear-gradient(135deg, #ffffff 30%, #fef08a 70%, #f59e0b 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-shadow: 0 1px 12px rgba(245, 158, 11, 0.25);
+          display: flex;
+          align-items: center;
+          gap: 8px;
         }
         .surprise-me-desc {
-          font-size: 0.75rem;
-          color: rgba(218,188,148,0.7);
+          font-size: 0.78rem;
+          color: rgba(230, 205, 170, 0.78);
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          max-width: 480px;
+          max-width: 500px;
+          margin-top: 2px;
         }
         .surprise-me-right {
           display: flex;
@@ -502,15 +533,48 @@ export default function Home() {
         }
         .surprise-me-button:hover .card-enter {
           gap: 10px;
+          color: #fbbf24;
+        }
+
+        @keyframes surpriseAuroraIdle {
+          0% {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55), 0 0 18px rgba(212, 169, 106, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-color: rgba(220, 170, 90, 0.25);
+          }
+          50% {
+            box-shadow: 0 10px 36px rgba(0, 0, 0, 0.6), 0 0 28px rgba(245, 158, 11, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+            border-color: rgba(251, 191, 36, 0.4);
+          }
+          100% {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55), 0 0 18px rgba(212, 169, 106, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-color: rgba(220, 170, 90, 0.25);
+          }
+        }
+
+        @keyframes surpriseSheen {
+          0% { left: -60%; }
+          25% { left: 140%; }
+          100% { left: 140%; }
+        }
+
+        @keyframes iconSparklePulse {
+          0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+          }
+          50% {
+            transform: scale(1.06);
+            box-shadow: 0 0 18px rgba(245, 158, 11, 0.45);
+          }
         }
 
         @media (max-width: 680px) {
           .surprise-me-desc { display: none; }
-          .surprise-me-button { height: 56px; }
+          .surprise-me-button { height: 58px; }
           .surprise-me-content { padding: 0 16px; }
           .surprise-me-left { gap: 12px; }
           .surprise-me-title {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             white-space: nowrap;
           }
           .surprise-enter-text { display: none; }
