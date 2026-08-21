@@ -619,6 +619,32 @@ export default function Home() {
           box-shadow: 0 0 6px rgba(196,154,90,0.8);
           animation: blink 2.2s ease-in-out infinite;
         }
+
+        /* New Space Badge */
+        .new-space-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 4.5px;
+          padding: 4px 9px;
+          border-radius: 20px;
+          background: linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(217, 119, 6, 0.35) 100%);
+          border: 1px solid rgba(251, 191, 36, 0.5);
+          font-size: 0.65rem;
+          font-weight: 700;
+          color: #fef08a;
+          letter-spacing: 0.08em;
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          box-shadow: 0 2px 10px rgba(245, 158, 11, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        .new-badge-dot {
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          background: #fbbf24;
+          box-shadow: 0 0 6px #fbbf24;
+          animation: blink 1.8s ease-in-out infinite;
+        }
         @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.35; } }
 
         .card-body { display: flex; flex-direction: column; gap: 0; }
@@ -919,16 +945,24 @@ export default function Home() {
                 <div className="card-vignette" />
 
                 <div className="card-content">
-                  {/* Top row: icon + live badge */}
+                  {/* Top row: icon + (new badge and/or live badge) */}
                   <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
                     <div className="card-icon"><Icon /></div>
-                    {counts[place.slug] && (
-                      <div className="live-badge">
-                        <span className="live-dot" />
-                        <IconUsers />
-                        <span>{counts[place.slug]}</span>
-                      </div>
-                    )}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      {place.isNew && (
+                        <div className="new-space-badge">
+                          <span className="new-badge-dot" />
+                          <span>NEW</span>
+                        </div>
+                      )}
+                      {counts[place.slug] && (
+                        <div className="live-badge">
+                          <span className="live-dot" />
+                          <IconUsers />
+                          <span>{counts[place.slug]}</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   {/* Bottom: just two lines — Telugu + English */}
