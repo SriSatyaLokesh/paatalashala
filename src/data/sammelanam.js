@@ -15,6 +15,7 @@ import thathayyaSongs from '@/data/songs/thathayya.json';
 import vennalloSongs from '@/data/songs/vennallo.json';
 import campfireSongs from '@/data/songs/campfire-jamming.json';
 import gundammaSongs from '@/data/songs/gundamma-gramophone.json';
+import samudraTheeramSongs from '@/data/songs/samudra-theeram.json';
 
 // __localIndex = this song's index within its own space's active+sorted list
 // (i.e. exactly what currentSongIndex would be on that song's home page).
@@ -33,6 +34,7 @@ export const ALL_SONGS = [
   ...withLocalIndex(vennalloSongs),
   ...withLocalIndex(campfireSongs),
   ...withLocalIndex(gundammaSongs),
+  ...withLocalIndex(samudraTheeramSongs),
 ];
 
 const stripEmoji = (s) => s.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim();
@@ -320,5 +322,37 @@ export const SPACE_THEMES = {
       position: 'center', transitionMs: 2000,
     }),
     getQuote: () => null,
+  },
+
+  'samudra-theeram': {
+    titleText: 'సముద్ర తీరం',
+    titleFontFamily: "'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif",
+    weather: 'clear', particles: 'stars',
+    capsuleTheme: {
+      accentText: '#22d3ee', accentRgb: '34, 211, 238',
+      glassBg: 'rgba(10, 18, 28, 0.85)', glassBorder: 'rgba(34, 211, 238, 0.3)',
+      glassShadow: '0 25px 60px -15px rgba(0,0,0,0.95), inset 0 1px 1px rgba(255,255,255,0.15)',
+      vinylSize: 48, vinylBorder: '3px solid #083344',
+      vinylRingShadow: '0 0 0 2px rgba(34, 211, 238, 0.4), 0 8px 16px rgba(0,0,0,0.8)',
+      vinylBg: '#020617', spindleBg: '#082f49',
+      artAlt: 'Track Art', fallbackEmoji: '🌊', fallbackTitle: 'సముద్ర తీరం',
+      titleFontSize: '1.05rem', secondaryColor: '#7dd3fc',
+      subtitleFallback: 'Beach & Sea Shore Melodies',
+      subtitleFormat: (movie, year) => `${movie} • ${year}`,
+      prevNextColor: 'rgba(255,255,255,0.9)', prevTitle: 'Previous Track', nextTitle: 'Next Track',
+      dividerColor: 'rgba(255,255,255,0.15)',
+      playIconColor: '#032130', playShadow: '0 4px 18px rgba(34, 211, 238, 0.6)',
+      restoreVolume: 50, volumeTrackBg: 'rgba(255,255,255,0.2)', volumeWidth: 65,
+      seekTrackBg: 'rgba(255, 255, 255, 0.2)', seekFillShadow: '0 0 12px rgba(34, 211, 238, 0.9)',
+      showSeekThumb: false, showControlIconHoverClass: false,
+    },
+    ambientAudio: { src: '/audio/ocean_waves.mp3', volume: 0.15, gate: 'none' },
+    getBackground: () => ({
+      url: prefixPath("url('/images/vennela_1.webp')"),
+      position: 'center', transitionMs: 2000,
+    }),
+    getQuote: (song) => song.quote,
+    quoteTextColor: '#7dd3fc', quoteTextShadow: '0 2px 4px rgba(0,0,0,0.9), 0 0 10px rgba(34, 211, 238, 0.4)',
+    quoteBorderColor: 'rgba(34, 211, 238, 0.3)',
   },
 };

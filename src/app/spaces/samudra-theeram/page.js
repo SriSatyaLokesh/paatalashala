@@ -1,0 +1,374 @@
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { useSpacePlayer } from '@/hooks/useSpacePlayer';
+import { useSpaceKeyboardShortcuts } from '@/hooks/useSpaceKeyboardShortcuts';
+import placeSongs from '@/data/songs/samudra-theeram.json';
+import FloatingYouTubePlayer from '@/components/space/FloatingYouTubePlayer';
+import PlayerErrorBanner from '@/components/space/PlayerErrorBanner';
+import PlayerCapsule from '@/components/space/PlayerCapsule';
+import { ListenersBadgeSingle } from '@/components/space/ListenersBadge';
+import SamudraTheeramBackground, { SCENE_NAMES } from '@/components/space/SamudraTheeramBackground';
+import { ChevronLeft, Wind, Tv, Waves } from 'lucide-react';
+import './samudra.css';
+
+const AMBIENT_AUDIO = { src: '/audio/ocean_waves.mp3', volume: 0.15, gate: 'none' };
+const PRESENCE_CONFIG = { channel: 'presence-samudra-theeram', base: 42, sineAmp: 5, cosAmp: 3, syncPad: 10, catchSpread: 8, catchOffset: 4 };
+const AUTO_SKIP = { enabled: true, delayMs: 1500, codes: [101, 150] };
+
+const CAPSULE_THEME = {
+  accentText: 'var(--fg-hud, #f0cfa0)',
+  accentRgb: '240, 207, 160',
+  glassBg: 'rgba(10, 10, 15, 0.88)',
+  glassBorder: 'rgba(255, 255, 255, 0.12)',
+  glassShadow: '0 25px 60px -15px rgba(0,0,0,0.95), inset 0 1px 1px rgba(255,255,255,0.15)',
+  vinylSize: 48,
+  vinylBorder: '3px solid rgba(255,255,255,0.15)',
+  vinylRingShadow: '0 0 0 2px var(--fg-dot, rgba(240, 207, 160, 0.4)), 0 8px 16px rgba(0,0,0,0.8)',
+  vinylBg: '#05070f',
+  spindleBg: '#1e293b',
+  artAlt: 'Track Art',
+  fallbackEmoji: '🌊',
+  fallbackTitle: 'సముద్ర తీరం',
+  titleFontSize: '1.02rem',
+  secondaryColor: 'var(--fg-dim, rgba(240, 207, 160, 0.65))',
+  subtitleFallback: 'Beach & Sea Shore Melodies',
+  subtitleFormat: (movie, year) => `${movie} • ${year}`,
+  prevNextColor: 'rgba(255,255,255,0.9)',
+  prevTitle: 'Previous Track',
+  nextTitle: 'Next Track',
+  dividerColor: 'rgba(255,255,255,0.15)',
+  playIconColor: '#0a0a0f',
+  playShadow: '0 4px 18px var(--fg-dotact, rgba(240, 207, 160, 0.6))',
+  restoreVolume: 50,
+  volumeTrackBg: 'rgba(255,255,255,0.2)',
+  volumeWidth: 65,
+  seekTrackBg: 'rgba(255, 255, 255, 0.2)',
+  seekFillShadow: '0 0 12px var(--fg-dotact, rgba(240, 207, 160, 0.9))',
+  showSeekThumb: false,
+  showControlIconHoverClass: false,
+};
+
+const SCENE_DATA = [
+  {
+    id: "s0",
+    num: "01",
+    name: "DAWN",
+    teluguTitle: "సూర్యోదయ కాంతులు",
+    desc: "Gold floods the horizon. The ocean catches fire — warm amber and peach across every swell.",
+    quote: "వేకువ వెలుగుల్లో అలల సవ్వడి... పసిడి కిరణాల పలకరింపు."
+  },
+  {
+    id: "s1",
+    num: "02",
+    name: "MIDDAY",
+    teluguTitle: "మిట్టమధ్యాహ్న కెరటాలు",
+    desc: "Full light. The sea turns a deep cerulean, scattering white specular across every swell.",
+    quote: "నీలాకాశం అంచున నీలి సముద్రం... వెండి నురుగుల తరంగాలు."
+  },
+  {
+    id: "s2",
+    num: "03",
+    name: "DUSK",
+    teluguTitle: "సంధ్యా రాగాల తీరం",
+    desc: "The sun descends in copper and ember. Long reflections stretch across the darkening water.",
+    quote: "సంధ్యా వేళ ఎర్రని సూర్యుడు... నీటి అలలపై రంగుల రాగాలు."
+  },
+  {
+    id: "s3",
+    num: "04",
+    name: "STORM",
+    teluguTitle: "ఉప్పొంగే కడలి & మెరుపుల తాండవం",
+    desc: "Waves amplify. The sky thickens. A darkness that isn't night — something coming from the west.",
+    quote: "ఉరుముల ఉరవడి, కడలి ఘోష... చీకటి మేఘాల మెరుపుల వెలుగు."
+  },
+  {
+    id: "s4",
+    num: "05",
+    name: "NIGHT",
+    teluguTitle: "వెన్నెల రాత్రి సముద్రం",
+    desc: "Stars emerge. The moon leaves a silver path on the swells. Nothing moves but the ocean.",
+    quote: "నిశ్శబ్ద రాత్రిలో వెన్నెల బాట... కనురెప్పల పై చల్లని కడలి గాలి."
+  },
+  {
+    id: "s5",
+    num: "06",
+    name: "PRE-DAWN",
+    teluguTitle: "ఉదయించే వేళ",
+    desc: "The last stars hold. A red-orange ember glows at the edge of the world, not yet a sun.",
+    quote: "తొలిపొద్దు సంకేతం... కొత్త ఉదయానికి స్వాగతం పలికే అలల నాదం."
+  }
+];
+
+export default function SamudraTheeramPage() {
+  const player = useSpacePlayer(placeSongs, {
+    initialVolume: 50,
+    ambientAudio: AMBIENT_AUDIO,
+    presence: PRESENCE_CONFIG,
+    autoSkipOnError: AUTO_SKIP,
+  });
+
+  const {
+    currentSong, isPlaying, volume, currentTime, duration, presenceCount, timeString,
+    ambientOn, setAmbientOn, playerError, isShuffle, setIsShuffle, seekHovered, setSeekHovered,
+    volumeHovered, setVolumeHovered, showShuffleHint, videoVisible, setVideoVisible,
+    handlePlayerReady, handlePlayerError, handleStateChange, handleTimeUpdate,
+    togglePlay, next, prev, seek, seekBy, changeVolume, fmt,
+  } = player;
+
+  useSpaceKeyboardShortcuts({
+    onTogglePlay: togglePlay, onNext: next, onPrev: prev, onChangeVolume: changeVolume,
+    onSeekBy: seekBy,
+    volume, restoreVolume: CAPSULE_THEME.restoreVolume,
+    toggleShuffle: () => setIsShuffle(prev => !prev),
+  });
+
+  const [currentSceneIdx, setCurrentSceneIdx] = useState(0);
+
+  // Web Audio procedural sea waves whoosh for realistic ambient immersion
+  const waveAudioRef = useRef(null);
+
+  useEffect(() => {
+    if (!ambientOn) {
+      if (waveAudioRef.current) {
+        try { waveAudioRef.current.close(); } catch {}
+        waveAudioRef.current = null;
+      }
+      return;
+    }
+
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      waveAudioRef.current = ctx;
+
+      const bufferSize = ctx.sampleRate * 4;
+      const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      let lastOut = 0.0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        output[i] = (lastOut + (0.04 * white)) / 1.04;
+        lastOut = output[i];
+        output[i] *= 3.5;
+      }
+
+      const whiteNoise = ctx.createBufferSource();
+      whiteNoise.buffer = noiseBuffer;
+      whiteNoise.loop = true;
+
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(320, ctx.currentTime);
+
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+
+      const lfo = ctx.createOscillator();
+      lfo.type = 'sine';
+      lfo.frequency.setValueAtTime(0.12, ctx.currentTime);
+
+      const lfoGain = ctx.createGain();
+      lfoGain.gain.setValueAtTime(280, ctx.currentTime);
+
+      lfo.connect(lfoGain);
+      lfoGain.connect(filter.frequency);
+
+      whiteNoise.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+
+      whiteNoise.start();
+      lfo.start();
+    } catch {}
+
+    return () => {
+      if (waveAudioRef.current) {
+        try { waveAudioRef.current.close(); } catch {}
+        waveAudioRef.current = null;
+      }
+    };
+  }, [ambientOn]);
+
+  // IntersectionObserver for reveal animations on scroll
+  useEffect(() => {
+    const revealEls = document.querySelectorAll('.scene-title, .scene-telugu, .scene-desc, .scene-quote, .h-line');
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          } else {
+            entry.target.classList.remove('visible');
+          }
+        }
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
+    );
+
+    revealEls.forEach((el) => io.observe(el));
+
+    return () => {
+      io.disconnect();
+    };
+  }, []);
+
+  const scrollToScene = (idx) => {
+    const el = document.getElementById(SCENE_DATA[idx]?.id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className="samudra-container">
+      {/* ── Fixed WebGL Canvas ── */}
+      <SamudraTheeramBackground onSceneUpdate={({ sceneIndex }) => {
+        setCurrentSceneIdx(sceneIndex);
+      }} />
+
+      {/* ── HUD ── */}
+      <div id="hud">
+        <div id="hud-top">
+          <div className="flex flex-col gap-2 pointer-events-auto">
+            <div className="flex items-center gap-2">
+              <Link
+                href="/"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-white/90 bg-white/10 hover:bg-white/20 border border-white/15 backdrop-blur-md transition-all shadow-md"
+              >
+                <ChevronLeft size={15} />
+                <span>SPACES</span>
+              </Link>
+              {timeString && (
+                <span className="text-xs font-mono text-white/80 px-2.5 py-1 bg-black/40 rounded-full border border-white/10 backdrop-blur-md">
+                  {timeString}
+                </span>
+              )}
+            </div>
+
+            <div className="flex items-center gap-3 mt-0.5">
+              <div id="scene_name" className="mono flex items-center gap-1.5">
+                <Waves size={15} className="inline opacity-80" />
+                <span id="scene_name_text">{SCENE_NAMES[currentSceneIdx]}</span>
+              </div>
+              <ListenersBadgeSingle count={presenceCount} spaceName="Samudra Theeram" />
+            </div>
+          </div>
+
+          <div className="flex flex-col items-end gap-2.5 pointer-events-auto">
+            {/* Ambient sound and video buttons */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setAmbientOn(!ambientOn)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md border transition-all ${
+                  ambientOn
+                    ? 'bg-white/25 border-white/50 text-white shadow-[0_0_12px_rgba(255,255,255,0.3)]'
+                    : 'bg-black/40 border-white/15 text-white/70 hover:text-white'
+                }`}
+                title="Toggle ocean surf ambient sound"
+              >
+                <Wind size={14} />
+                <span>{ambientOn ? 'AMBIENCE ON' : 'AMBIENCE OFF'}</span>
+              </button>
+
+              <button
+                onClick={() => setVideoVisible(!videoVisible)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md border transition-all ${
+                  videoVisible
+                    ? 'bg-white/25 border-white/50 text-white'
+                    : 'bg-black/40 border-white/15 text-white/70 hover:text-white'
+                }`}
+                title="Toggle floating video player"
+              >
+                <Tv size={14} />
+                <span>{videoVisible ? 'HIDE VIDEO' : 'VIDEO'}</span>
+              </button>
+            </div>
+
+            {/* Percentage & Progress Bar */}
+            <div className="flex flex-col items-end gap-1">
+              <div id="hud_pct" className="mono">000%</div>
+              <div id="prog_bar">
+                <div id="prog_fill" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* HUD Bottom Player Capsule */}
+        <div id="hud-bottom" className="pointer-events-auto">
+          {playerError && (
+            <PlayerErrorBanner
+              error={playerError}
+              onRetry={() => {}}
+              onDismiss={() => {}}
+            />
+          )}
+
+          <PlayerCapsule
+            currentSong={currentSong}
+            isPlaying={isPlaying}
+            currentTime={currentTime}
+            duration={duration}
+            volume={volume}
+            isShuffle={isShuffle}
+            showShuffleHint={showShuffleHint}
+            seekHovered={seekHovered}
+            volumeHovered={volumeHovered}
+            onTogglePlay={togglePlay}
+            onPrev={prev}
+            onNext={next}
+            onSeek={seek}
+            onSeekHover={setSeekHovered}
+            onChangeVolume={changeVolume}
+            onVolumeHover={setVolumeHovered}
+            onToggleShuffle={() => setIsShuffle(prev => !prev)}
+            fmt={fmt}
+            theme={CAPSULE_THEME}
+          />
+        </div>
+      </div>
+
+      {/* ── Scene Navigation Dots ── */}
+      <div id="scene_dots">
+        {SCENE_DATA.map((scene, idx) => (
+          <button
+            key={scene.id}
+            onClick={() => scrollToScene(idx)}
+            title={`${scene.name} - ${scene.teluguTitle}`}
+            className={`scene-dot ${currentSceneIdx === idx ? 'active' : ''}`}
+            aria-label={`Jump to scene ${scene.name}`}
+          />
+        ))}
+      </div>
+
+      {/* ── Scroll Track ── */}
+      <div id="scroll_track">
+        {SCENE_DATA.map((scene) => (
+          <div key={scene.id} className="scene-section" id={scene.id}>
+            <div className="h-line" />
+            <div className="scene-label">Scene {scene.num} / 06</div>
+            <div className="scene-title">{scene.name}</div>
+            <div className="scene-telugu">{scene.teluguTitle}</div>
+            <div className="scene-desc">{scene.desc}</div>
+            {scene.quote && <div className="scene-quote">"{scene.quote}"</div>}
+          </div>
+        ))}
+      </div>
+
+      {/* ── Floating YouTube Video ── */}
+      <FloatingYouTubePlayer
+        videoId={currentSong?.youtubeVideoId}
+        isPlaying={isPlaying}
+        volume={volume}
+        visible={videoVisible}
+        onReady={handlePlayerReady}
+        onError={handlePlayerError}
+        onStateChange={handleStateChange}
+        onTimeUpdate={handleTimeUpdate}
+      />
+    </div>
+  );
+}

@@ -1,0 +1,317 @@
+/* ── Samudra Theeram CodePen Authentic Design ── */
+:root {
+  /* Set by JS per scene — defaults to dawn */
+  --fg: #f0cfa0;
+  --fg-dim: rgba(240, 207, 160, 0.55);
+  --fg-hud: rgba(240, 207, 160, 0.7);
+  --fg-dot: rgba(240, 207, 160, 0.3);
+  --fg-dotact: rgba(240, 207, 160, 0.9);
+  --bg: #0a0a0f;
+  --accent: #a0b4ff;
+  --scrim: 0.18;
+}
+
+html, body {
+  height: auto !important;
+  min-height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  scroll-behavior: auto !important;
+  background-color: var(--bg) !important;
+}
+
+.samudra-container {
+  background: transparent !important;
+  color: var(--fg);
+  font-family: var(--font-space-grotesk), "Space Grotesk", system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  min-height: 600vh;
+  position: relative;
+  width: 100%;
+}
+
+.mono {
+  font-family: var(--font-space-mono), "Space Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* ── Fixed WebGL canvas ── */
+#webgl_canvas {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 0 !important;
+  display: block !important;
+  pointer-events: none !important;
+  background-color: #0a0a0f !important;
+}
+
+/* ── HUD ── */
+#hud {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  #hud {
+    padding: 1.75rem 2.5rem;
+  }
+}
+
+#hud-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  gap: 1rem;
+}
+
+#hud-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding-bottom: 0.5rem;
+}
+
+#scene_name {
+  font-family: var(--font-space-mono), "Space Mono", monospace;
+  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--fg-hud);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+  transition: color 1.2s ease;
+}
+
+#hud_pct {
+  font-family: var(--font-space-mono), "Space Mono", monospace;
+  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+  letter-spacing: 0.14em;
+  color: var(--fg-hud);
+  opacity: 0.85;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+  transition: color 1.2s ease;
+}
+
+#prog_bar {
+  width: 110px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.18);
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+@media (min-width: 640px) {
+  #prog_bar {
+    width: 130px;
+  }
+}
+
+#prog_fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: var(--fg-hud);
+  opacity: 0.85;
+  width: 0%;
+  transition: width 80ms linear, background 1.2s ease;
+}
+
+/* ── Scene nav dots ── */
+#scene_dots {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  position: fixed;
+  right: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 25;
+  pointer-events: auto;
+}
+
+@media (min-width: 768px) {
+  #scene_dots {
+    right: 1.75rem;
+  }
+}
+
+.scene-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--fg-dot);
+  transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  outline: none;
+}
+
+.scene-dot.active {
+  background: var(--fg-dotact);
+  transform: scale(1.65);
+  box-shadow: 0 0 10px var(--fg-dotact);
+}
+
+/* ── Scrollable track ── */
+#scroll_track {
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+  width: 100%;
+}
+
+.scene-section {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 1.5rem 8.5rem;
+  pointer-events: none;
+  position: relative;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .scene-section {
+    padding: 0 2.5rem 9rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .scene-section {
+    padding: 0 4rem 9.5rem;
+  }
+}
+
+/* Bottom scrim — gets more opaque as night approaches */
+.scene-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 8, var(--scrim, 0.18)) 0%,
+    rgba(0, 0, 8, calc(var(--scrim, 0.18) * 0.4)) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+  transition: background 0.5s ease;
+}
+
+.scene-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.scene-title {
+  font-family: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.8rem, 8vw, 6.2rem);
+  line-height: 0.95;
+  color: var(--fg);
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.7), 0 1px 4px rgba(0, 0, 0, 0.9);
+  letter-spacing: -0.02em;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease, color 1.2s ease;
+}
+
+.scene-title.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.scene-label {
+  font-family: var(--font-space-mono), "Space Mono", monospace;
+  font-size: clamp(0.58rem, 1.2vw, 0.75rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--fg);
+  opacity: 0.55;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+  transition: color 1.2s ease;
+}
+
+.scene-telugu {
+  font-family: 'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif;
+  font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+  color: var(--fg);
+  opacity: 0;
+  transform: translateY(12px);
+  margin-top: 0.4rem;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+  transition: opacity 0.7s ease 0.08s, transform 0.7s ease 0.08s, color 1.2s ease;
+}
+
+.scene-telugu.visible {
+  opacity: 0.95;
+  transform: none;
+}
+
+.scene-desc {
+  font-family: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+  font-weight: 300;
+  font-size: clamp(0.88rem, 2vw, 1.1rem);
+  color: var(--fg);
+  opacity: 0;
+  max-width: 460px;
+  margin-top: 0.75rem;
+  line-height: 1.55;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.85), 0 0px 4px rgba(0, 0, 0, 0.7);
+  transform: translateY(10px);
+  transition: opacity 0.7s ease 0.12s, transform 0.7s ease 0.12s, color 1.2s ease;
+}
+
+.scene-desc.visible {
+  opacity: 0.88;
+  transform: none;
+}
+
+.scene-quote {
+  font-size: clamp(0.82rem, 1.5vw, 0.95rem);
+  font-style: italic;
+  color: var(--fg);
+  opacity: 0;
+  max-width: 460px;
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  transform: translateY(8px);
+  transition: opacity 0.7s ease 0.18s, transform 0.7s ease 0.18s, color 1.2s ease;
+}
+
+.scene-quote.visible {
+  opacity: 0.75;
+  transform: none;
+}
+
+/* h-line decorative */
+.h-line {
+  width: 36px;
+  height: 1px;
+  background: var(--fg);
+  opacity: 0;
+  margin-bottom: 1rem;
+  transition: opacity 0.6s ease 0.05s, background 1.2s ease;
+}
+
+.h-line.visible {
+  opacity: 0.45;
+  width: 36px;
+}

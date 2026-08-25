@@ -14,6 +14,8 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
 - [ ] **Phase 6: Playlist Sync (V2 Integration)** - Build Spotify and YouTube OAuth integrations for playlist cloning.
 - [x] **Phase 7: Camp Fire Melodies** - Implement the Camp Fire Melodies environment with 3D WebGL campfire visualizer, starry night backdrop, glowing tent component, and curated campfire hits. (completed 2026-08-18)
 - [x] **Phase 8: Gundamma Gramophone** - Create 70s & 80s Telugu classics space environment, process vintage playlists, and integrate space route. (completed 2026-08-19)
+- [x] **Phase 9: Mobile Cache Clear & Versioned App Update** - Build version stamping system, Cache-Bust/PWA reload helper, and Home Page mobile Update button. (completed 2026-08-20)
+- [x] **Phase 10: Samudra Theeram (Beach & Sea Shore Melodies)** - Create the "Samudra Theeram" space featuring dynamic 24-hour sunrise/sunset beach day-night cycle animations and curated Telugu ocean/beach melodies. (completed 2026-08-24)
 
 ---
 
@@ -148,6 +150,7 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
 **Depends on**: Phase 8
 **Requirements**: PWA-01, PWA-02, CACHE-01
 **Success Criteria**:
+
   1. Automated build-time commit hash / version stamping is available in the client app.
   2. Mobile & desktop users can click an "Update App / Refresh" button to purge all stale cache storage, unregister/update service workers, and reload fresh assets.
   3. Installed PWA users receive a non-intrusive update prompt when a new commit version is deployed to `main`.
@@ -156,11 +159,25 @@ The Paatalashala roadmap is structured to deliver themed, culturally immersive T
 
 - [x] 09-01: Build version stamping system, Cache-Bust/PWA reload helper, and Home Page mobile Update button. (completed 2026-08-20)
 
+### Phase 10: Samudra Theeram (Beach & Sea Shore Melodies)
+
+**Goal:** Implement the "Samudra Theeram" Telugu space featuring an interactive/on-scroll day-night beach cycle (dawn, day, midday, sunset, night, dawn) based on the sun/wave animation UI (CodePen: https://codepen.io/Margarita-the-solid/pen/xbgrWpd), integrated media player with curated Telugu beach and sunrise/sunset melodies, and SEO optimizations for sea shore / ocean bed melodies.
+**Depends on:** Phase 9
+**Requirements:** ENV-03 (Samudra Theeram), DATA-01, DATA-02, SEO-01
+**Success Criteria:**
+  1. User can enter `/spaces/samudra-theeram` (or `/places/samudra-theeram`), experience the animated sun, sky, and waves transitioning across the day-night cycle, and listen to relaxing Telugu beach songs.
+  2. Media player correctly plays curated Telugu beach melodies and displays song details/visualizers.
+  3. Space is registered in `SPACES`, `Sammelanam`, and homepage listings with rich SEO tags (beach songs, seabed melodies, ocean bed melodies in Telugu).
+
+**Plans**: 1 plan
+
+- [x] 10-01: Build WebGL ocean day-night shader component, create Telugu ocean dataset, assemble `/spaces/samudra-theeram` space page, integrate presence & player capsule, register in SPACES/Sammelanam/Sitemap, and apply SEO. (completed 2026-08-24)
+
 ---
  
 ## Progress
  
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10
  
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -173,3 +190,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 7. Camp Fire Melodies | 1/1 | Complete    | 2026-08-18 |
 | 8. Gundamma Gramophone | 1/1 | Complete    | 2026-08-19 |
 | 9. Mobile Cache Clear & Versioned App Update | 1/1 | Complete    | 2026-08-20 |
+| 10. Samudra Theeram (Beach & Sea Shore Melodies) | 1/1 | Complete    | 2026-08-24 |
