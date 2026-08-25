@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { useSpacePlayer } from '@/hooks/useSpacePlayer';
 import { useSpaceKeyboardShortcuts } from '@/hooks/useSpaceKeyboardShortcuts';
@@ -8,12 +8,11 @@ import placeSongs from '@/data/songs/samudra-theeram.json';
 import FloatingYouTubePlayer from '@/components/space/FloatingYouTubePlayer';
 import PlayerErrorBanner from '@/components/space/PlayerErrorBanner';
 import PlayerCapsule from '@/components/space/PlayerCapsule';
-import { ListenersBadgeSingle } from '@/components/space/ListenersBadge';
+import { ListenersBadgeDesktop, ListenersBadgeMobileRow } from '@/components/space/ListenersBadge';
 import SamudraTheeramBackground, { SCENE_NAMES } from '@/components/space/SamudraTheeramBackground';
 import { ChevronLeft, Wind, Tv, Waves } from 'lucide-react';
 import './samudra.css';
 
-const AMBIENT_AUDIO = { src: '/audio/ocean_waves.mp3', volume: 0.15, gate: 'none' };
 const PRESENCE_CONFIG = { channel: 'presence-samudra-theeram', base: 42, sineAmp: 5, cosAmp: 3, syncPad: 10, catchSpread: 8, catchOffset: 4 };
 const AUTO_SKIP = { enabled: true, delayMs: 1500, codes: [101, 150] };
 
@@ -104,7 +103,6 @@ const SCENE_DATA = [
 export default function SamudraTheeramPage() {
   const player = useSpacePlayer(placeSongs, {
     initialVolume: 50,
-    ambientAudio: AMBIENT_AUDIO,
     presence: PRESENCE_CONFIG,
     autoSkipOnError: AUTO_SKIP,
   });
@@ -125,6 +123,9 @@ export default function SamudraTheeramPage() {
   });
 
   const [currentSceneIdx, setCurrentSceneIdx] = useState(0);
+  const handleSceneUpdate = useCallback(({ sceneIndex }) => {
+    setCurrentSceneIdx(sceneIndex);
+  }, []);
 
   // Web Audio procedural sea waves whoosh for realistic ambient immersion
   const waveAudioRef = useRef(null);
@@ -215,58 +216,43 @@ export default function SamudraTheeramPage() {
     };
   }, []);
 
+  const backgroundRef = useRef(null);
   const scrollToScene = (idx) => {
-    const el = document.getElementById(SCENE_DATA[idx]?.id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    backgroundRef.current?.jumpToScene(idx);
   };
 
   return (
     <div className="samudra-container">
       {/* ── Fixed WebGL Canvas ── */}
-      <SamudraTheeramBackground onSceneUpdate={({ sceneIndex }) => {
-        setCurrentSceneIdx(sceneIndex);
-      }} />
+      <SamudraTheeramBackground ref={backgroundRef} onSceneUpdate={handleSceneUpdate} />
 
       {/* ── HUD ── */}
       <div id="hud">
         <div id="hud-top">
-          <div className="flex flex-col gap-2 pointer-events-auto">
-            <div className="flex items-center gap-2">
-              <Link
-                href="/"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-white/90 bg-white/10 hover:bg-white/20 border border-white/15 backdrop-blur-md transition-all shadow-md"
-              >
+          <div className="hud-top-left">
+            <div className="hud-row">
+              <Link href="/" className="hud-back-link">
                 <ChevronLeft size={15} />
                 <span>SPACES</span>
               </Link>
-              {timeString && (
-                <span className="text-xs font-mono text-white/80 px-2.5 py-1 bg-black/40 rounded-full border border-white/10 backdrop-blur-md">
-                  {timeString}
-                </span>
-              )}
+              {timeString && <span className="hud-time-chip">{timeString}</span>}
             </div>
 
-            <div className="flex items-center gap-3 mt-0.5">
-              <div id="scene_name" className="mono flex items-center gap-1.5">
-                <Waves size={15} className="inline opacity-80" />
+            <div className="hud-listeners-row">
+              <div id="scene_name" className="mono hud-row">
+                <Waves size={15} style={{ opacity: 0.8 }} />
                 <span id="scene_name_text">{SCENE_NAMES[currentSceneIdx]}</span>
               </div>
-              <ListenersBadgeSingle count={presenceCount} spaceName="Samudra Theeram" />
+              <ListenersBadgeDesktop count={presenceCount} label="listeners" />
             </div>
           </div>
 
-          <div className="flex flex-col items-end gap-2.5 pointer-events-auto">
+          <div className="hud-top-right">
             {/* Ambient sound and video buttons */}
-            <div className="flex items-center gap-2">
+            <div className="hud-row">
               <button
                 onClick={() => setAmbientOn(!ambientOn)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md border transition-all ${
-                  ambientOn
-                    ? 'bg-white/25 border-white/50 text-white shadow-[0_0_12px_rgba(255,255,255,0.3)]'
-                    : 'bg-black/40 border-white/15 text-white/70 hover:text-white'
-                }`}
+                className={`hud-toggle-btn ${ambientOn ? 'active' : ''}`}
                 title="Toggle ocean surf ambient sound"
               >
                 <Wind size={14} />
@@ -275,11 +261,7 @@ export default function SamudraTheeramPage() {
 
               <button
                 onClick={() => setVideoVisible(!videoVisible)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md border transition-all ${
-                  videoVisible
-                    ? 'bg-white/25 border-white/50 text-white'
-                    : 'bg-black/40 border-white/15 text-white/70 hover:text-white'
-                }`}
+                className={`hud-toggle-btn ${videoVisible ? 'active' : ''}`}
                 title="Toggle floating video player"
               >
                 <Tv size={14} />
@@ -288,7 +270,7 @@ export default function SamudraTheeramPage() {
             </div>
 
             {/* Percentage & Progress Bar */}
-            <div className="flex flex-col items-end gap-1">
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}>
               <div id="hud_pct" className="mono">000%</div>
               <div id="prog_bar">
                 <div id="prog_fill" />
@@ -298,7 +280,7 @@ export default function SamudraTheeramPage() {
         </div>
 
         {/* HUD Bottom Player Capsule */}
-        <div id="hud-bottom" className="pointer-events-auto">
+        <div id="hud-bottom">
           {playerError && (
             <PlayerErrorBanner
               error={playerError}
@@ -321,12 +303,13 @@ export default function SamudraTheeramPage() {
             onPrev={prev}
             onNext={next}
             onSeek={seek}
-            onSeekHover={setSeekHovered}
+            onSeekHoverChange={setSeekHovered}
             onChangeVolume={changeVolume}
-            onVolumeHover={setVolumeHovered}
+            onVolumeHoverChange={setVolumeHovered}
             onToggleShuffle={() => setIsShuffle(prev => !prev)}
             fmt={fmt}
             theme={CAPSULE_THEME}
+            mobileListenersSlot={<ListenersBadgeMobileRow count={presenceCount} label="listeners" />}
           />
         </div>
       </div>
@@ -363,8 +346,8 @@ export default function SamudraTheeramPage() {
         videoId={currentSong?.youtubeVideoId}
         isPlaying={isPlaying}
         volume={volume}
-        visible={videoVisible}
-        onReady={handlePlayerReady}
+        videoVisible={videoVisible}
+        onPlayerReady={handlePlayerReady}
         onError={handlePlayerError}
         onStateChange={handleStateChange}
         onTimeUpdate={handleTimeUpdate}

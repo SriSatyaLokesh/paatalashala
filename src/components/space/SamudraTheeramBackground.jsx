@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react';
 
 // ═══════════════════════════════════════════════════════════════════
 // EXACT CodePen shader — not modified except for JS string escaping
@@ -42,9 +42,10 @@ const float PI  = 3.14159265359;
 const float TAU = 6.28318530718;
 
 // ── Render budget ───────────────────────────────────────────────────
-const int SEA_TRACE_STEPS  = 8;    // bisection iterations for surface find
-const int SEA_OCTAVES_GEO  = 3;    // octaves used during ray marching
-const int SEA_OCTAVES_FRAG = 5;    // octaves used for normal computation
+// Trimmed from the original 8/3/5 — biggest lever on render performance.
+const int SEA_TRACE_STEPS  = 5;    // bisection iterations for surface find
+const int SEA_OCTAVES_GEO  = 2;    // octaves used during ray marching
+const int SEA_OCTAVES_FRAG = 3;    // octaves used for normal computation
 
 // ── Hash / noise ────────────────────────────────────────────────────
 const vec2  HASH_DOT   = vec2(127.1, 311.7);
@@ -124,17 +125,18 @@ const float MOON_DISK_HI     = 0.99998;
 const float MOON_DISK_SCL    = 3.5;
 const vec3  MOON_COL_DISK    = vec3(0.95, 0.97, 1.00);
 const vec3  MOON_COL_CORONA  = vec3(0.88, 0.92, 1.00);
-const float MOON_CORONA_EXP  = 820.0; const float MOON_CORONA_SCL  = 5.0;
+// Halo/corona bumped up — stays visible at reduced render resolution.
+const float MOON_CORONA_EXP  = 820.0; const float MOON_CORONA_SCL  = 6.5;
 const vec3  MOON_COL_HALO1   = vec3(0.65, 0.75, 0.95);
-const float MOON_HALO1_EXP   = 60.0;  const float MOON_HALO1_SCL   = 0.18;
+const float MOON_HALO1_EXP   = 60.0;  const float MOON_HALO1_SCL   = 0.30;
 const vec3  MOON_COL_HALO2   = vec3(0.40, 0.52, 0.82);
-const float MOON_HALO2_EXP   = 12.0;  const float MOON_HALO2_SCL   = 0.07;
+const float MOON_HALO2_EXP   = 12.0;  const float MOON_HALO2_SCL   = 0.13;
 
 // ── Stars in sky ────────────────────────────────────────────────────
 const float STAR_HOR_LO     = 0.02;    // horizon fade start
 const float STAR_HOR_HI     = 0.28;    // horizon fade end
 const float STAR_STORM_SUPP = 0.88;    // storm suppression of stars
-const float STAR_NIGHT_SCL  = 2.80;    // overall star brightness scale
+const float STAR_NIGHT_SCL  = 3.60;    // overall star brightness scale
 const float NIGHT_STARS_THRESHOLD = 0.02;
 
 // ── Horizon mist ────────────────────────────────────────────────────
@@ -568,10 +570,11 @@ void main() {
       vec3 srd = vec3(mat2(cT,-sT,sT,cT) * rd.xy, rd.z);
 
       float sn  = hash(srd.xy * 300.0 + vec2(srd.z * 300.0));
-      // Tiered magnitudes — bright/medium/faint — creates depth and density
-      float sBright = pow(clamp(sn - 0.9994, 0.0, 1.0) * 1667.0, 1.6);
-      float sMedium = pow(clamp(sn - 0.998,  0.0, 1.0) *  500.0, 2.0) * 0.30;
-      float sFaint  = pow(clamp(sn - 0.993,  0.0, 1.0) *  143.0, 2.0) * 0.07;
+      // Tiered magnitudes — bright/medium/faint. Thresholds eased from the
+      // original so fewer rendered pixels still catches enough hits.
+      float sBright = pow(clamp(sn - 0.9991, 0.0, 1.0) * 1111.0, 1.6);
+      float sMedium = pow(clamp(sn - 0.9972, 0.0, 1.0) *  357.0, 2.0) * 0.30;
+      float sFaint  = pow(clamp(sn - 0.9902, 0.0, 1.0) *  102.0, 2.0) * 0.07;
       float stars = sBright + sMedium + sFaint;
       // Smooth per-star atmospheric scintillation — each star has its own rate
       float scintSpeed = 0.30 + sn * 0.60;
@@ -773,9 +776,19 @@ const getSceneColor = (s) => {
   return lerpColor(SCENE_COLORS[i], SCENE_COLORS[i + 1], t);
 };
 
-export default function SamudraTheeramBackground({ onSceneUpdate }) {
+const SamudraTheeramBackground = forwardRef(function SamudraTheeramBackground({ onSceneUpdate }, ref) {
   const canvasRef = useRef(null);
   const [errorMsg, setErrorMsg] = useState(null);
+
+  const jumpToSceneImplRef = useRef(null);
+  useImperativeHandle(ref, () => ({
+    jumpToScene: (idx) => jumpToSceneImplRef.current?.(idx),
+  }), []);
+
+  const onSceneUpdateRef = useRef(onSceneUpdate);
+  useEffect(() => {
+    onSceneUpdateRef.current = onSceneUpdate;
+  }, [onSceneUpdate]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -850,23 +863,19 @@ export default function SamudraTheeramBackground({ onSceneUpdate }) {
     const uScene = gl.getUniformLocation(prog, 'uSc');
     const uBlend = gl.getUniformLocation(prog, 'uBl');
 
-    // ── Renderer config (exact CodePen values) ─────────────────────
+    // ── Renderer config ─────────────────────────────────────────────
     const SCENE_COUNT = 6;
-    const MAX_DPR = 1.5;
-    const QUALITY_MIN = 0.82;
+    const MAX_DPR = 2.0;
+    const QUALITY_MIN = 0.75;
     const QUALITY_MAX = 1.0;
-    const QUALITY_STEP_DN = 0.06;
+    const QUALITY_STEP_DN = 0.09;
     const QUALITY_STEP_UP = 0.04;
     const FPS_LOW = 50;
     const FPS_HIGH = 57;
     const FPS_EVAL_WINDOW = 0.75;
-    const FPS_LOW_GRACE = 1.5;
+    const FPS_LOW_GRACE = 0.75;
     const FPS_HIGH_GRACE = 3.0;
-    const SCROLL_EASE = 0.1;
-    const VELOCITY_MAX = 520;
-    const VELOCITY_DAMPING = 0.86;
-    const VELOCITY_CUTOFF = 0.02;
-    const SMOOTH_SPEED = 8;
+    const SMOOTH_SPEED = 12;
     const DT_MAX = 0.05;
     const NIGHT_SCRIM_LO = 0.583;
     const NIGHT_SCRIM_SPAN = 0.25;
@@ -880,16 +889,47 @@ export default function SamudraTheeramBackground({ onSceneUpdate }) {
 
     let maxScroll = 1,
       tgt = 0,
-      smooth = 0,
-      velocity = 0;
+      smooth = 0;
     let qualityScale = QUALITY_MAX;
     let resizeRAF = 0,
       lastVH = 0;
 
-    const updateScrollMetrics = () => {
+    // ── Dynamic resolution while actively scrolling ─────────────────
+    const MOTION_QUALITY = 0.5;
+    const MOTION_EPS = 0.0015;
+    const MOTION_IDLE_MS = 350;
+
+    // ── Scene snapping / discrete slide navigation ───────────────────
+    const SNAP_STABLE_MS = 160;
+    const SNAP_DURATION_MS = 1500;
+    const SNAP_EPS = 0.0008;
+    let restingSceneIndex = 0;
+    let gestureStartIndex = null;
+    let lastTgtForSnap = 0;
+    let tgtStableSince = 0;
+    let lastMoveDir = 0;
+    let snapping = false;
+    const GESTURE_GAP_MS = 220;
+    let lastWheelTime = 0;
+    let snapFromY = 0;
+    let snapToY = 0;
+    let snapStartTime = 0;
+    let motionScale = 1;
+    let motionActive = false;
+    let motionIdleAt = 0;
+
+    const updateMaxScroll = () => {
       const vh = lastVH || window.innerHeight;
       maxScroll = Math.max(0, document.documentElement.scrollHeight - vh);
+    };
+
+    const updateScrollTarget = () => {
       tgt = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
+    };
+
+    const updateScrollMetrics = () => {
+      updateMaxScroll();
+      updateScrollTarget();
     };
 
     const resize = () => {
@@ -903,7 +943,7 @@ export default function SamudraTheeramBackground({ onSceneUpdate }) {
       if (!cssW || !cssH) return;
       lastVH = cssH;
       const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
-      const scale = dpr * qualityScale;
+      const scale = dpr * qualityScale * motionScale;
       const pixelW = Math.max(1, Math.round(cssW * scale));
       const pixelH = Math.max(1, Math.round(cssH * scale));
       canvas.style.width = `${cssW}px`;
@@ -922,48 +962,63 @@ export default function SamudraTheeramBackground({ onSceneUpdate }) {
       if (!resizeRAF) resizeRAF = requestAnimationFrame(resize);
     };
 
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     resize();
+    restingSceneIndex = 0;
     window.addEventListener('resize', requestResize, { passive: true });
     window.visualViewport?.addEventListener('resize', requestResize, { passive: true });
-    window.addEventListener('scroll', updateScrollMetrics, { passive: true });
+    window.addEventListener('scroll', updateScrollTarget, { passive: true });
     window.addEventListener('load', updateScrollMetrics, { passive: true });
-
-    // ── Wheel (exact CodePen) ──────────────────────────────────────
-    const WHEEL_LINE_PX = 16;
-    const WHEEL_PAGE_FRAC = 0.9;
 
     const onWheel = (e) => {
       if (e.ctrlKey || e.metaKey) return;
 
-      // Allow scrolling inside player capsule or volume sliders
       const target = e.target;
       if (target && target.closest && (target.closest('.overflow-y-auto') || target.closest('input[type="range"]'))) {
         return;
       }
 
       e.preventDefault();
-      const pagePx = window.innerHeight * WHEEL_PAGE_FRAC;
-      const delta =
-        e.deltaMode === 1
-          ? e.deltaY * WHEEL_LINE_PX
-          : e.deltaMode === 2
-            ? e.deltaY * pagePx
-            : e.deltaY;
 
-      // Loop: at the very end, scrolling further wraps back to dawn
-      if (delta > 0 && window.scrollY >= maxScroll - 2) {
-        velocity = 0;
-        smooth = 0;
-        tgt = 0;
-        window.scrollTo({ top: 0, behavior: 'auto' });
-        return;
-      }
+      const now = performance.now();
+      const isFreshGesture = now - lastWheelTime > GESTURE_GAP_MS;
+      lastWheelTime = now;
 
-      velocity += delta;
-      velocity = Math.max(-VELOCITY_MAX, Math.min(VELOCITY_MAX, velocity));
+      if (snapping || !isFreshGesture) return;
+      const dir = e.deltaY > 0 ? 1 : e.deltaY < 0 ? -1 : 0;
+      if (dir === 0 || maxScroll <= 0) return;
+
+      const targetIdx = Math.max(0, Math.min(N - 1, restingSceneIndex + dir));
+      if (targetIdx === restingSceneIndex) return;
+
+      restingSceneIndex = targetIdx;
+      gestureStartIndex = null;
+      const targetFraction = targetIdx / (N - 1);
+      lastTgtForSnap = targetFraction;
+      snapping = true;
+      snapFromY = window.scrollY;
+      snapToY = targetFraction * maxScroll;
+      snapStartTime = now;
     };
 
     window.addEventListener('wheel', onWheel, { passive: false });
+
+    // ── Scene-dot navigation ─────────────────────────────────────────
+    jumpToSceneImplRef.current = (idx) => {
+      const targetIdx = Math.max(0, Math.min(N - 1, idx));
+      restingSceneIndex = targetIdx;
+      gestureStartIndex = null;
+      const targetFraction = targetIdx / (N - 1);
+      lastTgtForSnap = targetFraction;
+      snapping = true;
+      snapFromY = window.scrollY;
+      snapToY = targetFraction * maxScroll;
+      snapStartTime = performance.now();
+    };
 
     // ── HUD references ─────────────────────────────────────────────
     const progFill = document.getElementById('prog_fill');
@@ -985,7 +1040,7 @@ export default function SamudraTheeramBackground({ onSceneUpdate }) {
         if (nameEl) nameEl.textContent = SCENE_NAMES[si];
         const dots = document.querySelectorAll('.scene-dot');
         dots.forEach((d, i) => d.classList.toggle('active', i === si));
-        if (onSceneUpdate) onSceneUpdate({ sceneIndex: si });
+        if (onSceneUpdateRef.current) onSceneUpdateRef.current({ sceneIndex: si });
       }
     };
 
@@ -1021,19 +1076,24 @@ export default function SamudraTheeramBackground({ onSceneUpdate }) {
     };
 
     // ── Scene color CSS vars ───────────────────────────────────────
+    let lastColorKey = '';
     const applySceneColor = (s) => {
       const [r, g, b] = getSceneColor(s);
+      const key = r + ',' + g + ',' + b;
+      if (key === lastColorKey) return;
+      lastColorKey = key;
       const root = document.documentElement;
-      root.style.setProperty('--fg', `rgb(${r},${g},${b})`);
-      root.style.setProperty('--fg-hud', `rgba(${r},${g},${b},${COLOR_ALPHA_HUD})`);
-      root.style.setProperty('--fg-dot', `rgba(${r},${g},${b},${COLOR_ALPHA_DOT})`);
-      root.style.setProperty('--fg-dotact', `rgba(${r},${g},${b},${COLOR_ALPHA_DOTA})`);
+      root.style.setProperty('--fg', `rgb(${key})`);
+      root.style.setProperty('--fg-hud', `rgba(${key},${COLOR_ALPHA_HUD})`);
+      root.style.setProperty('--fg-dot', `rgba(${key},${COLOR_ALPHA_DOT})`);
+      root.style.setProperty('--fg-dotact', `rgba(${key},${COLOR_ALPHA_DOTA})`);
     };
 
     // ── Render loop (exact CodePen) ────────────────────────────────
     const t0 = performance.now();
     let lastNow = t0;
     let animId = null;
+    let lastScrimVal = '';
 
     const frame = (now) => {
       try {
@@ -1043,17 +1103,51 @@ export default function SamudraTheeramBackground({ onSceneUpdate }) {
 
       maybeAdjustQuality(dt);
 
-      velocity *= Math.pow(VELOCITY_DAMPING, dt * 60);
-      if (Math.abs(velocity) < VELOCITY_CUTOFF) velocity = 0;
-      if (velocity !== 0)
-        window.scrollBy({ top: velocity * SCROLL_EASE, behavior: 'auto' });
+      if (snapping) {
+        const st = Math.min(1, (now - snapStartTime) / SNAP_DURATION_MS);
+        const eased = st < 0.5 ? 4 * st * st * st : 1 - Math.pow(-2 * st + 2, 3) / 2;
+        window.scrollTo({ top: snapFromY + (snapToY - snapFromY) * eased, behavior: 'auto' });
+        if (st >= 1) snapping = false;
+      } else {
+        const dTgt = tgt - lastTgtForSnap;
+        if (Math.abs(dTgt) > 0.0006) {
+          if (gestureStartIndex === null) gestureStartIndex = restingSceneIndex;
+          lastMoveDir = dTgt > 0 ? 1 : -1;
+          lastTgtForSnap = tgt;
+          tgtStableSince = now;
+        } else if (gestureStartIndex !== null && now - tgtStableSince > SNAP_STABLE_MS) {
+          const targetIdx = Math.max(0, Math.min(N - 1, gestureStartIndex + lastMoveDir));
+          const targetFraction = targetIdx / (N - 1);
+          restingSceneIndex = targetIdx;
+          gestureStartIndex = null;
+          if (Math.abs(tgt - targetFraction) > SNAP_EPS) {
+            snapping = true;
+            snapFromY = window.scrollY;
+            snapToY = targetFraction * maxScroll;
+            snapStartTime = now;
+          }
+        }
+      }
 
-      // Re-read scroll position every frame (matches CodePen pattern)
-      updateScrollMetrics();
+      updateScrollTarget();
 
       if (!Number.isFinite(tgt)) tgt = 0;
       smooth += (tgt - smooth) * (1 - Math.exp(-dt * SMOOTH_SPEED));
       if (!Number.isFinite(smooth)) smooth = 0;
+
+      const inMotion = snapping || Math.abs(tgt - smooth) > MOTION_EPS;
+      if (inMotion) {
+        motionIdleAt = now;
+        if (!motionActive) {
+          motionActive = true;
+          motionScale = MOTION_QUALITY;
+          requestResize();
+        }
+      } else if (motionActive && now - motionIdleAt > MOTION_IDLE_MS) {
+        motionActive = false;
+        motionScale = 1;
+        requestResize();
+      }
 
       const raw = smooth * (N - 1);
       const si = Math.min(Math.floor(raw), N - 2);
@@ -1062,10 +1156,13 @@ export default function SamudraTheeramBackground({ onSceneUpdate }) {
       updateHUD(smooth);
       applySceneColor(smooth);
 
-      // Night scrim deepens
+      // Night scrim deepens — only write on change
       const nightT = Math.max(0, Math.min(1, (smooth - NIGHT_SCRIM_LO) / NIGHT_SCRIM_SPAN));
       const scrimVal = (SCRIM_BASE + nightT * SCRIM_PEAK).toFixed(3);
-      document.documentElement.style.setProperty('--scrim', scrimVal);
+      if (scrimVal !== lastScrimVal) {
+        lastScrimVal = scrimVal;
+        document.documentElement.style.setProperty('--scrim', scrimVal);
+      }
 
       gl.uniform1f(uTi, (now - t0) / 1000);
       gl.uniform1f(uScroll, smooth);
@@ -1083,15 +1180,16 @@ export default function SamudraTheeramBackground({ onSceneUpdate }) {
     animId = requestAnimationFrame(frame);
 
     return () => {
+      jumpToSceneImplRef.current = null;
       if (animId) cancelAnimationFrame(animId);
       if (resizeRAF) cancelAnimationFrame(resizeRAF);
       window.removeEventListener('resize', requestResize);
       window.visualViewport?.removeEventListener('resize', requestResize);
-      window.removeEventListener('scroll', updateScrollMetrics);
+      window.removeEventListener('scroll', updateScrollTarget);
       window.removeEventListener('load', updateScrollMetrics);
       window.removeEventListener('wheel', onWheel);
     };
-  }, [onSceneUpdate]);
+  }, []);
 
   return (
     <>
@@ -1113,4 +1211,6 @@ export default function SamudraTheeramBackground({ onSceneUpdate }) {
       />
     </>
   );
-}
+});
+
+export default SamudraTheeramBackground;
