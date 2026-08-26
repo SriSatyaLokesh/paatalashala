@@ -154,6 +154,11 @@ export default function SamudraTheeramPage() {
       {/* ── Fixed WebGL Canvas ── */}
       <SamudraTheeramBackground />
 
+      {/* ── Immersive Title ── */}
+      <div className="immersive-title-container">
+        <h2 className="immersive-title">సముద్ర తీరం</h2>
+      </div>
+
       {/* ── HUD ── */}
       <div id="hud">
         <div id="hud-top">
