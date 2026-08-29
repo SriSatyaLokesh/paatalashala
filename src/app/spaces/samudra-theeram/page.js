@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useSpacePlayer } from '@/hooks/useSpacePlayer';
 import { useSpaceKeyboardShortcuts } from '@/hooks/useSpaceKeyboardShortcuts';
@@ -9,8 +9,8 @@ import FloatingYouTubePlayer from '@/components/space/FloatingYouTubePlayer';
 import PlayerErrorBanner from '@/components/space/PlayerErrorBanner';
 import PlayerCapsule from '@/components/space/PlayerCapsule';
 import { ListenersBadgeDesktop, ListenersBadgeMobileRow } from '@/components/space/ListenersBadge';
-import SamudraTheeramBackground, { SCENE_NAMES } from '@/components/space/SamudraTheeramBackground';
-import { ChevronLeft, Wind, Tv, Waves } from 'lucide-react';
+import SamudraTheeramBackground from '@/components/space/SamudraTheeramBackground';
+import { ChevronLeft, Wind, Tv } from 'lucide-react';
 import './samudra.css';
 
 const PRESENCE_CONFIG = { channel: 'presence-samudra-theeram', base: 42, sineAmp: 5, cosAmp: 3, syncPad: 10, catchSpread: 8, catchOffset: 4 };
@@ -49,57 +49,6 @@ const CAPSULE_THEME = {
   showControlIconHoverClass: false,
 };
 
-const SCENE_DATA = [
-  {
-    id: "s0",
-    num: "01",
-    name: "DAWN",
-    teluguTitle: "సూర్యోదయ కాంతులు",
-    desc: "Gold floods the horizon. The ocean catches fire — warm amber and peach across every swell.",
-    quote: "వేకువ వెలుగుల్లో అలల సవ్వడి... పసిడి కిరణాల పలకరింపు."
-  },
-  {
-    id: "s1",
-    num: "02",
-    name: "MIDDAY",
-    teluguTitle: "మిట్టమధ్యాహ్న కెరటాలు",
-    desc: "Full light. The sea turns a deep cerulean, scattering white specular across every swell.",
-    quote: "నీలాకాశం అంచున నీలి సముద్రం... వెండి నురుగుల తరంగాలు."
-  },
-  {
-    id: "s2",
-    num: "03",
-    name: "DUSK",
-    teluguTitle: "సంధ్యా రాగాల తీరం",
-    desc: "The sun descends in copper and ember. Long reflections stretch across the darkening water.",
-    quote: "సంధ్యా వేళ ఎర్రని సూర్యుడు... నీటి అలలపై రంగుల రాగాలు."
-  },
-  {
-    id: "s3",
-    num: "04",
-    name: "STORM",
-    teluguTitle: "ఉప్పొంగే కడలి & మెరుపుల తాండవం",
-    desc: "Waves amplify. The sky thickens. A darkness that isn't night — something coming from the west.",
-    quote: "ఉరుముల ఉరవడి, కడలి ఘోష... చీకటి మేఘాల మెరుపుల వెలుగు."
-  },
-  {
-    id: "s4",
-    num: "05",
-    name: "NIGHT",
-    teluguTitle: "వెన్నెల రాత్రి సముద్రం",
-    desc: "Stars emerge. The moon leaves a silver path on the swells. Nothing moves but the ocean.",
-    quote: "నిశ్శబ్ద రాత్రిలో వెన్నెల బాట... కనురెప్పల పై చల్లని కడలి గాలి."
-  },
-  {
-    id: "s5",
-    num: "06",
-    name: "PRE-DAWN",
-    teluguTitle: "ఉదయించే వేళ",
-    desc: "The last stars hold. A red-orange ember glows at the edge of the world, not yet a sun.",
-    quote: "తొలిపొద్దు సంకేతం... కొత్త ఉదయానికి స్వాగతం పలికే అలల నాదం."
-  }
-];
-
 export default function SamudraTheeramPage() {
   const player = useSpacePlayer(placeSongs, {
     initialVolume: 50,
@@ -122,9 +71,16 @@ export default function SamudraTheeramPage() {
     toggleShuffle: () => setIsShuffle(prev => !prev),
   });
 
-  const [currentSceneIdx, setCurrentSceneIdx] = useState(0);
-  const handleSceneUpdate = useCallback(({ sceneIndex }) => {
-    setCurrentSceneIdx(sceneIndex);
+  useEffect(() => {
+    const { documentElement: html, body } = document;
+    const prevHtmlOverflow = html.style.overflow;
+    const prevBodyOverflow = body.style.overflow;
+    html.style.overflow = 'hidden';
+    body.style.overflow = 'hidden';
+    return () => {
+      html.style.overflow = prevHtmlOverflow;
+      body.style.overflow = prevBodyOverflow;
+    };
   }, []);
 
   // Web Audio procedural sea waves whoosh for realistic ambient immersion
@@ -193,38 +149,15 @@ export default function SamudraTheeramPage() {
     };
   }, [ambientOn]);
 
-  // IntersectionObserver for reveal animations on scroll
-  useEffect(() => {
-    const revealEls = document.querySelectorAll('.scene-title, .scene-telugu, .scene-desc, .scene-quote, .h-line');
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          } else {
-            entry.target.classList.remove('visible');
-          }
-        }
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
-    );
-
-    revealEls.forEach((el) => io.observe(el));
-
-    return () => {
-      io.disconnect();
-    };
-  }, []);
-
-  const backgroundRef = useRef(null);
-  const scrollToScene = (idx) => {
-    backgroundRef.current?.jumpToScene(idx);
-  };
-
   return (
     <div className="samudra-container">
       {/* ── Fixed WebGL Canvas ── */}
-      <SamudraTheeramBackground ref={backgroundRef} onSceneUpdate={handleSceneUpdate} />
+      <SamudraTheeramBackground />
+
+      {/* ── Immersive Title ── */}
+      <div className="immersive-title-container">
+        <h2 className="immersive-title">సముద్ర తీరం</h2>
+      </div>
 
       {/* ── HUD ── */}
       <div id="hud">
@@ -239,10 +172,6 @@ export default function SamudraTheeramPage() {
             </div>
 
             <div className="hud-listeners-row">
-              <div id="scene_name" className="mono hud-row">
-                <Waves size={15} style={{ opacity: 0.8 }} />
-                <span id="scene_name_text">{SCENE_NAMES[currentSceneIdx]}</span>
-              </div>
               <ListenersBadgeDesktop count={presenceCount} label="listeners" />
             </div>
           </div>
@@ -267,14 +196,6 @@ export default function SamudraTheeramPage() {
                 <Tv size={14} />
                 <span>{videoVisible ? 'HIDE VIDEO' : 'VIDEO'}</span>
               </button>
-            </div>
-
-            {/* Percentage & Progress Bar */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}>
-              <div id="hud_pct" className="mono">000%</div>
-              <div id="prog_bar">
-                <div id="prog_fill" />
-              </div>
             </div>
           </div>
         </div>
@@ -312,33 +233,6 @@ export default function SamudraTheeramPage() {
             mobileListenersSlot={<ListenersBadgeMobileRow count={presenceCount} label="listeners" />}
           />
         </div>
-      </div>
-
-      {/* ── Scene Navigation Dots ── */}
-      <div id="scene_dots">
-        {SCENE_DATA.map((scene, idx) => (
-          <button
-            key={scene.id}
-            onClick={() => scrollToScene(idx)}
-            title={`${scene.name} - ${scene.teluguTitle}`}
-            className={`scene-dot ${currentSceneIdx === idx ? 'active' : ''}`}
-            aria-label={`Jump to scene ${scene.name}`}
-          />
-        ))}
-      </div>
-
-      {/* ── Scroll Track ── */}
-      <div id="scroll_track">
-        {SCENE_DATA.map((scene) => (
-          <div key={scene.id} className="scene-section" id={scene.id}>
-            <div className="h-line" />
-            <div className="scene-label">Scene {scene.num} / 06</div>
-            <div className="scene-title">{scene.name}</div>
-            <div className="scene-telugu">{scene.teluguTitle}</div>
-            <div className="scene-desc">{scene.desc}</div>
-            {scene.quote && <div className="scene-quote">"{scene.quote}"</div>}
-          </div>
-        ))}
       </div>
 
       {/* ── Floating YouTube Video ── */}

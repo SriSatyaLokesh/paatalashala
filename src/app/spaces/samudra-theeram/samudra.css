@@ -8,23 +8,15 @@
   --fg-dotact: rgba(240, 207, 160, 0.9);
   --bg: #0a0a0f;
   --accent: #a0b4ff;
-  --scrim: 0.18;
 }
 
+/* overflow is locked/restored in JS (page.js) rather than here, so it
+   can't leak onto other routes if this stylesheet outlives the page
+   across a client-side navigation */
 html, body {
-  height: auto !important;
-  min-height: 100% !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  scroll-behavior: auto !important;
-  background: linear-gradient(
-    to bottom,
-    #6b99e5 0%,
-    #fa801f 45%,
-    #d18c52 58%,
-    #140a05 100%
-  ) !important;
-  background-attachment: fixed !important;
+  height: 100% !important;
+  overscroll-behavior: none;
+  background: var(--bg) !important;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -40,14 +32,11 @@ body::-webkit-scrollbar {
   background: transparent !important;
   color: var(--fg);
   font-family: var(--font-space-grotesk), "Space Grotesk", system-ui, -apple-system, sans-serif;
-  overflow-x: hidden;
-  min-height: 600vh;
+  overflow: hidden;
+  height: 100vh;
+  height: 100dvh;
   position: relative;
   width: 100%;
-}
-
-.mono {
-  font-family: var(--font-space-mono), "Space Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
 /* ── Fixed WebGL canvas ── */
@@ -59,13 +48,44 @@ body::-webkit-scrollbar {
   z-index: 0 !important;
   display: block !important;
   pointer-events: none !important;
-  background: linear-gradient(
-    to bottom,
-    #6b99e5 0%,
-    #fa801f 45%,
-    #d18c52 58%,
-    #140a05 100%
-  ) !important;
+  background: var(--bg) !important;
+}
+
+/* ── Immersive title ── */
+.immersive-title-container {
+  position: absolute;
+  top: 10vh;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.immersive-title {
+  margin: 0;
+  font-family: 'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif;
+  font-size: 4.6rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85), 0 0 30px var(--fg-hud, rgba(240, 207, 160, 0.4));
+  transition: text-shadow 1.2s ease;
+}
+
+@media (max-width: 768px) {
+  .immersive-title-container {
+    top: 9vh !important;
+  }
+
+  .immersive-title {
+    font-size: 2.3rem !important;
+  }
 }
 
 /* ── HUD ── */
@@ -104,244 +124,6 @@ body::-webkit-scrollbar {
   width: 100%;
   padding-bottom: 0.5rem;
   pointer-events: auto;
-}
-
-#scene_name {
-  font-family: var(--font-space-mono), "Space Mono", monospace;
-  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--fg-hud);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
-  transition: color 1.2s ease;
-}
-
-#hud_pct {
-  font-family: var(--font-space-mono), "Space Mono", monospace;
-  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
-  letter-spacing: 0.14em;
-  color: var(--fg-hud);
-  opacity: 0.85;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
-  transition: color 1.2s ease;
-}
-
-#prog_bar {
-  width: 110px;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.18);
-  position: relative;
-  overflow: hidden;
-  border-radius: 2px;
-}
-
-@media (min-width: 640px) {
-  #prog_bar {
-    width: 130px;
-  }
-}
-
-#prog_fill {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  background: var(--fg-hud);
-  opacity: 0.85;
-  width: 0%;
-  transition: width 80ms linear, background 1.2s ease;
-}
-
-/* ── Scene nav dots ── */
-#scene_dots {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-  position: fixed;
-  right: 1.25rem;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 25;
-  pointer-events: auto;
-}
-
-@media (min-width: 768px) {
-  #scene_dots {
-    right: 1.75rem;
-  }
-}
-
-.scene-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--fg-dot);
-  transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  border: none;
-  padding: 0;
-  outline: none;
-}
-
-.scene-dot.active {
-  background: var(--fg-dotact);
-  transform: scale(1.65);
-  box-shadow: 0 0 10px var(--fg-dotact);
-}
-
-/* ── Scrollable track ── */
-#scroll_track {
-  position: relative;
-  z-index: 10;
-  pointer-events: none;
-  width: 100%;
-}
-
-.scene-section {
-  min-height: 100vh;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 6rem 1.5rem 7.5rem;
-  pointer-events: none;
-  position: relative;
-  box-sizing: border-box;
-}
-
-@media (min-width: 640px) {
-  .scene-section {
-    padding: 6.5rem 2.5rem 8rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .scene-section {
-    padding: 7rem 4rem 8.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .scene-section {
-    padding: 5.5rem 1.25rem 8.5rem;
-  }
-}
-
-@media (max-height: 480px) {
-  .scene-section {
-    padding: 4.25rem 1.25rem 6rem;
-  }
-  .scene-title {
-    font-size: clamp(2rem, 7vw, 3.6rem);
-  }
-  .scene-quote {
-    display: none;
-  }
-}
-
-.scene-section::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 8, calc(var(--scrim, 0.18) + 0.34)) 0%,
-    rgba(0, 0, 8, calc(var(--scrim, 0.18) + 0.30)) 35%,
-    rgba(0, 0, 8, calc(var(--scrim, 0.18) + 0.20)) 55%,
-    rgba(0, 0, 8, calc(var(--scrim, 0.18) * 0.5)) 78%,
-    transparent 96%
-  );
-  pointer-events: none;
-  z-index: 0;
-  transition: background 0.5s ease;
-}
-
-.scene-section > * {
-  position: relative;
-  z-index: 1;
-}
-
-.scene-title {
-  font-family: var(--font-space-grotesk), "Space Grotesk", sans-serif;
-  font-weight: 700;
-  font-size: clamp(2.8rem, 8vw, 6.2rem);
-  line-height: 0.95;
-  color: var(--fg);
-  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.7), 0 1px 4px rgba(0, 0, 0, 0.9);
-  letter-spacing: -0.02em;
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.7s ease, transform 0.7s ease, color 1.2s ease;
-}
-
-.scene-title.visible {
-  opacity: 1;
-  transform: none;
-}
-
-.scene-label {
-  font-family: var(--font-space-mono), "Space Mono", monospace;
-  font-size: clamp(0.58rem, 1.2vw, 0.75rem);
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--fg);
-  opacity: 0.55;
-  margin-bottom: 0.5rem;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
-  transition: color 1.2s ease;
-}
-
-.scene-telugu {
-  font-family: 'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif;
-  font-size: clamp(1.1rem, 2.4vw, 1.6rem);
-  color: var(--fg);
-  opacity: 0;
-  transform: translateY(12px);
-  margin-top: 0.4rem;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
-  transition: opacity 0.7s ease 0.08s, transform 0.7s ease 0.08s, color 1.2s ease;
-}
-
-.scene-telugu.visible {
-  opacity: 0.95;
-  transform: none;
-}
-
-.scene-desc {
-  font-family: var(--font-space-grotesk), "Space Grotesk", sans-serif;
-  font-weight: 300;
-  font-size: clamp(0.88rem, 2vw, 1.1rem);
-  color: var(--fg);
-  opacity: 0;
-  max-width: 460px;
-  margin-top: 0.75rem;
-  line-height: 1.55;
-  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.85), 0 0px 4px rgba(0, 0, 0, 0.7);
-  transform: translateY(10px);
-  transition: opacity 0.7s ease 0.12s, transform 0.7s ease 0.12s, color 1.2s ease;
-}
-
-.scene-desc.visible {
-  opacity: 0.88;
-  transform: none;
-}
-
-.scene-quote {
-  font-size: clamp(0.82rem, 1.5vw, 0.95rem);
-  font-style: italic;
-  color: var(--fg);
-  opacity: 0;
-  max-width: 460px;
-  margin-top: 0.6rem;
-  padding-top: 0.6rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  transform: translateY(8px);
-  transition: opacity 0.7s ease 0.18s, transform 0.7s ease 0.18s, color 1.2s ease;
-}
-
-.scene-quote.visible {
-  opacity: 0.75;
-  transform: none;
 }
 
 .hud-top-left,
@@ -466,19 +248,4 @@ body::-webkit-scrollbar {
   .mobile-listeners-row {
     display: flex !important;
   }
-}
-
-/* h-line decorative */
-.h-line {
-  width: 36px;
-  height: 1px;
-  background: var(--fg);
-  opacity: 0;
-  margin-bottom: 1rem;
-  transition: opacity 0.6s ease 0.05s, background 1.2s ease;
-}
-
-.h-line.visible {
-  opacity: 0.45;
-  width: 36px;
 }

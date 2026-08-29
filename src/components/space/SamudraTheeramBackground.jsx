@@ -1,26 +1,29 @@
 'use client';
 
-import { useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // ═══════════════════════════════════════════════════════════════════
-// EXACT CodePen shader — not modified except for JS string escaping
+// Ocean shader — ported from the .idea/ reference (CodePen-style
+// raymarched 24hr day/night ocean), wired to loop infinitely instead
+// of a single dawn→storm pass.
 // ═══════════════════════════════════════════════════════════════════
 
 const VS = `
 attribute vec2 a;
-void main() { gl_Position = vec4(a, 0.0, 1.0); }
+void main() {
+  gl_Position = vec4(a, 0.0, 1.0);
+}
 `;
 
 const FS = `
 precision highp float;
 
 // ── ANGLE/DIRECTX SAFETY PATCHES ──
-// CodePen shaders often rely on undefined GLSL behavior that works on macOS/OpenGL 
-// but silently outputs NaN (black screen) on Windows/ANGLE.
+// Raw pow()/smoothstep() with out-of-domain inputs silently outputs NaN
+// (black screen) on Windows/ANGLE while working fine on macOS/OpenGL.
 float safe_pow(float a, float b) { return pow(max(a, 1e-6), b); }
 vec2 safe_pow(vec2 a, vec2 b) { return pow(max(a, vec2(1e-6)), b); }
 vec3 safe_pow(vec3 a, vec3 b) { return pow(max(a, vec3(1e-6)), b); }
-vec4 safe_pow(vec4 a, vec4 b) { return pow(max(a, vec4(1e-6)), b); }
 #define pow safe_pow
 
 float safe_smoothstep(float e0, float e1, float x) {
@@ -33,762 +36,395 @@ float safe_smoothstep(float e0, float e1, float x) {
 uniform vec2  uR;
 uniform float uT, uS, uSc, uBl;
 
-// ═══════════════════════════════════════════════════════════════════
-// CONSTANTS — every magic number lives here, grouped by domain
-// ═══════════════════════════════════════════════════════════════════
+#define PI 3.14159265359
+#define MARCH_STEPS 22
+#define REFINE_STEPS 5
 
-// ── Math ────────────────────────────────────────────────────────────
-const float PI  = 3.14159265359;
-const float TAU = 6.28318530718;
+float sat(float x) {
+  return clamp(x, 0.0, 1.0);
+}
 
-// ── Render budget ───────────────────────────────────────────────────
-// Trimmed from the original 8/3/5 — biggest lever on render performance.
-const int SEA_TRACE_STEPS  = 5;    // bisection iterations for surface find
-const int SEA_OCTAVES_GEO  = 2;    // octaves used during ray marching
-const int SEA_OCTAVES_FRAG = 3;    // octaves used for normal computation
+// 5 named scene stops (DAWN, MIDDAY, DUSK, NIGHT, STORM), wrapping
+// STORM back into DAWN so the cycle repeats forever.
+vec3 sCol(vec3 c0, vec3 c1, vec3 c2, vec3 c3, vec3 c4) {
+  int si = int(uSc);
+  vec3 a = c0;
+  vec3 b = c1;
+  if (si == 1) { a = c1; b = c2; }
+  else if (si == 2) { a = c2; b = c3; }
+  else if (si == 3) { a = c3; b = c4; }
+  else if (si == 4) { a = c4; b = c0; }
+  return mix(a, b, uBl);
+}
 
-// ── Hash / noise ────────────────────────────────────────────────────
-const vec2  HASH_DOT   = vec2(127.1, 311.7);
-const float HASH_SCALE = 43758.5453123;
+float sF(float c0, float c1, float c2, float c3, float c4) {
+  int si = int(uSc);
+  float a = c0;
+  float b = c1;
+  if (si == 1) { a = c1; b = c2; }
+  else if (si == 2) { a = c2; b = c3; }
+  else if (si == 3) { a = c3; b = c4; }
+  else if (si == 4) { a = c4; b = c0; }
+  return mix(a, b, uBl);
+}
 
-// ── Sea octave ──────────────────────────────────────────────────────
-const mat2  SEA_OCT_M        = mat2(1.6, 1.2, -1.2, 1.6); // octave rotation
-const float SEA_OCT_POWER    = 0.65;  // crest sharpness (1 = sharper)
-const float SEA_UV_X_SCALE   = 0.75;  // horizontal stretch ratio
-const float SEA_FREQ_BASE    = 0.16;  // initial spatial frequency
-const float SEA_FREQ_MUL     = 1.9;   // frequency increase per octave
-const float SEA_AMP_MUL      = 0.22;  // amplitude falloff per octave
-const float SEA_CHOPPY_BLEND = 0.20;  // choppy -> 1.0 blend rate per octave
-const float SEA_TRACE_FAR    = 1000.0;// maximum ray distance
+// Same 5-stop cyclic blend as sF, but with an explicit blend factor —
+// used with an eased (zero-velocity-at-each-stop) factor for the camera
+// so motion doesn't kink at every scene boundary, only at the wrap.
+float sF(float c0, float c1, float c2, float c3, float c4, float blv) {
+  int si = int(uSc);
+  float a = c0;
+  float b = c1;
+  if (si == 1) { a = c1; b = c2; }
+  else if (si == 2) { a = c2; b = c3; }
+  else if (si == 3) { a = c3; b = c4; }
+  else if (si == 4) { a = c4; b = c0; }
+  return mix(a, b, blv);
+}
 
-// ── Scene transitions ───────────────────────────────────────────────
-const float STORM_FADE_LO = 0.500;  // scroll progress where storm begins
-const float STORM_FADE_HI = 0.667;
-const float NIGHT_FADE_LO = 0.667;  // scroll progress where night begins
-const float NIGHT_FADE_HI = 0.833;
-
-// ── Camera ──────────────────────────────────────────────────────────
-const float CAM_HEIGHT_START = 5.2;  // eye height at dawn
-const float CAM_HEIGHT_END   = 4.4;  // eye height at storm
-const float CAM_DRIFT_SPEED  = 0.5;  // forward drift units/sec
-const float CAM_PITCH        = 0.20; // look-down angle
-const float CAM_FOCAL        = -1.8; // z component of initial ray direction
-const float CAM_BARREL       = 0.10; // lens barrel distortion coefficient
-
-// ── Sky gradient ────────────────────────────────────────────────────
-const float SKY_GRAD_EXP = 0.42;    // power applied to vertical gradient
-
-// ── Clouds ──────────────────────────────────────────────────────────
-const float CLOUD_FREQ_A    = 5.5;   // coarse noise spatial scale
-const float CLOUD_FREQ_B    = 8.0;   // fine noise spatial scale
-const float CLOUD_TIME_A    = 0.012; // coarse noise time rate
-const float CLOUD_TIME_B    = 0.008; // fine noise time rate
-const float CLOUD_THRESH_LO = 0.62;  // cloud density threshold low
-const float CLOUD_THRESH_HI = 0.86;  // cloud density threshold high
-const float CLOUD_BLEND_A   = 0.65;  // coarse octave weight
-const float CLOUD_BLEND_B   = 0.35;  // fine octave weight
-const float CLOUD_HOR_LO    = -0.02; // fade out below horizon
-const float CLOUD_HOR_HI    = 0.24;  // fully visible above
-const float CLOUD_AMT_BASE  = 0.06;  // cloud amount in clear weather
-const float CLOUD_AMT_STORM = 0.22;  // additional cloud amount in storm
-const float CLOUD_DARKEN    = 0.97;  // sky darkening under cloud
-const float CLOUD_MIX       = 0.35;  // cloud opacity blend
-const vec3  CLOUD_COL_CLEAR = vec3(1.00, 0.82, 0.65); // warm daytime cloud tint
-const vec3  CLOUD_COL_STORM = vec3(0.42, 0.48, 0.56); // grey storm cloud tint
-
-// ── Sun ─────────────────────────────────────────────────────────────
-const float SUN_ARC_END      = 0.46;  // fraction of scroll at which sun sets
-const float SUN_ARC_X        = -0.75; // arc x radius
-const float SUN_ARC_Y_SCALE  = 0.38;  // arc y amplitude
-const float SUN_ARC_Y_OFFSET = 0.00; // sun sits on horizon at start of dawn
-const float SUN_GLOW_LO      = -0.10; // glow start (sun below horizon)
-const float SUN_GLOW_HI      = 0.06;  // glow fully active
-const float SUN_HALO_EXP_A   = 380.0; // tight inner halo exponent
-const float SUN_HALO_SCL_A   = 6.8;
-const float SUN_HALO_EXP_B   = 22.0;  // mid corona exponent
-const float SUN_HALO_SCL_B   = 0.22;
-const float SUN_HALO_EXP_C   = 5.0;   // broad scatter exponent
-const float SUN_HALO_SCL_C   = 0.09;
-const float SUN_HALO_EXP_D   = 3.0;   // very-wide atmospheric scatter
-const float SUN_HALO_SCL_D   = 0.035;
-const float SUN_DISK_LO      = 0.99975;  // disk edge inner
-const float SUN_DISK_HI      = 0.99998;  // disk edge outer
-const float SUN_DISK_SCL     = 1.8;
-const float SUN_HORIZON_FALL = 24.0;  // horizon glow vertical falloff
-const float SUN_HORIZON_SCL  = 0.11;
-
-// ── Moon ────────────────────────────────────────────────────────────
-const vec3  MOON_DIR_RAW     = vec3(-0.14, 0.42, -1.0); // fixed direction
-const float MOON_THRESHOLD   = 0.04;   // moonAmt below which moon is skipped
-const float MOON_DISK_LO     = 0.99985;
-const float MOON_DISK_HI     = 0.99998;
-const float MOON_DISK_SCL    = 3.5;
-const vec3  MOON_COL_DISK    = vec3(0.95, 0.97, 1.00);
-const vec3  MOON_COL_CORONA  = vec3(0.88, 0.92, 1.00);
-// Halo/corona bumped up — stays visible at reduced render resolution.
-const float MOON_CORONA_EXP  = 820.0; const float MOON_CORONA_SCL  = 6.5;
-const vec3  MOON_COL_HALO1   = vec3(0.65, 0.75, 0.95);
-const float MOON_HALO1_EXP   = 60.0;  const float MOON_HALO1_SCL   = 0.30;
-const vec3  MOON_COL_HALO2   = vec3(0.40, 0.52, 0.82);
-const float MOON_HALO2_EXP   = 12.0;  const float MOON_HALO2_SCL   = 0.13;
-
-// ── Stars in sky ────────────────────────────────────────────────────
-const float STAR_HOR_LO     = 0.02;    // horizon fade start
-const float STAR_HOR_HI     = 0.28;    // horizon fade end
-const float STAR_STORM_SUPP = 0.88;    // storm suppression of stars
-const float STAR_NIGHT_SCL  = 3.60;    // overall star brightness scale
-const float NIGHT_STARS_THRESHOLD = 0.02;
-
-// ── Horizon mist ────────────────────────────────────────────────────
-const float HZ_MIST_CLEAR   = 38.0;  // falloff in clear weather
-const float HZ_MIST_STORM   = 22.0;  // falloff in storm (wider mist)
-const float HZ_MIST_SCL     = 0.09;  // base mist brightness
-const float HZ_MIST_STORM_ADD = 0.10;
-
-// ── Storm sky tint ──────────────────────────────────────────────────
-const vec3  STORM_SKY_TINT     = vec3(0.91, 0.94, 0.98);
-const float STORM_SKY_TINT_AMT = 0.22;
-
-// ── Lightning ────────────────────────────────────────────────────────
-const float LT_RATE          = 0.28;   // flash slots per second
-const float LT_PROB          = 0.30;   // fraction of slots that fire
-const float LT_DECAY         = 9.0;    // flash decay (higher = shorter)
-const float LT_BOLT_ELEV_MIN = 0.015;  // bolt lower elevation bound
-const float LT_BOLT_ELEV_MAX = 0.82;   // bolt upper elevation bound
-const float LT_BOLT_WIDTH    = 0.0020; // hard-core half-width (thin)
-const float LT_BOLT_GLOW     = 0.013;  // soft corona radius
-const float LT_JITTER        = 0.070;  // per-segment lateral displacement
-const float LT_SEGS          = 9.0;    // angular segments in main bolt
-const float LT_BRANCH_SEGS   = 5.0;   // segments in branch arm
-const float LT_BRANCH_SPREAD = 0.09;  // branch lateral divergence
-const vec3  LT_COL_SHEET     = vec3(0.76, 0.86, 1.00); // sheet glow
-const vec3  LT_COL_BOLT      = vec3(0.96, 0.97, 1.00); // bolt + branch
-const float LT_SHEET_BRIGHT  = 2.2;
-const float LT_BOLT_BRIGHT   = 12.0;  // hard core brightness
-const float LT_GLOW_BRIGHT   = 1.6;   // soft corona brightness
-const float LT_BRANCH_BRIGHT = 6.0;   // branch arm brightness
-const float LT_WATER_BRIGHT  = 0.55;
-
-// ── Sea surface rendering ───────────────────────────────────────────
-const float SEA_HORIZON_BLEND  = -0.05; // horizon softness (sea side)
-const float SEA_HORIZON_EXP    = 0.30;  // horizon blend power
-const float SEA_MIX_THRESHOLD  = 0.001; // skip sea below this blend value
-const float SEA_NORMAL_EPS_K   = 0.10;  // adaptive normal eps: dist2 x K / width
-const float FRESNEL_EXP        = 3.0;
-const float FRESNEL_SCL        = 0.65;
-// Sun reflection highlights on water
-const float REFL_SUN_EXP_A     = 140.0; const float REFL_SUN_SCL_A = 3.0;
-const float REFL_SUN_EXP_B     = 18.0;  const float REFL_SUN_SCL_B = 0.10;
-// Moon reflection on water
-const vec3  REFL_MOON_COL_A = vec3(0.90, 0.94, 1.00);
-const float REFL_MOON_EXP_A = 320.0;   const float REFL_MOON_SCL_A = 2.40;
-const vec3  REFL_MOON_COL_B = vec3(0.72, 0.82, 0.98);
-const float REFL_MOON_EXP_B = 28.0;    const float REFL_MOON_SCL_B = 0.42;
-const vec3  REFL_MOON_COL_C = vec3(0.50, 0.62, 0.88);
-const float REFL_MOON_EXP_C = 6.0;     const float REFL_MOON_SCL_C = 0.12;
-// Diffuse lighting
-const float DIFF_WRAP        = 0.4;   // wrap lighting coefficient
-const float DIFF_LIFT        = 0.6;   // diffuse minimum
-const float DIFF_EXP         = 80.0;  // diffuse exponent
-const float DIFF_WATER_SCL   = 0.12;  // water color diffuse contribution
-// Subsurface scatter
-const float SSS_ATTEN_K   = 0.001; // attenuation per dist2
-const float SSS_SCL       = 0.18;  // scatter brightness
-// Sun specular on water
-const float SPEC_EXP      = 60.0;
-// Water glitter
-const float GLITTER_UV_SCL    = 18.0;
-const float GLITTER_TIME_U    = 0.55;
-const float GLITTER_TIME_V    = 0.22;
-const float GLITTER_THRESH    = 0.94;
-const float GLITTER_SCL       = 0.09;
-// Moon specular on water
-const vec3  MSPEC_COL_A   = vec3(0.88, 0.93, 1.00);
-const float MSPEC_EXP_A   = 380.0; const float MSPEC_SCL_A = 0.55;
-const vec3  MSPEC_COL_B   = vec3(0.70, 0.80, 0.97);
-const float MSPEC_EXP_B   = 22.0;  const float MSPEC_SCL_B = 0.14;
-// Fog
-const float FOG_SCALE = 1.6;
-
-// ── Post-processing ─────────────────────────────────────────────────
-const float HOR_EDGE_LO    = -0.008; // horizon softening band start
-const float HOR_EDGE_HI    = 0.018;  // horizon softening band end
-const float HOR_BLEND      = 0.25;   // fog-into-horizon blend fraction
-const float GRAIN_UV_SCL   = 0.5;    // noise coord scale for grain
-const float GRAIN_TIME_SCL = 12.0;   // grain animation rate
-const float GRAIN_STR      = 0.003;  // grain magnitude
-const float GAMMA          = 0.78;   // photographic tone gamma
-
-// ═══════════════════════════════════════════════════════════════════
-// SCENE PALETTES  (6 stops: predawn / dawn / midday / dusk / storm / night)
-// ═══════════════════════════════════════════════════════════════════
-// PRE-DAWN: blue-lavender sky, warm rose-pink horizon glow (palette ref: image 1)
-const vec3 SKY_TOP_PREDAWN  = vec3(0.38, 0.40, 0.64);  // soft periwinkle-blue
-const vec3 SKY_TOP_DAWN     = vec3(0.42, 0.60, 0.90);  // pale blue
-const vec3 SKY_TOP_DAY      = vec3(0.04, 0.22, 0.62);
-const vec3 SKY_TOP_DUSK     = vec3(0.14, 0.04, 0.26);  // deep purple overhead
-const vec3 SKY_TOP_STORM    = vec3(0.04, 0.05, 0.09);
-const vec3 SKY_TOP_NIGHT    = vec3(0.01, 0.01, 0.05);  // near-black, no purple
-
-const vec3 SKY_HOR_PREDAWN  = vec3(0.70, 0.52, 0.64);  // soft rose blush at horizon
-const vec3 SKY_HOR_DAWN     = vec3(0.98, 0.50, 0.12);  // bright orange sunrise
-const vec3 SKY_HOR_DAY      = vec3(0.50, 0.68, 0.92);
-const vec3 SKY_HOR_DUSK     = vec3(0.98, 0.22, 0.02);  // vivid red-orange horizon
-const vec3 SKY_HOR_STORM    = vec3(0.15, 0.17, 0.23);
-const vec3 SKY_HOR_NIGHT    = vec3(0.02, 0.02, 0.06);  // dark near-black, no purple
-
-const vec3 SUN_COL_PREDAWN  = vec3(0.90, 0.55, 0.62);  // soft salmon-pink sub-horizon glow
-const vec3 SUN_COL_DAWN     = vec3(1.00, 0.88, 0.35);  // bright warm gold
-const vec3 SUN_COL_DAY      = vec3(1.00, 0.96, 0.80);
-const vec3 SUN_COL_DUSK     = vec3(1.00, 0.28, 0.04);  // deep red sun at horizon
-const vec3 SUN_COL_STORM    = vec3(0.26, 0.28, 0.34);
-const vec3 SUN_COL_NIGHT    = vec3(0.72, 0.78, 0.98);  // moonlight blue-white
-
-const vec3 SEA_BASE_PREDAWN = vec3(0.02, 0.02, 0.06);  // near-black deep indigo
-const vec3 SEA_BASE_DAWN    = vec3(0.08, 0.04, 0.02);  // dark warm
-const vec3 SEA_BASE_DAY     = vec3(0.02, 0.10, 0.26);
-const vec3 SEA_BASE_DUSK    = vec3(0.09, 0.05, 0.03);
-const vec3 SEA_BASE_STORM   = vec3(0.03, 0.04, 0.06);
-const vec3 SEA_BASE_NIGHT   = vec3(0.01, 0.01, 0.04);
-
-const vec3 SEA_WATER_PREDAWN = vec3(0.25, 0.28, 0.54);  // dark muted blue-lavender
-const vec3 SEA_WATER_DAWN    = vec3(0.82, 0.55, 0.32);  // warm peach-amber
-const vec3 SEA_WATER_DAY     = vec3(0.42, 0.82, 0.88);  // turquoise midday
-const vec3 SEA_WATER_DUSK    = vec3(0.32, 0.18, 0.08);  // dark amber-brown
-const vec3 SEA_WATER_STORM   = vec3(0.48, 0.54, 0.60);
-const vec3 SEA_WATER_NIGHT   = vec3(0.20, 0.32, 0.62);  // dark moonlit blue
-
-const vec3 FOG_COL_PREDAWN  = vec3(0.60, 0.46, 0.58);  // muted rose-lavender haze
-const vec3 FOG_COL_DAWN     = vec3(0.92, 0.65, 0.45);  // warm peach haze
-const vec3 FOG_COL_DAY      = vec3(0.60, 0.76, 0.94);
-const vec3 FOG_COL_DUSK     = vec3(0.30, 0.10, 0.06);  // dark, low saturation
-const vec3 FOG_COL_STORM    = vec3(0.12, 0.14, 0.18);
-const vec3 FOG_COL_NIGHT    = vec3(0.01, 0.01, 0.04);  // near-black
-
-// ── Sea scalars per scene ───────────────────────────────────────────
-const float SEA_H_PREDAWN = 0.42;
-const float SEA_H_DAWN  = 0.62;
-const float SEA_H_DAY   = 0.48;
-const float SEA_H_DUSK  = 0.72;
-const float SEA_H_NIGHT = 0.48;
-const float SEA_H_STORM = 1.35;
-const float SEA_H_STORM_EXTRA = 0.25; // extra height added by storm blend
-
-const float SEA_CH_PREDAWN = 0.68;
-const float SEA_CH_DAWN  = 1.00;
-const float SEA_CH_DAY   = 0.75;
-const float SEA_CH_DUSK  = 1.25;
-const float SEA_CH_NIGHT = 0.75;
-const float SEA_CH_STORM = 2.80;
-
-const float SEA_SPD_PREDAWN = 0.48;
-const float SEA_SPD_DAWN  = 0.80;
-const float SEA_SPD_DAY   = 0.65;
-const float SEA_SPD_DUSK  = 0.90;
-const float SEA_SPD_NIGHT = 0.55;
-const float SEA_SPD_STORM = 1.40;
-
-const float FOG_DEN_PREDAWN = 0.010;
-const float FOG_DEN_DAWN  = 0.012;
-const float FOG_DEN_DAY   = 0.010;
-const float FOG_DEN_DUSK  = 0.014;
-const float FOG_DEN_NIGHT = 0.028;
-const float FOG_DEN_STORM = 0.046;
-
-const float MOON_AMT_PREDAWN = 0.62;  // moon still visible
-const float MOON_AMT_DAWN  = 0.10;   // nearly gone
-const float MOON_AMT_DAY   = 0.00;
-const float MOON_AMT_DUSK  = 0.00;
-const float MOON_AMT_NIGHT = 0.80;
-const float MOON_AMT_STORM = 0.10;  // faint moon through storm clouds
-
-// ═══════════════════════════════════════════════════════════════════
-// UTILITY
-// ═══════════════════════════════════════════════════════════════════
-
-float sat(float x) { return clamp(x, 0.0, 1.0); }
-
-// Smooth Hermite interpolation (C2)
 float smoother(float x) {
-  x = sat(x);
-  return x*x*x * (x*(x*6.0 - 15.0) + 10.0);
+  x = clamp(x, 0.0, 1.0);
+  return x * x * x * (x * (x * 6.0 - 15.0) + 10.0);
 }
 
-// Interpolate a vec3 across 6 named scene stops
-vec3 sCol(vec3 c0, vec3 c1, vec3 c2, vec3 c3, vec3 c4, vec3 c5) {
-  int si = int(uSc);
-  vec3 a = c0, b = c1;
-  if      (si == 1) { a = c1; b = c2; }
-  else if (si == 2) { a = c2; b = c3; }
-  else if (si == 3) { a = c3; b = c4; }
-  else if (si == 4) { a = c4; b = c5; }
-  return mix(a, b, uBl);
-}
-
-// Interpolate a float across 6 named scene stops
-float sF(float c0, float c1, float c2, float c3, float c4, float c5) {
-  int si = int(uSc);
-  float a = c0, b = c1;
-  if      (si == 1) { a = c1; b = c2; }
-  else if (si == 2) { a = c2; b = c3; }
-  else if (si == 3) { a = c3; b = c4; }
-  else if (si == 4) { a = c4; b = c5; }
-  return mix(a, b, uBl);
+mat2 rot(float a) {
+  float c = cos(a);
+  float s = sin(a);
+  return mat2(c, -s, s, c);
 }
 
 float hash(vec2 p) {
-  return fract(sin(dot(p, HASH_DOT)) * HASH_SCALE);
+  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
 }
 
 float noise(vec2 p) {
-  vec2 i = floor(p), f = fract(p);
-  f = f*f * (3.0 - 2.0*f);
-  float a = hash(i),              b = hash(i + vec2(1,0));
-  float c = hash(i + vec2(0,1)),  d = hash(i + vec2(1,1));
+  vec2 i = floor(p);
+  vec2 f = fract(p);
+  f = f * f * (3.0 - 2.0 * f);
+
+  float a = hash(i);
+  float b = hash(i + vec2(1.0, 0.0));
+  float c = hash(i + vec2(0.0, 1.0));
+  float d = hash(i + vec2(1.0, 1.0));
+
   return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
 }
 
-float snoise(vec2 p) { return noise(p) * 2.0 - 1.0; }
+float waveH(vec2 p, float t, float amp, float storm) {
+  float h = 0.0;
 
-// ═══════════════════════════════════════════════════════════════════
-// SEA
-// ═══════════════════════════════════════════════════════════════════
+  vec2 swell1 = normalize(vec2(1.0, 0.28));
+  vec2 swell2 = normalize(vec2(-0.48, 0.88));
+  vec2 swell3 = normalize(vec2(0.82, -0.16));
 
-float sea_octave(vec2 uv, float choppy) {
-  uv += snoise(uv);
-  vec2 wv  = 1.0 - abs(sin(uv));
-  vec2 swv = abs(cos(uv));
-  wv = mix(wv, swv, wv);
-  return pow(1.0 - pow(wv.x * wv.y, SEA_OCT_POWER), choppy);
+  swell2 = rot(storm * 0.18) * swell2;
+  swell3 = rot(-storm * 0.14) * swell3;
+
+  float d1 = dot(p, swell1);
+  float d2 = dot(p, swell2);
+  float d3 = dot(p, swell3);
+
+  h += amp * 0.66 * sin(d1 * 0.42 + t * 0.38);
+  h += amp * 0.22 * sin(d1 * 0.94 - t * 0.62);
+  h += amp * 0.14 * sin(d2 * 1.18 - t * 0.82);
+  h += amp * 0.09 * sin(d3 * 1.82 + t * 1.04);
+
+  h += amp * (0.11 + storm * 0.07) * sin(p.x * 1.45 - t * 0.76 + p.y * 0.66);
+  h += amp * (0.07 + storm * 0.05) * sin(p.x * 2.85 + t * 1.06 - p.y * 0.52);
+  h += amp * (0.04 + storm * 0.03) * sin(p.x * 4.60 - t * 1.50 + p.y * 1.02);
+
+  float micro = noise(p * 14.0 + vec2(t * 0.18, t * 0.06)) - 0.5;
+  h += micro * amp * (0.010 + storm * 0.008);
+
+  return h;
 }
 
-float seaMap(vec3 p, float seaH, float ch, float seaT) {
-  float freq = SEA_FREQ_BASE, amp = seaH, choppy = ch;
-  vec2  uv   = p.xz; uv.x *= SEA_UV_X_SCALE;
-  float d, h = 0.0;
-  for (int i = 0; i < SEA_OCTAVES_GEO; i++) {
-    d    = sea_octave((uv + seaT) * freq, choppy);
-    d   += sea_octave((uv - seaT) * freq, choppy);
-    h   += d * amp;
-    uv  *= SEA_OCT_M;
-    freq *= SEA_FREQ_MUL;
-    amp  *= SEA_AMP_MUL;
-    choppy = mix(choppy, 1.0, SEA_CHOPPY_BLEND);
-  }
-  return p.y - h;
+vec3 waveNorm(vec2 p, float t, float amp, float storm) {
+  float e = 0.018;
+  float hL = waveH(p - vec2(e, 0.0), t, amp, storm);
+  float hR = waveH(p + vec2(e, 0.0), t, amp, storm);
+  float hD = waveH(p - vec2(0.0, e), t, amp, storm);
+  float hU = waveH(p + vec2(0.0, e), t, amp, storm);
+  return normalize(vec3(-(hR - hL) / (2.0 * e), 1.0, -(hU - hD) / (2.0 * e)));
 }
 
-float seaMapFine(vec3 p, float seaH, float ch, float seaT) {
-  float freq = SEA_FREQ_BASE, amp = seaH, choppy = ch;
-  vec2  uv   = p.xz; uv.x *= SEA_UV_X_SCALE;
-  float d, h = 0.0;
-  for (int i = 0; i < SEA_OCTAVES_FRAG; i++) {
-    d    = sea_octave((uv + seaT) * freq, choppy);
-    d   += sea_octave((uv - seaT) * freq, choppy);
-    h   += d * amp;
-    uv  *= SEA_OCT_M;
-    freq *= SEA_FREQ_MUL;
-    amp  *= SEA_AMP_MUL;
-    choppy = mix(choppy, 1.0, SEA_CHOPPY_BLEND);
-  }
-  return p.y - h;
-}
+float starField(vec2 uv) {
+  vec2 gv = floor(uv);
+  vec2 lv = fract(uv) - 0.5;
 
-float seaTrace(vec3 ori, vec3 dir, out vec3 p, float seaH, float ch, float seaT) {
-  float tm = 0.0, tx = SEA_TRACE_FAR;
-  float hx = seaMap(ori + dir * tx, seaH, ch, seaT);
-  if (hx > 0.0) { p = ori + dir * tx; return tx; }
-  float hm = seaMap(ori, seaH, ch, seaT);
-  float tmid = 0.0;
-  for (int i = 0; i < SEA_TRACE_STEPS; i++) {
-    tmid = mix(tm, tx, hm / (hm - hx));
-    p    = ori + dir * tmid;
-    float hmid = seaMap(p, seaH, ch, seaT);
-    if (hmid < 0.0) { tx = tmid; hx = hmid; }
-    else            { tm = tmid; hm = hmid; }
-  }
-  return tmid;
+  float h = hash(gv);
+  float size = mix(0.012, 0.0025, h);
+  float d = length(lv + vec2(hash(gv + 3.1) - 0.5, hash(gv + 7.3) - 0.5) * 0.25);
+  float star = smoothstep(size, 0.0, d);
+  star *= smoothstep(0.82, 1.0, h);
+  return star;
 }
-
-vec3 seaNormal(vec3 p, float eps, float seaH, float ch, float seaT) {
-  vec3 n;
-  n.y = seaMapFine(p, seaH, ch, seaT);
-  n.x = seaMapFine(vec3(p.x + eps, p.y, p.z), seaH, ch, seaT) - n.y;
-  n.z = seaMapFine(vec3(p.x, p.y, p.z + eps), seaH, ch, seaT) - n.y;
-  n.y = eps;
-  return normalize(n);
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// MAIN
-// ═══════════════════════════════════════════════════════════════════
 
 void main() {
-  vec2  uv = (gl_FragCoord.xy - uR * 0.5) / uR.y;
-  float s  = smoother(uS);
+  vec2 uv = (gl_FragCoord.xy - uR * 0.5) / uR.y;
 
-  float storm = smoothstep(STORM_FADE_LO, STORM_FADE_HI, s);
-  float night = smoothstep(NIGHT_FADE_LO, NIGHT_FADE_HI, s);
+  float s = uS;
 
-  // ── Scene-driven sea parameters ────────────────────────────────
-  float seaH  = sF(SEA_H_DAWN, SEA_H_DAY, SEA_H_DUSK, SEA_H_STORM, SEA_H_NIGHT, SEA_H_PREDAWN)
-               + storm * SEA_H_STORM_EXTRA;
-  float seaCh = sF(SEA_CH_DAWN, SEA_CH_DAY, SEA_CH_DUSK, SEA_CH_STORM, SEA_CH_NIGHT, SEA_CH_PREDAWN);
-  float seaT  = uT * sF(SEA_SPD_DAWN, SEA_SPD_DAY, SEA_SPD_DUSK, SEA_SPD_STORM, SEA_SPD_NIGHT, SEA_SPD_PREDAWN);
+  // Per-scene stops (not a raw 0..1 mix) so these stay continuous across
+  // the STORM→DAWN wrap of the infinite loop — a plain mix(a, b, s) snaps
+  // back to its start value the instant s wraps from ~1 to 0, which was
+  // making the horizon visibly jump at the end of every cycle. The blend
+  // itself is eased (zero velocity at each scene stop) so motion doesn't
+  // kink at every scene boundary either — only the position needs to
+  // land on the same stop each time, not the speed of approach.
+  float blEase = smoother(uBl);
+  float camY = sF(1.14, 1.12, 1.09, 1.05, 1.00, blEase);
+  camY += sin(s * PI * 2.0) * 0.028;
+  float camZ = sF(0.08, 0.00, -0.06, -0.12, -0.18, blEase);
+  float pitch = sF(-0.075, -0.065, -0.058, -0.050, -0.045, blEase);
 
-  // ── Lightning ──────────────────────────────────────────────────
-  // Quantise time into slots; each slot either fires or stays dark
-  float ltSlot  = floor(uT * LT_RATE);
-  float ltRand  = hash(vec2(ltSlot, 17.31));
-  float ltPhase = fract(uT * LT_RATE);
-  float ltFire  = step(1.0 - LT_PROB, ltRand);
-  // Second sub-flash ~0.08 s after the main one for double-strike feel
-  float ltRand2 = hash(vec2(ltSlot, 5.77));
-  float ltPhase2 = clamp(ltPhase - 0.12, 0.0, 1.0);
-  float ltFire2  = step(1.0 - LT_PROB * 0.5, ltRand2);
-  float ltFlash = (ltFire  * exp(-ltPhase  * LT_DECAY)
-                + ltFire2 * exp(-ltPhase2 * LT_DECAY) * 0.55) * storm;
-  // Horizontal position of bolt, random per slot
-  float ltBoltX = (hash(vec2(ltSlot, 3.91)) - 0.5) * 1.4;
+  vec3 ro = vec3(0.0, camY, camZ);
+  vec3 rd = normalize(vec3(uv.x, uv.y - pitch, -1.4));
 
-  // ── Scene palette ──────────────────────────────────────────────
-  vec3 skyTop   = sCol(SKY_TOP_DAWN,   SKY_TOP_DAY,   SKY_TOP_DUSK,   SKY_TOP_STORM,   SKY_TOP_NIGHT,   SKY_TOP_PREDAWN);
-  vec3 skyHori  = sCol(SKY_HOR_DAWN,   SKY_HOR_DAY,   SKY_HOR_DUSK,   SKY_HOR_STORM,   SKY_HOR_NIGHT,   SKY_HOR_PREDAWN);
-  vec3 sunCol   = sCol(SUN_COL_DAWN,   SUN_COL_DAY,   SUN_COL_DUSK,   SUN_COL_STORM,   SUN_COL_NIGHT,   SUN_COL_PREDAWN);
-  vec3 seaBase  = sCol(SEA_BASE_DAWN,  SEA_BASE_DAY,  SEA_BASE_DUSK,  SEA_BASE_STORM,  SEA_BASE_NIGHT,  SEA_BASE_PREDAWN);
-  vec3 seaWater = sCol(SEA_WATER_DAWN, SEA_WATER_DAY, SEA_WATER_DUSK, SEA_WATER_STORM, SEA_WATER_NIGHT, SEA_WATER_PREDAWN);
-  vec3 fogCol   = sCol(FOG_COL_DAWN,   FOG_COL_DAY,   FOG_COL_DUSK,   FOG_COL_STORM,   FOG_COL_NIGHT,   FOG_COL_PREDAWN);
-  float fogDen  = sF(FOG_DEN_DAWN, FOG_DEN_DAY, FOG_DEN_DUSK, FOG_DEN_STORM, FOG_DEN_NIGHT, FOG_DEN_PREDAWN);
+  float storm = smoothstep(0.80, 1.0, s);
+  float night = smoothstep(0.56, 0.84, s);
 
-  // ── Delayed warm-up for midday->dusk (uSc==1) ──────────────────
-  // Water, sun color and fog all stay cool until the final quarter of the blend
-  if (int(uSc) == 1) {
-    float t  = uBl;
-    float d5 = t * t * t * t * t;   // x^5 — very late onset
-    sunCol   = mix(SUN_COL_DAY,      SUN_COL_DUSK,   d5);
-    seaWater = mix(SEA_WATER_DAY,    SEA_WATER_DUSK, d5);
-    seaBase  = mix(SEA_BASE_DAY,     SEA_BASE_DUSK,  d5);
-    fogCol   = mix(FOG_COL_DAY,      FOG_COL_DUSK,   d5);
-    fogDen   = mix(FOG_DEN_DAY,      FOG_DEN_DUSK,   d5);
+  vec3 skyTop = sCol(
+    vec3(0.18, 0.06, 0.24),
+    vec3(0.05, 0.24, 0.68),
+    vec3(0.26, 0.06, 0.04),
+    vec3(0.04, 0.06, 0.16),
+    vec3(0.04, 0.05, 0.09)
+  );
+
+  vec3 skyHori = sCol(
+    vec3(0.92, 0.48, 0.18),
+    vec3(0.42, 0.62, 0.90),
+    vec3(0.88, 0.32, 0.04),
+    vec3(0.10, 0.14, 0.30),
+    vec3(0.15, 0.17, 0.23)
+  );
+
+  vec3 sunCol = sCol(
+    vec3(1.0, 0.62, 0.22),
+    vec3(1.0, 0.96, 0.80),
+    vec3(1.0, 0.38, 0.05),
+    vec3(0.70, 0.75, 0.94),
+    vec3(0.26, 0.28, 0.34)
+  );
+
+  vec3 seaDeep = sCol(
+    vec3(0.08, 0.05, 0.12),
+    vec3(0.03, 0.14, 0.34),
+    vec3(0.10, 0.06, 0.04),
+    vec3(0.03, 0.06, 0.14),
+    vec3(0.03, 0.04, 0.07)
+  );
+
+  vec3 seaShlo = sCol(
+    vec3(0.28, 0.17, 0.24),
+    vec3(0.09, 0.38, 0.60),
+    vec3(0.24, 0.13, 0.06),
+    vec3(0.08, 0.15, 0.28),
+    vec3(0.07, 0.10, 0.14)
+  );
+
+  vec3 fogCol = sCol(
+    vec3(0.80, 0.50, 0.30),
+    vec3(0.58, 0.72, 0.90),
+    vec3(0.70, 0.28, 0.05),
+    vec3(0.06, 0.10, 0.20),
+    vec3(0.12, 0.14, 0.18)
+  );
+
+  float sunProgress = clamp(s / 0.58, 0.0, 1.0);
+  float sunAngle = sunProgress * PI;
+  float sunArcX = cos(sunAngle) * -0.75;
+  float sunArcY = sin(sunAngle) * 0.38 - 0.08;
+
+  vec3 sunDir = normalize(vec3(sunArcX, sunArcY, -1.0));
+
+  float waveAmp = sF(0.082, 0.070, 0.100, 0.054, 0.30);
+  waveAmp += storm * 0.020;
+
+  float fogDen = sF(0.020, 0.010, 0.022, 0.034, 0.046);
+
+  float sunAbove = step(0.0, sunDir.y);
+  float sunGlow = smoothstep(-0.10, 0.06, sunDir.y);
+
+  vec3 col;
+
+  if (rd.y < 0.0) {
+    float tFlat = ro.y / (-rd.y);
+    float stepSize = tFlat / float(MARCH_STEPS);
+    float t = stepSize;
+
+    for (int i = 0; i < MARCH_STEPS; i++) {
+      vec2 wpTest = ro.xz + rd.xz * t;
+      float wy = ro.y + rd.y * t;
+      if (wy < waveH(wpTest, uT, waveAmp, storm)) break;
+      t += stepSize;
+    }
+
+    float ta = t - stepSize;
+    float tb = t;
+
+    for (int i = 0; i < REFINE_STEPS; i++) {
+      float tm = (ta + tb) * 0.5;
+      vec2 wpm = ro.xz + rd.xz * tm;
+      if (ro.y + rd.y * tm < waveH(wpm, uT, waveAmp, storm)) tb = tm;
+      else ta = tm;
+    }
+
+    t = (ta + tb) * 0.5;
+
+    vec2 wp = ro.xz + rd.xz * t;
+    vec3 n = waveNorm(wp, uT, waveAmp, storm);
+    vec3 vDir = -rd;
+
+    float fres = pow(1.0 - clamp(dot(n, vDir), 0.0, 1.0), 4.0);
+
+    vec3 refl = reflect(rd, n);
+    float rh = clamp(refl.y, 0.0, 1.0);
+
+    vec3 reflSky = mix(skyHori, skyTop, pow(rh, 0.42));
+    reflSky = mix(reflSky, skyHori, 0.12);
+
+    float rSun = max(dot(refl, sunDir), 0.0);
+    reflSky += sunCol * pow(rSun, 120.0) * 2.0 * sunGlow;
+    reflSky += sunCol * pow(rSun, 18.0) * 0.07 * sunGlow;
+
+    float depth = exp(-t * 0.40);
+    vec3 waterC = mix(seaDeep, seaShlo, depth * 0.5);
+
+    vec3 absorb = vec3(0.85, 0.92, 1.0);
+    waterC *= mix(vec3(1.0), absorb, clamp(t * 0.25, 0.0, 1.0));
+
+    col = mix(waterC, reflSky, 0.15 + fres * 0.34);
+
+    float spec = pow(max(dot(reflect(-sunDir, n), vDir), 0.0), 200.0);
+    col += sunCol * spec * 1.10 * sunAbove;
+
+    float broadSpec = pow(max(dot(reflect(-sunDir, n), vDir), 0.0), 32.0);
+    col += sunCol * broadSpec * 0.12 * sunGlow;
+
+    float sunLine = pow(max(dot(reflect(rd, n), sunDir), 0.0), 8.0);
+    col += sunCol * sunLine * 0.48 * smoothstep(0.0, 0.35, -rd.y) * sunGlow;
+
+    float sparkle = noise(wp * 18.0 + vec2(uT * 0.55, uT * 0.22));
+    sparkle = smoothstep(0.94, 1.0, sparkle);
+    col += sunCol * sparkle * 0.08 * sunGlow * sunAbove;
+
+    float hC = waveH(wp, uT, waveAmp, storm);
+    float hL = waveH(wp - vec2(0.025, 0.0), uT, waveAmp, storm);
+    float hR = waveH(wp + vec2(0.025, 0.0), uT, waveAmp, storm);
+    float hD = waveH(wp - vec2(0.0, 0.025), uT, waveAmp, storm);
+    float hU = waveH(wp + vec2(0.0, 0.025), uT, waveAmp, storm);
+
+    float curvature = hR + hL + hU + hD - 4.0 * hC;
+    float foam = clamp(curvature * (24.0 + storm * 10.0), 0.0, 1.0);
+    col += foam * vec3(1.0) * (0.03 + storm * 0.10);
+
+    float fog = 1.0 - exp(-t * fogDen * 1.65);
+    col = mix(col, fogCol, fog);
+  } else {
+    float h = clamp(rd.y, 0.0, 1.0);
+    col = mix(skyHori, skyTop, pow(h, 0.38));
   }
 
-  // ── Sun / moon direction & intensity ───────────────────────────
-  float sunProgress = clamp(s / SUN_ARC_END, 0.0, 1.0);
-  float sunAngle    = sunProgress * PI;
-  vec3  sunDir  = normalize(vec3(cos(sunAngle) * SUN_ARC_X,
-                                  sin(sunAngle) * SUN_ARC_Y_SCALE + SUN_ARC_Y_OFFSET,
-                                  -1.0));
-  vec3  moonDir = normalize(MOON_DIR_RAW);
-  float moonAmt = sF(MOON_AMT_DAWN, MOON_AMT_DAY, MOON_AMT_DUSK, MOON_AMT_STORM, MOON_AMT_NIGHT, MOON_AMT_PREDAWN);
-  float sunAbove = step(0.0, sunDir.y);
-  float sunGlow  = smoothstep(SUN_GLOW_LO, SUN_GLOW_HI, sunDir.y);
+  float horizonW = 0.008;
+  float skyMix = smoothstep(-horizonW, horizonW, rd.y);
 
-  // ── Camera ─────────────────────────────────────────────────────
-  vec3 ori = vec3(0.0, mix(CAM_HEIGHT_START, CAM_HEIGHT_END, s), uT * CAM_DRIFT_SPEED);
-  vec3 rd  = normalize(vec3(uv.x, uv.y - CAM_PITCH, CAM_FOCAL));
-  rd.z    += length(uv) * CAM_BARREL;
-  rd       = normalize(rd);
-
-  // ── Sky ────────────────────────────────────────────────────────
   vec3 skyCol;
   {
-    float elev = clamp(rd.y, 0.0, 1.0);
+    float h = clamp(rd.y, 0.0, 1.0);
+    skyCol = mix(skyHori, skyTop, pow(h, 0.38));
 
-    // Delay orange bleed during midday->dusk (uSc==1):
-    // quintic ease on both top and horizon — stays blue until ~final quarter
-    vec3 skyTopFinal  = skyTop;
-    vec3 skyHoriFinal = skyHori;
-    if (int(uSc) == 1) {
-      float t = uBl;
-      float db = t * t * t * t * t;  // x^5 — very delayed warmth
-      skyTopFinal  = mix(SKY_TOP_DAY,     SKY_TOP_DUSK,   db);
-      skyHoriFinal = mix(SKY_HOR_DAY,     SKY_HOR_DUSK,   db * db);  // even later on horizon
-    }
-    // Also delay dawn->midday top from bluing out too fast
-    if (int(uSc) == 0) {
-      float db = uBl * uBl;
-      skyTopFinal  = mix(SKY_TOP_DAWN,    SKY_TOP_DAY,    db);
-      skyHoriFinal = mix(SKY_HOR_DAWN,    SKY_HOR_DAY,    uBl);
-    }
+    float cloudBand = noise(rd.x * 5.5 + vec2(rd.y * 3.0, uT * 0.015));
+    float cloudBand2 = noise(rd.x * 8.0 - vec2(rd.y * 4.0, uT * 0.010));
+    float clouds = smoothstep(0.62, 0.86, cloudBand * 0.65 + cloudBand2 * 0.35);
+    clouds *= smoothstep(-0.02, 0.24, rd.y);
+    clouds *= 0.08 + storm * 0.18;
 
-    // Per-scene gradient exponent: dusk gets a steeper curve so purple dominates
-    // overhead and orange is tightly bound near the horizon
-    float gradExp = SKY_GRAD_EXP;
-    if (int(uSc) == 2) gradExp = 0.22;  // pure dusk: very steep
-    if (int(uSc) == 1) {
-      // midday->dusk: ease the exponent from normal to steep
-      float db = uBl * uBl * uBl * uBl * uBl;
-      gradExp = mix(SKY_GRAD_EXP, 0.22, db);
-    }
+    vec3 cloudCol = mix(
+      vec3(1.0, 0.82, 0.65),
+      vec3(0.42, 0.48, 0.56),
+      storm
+    );
 
-    skyCol = mix(skyHoriFinal, skyTopFinal, pow(elev, gradExp));
+    skyCol = mix(skyCol, mix(skyCol * 0.97, cloudCol, 0.35), clouds);
 
-    // Dusk crimson mid-band: vivid red-crimson strip between horizon orange and purple sky
-    if (int(uSc) == 2 || (int(uSc) == 1 && uBl > 0.6)) {
-      float duskAmt = (int(uSc) == 2) ? 1.0 : (uBl - 0.6) / 0.4;
-      float midBand = exp(-pow((elev - 0.12) / 0.09, 2.0));  // gaussian centered at low elevation
-      vec3  crimson = vec3(0.78, 0.10, 0.04);
-      skyCol = mix(skyCol, crimson, midBand * 0.55 * duskAmt);
-    }
-
-    // Clouds
-    float cn1    = noise(vec2(rd.x * CLOUD_FREQ_A + rd.y * 3.0, uT * CLOUD_TIME_A));
-    float cn2    = noise(vec2(rd.x * CLOUD_FREQ_B - rd.y * 4.0, uT * CLOUD_TIME_B));
-    float clouds = smoothstep(CLOUD_THRESH_LO, CLOUD_THRESH_HI,
-                              cn1 * CLOUD_BLEND_A + cn2 * CLOUD_BLEND_B);
-    clouds *= smoothstep(CLOUD_HOR_LO, CLOUD_HOR_HI, rd.y)
-           * (CLOUD_AMT_BASE + storm * CLOUD_AMT_STORM);
-    vec3 cloudC  = mix(CLOUD_COL_CLEAR, CLOUD_COL_STORM, storm);
-    skyCol = mix(skyCol, mix(skyCol * CLOUD_DARKEN, cloudC, CLOUD_MIX), clouds);
-
-    // Sun glows + disk
     float sd = max(dot(rd, sunDir), 0.0);
-    skyCol += sunCol * pow(sd, SUN_HALO_EXP_A) * SUN_HALO_SCL_A * sunGlow;
-    skyCol += sunCol * pow(sd, SUN_HALO_EXP_B) * SUN_HALO_SCL_B * sunGlow;
-    skyCol += sunCol * pow(sd, SUN_HALO_EXP_C) * SUN_HALO_SCL_C * sunGlow;
-    skyCol += sunCol * pow(sd, SUN_HALO_EXP_D) * SUN_HALO_SCL_D * sunGlow;
-    skyCol += sunCol * smoothstep(SUN_DISK_LO, SUN_DISK_HI, dot(rd, sunDir))
-                     * SUN_DISK_SCL * sunGlow;
-    skyCol += sunCol * exp(-abs(rd.y) * SUN_HORIZON_FALL) * SUN_HORIZON_SCL * sunGlow;
+    skyCol += sunCol * pow(sd, 900.0) * 4.5 * sunGlow;
+    skyCol += sunCol * pow(sd, 40.0)  * 0.14 * sunGlow;
+    skyCol += sunCol * pow(sd, 8.0)   * 0.06 * sunGlow;
 
-    // Moon disk + halo
-    if (moonAmt > MOON_THRESHOLD) {
-      float md = max(dot(rd, moonDir), 0.0);
-      skyCol += MOON_COL_DISK   * smoothstep(MOON_DISK_LO, MOON_DISK_HI, dot(rd, moonDir))
-                                * MOON_DISK_SCL * moonAmt;
-      skyCol += MOON_COL_CORONA * pow(md, MOON_CORONA_EXP) * MOON_CORONA_SCL * moonAmt;
-      skyCol += MOON_COL_HALO1  * pow(md, MOON_HALO1_EXP)  * MOON_HALO1_SCL  * moonAmt;
-      skyCol += MOON_COL_HALO2  * pow(md, MOON_HALO2_EXP)  * MOON_HALO2_SCL  * moonAmt;
+    float sunDisk = smoothstep(0.99975, 0.999995, dot(rd, sunDir));
+    skyCol += sunCol * sunDisk * 2.0 * sunGlow;
+
+    float horizonBand = exp(-abs(rd.y) * 24.0);
+    skyCol += sunCol * horizonBand * 0.11 * sunGlow;
+
+    float viewSun = max(dot(rd, sunDir), 0.0);
+    skyCol += sunCol * pow(viewSun, 3.0) * 0.035 * sunGlow;
+
+    if (night > 0.02) {
+      vec2 starUv = rd.xy / max(0.12, rd.z + 1.6);
+      starUv *= 140.0;
+      float stars = starField(starUv) + starField(starUv * 0.55 + 11.7) * 0.65;
+      stars *= smoothstep(0.02, 0.26, rd.y);
+      stars *= (1.0 - storm * 0.85);
+      skyCol += vec3(0.80, 0.88, 1.0) * stars * night * 0.82;
     }
 
-    // Stars — visible in night (fading in) and predawn (last scene, fading in)
-    float predawnStars = smoothstep(0.833, 0.916, s);
-    float starVis = max(night, predawnStars);
-    if (starVis > NIGHT_STARS_THRESHOLD) {
-      float starAngle = uT * 0.008;
-      float cT = cos(starAngle), sT = sin(starAngle);
-      vec3 srd = vec3(mat2(cT,-sT,sT,cT) * rd.xy, rd.z);
+    float horizonMist = exp(-abs(rd.y) * mix(38.0, 22.0, storm));
+    skyCol += fogCol * horizonMist * (0.09 + storm * 0.10);
 
-      float sn  = hash(srd.xy * 300.0 + vec2(srd.z * 300.0));
-      // Tiered magnitudes — bright/medium/faint. Thresholds eased from the
-      // original so fewer rendered pixels still catches enough hits.
-      float sBright = pow(clamp(sn - 0.9991, 0.0, 1.0) * 1111.0, 1.6);
-      float sMedium = pow(clamp(sn - 0.9972, 0.0, 1.0) *  357.0, 2.0) * 0.30;
-      float sFaint  = pow(clamp(sn - 0.9902, 0.0, 1.0) *  102.0, 2.0) * 0.07;
-      float stars = sBright + sMedium + sFaint;
-      // Smooth per-star atmospheric scintillation — each star has its own rate
-      float scintSpeed = 0.30 + sn * 0.60;
-      stars *= 0.92 + 0.08 * sin(uT * scintSpeed + sn * 19.7);
-
-      float starMask = smoothstep(STAR_HOR_LO, STAR_HOR_HI, rd.y)
-                     * (1.0 - storm * STAR_STORM_SUPP);
-      skyCol += vec3(stars) * starMask * starVis * STAR_NIGHT_SCL;
-    }
-
-    // Lightning sheet glow — diffuse brightening of the cloud layer
-    skyCol += LT_COL_SHEET * ltFlash * LT_SHEET_BRIGHT;
-
-    // Lightning bolts — multi-bolt with organic branching
-    if (ltFlash > 0.003 && rd.y > LT_BOLT_ELEV_MIN && rd.y < LT_BOLT_ELEV_MAX) {
-      float screenX = rd.x / max(0.05, -rd.z);
-      // elevN=1 at top of sky, elevN=0 at horizon — bolts travel 1->0
-      float elevN   = (rd.y - LT_BOLT_ELEV_MIN) / (LT_BOLT_ELEV_MAX - LT_BOLT_ELEV_MIN);
-
-      float boltGlow = 0.0;
-      // Fade bolt out as it approaches the horizon — no hard cutoff
-      float horizFade = smoothstep(0.0, 0.12, elevN);
-      const int NSEGS = 18;
-
-      for (int bi = 0; bi < 2; bi++) {
-        float bSeed = ltSlot * 7.3 + float(bi) * 50.0;
-        float j     = bSeed * 17.3;
-
-        // Pre-walk x positions: xs[0] = top of bolt, xs[17] = near horizon
-        float xs[18];
-        xs[0] = (hash(vec2(bSeed, 0.3)) - 0.5) * 1.0;
-        for (int i = 1; i < NSEGS; i++) {
-          float fi = float(i);
-          xs[i] = xs[i-1] + (hash(vec2(j + fi * 0.71, 2.0)) - 0.5) * 0.06;
-        }
-
-        // Main bolt: segment i spans elevN from (1 - (i+1)/N) to (1 - i/N)
-        for (int i = 0; i < NSEGS; i++) {
-          float fi    = float(i);
-          float segHi = 1.0 - fi / float(NSEGS);
-          float segLo = 1.0 - (fi + 1.0) / float(NSEGS);
-          float x0    = xs[i];
-          float x1    = (i < NSEGS - 1) ? xs[i+1] : xs[i];
-
-          if (elevN >= segLo && elevN < segHi) {
-            float t  = (segHi - elevN) / (segHi - segLo);
-            float cx = mix(x0, x1, t);
-            float dM = abs(screenX - cx);
-            boltGlow += smoothstep(0.0007, 0.0, dM) * 4.5;
-            boltGlow += exp(-dM * 120.0) * 1.2;
-            boltGlow += exp(-dM * 40.0)  * 0.35;
-          }
-
-          // Branch: 25% chance, continuous position interpolated
-          if (hash(vec2(j + fi * 1.9, 3.0)) < 0.25 && segLo > 0.06) {
-            float ba    = hash(vec2(j + fi * 3.1, 4.0)) * 1.5;
-            float bSpan = segLo * 0.65;
-            float bTop  = segLo;
-            float bBot  = segLo - bSpan;
-
-            if (elevN >= bBot && elevN < bTop) {
-              // How far along the branch (0=start at split, 1=tip)
-              float bt = (bTop - elevN) / bSpan;
-              // Fade branch out toward tip
-              float bFade = 1.0 - bt * bt;
-
-              const int NBSEGS = 7;
-              float bcX = x0;
-              float prevBcX = x0;
-              for (int k = 0; k < NBSEGS; k++) {
-                float fk   = float(k);
-                float tLo  = fk       / float(NBSEGS);
-                float tHi  = (fk+1.0) / float(NBSEGS);
-                float bnX  = bcX + (hash(vec2(ba + fk * 0.5, 5.0)) - 0.5) * 0.05;
-                if (bt >= tLo && bt < tHi) {
-                  float lt   = (bt - tLo) / (tHi - tLo);
-                  float bcx  = mix(bcX, bnX, lt);
-                  float dB   = abs(screenX - bcx);
-                  boltGlow  += (smoothstep(0.0006, 0.0, dB) * 2.5
-                              + exp(-dB * 100.0) * 0.6
-                              + exp(-dB * 32.0)  * 0.15) * bFade;
-                }
-                bcX = bnX;
-              }
-            }
-          }
-        }
-      }
-
-      skyCol += LT_COL_BOLT * boltGlow * ltFlash * horizFade;
-    }
-
-    // Horizon mist
-    float hzMist = exp(-abs(rd.y) * mix(HZ_MIST_CLEAR, HZ_MIST_STORM, storm));
-    skyCol += fogCol * hzMist * (HZ_MIST_SCL + storm * HZ_MIST_STORM_ADD);
-    skyCol  = mix(skyCol, skyCol * STORM_SKY_TINT, storm * STORM_SKY_TINT_AMT);
+    skyCol = mix(skyCol, skyCol * vec3(0.91, 0.94, 0.98), storm * 0.22);
   }
 
-  // ── Sea ────────────────────────────────────────────────────────
-  float seaMix = pow(smoothstep(0.0, SEA_HORIZON_BLEND, rd.y), SEA_HORIZON_EXP);
-  vec3  col;
+  col = mix(col, skyCol, skyMix);
 
-  if (seaMix > SEA_MIX_THRESHOLD) {
-    vec3 p;
-    seaTrace(ori, rd, p, seaH, seaCh, seaT);
-    vec3  dist   = p - ori;
-    float eps    = dot(dist, dist) * SEA_NORMAL_EPS_K / uR.x;
-    vec3  n      = seaNormal(p, eps, seaH, seaCh, seaT);
-    float fresnel = pow(1.0 - max(dot(n, -rd), 0.0), FRESNEL_EXP) * FRESNEL_SCL;
+  float hEdge = smoothstep(-0.008, 0.018, rd.y);
+  col = mix(fogCol, col, hEdge * 0.25 + 0.75);
 
-    // Sky reflected in surface
-    vec3  reflDir = reflect(rd, n);
-    float rElev   = clamp(reflDir.y, 0.0, 1.0);
-    vec3  reflSky = mix(skyHori, skyTop, pow(rElev, SKY_GRAD_EXP));
+  float grain = hash(gl_FragCoord.xy * 0.5 + floor(uT * 12.0)) - 0.5;
+  col += grain * 0.006;
 
-    float rSun = max(dot(reflDir, sunDir), 0.0);
-    reflSky += sunCol * pow(rSun, REFL_SUN_EXP_A) * REFL_SUN_SCL_A * sunGlow;
-    reflSky += sunCol * pow(rSun, REFL_SUN_EXP_B) * REFL_SUN_SCL_B * sunGlow;
-
-    if (moonAmt > MOON_THRESHOLD) {
-      float rMoon = max(dot(reflDir, moonDir), 0.0);
-      reflSky += REFL_MOON_COL_A * pow(rMoon, REFL_MOON_EXP_A) * REFL_MOON_SCL_A * moonAmt;
-      reflSky += REFL_MOON_COL_B * pow(rMoon, REFL_MOON_EXP_B) * REFL_MOON_SCL_B * moonAmt;
-      reflSky += REFL_MOON_COL_C * pow(rMoon, REFL_MOON_EXP_C) * REFL_MOON_SCL_C * moonAmt;
-    }
-
-    // Diffuse + refracted base
-    float diff      = pow(dot(n, sunDir) * DIFF_WRAP + DIFF_LIFT, DIFF_EXP) * sunGlow;
-    vec3  refracted = seaBase + diff * seaWater * DIFF_WATER_SCL;
-    vec3  waterCol  = mix(refracted, reflSky, fresnel);
-
-    // Subsurface scatter
-    float atten = max(1.0 - dot(dist, dist) * SSS_ATTEN_K, 0.0);
-    waterCol   += seaWater * (p.y - seaH) * SSS_SCL * atten;
-
-    // Sun specular (energy-conserving Blinn-Phong)
-    float specNrm = (SPEC_EXP + 8.0) / (PI * 8.0);
-    float spec    = pow(max(dot(reflect(-sunDir, n), -rd), 0.0), SPEC_EXP) * specNrm;
-    waterCol     += sunCol * spec * sunAbove;
-
-    // Glitter
-    float glitter = noise(p.xz * GLITTER_UV_SCL + vec2(uT * GLITTER_TIME_U, uT * GLITTER_TIME_V));
-    waterCol += sunCol * smoothstep(GLITTER_THRESH, 1.0, glitter) * GLITTER_SCL * sunGlow * sunAbove;
-
-    // Moon specular on water
-    if (moonAmt > MOON_THRESHOLD) {
-      waterCol += MSPEC_COL_A * pow(max(dot(reflect(-moonDir,n),-rd),0.0), MSPEC_EXP_A) * MSPEC_SCL_A * moonAmt;
-      waterCol += MSPEC_COL_B * pow(max(dot(reflect(-moonDir,n),-rd),0.0), MSPEC_EXP_B) * MSPEC_SCL_B * moonAmt;
-    }
-
-    // Lightning flash on water
-    waterCol += LT_COL_SHEET * ltFlash * LT_WATER_BRIGHT;
-
-    // Fog
-    waterCol = mix(waterCol, fogCol, 1.0 - exp(-length(dist) * fogDen * FOG_SCALE));
-
-    col = mix(skyCol, waterCol, seaMix);
-  } else {
-    col = skyCol;
-  }
-
-  // ── Post-processing ────────────────────────────────────────────
-  col  = mix(fogCol, col, smoothstep(HOR_EDGE_LO, HOR_EDGE_HI, rd.y) * HOR_BLEND
-           + (1.0 - HOR_BLEND));
-  col += (hash(gl_FragCoord.xy * GRAIN_UV_SCL + floor(uT * GRAIN_TIME_SCL)) - 0.5)
-       * GRAIN_STR;
-  gl_FragColor = vec4(clamp(pow(col, vec3(GAMMA)), 0.0, 1.0), 1.0);
+  gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
 }
 `;
 
 // ═══════════════════════════════════════════════════════════════════
-// React component — exact port of CodePen JS render loop
+// Scene identity — used only to tint the HUD/player accent color.
+// Order matches the shader's cyclic stops: DAWN → MIDDAY → DUSK →
+// NIGHT → STORM → (wraps back to DAWN).
 // ═══════════════════════════════════════════════════════════════════
 
-export const SCENE_NAMES = ["DAWN", "MIDDAY", "DUSK", "STORM", "NIGHT", "PRE-DAWN"];
+export const SCENE_NAMES = ['DAWN', 'MIDDAY', 'DUSK', 'NIGHT', 'STORM'];
 
-export const SCENE_COLORS = [
-  [255, 185, 80],   // DAWN     — warm gold
-  [210, 235, 255],  // MIDDAY   — cool sky white
-  [255, 175, 80],   // DUSK     — amber-orange
-  [180, 188, 205],  // STORM    — cold grey-white
-  [110, 138, 225],  // NIGHT    — blue-indigo moonlight
-  [150, 140, 185]   // PRE-DAWN — dusty lavender
+const SCENE_COLORS = [
+  [255, 185, 80],   // DAWN   — warm gold
+  [210, 235, 255],  // MIDDAY — cool sky white
+  [255, 140, 70],   // DUSK   — amber-orange
+  [110, 138, 225],  // NIGHT  — blue-indigo moonlight
+  [180, 188, 205],  // STORM  — cold grey-white
 ];
 
 const lerpColor = (a, b, t) => [
   Math.round(a[0] + (b[0] - a[0]) * t),
   Math.round(a[1] + (b[1] - a[1]) * t),
-  Math.round(a[2] + (b[2] - a[2]) * t)
+  Math.round(a[2] + (b[2] - a[2]) * t),
 ];
 
-const getSceneColor = (s) => {
-  // Guard against NaN from scroll metrics on first frame
-  if (!Number.isFinite(s)) s = 0;
-  s = Math.max(0, Math.min(1, s));
-  const raw = s * (SCENE_COLORS.length - 1);
-  const i = Math.min(Math.floor(raw), SCENE_COLORS.length - 2);
-  const t = Math.max(0, Math.min(1, raw - i));
-  return lerpColor(SCENE_COLORS[i], SCENE_COLORS[i + 1], t);
+const getSceneColor = (si, bl) => {
+  const a = SCENE_COLORS[si];
+  const b = SCENE_COLORS[(si + 1) % SCENE_COLORS.length];
+  return lerpColor(a, b, bl);
 };
 
-const SamudraTheeramBackground = forwardRef(function SamudraTheeramBackground({ onSceneUpdate }, ref) {
+// Elements that own their own scroll/drag/wheel interaction
+const SCROLL_EXCLUDE_SELECTOR =
+  'input, textarea, select, [contenteditable="true"], .capsule-hud, .hud-toggle-btn, .hud-back-link';
+
+export default function SamudraTheeramBackground() {
   const canvasRef = useRef(null);
   const [errorMsg, setErrorMsg] = useState(null);
-
-  const jumpToSceneImplRef = useRef(null);
-  useImperativeHandle(ref, () => ({
-    jumpToScene: (idx) => jumpToSceneImplRef.current?.(idx),
-  }), []);
-
-  const onSceneUpdateRef = useRef(onSceneUpdate);
-  useEffect(() => {
-    onSceneUpdateRef.current = onSceneUpdate;
-  }, [onSceneUpdate]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -800,7 +436,7 @@ const SamudraTheeramBackground = forwardRef(function SamudraTheeramBackground({ 
       depth: false,
       stencil: false,
       preserveDrawingBuffer: false,
-      powerPreference: 'high-performance'
+      powerPreference: 'high-performance',
     });
 
     if (!gl) {
@@ -808,19 +444,18 @@ const SamudraTheeramBackground = forwardRef(function SamudraTheeramBackground({ 
       return;
     }
 
-    // ── Compile & link ─────────────────────────────────────────────
     const mkShader = (type, src) => {
-      const s = gl.createShader(type);
-      gl.shaderSource(s, src);
-      gl.compileShader(s);
-      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
-        const info = gl.getShaderInfoLog(s);
+      const sh = gl.createShader(type);
+      gl.shaderSource(sh, src);
+      gl.compileShader(sh);
+      if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+        const info = gl.getShaderInfoLog(sh);
         console.error('Shader compilation failed:', info);
-        setErrorMsg(prev => (prev ? prev + '\n\n' : '') + 'Shader Error:\n' + info);
-        gl.deleteShader(s);
+        setErrorMsg((prev) => (prev ? prev + '\n\n' : '') + 'Shader Error:\n' + info);
+        gl.deleteShader(sh);
         return null;
       }
-      return s;
+      return sh;
     };
 
     const vert = mkShader(gl.VERTEX_SHADER, VS);
@@ -835,7 +470,7 @@ const SamudraTheeramBackground = forwardRef(function SamudraTheeramBackground({ 
     if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
       const info = gl.getProgramInfoLog(prog);
       console.error('Program linking failed:', info);
-      setErrorMsg(prev => (prev ? prev + '\n\n' : '') + 'Link Error:\n' + info);
+      setErrorMsg((prev) => (prev ? prev + '\n\n' : '') + 'Link Error:\n' + info);
       return;
     }
 
@@ -863,311 +498,200 @@ const SamudraTheeramBackground = forwardRef(function SamudraTheeramBackground({ 
     const uScene = gl.getUniformLocation(prog, 'uSc');
     const uBlend = gl.getUniformLocation(prog, 'uBl');
 
-    // ── Renderer config ─────────────────────────────────────────────
-    const SCENE_COUNT = 6;
-    const MAX_DPR = 2.0;
-    const QUALITY_MIN = 0.75;
-    const QUALITY_MAX = 1.0;
-    const QUALITY_STEP_DN = 0.09;
-    const QUALITY_STEP_UP = 0.04;
-    const FPS_LOW = 50;
-    const FPS_HIGH = 57;
-    const FPS_EVAL_WINDOW = 0.75;
-    const FPS_LOW_GRACE = 0.75;
-    const FPS_HIGH_GRACE = 3.0;
-    const SMOOTH_SPEED = 12;
-    const DT_MAX = 0.05;
-    const NIGHT_SCRIM_LO = 0.583;
-    const NIGHT_SCRIM_SPAN = 0.25;
-    const SCRIM_BASE = 0.18;
-    const SCRIM_PEAK = 0.56;
-    const COLOR_ALPHA_HUD = 0.8;
-    const COLOR_ALPHA_DOT = 0.3;
-    const COLOR_ALPHA_DOTA = 0.92;
-
+    // ── Renderer config ──────────────────────────────────────────
     const N = SCENE_NAMES.length;
+    const MAX_DPR = 1.5;
+    const MIN_QUALITY = 0.82;
+    const MAX_QUALITY = 1.0;
 
-    let maxScroll = 1,
-      tgt = 0,
-      smooth = 0;
-    let qualityScale = QUALITY_MAX;
-    let resizeRAF = 0,
-      lastVH = 0;
+    let qualityScale = MAX_QUALITY;
+    let resizeRAF = 0;
 
-    // ── Dynamic resolution while actively scrolling ─────────────────
-    const MOTION_QUALITY = 0.5;
-    const MOTION_EPS = 0.0015;
-    const MOTION_IDLE_MS = 350;
+    // ── Infinite scroll driver ─────────────────────────────────────
+    const PIXELS_PER_SCENE = 900;
+    const scrollEase = 0.1;
 
-    // ── Scene snapping / discrete slide navigation ───────────────────
-    const SNAP_STABLE_MS = 160;
-    const SNAP_DURATION_MS = 1500;
-    const SNAP_EPS = 0.0008;
-    let restingSceneIndex = 0;
-    let gestureStartIndex = null;
-    let lastTgtForSnap = 0;
-    let tgtStableSince = 0;
-    let lastMoveDir = 0;
-    let snapping = false;
-    const GESTURE_GAP_MS = 220;
-    let lastWheelTime = 0;
-    let snapFromY = 0;
-    let snapToY = 0;
-    let snapStartTime = 0;
-    let motionScale = 1;
-    let motionActive = false;
-    let motionIdleAt = 0;
-
-    const updateMaxScroll = () => {
-      const vh = lastVH || window.innerHeight;
-      maxScroll = Math.max(0, document.documentElement.scrollHeight - vh);
-    };
-
-    const updateScrollTarget = () => {
-      tgt = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
-    };
-
-    const updateScrollMetrics = () => {
-      updateMaxScroll();
-      updateScrollTarget();
-    };
+    let posPx = 0;
+    let smoothPx = 0;
+    let velocity = 0;
 
     const resize = () => {
       resizeRAF = 0;
+
       const vp = window.visualViewport ?? {
         width: window.innerWidth,
-        height: window.innerHeight
+        height: window.innerHeight,
       };
+
       const cssW = Math.round(vp.width);
       const cssH = Math.round(vp.height);
       if (!cssW || !cssH) return;
-      lastVH = cssH;
+
       const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
-      const scale = dpr * qualityScale * motionScale;
-      const pixelW = Math.max(1, Math.round(cssW * scale));
-      const pixelH = Math.max(1, Math.round(cssH * scale));
+      const renderScale = dpr * qualityScale;
+
+      const pixelW = Math.max(1, Math.round(cssW * renderScale));
+      const pixelH = Math.max(1, Math.round(cssH * renderScale));
+
       canvas.style.width = `${cssW}px`;
       canvas.style.height = `${cssH}px`;
+
       if (canvas.width !== pixelW || canvas.height !== pixelH) {
         canvas.width = pixelW;
         canvas.height = pixelH;
-        gl.viewport(0, 0, pixelW, pixelH);
-        gl.uniform2f(uR, pixelW, pixelH);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
-      updateScrollMetrics();
+
+      gl.viewport(0, 0, pixelW, pixelH);
+      gl.uniform2f(uR, pixelW, pixelH);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     };
 
     const requestResize = () => {
       if (!resizeRAF) resizeRAF = requestAnimationFrame(resize);
     };
 
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
-    }
-    window.scrollTo(0, 0);
-
     resize();
-    restingSceneIndex = 0;
+
     window.addEventListener('resize', requestResize, { passive: true });
     window.visualViewport?.addEventListener('resize', requestResize, { passive: true });
-    window.addEventListener('scroll', updateScrollTarget, { passive: true });
-    window.addEventListener('load', updateScrollMetrics, { passive: true });
+
+    const addVelocity = (delta) => {
+      velocity += delta;
+      velocity = Math.max(-520, Math.min(520, velocity));
+    };
 
     const onWheel = (e) => {
-      if (e.ctrlKey || e.metaKey) return;
-
-      const target = e.target;
-      if (target && target.closest && (target.closest('.overflow-y-auto') || target.closest('input[type="range"]'))) {
+      if (
+        e.ctrlKey ||
+        e.metaKey ||
+        e.target.closest?.(SCROLL_EXCLUDE_SELECTOR)
+      ) {
         return;
       }
 
       e.preventDefault();
 
-      const now = performance.now();
-      const isFreshGesture = now - lastWheelTime > GESTURE_GAP_MS;
-      lastWheelTime = now;
+      const linePx = 16;
+      const pagePx = window.innerHeight * 0.9;
+      const delta =
+        e.deltaMode === 1 ? e.deltaY * linePx : e.deltaMode === 2 ? e.deltaY * pagePx : e.deltaY;
 
-      if (snapping || !isFreshGesture) return;
-      const dir = e.deltaY > 0 ? 1 : e.deltaY < 0 ? -1 : 0;
-      if (dir === 0 || maxScroll <= 0) return;
+      addVelocity(delta);
+    };
 
-      const targetIdx = Math.max(0, Math.min(N - 1, restingSceneIndex + dir));
-      if (targetIdx === restingSceneIndex) return;
+    let touchY = null;
 
-      restingSceneIndex = targetIdx;
-      gestureStartIndex = null;
-      const targetFraction = targetIdx / (N - 1);
-      lastTgtForSnap = targetFraction;
-      snapping = true;
-      snapFromY = window.scrollY;
-      snapToY = targetFraction * maxScroll;
-      snapStartTime = now;
+    const onTouchStart = (e) => {
+      if (e.target.closest?.(SCROLL_EXCLUDE_SELECTOR)) {
+        touchY = null;
+        return;
+      }
+      touchY = e.touches[0].clientY;
+    };
+
+    const onTouchMove = (e) => {
+      if (touchY === null) return;
+      const y = e.touches[0].clientY;
+      const delta = touchY - y;
+      touchY = y;
+      e.preventDefault();
+      addVelocity(delta * 2.2);
+    };
+
+    const onTouchEnd = () => {
+      touchY = null;
     };
 
     window.addEventListener('wheel', onWheel, { passive: false });
-
-    // ── Scene-dot navigation ─────────────────────────────────────────
-    jumpToSceneImplRef.current = (idx) => {
-      const targetIdx = Math.max(0, Math.min(N - 1, idx));
-      restingSceneIndex = targetIdx;
-      gestureStartIndex = null;
-      const targetFraction = targetIdx / (N - 1);
-      lastTgtForSnap = targetFraction;
-      snapping = true;
-      snapFromY = window.scrollY;
-      snapToY = targetFraction * maxScroll;
-      snapStartTime = performance.now();
-    };
-
-    // ── HUD references ─────────────────────────────────────────────
-    const progFill = document.getElementById('prog_fill');
-    const hudPct = document.getElementById('hud_pct');
-
-    let lastHUDPct = -1, lastHUDScene = -1;
-
-    const updateHUD = (s) => {
-      const p = Math.round(s * 100);
-      const si = Math.min(N - 1, Math.floor(s * N));
-      if (p !== lastHUDPct) {
-        lastHUDPct = p;
-        if (hudPct) hudPct.textContent = String(p).padStart(3, '0') + '%';
-        if (progFill) progFill.style.width = `${p}%`;
-      }
-      if (si !== lastHUDScene) {
-        lastHUDScene = si;
-        const nameEl = document.getElementById('scene_name_text');
-        if (nameEl) nameEl.textContent = SCENE_NAMES[si];
-        const dots = document.querySelectorAll('.scene-dot');
-        dots.forEach((d, i) => d.classList.toggle('active', i === si));
-        if (onSceneUpdateRef.current) onSceneUpdateRef.current({ sceneIndex: si });
-      }
-    };
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
 
     // ── Performance adaptation ─────────────────────────────────────
-    let fpsAccum = 0, fpsFrames = 0, lowFpsTime = 0, highFpsTime = 0;
+    let fpsAccum = 0;
+    let fpsFrames = 0;
+    let lowFpsTime = 0;
+    let highFpsTime = 0;
 
     const maybeAdjustQuality = (dt) => {
       fpsAccum += dt;
       fpsFrames++;
-      if (fpsAccum < FPS_EVAL_WINDOW) return;
+      if (fpsAccum < 0.75) return;
+
       const fps = fpsFrames / fpsAccum;
-      fpsAccum = fpsFrames = 0;
-      if (fps < FPS_LOW) {
-        lowFpsTime += FPS_EVAL_WINDOW;
+      fpsAccum = 0;
+      fpsFrames = 0;
+
+      if (fps < 50) {
+        lowFpsTime += 0.75;
         highFpsTime = 0;
-      } else if (fps > FPS_HIGH) {
-        highFpsTime += FPS_EVAL_WINDOW;
+      } else if (fps > 57) {
+        highFpsTime += 0.75;
         lowFpsTime = 0;
       } else {
         lowFpsTime = 0;
         highFpsTime = 0;
       }
-      if (lowFpsTime >= FPS_LOW_GRACE && qualityScale > QUALITY_MIN) {
-        qualityScale = Math.max(QUALITY_MIN, +(qualityScale - QUALITY_STEP_DN).toFixed(2));
+
+      if (lowFpsTime >= 1.5 && qualityScale > MIN_QUALITY) {
+        qualityScale = Math.max(MIN_QUALITY, +(qualityScale - 0.06).toFixed(2));
         lowFpsTime = 0;
         requestResize();
       }
-      if (highFpsTime >= FPS_HIGH_GRACE && qualityScale < QUALITY_MAX) {
-        qualityScale = Math.min(QUALITY_MAX, +(qualityScale + QUALITY_STEP_UP).toFixed(2));
+
+      if (highFpsTime >= 3.0 && qualityScale < MAX_QUALITY) {
+        qualityScale = Math.min(MAX_QUALITY, +(qualityScale + 0.04).toFixed(2));
         highFpsTime = 0;
         requestResize();
       }
     };
 
-    // ── Scene color CSS vars ───────────────────────────────────────
+    // ── Scene accent color (tints HUD/player chrome) ────────────────
     let lastColorKey = '';
-    const applySceneColor = (s) => {
-      const [r, g, b] = getSceneColor(s);
+    const applySceneColor = (wrapped) => {
+      const si = Math.floor(wrapped);
+      const bl = wrapped - si;
+      const [r, g, b] = getSceneColor(si, bl);
       const key = r + ',' + g + ',' + b;
       if (key === lastColorKey) return;
       lastColorKey = key;
       const root = document.documentElement;
       root.style.setProperty('--fg', `rgb(${key})`);
-      root.style.setProperty('--fg-hud', `rgba(${key},${COLOR_ALPHA_HUD})`);
-      root.style.setProperty('--fg-dot', `rgba(${key},${COLOR_ALPHA_DOT})`);
-      root.style.setProperty('--fg-dotact', `rgba(${key},${COLOR_ALPHA_DOTA})`);
+      root.style.setProperty('--fg-hud', `rgba(${key},0.8)`);
+      root.style.setProperty('--fg-dot', `rgba(${key},0.3)`);
+      root.style.setProperty('--fg-dotact', `rgba(${key},0.92)`);
     };
 
-    // ── Render loop (exact CodePen) ────────────────────────────────
+    // ── Render loop ──────────────────────────────────────────────
     const t0 = performance.now();
     let lastNow = t0;
     let animId = null;
-    let lastScrimVal = '';
 
     const frame = (now) => {
       try {
         animId = requestAnimationFrame(frame);
-        const dt = Math.min((now - lastNow) / 1000, DT_MAX);
+        const dt = Math.min((now - lastNow) / 1000, 0.05);
         lastNow = now;
 
-      maybeAdjustQuality(dt);
+        maybeAdjustQuality(dt);
 
-      if (snapping) {
-        const st = Math.min(1, (now - snapStartTime) / SNAP_DURATION_MS);
-        const eased = st < 0.5 ? 4 * st * st * st : 1 - Math.pow(-2 * st + 2, 3) / 2;
-        window.scrollTo({ top: snapFromY + (snapToY - snapFromY) * eased, behavior: 'auto' });
-        if (st >= 1) snapping = false;
-      } else {
-        const dTgt = tgt - lastTgtForSnap;
-        if (Math.abs(dTgt) > 0.0006) {
-          if (gestureStartIndex === null) gestureStartIndex = restingSceneIndex;
-          lastMoveDir = dTgt > 0 ? 1 : -1;
-          lastTgtForSnap = tgt;
-          tgtStableSince = now;
-        } else if (gestureStartIndex !== null && now - tgtStableSince > SNAP_STABLE_MS) {
-          const targetIdx = Math.max(0, Math.min(N - 1, gestureStartIndex + lastMoveDir));
-          const targetFraction = targetIdx / (N - 1);
-          restingSceneIndex = targetIdx;
-          gestureStartIndex = null;
-          if (Math.abs(tgt - targetFraction) > SNAP_EPS) {
-            snapping = true;
-            snapFromY = window.scrollY;
-            snapToY = targetFraction * maxScroll;
-            snapStartTime = now;
-          }
-        }
-      }
+        velocity *= Math.pow(0.86, dt * 60);
+        if (Math.abs(velocity) < 0.02) velocity = 0;
+        if (velocity !== 0) posPx += velocity * scrollEase;
 
-      updateScrollTarget();
+        smoothPx += (posPx - smoothPx) * (1 - Math.exp(-dt * 8));
 
-      if (!Number.isFinite(tgt)) tgt = 0;
-      smooth += (tgt - smooth) * (1 - Math.exp(-dt * SMOOTH_SPEED));
-      if (!Number.isFinite(smooth)) smooth = 0;
+        const wrapped = (((smoothPx / PIXELS_PER_SCENE) % N) + N) % N;
+        const si = Math.min(Math.floor(wrapped), N - 1);
+        const bl = wrapped - si;
+        const s = wrapped / N;
 
-      const inMotion = snapping || Math.abs(tgt - smooth) > MOTION_EPS;
-      if (inMotion) {
-        motionIdleAt = now;
-        if (!motionActive) {
-          motionActive = true;
-          motionScale = MOTION_QUALITY;
-          requestResize();
-        }
-      } else if (motionActive && now - motionIdleAt > MOTION_IDLE_MS) {
-        motionActive = false;
-        motionScale = 1;
-        requestResize();
-      }
+        applySceneColor(wrapped);
 
-      const raw = smooth * (N - 1);
-      const si = Math.min(Math.floor(raw), N - 2);
-      const bl = raw - si;
-
-      updateHUD(smooth);
-      applySceneColor(smooth);
-
-      // Night scrim deepens — only write on change
-      const nightT = Math.max(0, Math.min(1, (smooth - NIGHT_SCRIM_LO) / NIGHT_SCRIM_SPAN));
-      const scrimVal = (SCRIM_BASE + nightT * SCRIM_PEAK).toFixed(3);
-      if (scrimVal !== lastScrimVal) {
-        lastScrimVal = scrimVal;
-        document.documentElement.style.setProperty('--scrim', scrimVal);
-      }
-
-      gl.uniform1f(uTi, (now - t0) / 1000);
-      gl.uniform1f(uScroll, smooth);
-      gl.uniform1f(uScene, si);
-      gl.uniform1f(uBlend, bl);
+        gl.uniform1f(uTi, (now - t0) / 1000);
+        gl.uniform1f(uScroll, s);
+        gl.uniform1f(uScene, si);
+        gl.uniform1f(uBlend, bl);
 
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       } catch (err) {
@@ -1180,14 +704,14 @@ const SamudraTheeramBackground = forwardRef(function SamudraTheeramBackground({ 
     animId = requestAnimationFrame(frame);
 
     return () => {
-      jumpToSceneImplRef.current = null;
       if (animId) cancelAnimationFrame(animId);
       if (resizeRAF) cancelAnimationFrame(resizeRAF);
       window.removeEventListener('resize', requestResize);
       window.visualViewport?.removeEventListener('resize', requestResize);
-      window.removeEventListener('scroll', updateScrollTarget);
-      window.removeEventListener('load', updateScrollMetrics);
       window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
     };
   }, []);
 
@@ -1198,7 +722,7 @@ const SamudraTheeramBackground = forwardRef(function SamudraTheeramBackground({ 
           position: 'fixed', top: 0, left: 0, zIndex: 9999,
           background: 'rgba(255,0,0,0.9)', color: 'white',
           padding: '2rem', width: '100vw', height: '100vh',
-          fontFamily: 'monospace', whiteSpace: 'pre-wrap', overflow: 'auto'
+          fontFamily: 'monospace', whiteSpace: 'pre-wrap', overflow: 'auto',
         }}>
           <h2>WebGL / JS Error</h2>
           {errorMsg}
@@ -1211,6 +735,4 @@ const SamudraTheeramBackground = forwardRef(function SamudraTheeramBackground({ 
       />
     </>
   );
-});
-
-export default SamudraTheeramBackground;
+}
