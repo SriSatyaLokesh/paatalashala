@@ -239,6 +239,13 @@ void main() {
 
   vec3 sunDir = normalize(vec3(sunArcX, sunArcY, -1.0));
 
+  // Moon Arc & Progress — Moon moves in the exact same left-to-right arc as the sun with reduced vertical height
+  float moonProgress = clamp((s - 0.48) / 0.40, 0.0, 1.0);
+  float moonAngle = moonProgress * PI;
+  float moonArcX = cos(moonAngle) * -0.70;
+  float moonArcY = sin(moonAngle) * 0.24 - 0.04;
+  vec3 moonDir = normalize(vec3(moonArcX, moonArcY, -1.0));
+
   float waveAmp = sF(0.082, 0.070, 0.100, 0.054, 0.30);
   waveAmp += storm * 0.020;
 
@@ -246,6 +253,11 @@ void main() {
 
   float sunAbove = step(0.0, sunDir.y);
   float sunGlow = smoothstep(-0.10, 0.06, sunDir.y);
+
+  float moonAbove = step(0.0, moonDir.y);
+  // Gated strictly so Moon ONLY appears after sun has completely set below horizon
+  float moonGlow = smoothstep(-0.06, 0.08, moonDir.y) * smoothstep(0.50, 0.62, s) * (1.0 - smoothstep(0.84, 0.96, s)) * (1.0 - sunGlow);
+  vec3 moonCol = vec3(0.75, 0.85, 0.98);
 
   vec3 col;
 
@@ -289,6 +301,10 @@ void main() {
     reflSky += sunCol * pow(rSun, 120.0) * 2.0 * sunGlow;
     reflSky += sunCol * pow(rSun, 18.0) * 0.07 * sunGlow;
 
+    float rMoon = max(dot(refl, moonDir), 0.0);
+    reflSky += moonCol * pow(rMoon, 100.0) * 0.25 * moonGlow;
+    reflSky += moonCol * pow(rMoon, 14.0) * 0.02 * moonGlow;
+
     float depth = exp(-t * 0.40);
     vec3 waterC = mix(seaDeep, seaShlo, depth * 0.5);
 
@@ -309,6 +325,20 @@ void main() {
     float sparkle = noise(wp * 18.0 + vec2(uT * 0.55, uT * 0.22));
     sparkle = smoothstep(0.94, 1.0, sparkle);
     col += sunCol * sparkle * 0.08 * sunGlow * sunAbove;
+
+    // Subtle, gentle moonlight reflections & shimmering beam path on sea
+    float moonSpec = pow(max(dot(reflect(-moonDir, n), vDir), 0.0), 160.0);
+    col += moonCol * moonSpec * 0.35 * moonGlow * moonAbove;
+
+    float moonBroadSpec = pow(max(dot(reflect(-moonDir, n), vDir), 0.0), 24.0);
+    col += moonCol * moonBroadSpec * 0.04 * moonGlow;
+
+    float moonLine = pow(max(dot(reflect(rd, n), moonDir), 0.0), 6.5);
+    col += moonCol * moonLine * 0.18 * smoothstep(0.0, 0.35, -rd.y) * moonGlow;
+
+    float moonSparkle = noise(wp * 16.0 + vec2(-uT * 0.40, uT * 0.18));
+    moonSparkle = smoothstep(0.94, 1.0, moonSparkle);
+    col += moonCol * moonSparkle * 0.02 * moonGlow * moonAbove;
 
     float hC = waveH(wp, uT, waveAmp, storm);
     float hL = waveH(wp - vec2(0.025, 0.0), uT, waveAmp, storm);
@@ -356,6 +386,20 @@ void main() {
 
     float sunDisk = smoothstep(0.99975, 0.999995, dot(rd, sunDir));
     skyCol += sunCol * sunDisk * 2.0 * sunGlow;
+
+    // Gentle Full Moon In Sky with Craters & Soft Atmosphere Halo
+    float md = max(dot(rd, moonDir), 0.0);
+    skyCol += moonCol * pow(md, 450.0) * 1.2 * moonGlow;
+    skyCol += moonCol * pow(md, 35.0)  * 0.06 * moonGlow;
+    skyCol += moonCol * pow(md, 7.0)   * 0.02 * moonGlow;
+
+    float moonDisk = smoothstep(0.99965, 0.99995, md);
+    if (moonDisk > 0.0) {
+      vec3 mP = rd * 26.0 + vec3(uT * 0.001, uT * 0.001, 0.0);
+      float crater = noise(mP.xy * 2.4) * 0.20 + noise(mP.xy * 6.5) * 0.10;
+      vec3 moonBody = mix(vec3(0.92, 0.95, 0.98), vec3(0.65, 0.70, 0.76), crater);
+      skyCol += moonBody * moonDisk * 1.1 * moonGlow;
+    }
 
     float horizonBand = exp(-abs(rd.y) * 24.0);
     skyCol += sunCol * horizonBand * 0.11 * sunGlow;
@@ -422,9 +466,14 @@ const getSceneColor = (si, bl) => {
 const SCROLL_EXCLUDE_SELECTOR =
   'input, textarea, select, [contenteditable="true"], .capsule-hud, .hud-toggle-btn, .hud-back-link';
 
-export default function SamudraTheeramBackground() {
+export default function SamudraTheeramBackground({ autoCycle = false }) {
   const canvasRef = useRef(null);
   const [errorMsg, setErrorMsg] = useState(null);
+
+  const autoCycleRef = useRef(autoCycle);
+  useEffect(() => {
+    autoCycleRef.current = autoCycle;
+  }, [autoCycle]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -511,8 +560,10 @@ export default function SamudraTheeramBackground() {
     const PIXELS_PER_SCENE = 900;
     const scrollEase = 0.1;
 
-    let posPx = 0;
-    let smoothPx = 0;
+    // Default sun location to golden sunset (Scene 2.1) matching user screenshot
+    const DEFAULT_SCENE_OFFSET = 2.1;
+    let posPx = DEFAULT_SCENE_OFFSET * PIXELS_PER_SCENE;
+    let smoothPx = posPx;
     let velocity = 0;
 
     const resize = () => {
@@ -674,6 +725,11 @@ export default function SamudraTheeramBackground() {
         lastNow = now;
 
         maybeAdjustQuality(dt);
+
+        if (autoCycleRef.current) {
+          // Slow motion auto-orbit: steadily advance scroll position continuously
+          posPx += dt * 36.0;
+        }
 
         velocity *= Math.pow(0.86, dt * 60);
         if (Math.abs(velocity) < 0.02) velocity = 0;
