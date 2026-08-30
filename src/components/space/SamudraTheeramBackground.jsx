@@ -232,18 +232,21 @@ void main() {
     vec3(0.12, 0.14, 0.18)
   );
 
+  float aspect = uR.x / uR.y;
+  float maxArcX = min(0.72, aspect * 0.42);
+
   float sunProgress = clamp(s / 0.58, 0.0, 1.0);
   float sunAngle = sunProgress * PI;
-  float sunArcX = cos(sunAngle) * -0.75;
-  float sunArcY = sin(sunAngle) * 0.38 - 0.08;
+  float sunArcX = cos(sunAngle) * -maxArcX;
+  float sunArcY = sin(sunAngle) * 0.30 - 0.04;
 
   vec3 sunDir = normalize(vec3(sunArcX, sunArcY, -1.0));
 
-  // Moon Arc & Progress — Moon moves in the exact same left-to-right arc as the sun with reduced vertical height
+  // Moon Arc & Progress — Moon moves in the exact same left-to-right arc adapted for mobile aspect ratio
   float moonProgress = clamp((s - 0.48) / 0.40, 0.0, 1.0);
   float moonAngle = moonProgress * PI;
-  float moonArcX = cos(moonAngle) * -0.70;
-  float moonArcY = sin(moonAngle) * 0.24 - 0.04;
+  float moonArcX = cos(moonAngle) * -maxArcX;
+  float moonArcY = sin(moonAngle) * 0.26 - 0.02;
   vec3 moonDir = normalize(vec3(moonArcX, moonArcY, -1.0));
 
   float waveAmp = sF(0.082, 0.070, 0.100, 0.054, 0.30);
@@ -384,7 +387,8 @@ void main() {
     skyCol += sunCol * pow(sd, 40.0)  * 0.14 * sunGlow;
     skyCol += sunCol * pow(sd, 8.0)   * 0.06 * sunGlow;
 
-    float sunDisk = smoothstep(0.99975, 0.999995, dot(rd, sunDir));
+    float sunDiskThresh = mix(0.9994, 0.99975, clamp((aspect - 0.5) / 0.8, 0.0, 1.0));
+    float sunDisk = smoothstep(sunDiskThresh, 0.999995, dot(rd, sunDir));
     skyCol += sunCol * sunDisk * 2.0 * sunGlow;
 
     // Gentle Full Moon In Sky with Craters & Soft Atmosphere Halo
@@ -393,12 +397,13 @@ void main() {
     skyCol += moonCol * pow(md, 35.0)  * 0.06 * moonGlow;
     skyCol += moonCol * pow(md, 7.0)   * 0.02 * moonGlow;
 
-    float moonDisk = smoothstep(0.99965, 0.99995, md);
+    float moonDiskThresh = mix(0.9992, 0.99965, clamp((aspect - 0.5) / 0.8, 0.0, 1.0));
+    float moonDisk = smoothstep(moonDiskThresh, 0.99995, md);
     if (moonDisk > 0.0) {
       vec3 mP = rd * 26.0 + vec3(uT * 0.001, uT * 0.001, 0.0);
       float crater = noise(mP.xy * 2.4) * 0.20 + noise(mP.xy * 6.5) * 0.10;
       vec3 moonBody = mix(vec3(0.92, 0.95, 0.98), vec3(0.65, 0.70, 0.76), crater);
-      skyCol += moonBody * moonDisk * 1.1 * moonGlow;
+      skyCol += moonBody * moonDisk * 1.2 * moonGlow;
     }
 
     float horizonBand = exp(-abs(rd.y) * 24.0);
