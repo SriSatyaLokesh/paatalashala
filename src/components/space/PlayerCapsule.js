@@ -55,6 +55,19 @@ export default function PlayerCapsule({
     }
   };
 
+  const formatTitle = (title, maxLen = 38) => {
+    if (!title) return '';
+    let clean = title
+      .replace(/^Full Video:\s*/i, '')
+      .replace(/^Full Song:\s*/i, '')
+      .replace(/^(#\w+\s*)+/g, '')
+      .trim();
+    if (clean.length > maxLen) {
+      return clean.slice(0, maxLen).trim() + '…';
+    }
+    return clean;
+  };
+
   return (
     <div style={{
       background: t.glassBg,
@@ -67,11 +80,13 @@ export default function PlayerCapsule({
       gap: '16px',
       boxShadow: t.glassShadow,
       position: 'relative',
+      width: '100%',
+      boxSizing: 'border-box',
     }} className="capsule-hud">
 
-      <div className="player-main-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '16px' }}>
+      <div className="player-main-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '16px', boxSizing: 'border-box' }}>
 
-        <div className="track-info-container" style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
+        <div className="track-info-container" style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: '1 1 0%', overflow: 'hidden' }}>
           <div style={{
             width: `${t.vinylSize}px`,
             height: `${t.vinylSize}px`,
@@ -107,11 +122,35 @@ export default function PlayerCapsule({
             }} />
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
-            <span style={{ fontSize: t.titleFontSize, fontWeight: '800', color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', letterSpacing: '0.01em' }}>
-              {currentSong?.title || t.fallbackTitle}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0, flex: '1 1 0%', overflow: 'hidden' }}>
+            <span
+              title={currentSong?.title || t.fallbackTitle}
+              style={{
+                fontSize: t.titleFontSize,
+                fontWeight: '800',
+                color: '#fff',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                letterSpacing: '0.01em',
+                maxWidth: '100%',
+                display: 'block',
+              }}
+            >
+              {formatTitle(currentSong?.title) || t.fallbackTitle}
             </span>
-            <span style={{ fontSize: '0.75rem', color: t.secondaryColor, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            <span
+              title={currentSong?.movie ? t.subtitleFormat(currentSong.movie, currentSong.year) : t.subtitleFallback}
+              style={{
+                fontSize: '0.75rem',
+                color: t.secondaryColor,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                maxWidth: '100%',
+                display: 'block',
+              }}
+            >
               {currentSong?.movie ? t.subtitleFormat(currentSong.movie, currentSong.year) : t.subtitleFallback}
             </span>
           </div>
