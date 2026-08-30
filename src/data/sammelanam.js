@@ -347,7 +347,8 @@ export const SPACE_THEMES = {
       showSeekThumb: false, showControlIconHoverClass: false,
     },
     ambientAudio: { src: '/audio/ocean_waves.mp3', volume: 0.15, gate: 'none' },
-    getBackground: () => ({
+    getBackground: (song) => ({
+      // TODO: Change image once user provides dedicated Samudra Theeram background image
       url: prefixPath("url('/images/vennela_1.webp')"),
       position: 'center', transitionMs: 2000,
     }),

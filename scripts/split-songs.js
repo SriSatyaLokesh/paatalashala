@@ -10,7 +10,7 @@ const OUTPUT_DIR = path.join(__dirname, '..', 'src', 'data', 'songs');
 
 // Known active place ids — kept explicit (not derived) so an unrecognized
 // `place` value in songs.json fails loudly instead of silently being dropped.
-const PLACES = ['tractor-anna', 'auto', 'thathayya', 'ammama', 'vennallo', 'saloon'];
+const PLACES = ['tractor-anna', 'auto', 'thathayya', 'ammama', 'vennallo', 'saloon', 'campfire-jamming', 'gundamma-gramophone', 'samudra-theeram'];
 
 const songs = JSON.parse(fs.readFileSync(SONGS_JSON_PATH, 'utf8'));
 
