@@ -1,0 +1,142 @@
+/* ── Samudra Theeram CodePen Authentic Design ── */
+:root {
+  /* Set by JS per scene — defaults to dawn */
+  --fg: #f0cfa0;
+  --fg-dim: rgba(240, 207, 160, 0.55);
+  --fg-hud: rgba(240, 207, 160, 0.7);
+  --fg-dot: rgba(240, 207, 160, 0.3);
+  --fg-dotact: rgba(240, 207, 160, 0.9);
+  --bg: #0a0a0f;
+  --accent: #a0b4ff;
+}
+
+/* overflow is locked/restored in JS (page.js) rather than here, so it
+   can't leak onto other routes if this stylesheet outlives the page
+   across a client-side navigation */
+html, body {
+  height: 100% !important;
+  overscroll-behavior: none;
+  background: var(--bg) !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.samudra-container {
+  background: transparent !important;
+  color: var(--fg);
+  font-family: var(--font-space-grotesk), "Space Grotesk", system-ui, -apple-system, sans-serif;
+  overflow: hidden;
+  height: 100vh;
+  height: 100dvh;
+  position: relative;
+  width: 100%;
+}
+
+/* ── Fixed WebGL canvas ── */
+#webgl_canvas {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 0 !important;
+  display: block !important;
+  pointer-events: none !important;
+  background: var(--bg) !important;
+}
+
+/* ── Immersive title ── */
+.immersive-title-container {
+  position: absolute;
+  top: 10vh;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.immersive-title {
+  margin: 0;
+  font-family: 'Akaya Telivigala', 'Gurajada', 'Ravi Prakash', serif;
+  font-size: 4.6rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85), 0 0 30px var(--fg-hud, rgba(240, 207, 160, 0.4));
+  transition: text-shadow 1.2s ease;
+}
+
+@media (max-width: 768px) {
+  .immersive-title-container {
+    top: 9vh !important;
+  }
+
+  .immersive-title {
+    font-size: 2.3rem !important;
+  }
+}
+
+.mobile-listeners-row {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .listeners-badge-desktop {
+    display: none !important;
+  }
+  .mobile-listeners-row {
+    display: flex !important;
+  }
+}
+
+.samudra-interactive-toast {
+  bottom: 165px;
+}
+
+@media (max-width: 768px) {
+  .samudra-interactive-toast {
+    bottom: 220px !important;
+  }
+}
+
+@media (max-width: 540px) {
+  .samudra-interactive-toast {
+    bottom: 235px !important;
+  }
+  .samudra-interactive-toast > div {
+    font-size: 0.72rem !important;
+    padding: 6px 12px !important;
+    white-space: normal !important;
+    text-align: center !important;
+    max-width: 88vw !important;
+  }
+}
+
+.samudra-autocycle-desktop {
+  display: flex !important;
+}
+
+.samudra-autocycle-mobile {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .samudra-autocycle-desktop {
+    display: none !important;
+  }
+  .samudra-autocycle-mobile {
+    display: flex !important;
+  }
+}

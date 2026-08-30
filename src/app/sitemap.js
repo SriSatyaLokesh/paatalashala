@@ -5,6 +5,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://srisatyalokesh.is-
 export default function sitemap() {
   const routes = [
     "",
+    "/spaces/samudra-theeram",
     "/spaces/gundamma-gramophone",
     "/spaces/campfire-jamming",
     "/spaces/ammama",
