@@ -55,7 +55,7 @@ Paatalashala is an immersive, interactive audio web application designed to trig
 ### 9. 🌊 Samudra Theeram (సముద్ర తీరం)
 * **Vibe:** 24-hour day and night ocean cycle on the beach, sunrise & sunset reflections, and ocean bed melodies.
 * **Atmosphere:** Interactive WebGL raymarching ocean wave shader transitioning across 5 distinct phases (Dawn, Midday, Golden Sunset, Full Moon Night with procedural lunar craters & moonlight water reflections, and Storm), slow-motion Auto Day ⇄ Night motion toggle (`SunMoonCycleIcon`), interactive 10s scroll hint, procedural surf waves audio, and real-time HUD metrics.
-* **Music:** 32 curated Telugu beach melodies, ocean tunes, and coastal classics.
+* **Music:** Curated Telugu beach melodies, ocean tunes, and coastal classics.
 
 ### 10. 🔀 Sammelanam / Surprise Me (సమ్మేళనం)
 * **Vibe:** Dynamic cross-space journey and infinite surprise discoveries.
