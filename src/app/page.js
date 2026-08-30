@@ -165,7 +165,7 @@ const CARD_BG = {
   'ammama': '/images/grandma_1.webp',
   'vennallo': '/images/vennela_1.webp',
   'gundamma-gramophone': '/images/gundamma_1.webp',
-  'samudra-theeram': '/images/sunset_farm_background.webp',
+  'samudra-theeram': '/images/samudra_theeram.webp',
   'sammelanam': '/images/vennela_2.webp',
   'campfire-jamming': '/images/campfire.png',
 };
