@@ -285,7 +285,6 @@ export default function SamudraTheeramPage() {
         className="samudra-interactive-toast"
         style={{
           position: 'fixed',
-          bottom: '165px',
           left: '50%',
           transform: showTooltip ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(12px)',
           zIndex: 45,

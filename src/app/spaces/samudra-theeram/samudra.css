@@ -101,7 +101,20 @@ body::-webkit-scrollbar {
   }
 }
 
+.samudra-interactive-toast {
+  bottom: 165px;
+}
+
+@media (max-width: 768px) {
+  .samudra-interactive-toast {
+    bottom: 220px !important;
+  }
+}
+
 @media (max-width: 540px) {
+  .samudra-interactive-toast {
+    bottom: 235px !important;
+  }
   .samudra-interactive-toast > div {
     font-size: 0.72rem !important;
     padding: 6px 12px !important;
