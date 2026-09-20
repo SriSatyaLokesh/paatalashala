@@ -12,7 +12,7 @@ const spaceMono = Space_Mono({
   weight: ["400", "700"],
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://srisatyalokesh.is-a.dev/paatalashala";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.paatalashala.space";
 
 export const metadata = {
   title: "Samudra Theeram | Best Telugu Beach Songs, Sea Shore & Ocean Bed Melodies",

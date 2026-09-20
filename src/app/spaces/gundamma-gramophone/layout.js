@@ -1,4 +1,4 @@
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://srisatyalokesh.is-a.dev/paatalashala";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.paatalashala.space";
 
 export const metadata = {
   title: "Gundamma Gari Gramophone | Best 60s, 70s, 80s Telugu Old Songs & Black & White Classics",

@@ -164,7 +164,7 @@ Paatalashala is built as a static HTML export (`output: 'export'`) and deployed 
 ### Environment Variables
 Configure the following in Cloudflare Pages (**Settings** → **Environment variables**):
 * `NODE_VERSION`: `22`
-* `NEXT_PUBLIC_SITE_URL`: `https://<your-project>.pages.dev` (or custom domain)
+* `NEXT_PUBLIC_SITE_URL`: `https://www.paatalashala.space`
 * `NEXT_PUBLIC_SUPABASE_URL`: `https://yxtslmupjghwaypqeuvw.supabase.co`
 * `NEXT_PUBLIC_SUPABASE_ANON_KEY`: `sb_publishable_...`
 * `NEXT_PUBLIC_GA_ID`: `G-7R7M04TH9P`
