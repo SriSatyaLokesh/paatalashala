@@ -1,16 +1,18 @@
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.paatalashala.space";
+
 export const metadata = {
   title: "Thathayya Tape Recorder | Timeless Telugu Classics | Paatalashala",
   description: "Step onto a warm vintage village veranda, listen to the gentle morning hum, and enjoy the timeless golden era of Telugu music playing from a nostalgic cassette tape recorder.",
   keywords: ["Telugu old songs", "Thathayya tape recorder", "Ghantasala songs", "SPB melodies", "Ilaiyaraaja classics", "nostalgic Telugu music", "retro soundscape", "village veranda ambient"],
   alternates: {
-    canonical: "https://srisatyalokesh.is-a.dev/paatalashala/spaces/thathayya"
+    canonical: `${SITE_URL}/spaces/thathayya`
   },
   openGraph: {
     title: "Thathayya Tape Recorder | Timeless Telugu Classics | Paatalashala",
     description: "Relax on a vintage veranda with a warm cup of tea and timeless classic Telugu melodies playing from an old cassette tape recorder.",
-    url: "https://srisatyalokesh.is-a.dev/paatalashala/spaces/thathayya",
+    url: `${SITE_URL}/spaces/thathayya`,
     siteName: "Paatalashala",
-    images: [{ url: "https://srisatyalokesh.is-a.dev/paatalashala/images/tape_recorder_background.webp" }],
+    images: [{ url: `${SITE_URL}/images/tape_recorder_background.webp` }],
     locale: "en_US",
     type: "website"
   },
@@ -18,7 +20,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Thathayya Tape Recorder | Timeless Telugu Classics | Paatalashala",
     description: "Relax on a vintage veranda with a warm cup of tea and timeless classic Telugu melodies playing from an old cassette tape recorder.",
-    images: ["https://srisatyalokesh.is-a.dev/paatalashala/images/tape_recorder_background.webp"]
+    images: [`${SITE_URL}/images/tape_recorder_background.webp`]
   }
 };
 

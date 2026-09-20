@@ -1,16 +1,18 @@
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.paatalashala.space";
+
 export const metadata = {
   title: "Ammama Radio | Amma Radio Playlist & Lullabies | Paatalashala",
   description: "Experience the warmth of grandma's traditional village kitchen. Play the famous Amma radio playlist, classic lullabies, and vintage Telugu playlists from a nostalgic transistor radio.",
   keywords: ["amma radio playlist", "ammama radio", "telugu playlists", "paatalashala", "telugu lullabies", "S. Janaki hits", "Susheela melodies", "traditional Telugu kitchen", "village soundscape", "old Telugu radio songs"],
   alternates: {
-    canonical: "https://srisatyalokesh.is-a.dev/paatalashala/spaces/ammama"
+    canonical: `${SITE_URL}/spaces/ammama`
   },
   openGraph: {
     title: "Ammama Radio | Amma Radio Playlist & Lullabies | Paatalashala",
     description: "Play the famous Amma radio playlist, classic lullabies, and vintage Telugu playlists from a nostalgic kitchen transistor radio.",
-    url: "https://srisatyalokesh.is-a.dev/paatalashala/spaces/ammama",
+    url: `${SITE_URL}/spaces/ammama`,
     siteName: "Paatalashala",
-    images: [{ url: "https://srisatyalokesh.is-a.dev/paatalashala/images/grandma_1.webp" }],
+    images: [{ url: `${SITE_URL}/images/grandma_1.webp` }],
     locale: "en_US",
     type: "website"
   },
@@ -18,7 +20,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Ammama Radio | Amma Radio Playlist & Lullabies | Paatalashala",
     description: "Play the famous Amma radio playlist, classic lullabies, and vintage Telugu playlists from a nostalgic kitchen transistor radio.",
-    images: ["https://srisatyalokesh.is-a.dev/paatalashala/images/grandma_1.webp"]
+    images: [`${SITE_URL}/images/grandma_1.webp`]
   }
 };
 

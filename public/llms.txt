@@ -43,4 +43,4 @@ Paatalashala is an interactive web experience connecting music lovers to vintage
 - **Framework**: Next.js (App Router), React, Tailwind CSS, Three.js WebGL.
 - **Audio Delivery**: YouTube IFrame Embed API (Zero hosted copyright audio, completely legal streaming).
 - **Presence**: Real-time listener counters via WebSocket channels.
-- **URL**: https://srisatyalokesh.is-a.dev/paatalashala
+- **URL**: https://www.paatalashala.space

@@ -3,7 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 
 // Set NEXT_PUBLIC_SITE_URL in .env to override (e.g. for custom domain)
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://srisatyalokesh.is-a.dev/paatalashala";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.paatalashala.space";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

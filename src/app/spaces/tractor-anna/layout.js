@@ -1,16 +1,18 @@
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.paatalashala.space";
+
 export const metadata = {
   title: "Tractor Anna | Immersive Telugu Farmland Beats | Paatalashala",
   description: "Ride a classic tractor through green paddy fields under a golden sunset. Experience high-energy Telugu folk songs, mass beats, and farm road ambient hums.",
   keywords: ["Tractor anna", "Telugu folk songs", "farmland driving soundscape", "Telugu mass beats", "village driving ambient", "high energy Telugu tracks"],
   alternates: {
-    canonical: "https://srisatyalokesh.is-a.dev/paatalashala/spaces/tractor-anna"
+    canonical: `${SITE_URL}/spaces/tractor-anna`
   },
   openGraph: {
     title: "Tractor Anna | Immersive Telugu Farmland Beats | Paatalashala",
     description: "High-energy driving simulation across beautiful Telugu farmlands with pumping local rhythms.",
-    url: "https://srisatyalokesh.is-a.dev/paatalashala/spaces/tractor-anna",
+    url: `${SITE_URL}/spaces/tractor-anna`,
     siteName: "Paatalashala",
-    images: [{ url: "https://srisatyalokesh.is-a.dev/paatalashala/images/sunset_farm_background.webp" }],
+    images: [{ url: `${SITE_URL}/images/sunset_farm_background.webp` }],
     locale: "en_US",
     type: "website"
   },
@@ -18,7 +20,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Tractor Anna | Immersive Telugu Farmland Beats | Paatalashala",
     description: "High-energy driving simulation across beautiful Telugu farmlands with pumping local rhythms.",
-    images: ["https://srisatyalokesh.is-a.dev/paatalashala/images/sunset_farm_background.webp"]
+    images: [`${SITE_URL}/images/sunset_farm_background.webp`]
   }
 };
 

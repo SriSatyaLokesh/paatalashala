@@ -1,16 +1,18 @@
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.paatalashala.space";
+
 export const metadata = {
   title: "మేడ మీద వెన్నెల్లో | Best Telugu Sleep Songs & Soothing Night Playlist | Paatalashala",
   description: "Listen to the best Telugu sleep songs and soothing night playlist on a cozy village terrace (midde) under a starry sky. Relax with comforting midnight melodies, cool breeze, and ambient night sounds.",
   keywords: ["best telugu sleeping songs", "telugu sleep songs", "telugu night songs", "best night playlist", "sleeping playlist", "మేడ మీద వెన్నెల్లో", "Meda Midha Vennallo", "Telugu night melodies", "terrace midnight breeze", "village night ambient", "starry sky audio", "cozy Telugu soundtrack"],
   alternates: {
-    canonical: "https://srisatyalokesh.is-a.dev/paatalashala/spaces/vennallo"
+    canonical: `${SITE_URL}/spaces/vennallo`
   },
   openGraph: {
     title: "మేడ మీద వెన్నెల్లో | Best Telugu Sleep Songs & Soothing Night Playlist | Paatalashala",
     description: "Relax on an open terrace under a starry night sky with a soothing cool breeze and the best Telugu sleep songs playlist playing.",
-    url: "https://srisatyalokesh.is-a.dev/paatalashala/spaces/vennallo",
+    url: `${SITE_URL}/spaces/vennallo`,
     siteName: "Paatalashala",
-    images: [{ url: "https://srisatyalokesh.is-a.dev/paatalashala/images/vennela_1.webp" }],
+    images: [{ url: `${SITE_URL}/images/vennela_1.webp` }],
     locale: "en_US",
     type: "website"
   },
@@ -18,7 +20,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "మేడ మీద వెన్నెల్లో | Best Telugu Sleep Songs & Soothing Night Playlist | Paatalashala",
     description: "Relax on an open terrace under a starry night sky with a soothing cool breeze and the best Telugu sleep songs playlist playing.",
-    images: ["https://srisatyalokesh.is-a.dev/paatalashala/images/vennela_1.webp"]
+    images: [`${SITE_URL}/images/vennela_1.webp`]
   }
 };
 
