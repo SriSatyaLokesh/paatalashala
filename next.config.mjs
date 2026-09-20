@@ -11,8 +11,9 @@ let commitHash = 'local-dev';
 try {
   commitHash = execSync('git rev-parse --short HEAD', { cwd: __dirname, encoding: 'utf8' }).trim();
 } catch (e) {
-  if (process.env.GITHUB_SHA) {
-    commitHash = process.env.GITHUB_SHA.substring(0, 7);
+  const envSha = process.env.GITHUB_SHA || process.env.CF_PAGES_COMMIT_SHA;
+  if (envSha) {
+    commitHash = envSha.substring(0, 7);
   }
 }
 
@@ -44,9 +45,12 @@ fs.writeFileSync(
 const isProd = process.env.NODE_ENV === 'production';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || '';
 
-// Add /paatalashala prefix ONLY for GitHub subdirectory deployment or local emulation
-// Custom domain or localhost: no prefix
-const shouldUseBasePath = SITE_URL.includes('srisatyalokesh.is-a.dev') || process.env.LOCAL_SERVE === 'true';
+// Add /paatalashala prefix ONLY for subdirectory deployment or local emulation
+// Root domain (e.g. Cloudflare Pages, custom domain, or localhost): no prefix
+const shouldUseBasePath =
+  process.env.NEXT_PUBLIC_BASE_PATH === '/paatalashala' ||
+  SITE_URL.endsWith('/paatalashala') ||
+  process.env.LOCAL_SERVE === 'true';
 const basePath = isProd && shouldUseBasePath ? '/paatalashala' : undefined;
 
 const nextConfig = {

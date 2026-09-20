@@ -116,6 +116,7 @@ npm run split-songs
 ## 🛠️ Tech Stack
 
 * **Framework:** Next.js (with Turbopack engine)
+* **Hosting & CDN:** Cloudflare Pages (Static HTML Export with Anycast Edge Caching)
 * **Realtime Sync:** Optional Supabase Realtime (Presence WebSockets)
 * **Styling:** Vanilla CSS, CSS modules, CSS Global, and Tailwind utility tokens
 * **Icons:** Custom SVG inline components and Lucide React
@@ -125,7 +126,7 @@ npm run split-songs
 ## 💻 Getting Started
 
 ### Prerequisites
-Make sure you have [Node.js](https://nodejs.org) installed on your system.
+Make sure you have [Node.js](https://nodejs.org) (v20+ or v22, specified in `.node-version`) installed on your system.
 
 ### Installation
 Clone the repository and install the dependencies:
@@ -147,6 +148,28 @@ npm run build
 npm run serve:prod
 ```
 The optimized server will accept connections at `http://localhost:<PORT>/paatalashala`.
+
+---
+
+## ☁️ Deployment (Cloudflare Pages)
+
+Paatalashala is built as a static HTML export (`output: 'export'`) and deployed via **Cloudflare Pages Direct Git Integration**.
+
+### Build Settings
+* **Framework preset:** `None` (or `Next.js Static`)
+* **Build command:** `npm run build`
+* **Build output directory:** `out`
+* **Node.js version:** `22` (automatically inferred from `.node-version`)
+
+### Environment Variables
+Configure the following in Cloudflare Pages (**Settings** → **Environment variables**):
+* `NODE_VERSION`: `22`
+* `NEXT_PUBLIC_SITE_URL`: `https://<your-project>.pages.dev` (or custom domain)
+* `NEXT_PUBLIC_SUPABASE_URL`: `https://yxtslmupjghwaypqeuvw.supabase.co`
+* `NEXT_PUBLIC_SUPABASE_ANON_KEY`: `sb_publishable_...`
+* `NEXT_PUBLIC_GA_ID`: `G-7R7M04TH9P`
+
+Edge caching and security headers are automatically applied via `public/_headers`.
 
 ---
 

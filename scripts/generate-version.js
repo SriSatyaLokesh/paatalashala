@@ -8,8 +8,9 @@ let commitHash = 'local-dev';
 try {
   commitHash = execSync('git rev-parse --short HEAD', { cwd: rootDir, encoding: 'utf8' }).trim();
 } catch (e) {
-  if (process.env.GITHUB_SHA) {
-    commitHash = process.env.GITHUB_SHA.substring(0, 7);
+  const envSha = process.env.GITHUB_SHA || process.env.CF_PAGES_COMMIT_SHA;
+  if (envSha) {
+    commitHash = envSha.substring(0, 7);
   }
 }
 

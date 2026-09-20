@@ -1,9 +1,11 @@
 const isProd = process.env.NODE_ENV === 'production';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || '';
 
-// Add /paatalashala prefix ONLY for GitHub subdirectory deployment
-// Custom domain or localhost: no prefix
-const shouldUseBasePath = SITE_URL.includes('srisatyalokesh.is-a.dev');
+// Add /paatalashala prefix ONLY for subdirectory deployment or local emulation
+// Root domain (e.g. Cloudflare Pages, custom domain, or localhost): no prefix
+const shouldUseBasePath =
+  process.env.NEXT_PUBLIC_BASE_PATH === '/paatalashala' ||
+  SITE_URL.endsWith('/paatalashala');
 const basePath = isProd && shouldUseBasePath ? '/paatalashala' : '';
 
 export function prefixPath(path) {
